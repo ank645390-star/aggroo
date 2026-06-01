@@ -1,0 +1,24 @@
+.root {
+  height: var(--height-20);
+  width: var(--width-20);
+  position: relative;
+}
+.root[data-size="24"] .vectorIcon {
+  filter: brightness(0) saturate(100%) invert(19%) sepia(11%) saturate(2306%)
+    hue-rotate(102deg) brightness(96%) contrast(87%);
+  height: 79.17%;
+  bottom: 8.33%;
+  left: 8.33%;
+}
+.vectorIcon {
+  position: absolute;
+  height: 79%;
+  width: 100%;
+  top: 12.5%;
+  right: 12.5%;
+  bottom: 8.5%;
+  left: 8.5%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}

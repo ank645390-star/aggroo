@@ -1,0 +1,54 @@
+/* === VOLUME CHIP (1Л / 5Л / 10Л) ============================================
+   Figma exact spec: 100 × 52, gap 12 между.
+   Active: светлый фон (--decorative-1) + темно-зелёный border + темно-зелёный текст
+   Inactive: белый фон + серый border + серый текст; hover → лёгкий хайлайт
+========================================================================== */
+.root {
+  appearance: none;
+  background: none;
+  cursor: pointer;
+  height: 52px;
+  min-width: 100px;
+  padding: 0 20px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  font-family: var(--font-golos-text);
+  font-weight: 500;
+  line-height: 100%;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+/* Inactive */
+.root[data-state="Inactive"] {
+  background-color: var(--bg-card);
+  border: 1px solid var(--text-grey);
+  color: var(--text-grey);
+}
+.root[data-state="Inactive"]:hover {
+  border-color: var(--brand-accent-secondary-default);
+  color: var(--brand-accent-secondary-default);
+}
+
+/* Active */
+.root[data-state="Active"] {
+  background-color: var(--decorative-1);
+  border: 2px solid var(--brand-accent-secondary-default);
+  color: var(--brand-accent-secondary-default);
+  font-weight: 600;
+}
+
+.div { display: inline-block; }
+
+.root:focus-visible {
+  outline: 2px solid var(--brand-accent-primary-default);
+  outline-offset: 2px;
+}
+.root:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

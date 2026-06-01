@@ -1,0 +1,1569 @@
+.describeSectionWrapper,
+.desktop {
+  display: flex;
+  box-sizing: border-box;
+}
+.desktop {
+  width: 100%;
+  position: relative;
+  background-color: var(--bg-cream);
+  overflow: hidden;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0;
+  line-height: normal;
+  letter-spacing: normal;
+}
+.describeSectionWrapper {
+  align-self: stretch;
+  align-items: flex-start;
+  /* 120px розриву між карткою товару і блоком табів.
+   * ВАЖЛИВО: загальна вертикальна "ціна" секції (top + bottom) має дорівнювати
+   * 160px (як і було спочатку), щоб не зрушувати всю сторінку нижче.
+   * Тому padding-bottom скорочено з 160 → 40 (40+120=160). */
+  padding: 120px var(--padding-0) 40px;
+  max-width: 100%;
+  flex-shrink: 0;
+}
+.describeSection {
+  flex: 1;
+  border-radius: var(--br-6);
+  background-color: var(--bg-card);
+  overflow: hidden;
+  flex-direction: column;
+  padding: var(--padding-100) 119px;
+  box-sizing: border-box;
+  position: relative;
+  isolation: isolate;
+  gap: 83px;
+}
+.describeSection,
+.featureColumn,
+.featureColumnWrapper {
+  display: flex;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.featureColumnWrapper {
+  width: 1481px;
+  padding: var(--padding-0) 5px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  text-align: left;
+  font-size: var(--fs-82);
+  color: var(--text-black);
+  font-family: var(--font-golos-text);
+  position: relative;
+  z-index: 3;
+}
+.featureColumn {
+  flex: 1;
+  flex-direction: column;
+  /* ВАЖЛИВО: тримаємо текст у лівій колонці, щоб НІ ЗА ЯКИХ ОБСТАВИН (навіть
+   * найдовший текст з адмінки) він не накладався на дерево.
+   * Дерево-зображення `Image2 .imageIcon` має `left: 536px`. Секція має
+   * `padding-left: 119px` (default desktop) → доступний текстовий простір =
+   * 536 − 119 = 417px. Залишаємо 20px візуального зазора. */
+  max-width: calc(536px - 119px - 20px); /* = 397px */
+  overflow-wrap: break-word;
+}
+.h1 {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  /* Fixed px (NOT vw-based) — ScaledShell scales the 1920px canvas;
+     vw-clamp would double-scale on QHD/4K and on narrow widths over-
+     shrink absolute-positioned neighbours. */
+  font-size: 46px;
+  letter-spacing: var(--ls--1);
+  line-height: 1.1;
+  text-transform: uppercase;
+  font-family: inherit;
+  overflow-wrap: break-word;
+}
+.span {
+  font-weight: 600;
+}
+.span2 {
+  color: var(--text-grey);
+  font-family: var(--font-commissioner);
+}
+.span4 {
+  font-weight: 600;
+  font-family: var(--font-golos-text);
+}
+.h2 {
+  align-self: stretch;
+  position: relative;
+  /* Fixed px — see .h1 comment about vw + ScaledShell interaction. */
+  font-size: 36px;
+  letter-spacing: var(--ls--1);
+  line-height: 1.2;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-family: var(--font-commissioner);
+  color: var(--text-grey);
+  z-index: 2;
+  margin: -9px 0 0;
+  overflow-wrap: break-word;
+}
+.textBlockWrapper {
+  /* Той самий принцип, що і для .featureColumn — текст ніколи не повинен
+   * лізти на дерево. Безпечна ширина = `Image2 .imageIcon left (536px)` −
+   * `.describeSection padding-left (119px)` − 20px зазор = 397px. */
+  width: calc(536px - 119px - 20px); /* = 397px */
+  max-width: 100%;
+  padding: var(--padding-0) var(--padding-1);
+  box-sizing: border-box;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 3;
+}
+.chaineSectionWrapper,
+.textBlock,
+.textBlockWrapper {
+  display: flex;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.textBlock {
+  flex: 1;
+  flex-direction: column;
+  gap: 139px;
+}
+.chaineSectionWrapper {
+  align-self: stretch;
+  padding: var(--padding-0);
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.backgroundNoise,
+.chaineSection {
+  position: relative;
+  background-color: var(--brand-accent-secondary-hover);
+  max-width: 100%;
+}
+.chaineSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  box-sizing: border-box;
+  isolation: isolate;
+  gap: 0;
+}
+.backgroundNoise {
+  width: var(--width-1920);
+  height: 1372px;
+  display: none;
+  z-index: 0;
+  flex-shrink: 0;
+}
+.featureBlockParent {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--gap-20);
+  max-width: 100%;
+  flex-shrink: 0;
+}
+.imageParent {
+  width: 1315px;
+  height: 911px;
+  position: absolute;
+  margin: 0 !important;
+  top: -838px;
+  left: 0;
+  flex-shrink: 0;
+  z-index: 6;
+  pointer-events: none;
+}
+.imageIcon,
+.imageIcon2 {
+  position: absolute;
+  top: 147px;
+  left: 0;
+  width: 954px;
+  height: 691px;
+  object-fit: cover;
+}
+.imageIcon2 {
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  left: 477px;
+  max-height: 100%;
+  width: 838px;
+  z-index: 5;
+}
+.combinedProducts,
+.combinedProductsWrapper {
+  display: flex;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.combinedProductsWrapper {
+  align-self: stretch;
+  justify-content: center;
+  padding: var(--padding-0) var(--padding-20) 122px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.combinedProducts {
+  width: var(--width-1680);
+  flex-direction: column;
+  gap: 138px;
+}
+
+/* ===== Tab content (Дозування / Склад / Сумісність / Характеристика) ===== */
+.tabContentWrapper {
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: flex-start;
+  padding: var(--padding-0) 5px;
+  box-sizing: border-box;
+}
+.tabContentInner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 900px;
+}
+.tabContentTitle {
+  margin: 0;
+  font-family: var(--font-golos-text);
+  font-size: 56px;
+  font-weight: 600;
+  line-height: 110%;
+  color: var(--text-black);
+  text-transform: uppercase;
+  letter-spacing: var(--ls--1);
+}
+.tabList {
+  margin: 0;
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-family: var(--font-golos-text);
+  font-size: var(--fs-18);
+  line-height: 140%;
+  color: var(--text-black);
+}
+.tabContentNote {
+  margin: 0;
+  font-family: var(--font-golos-text);
+  font-size: var(--fs-18);
+  line-height: 140%;
+  color: var(--text-black);
+  max-width: 760px;
+}
+.richTabBody {
+  font-family: var(--font-golos-text);
+  font-size: var(--fs-18);
+  line-height: 150%;
+  color: var(--text-black);
+  max-width: 820px;
+}
+.richTabBody p { margin: 0 0 14px; }
+.richTabBody p:last-child { margin-bottom: 0; }
+.richTabBody b, .richTabBody strong { color: #2c2c27; }
+.tabImage {
+  display: block;
+  width: 100%;
+  max-width: 820px;
+  height: auto;
+  border-radius: 16px;
+  margin-bottom: 12px;
+  object-fit: cover;
+}
+.tabList li b { color: #1b4332; }
+
+/* =================================================================
+   Rich tabs (Дозування / Склад / Сумісність / Характеристика)
+   Card-based design that matches the global system.
+   ================================================================= */
+.richTabWrapper {
+  --accent-bg: #f7fae8;
+  --accent-line: #b3d217;
+  --accent-fg: #1b4332;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e7ebe7;
+  border-radius: 24px;
+  padding: 48px 56px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  box-shadow: 0 2px 0 rgba(28,30,17,0.02);
+}
+.richTabWrapper[data-accent="lime"]  { --accent-bg: #f7fae8; --accent-line: #b3d217; --accent-fg: #1b4332; }
+.richTabWrapper[data-accent="olive"] { --accent-bg: #f0f3e2; --accent-line: #8a9a3f; --accent-fg: #1b4332; }
+.richTabWrapper[data-accent="earth"] { --accent-bg: #f3efe4; --accent-line: #b48a3f; --accent-fg: #2c2c27; }
+.richTabWrapper[data-accent="sand"]  { --accent-bg: #f5f5f0; --accent-line: #2c2c27; --accent-fg: #2c2c27; }
+
+.richTabHead {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #ecece4;
+}
+.richTabIcon {
+  width: 64px; height: 64px;
+  border-radius: 16px;
+  background: var(--accent-bg);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-fg);
+  flex-shrink: 0;
+}
+.richTabHeadText { display: flex; flex-direction: column; gap: 10px; padding-top: 2px; }
+.richTabTitle {
+  margin: 0;
+  font-family: var(--font-golos-text);
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 110%;
+  color: var(--text-black);
+  text-transform: uppercase;
+  letter-spacing: var(--ls--1);
+}
+.richTabIntro {
+  margin: 0;
+  font-family: var(--font-golos-text);
+  font-size: 18px;
+  line-height: 150%;
+  color: #4a4a44;
+  max-width: 760px;
+}
+
+.richTabList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 32px;
+}
+.richTabItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--accent-bg);
+  border-left: 3px solid var(--accent-line);
+  border-radius: 0 12px 12px 0;
+  font-family: var(--font-golos-text);
+  font-size: 17px;
+  line-height: 145%;
+  color: var(--text-black);
+}
+.richTabBullet {
+  font-size: 22px;
+  line-height: 1;
+  color: var(--accent-line);
+  font-weight: 700;
+  margin-top: 2px;
+}
+.richTabItemText { flex: 1; }
+.richTabItemText b, .richTabItemText strong { color: var(--accent-fg); font-weight: 600; }
+
+.richTabNoteBox {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: #fff8e1;
+  border-left: 3px solid #f7c576;
+  border-radius: 0 12px 12px 0;
+  padding: 18px 22px;
+}
+.richTabNoteLabel {
+  font-family: var(--font-golos-text);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #b86d00;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+.richTabNote {
+  margin: 0;
+  font-family: var(--font-golos-text);
+  font-size: 16px;
+  line-height: 150%;
+  color: #2c2c27;
+}
+
+/* ====== Specs table (Характеристика) ====== */
+.specsTableWrap { width: 100%; overflow-x: auto; }
+.specsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-golos-text);
+}
+.specsTable tr { border-top: 1px solid #ecece4; }
+.specsTable tr:first-child { border-top: 0; }
+.specsTable th {
+  text-align: left;
+  font-size: 16px;
+  font-weight: 500;
+  color: #6b6b66;
+  padding: 18px 24px 18px 0;
+  vertical-align: top;
+  width: 45%;
+}
+.specsTable td {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-black);
+  padding: 18px 0;
+  vertical-align: top;
+}
+.specsTable td b, .specsTable td strong { color: #1b4332; }
+
+@media screen and (max-width: 980px) {
+  .richTabWrapper { padding: 32px 24px; gap: 24px; }
+  .richTabTitle { font-size: 32px; }
+  .richTabHead { gap: 16px; }
+  .richTabIcon { width: 52px; height: 52px; }
+  .richTabList { grid-template-columns: 1fr; }
+  .specsTable th { width: 50%; padding-right: 16px; font-size: 14px; }
+  .specsTable td { font-size: 16px; }
+}
+@media screen and (max-width: 1275px) {
+  .describeSectionWrapper {
+    /* Зберігаємо первісну сумарну висоту 104px: 78 (top) + 26 (bottom) = 104 */
+    padding-top: 78px;
+    padding-bottom: 26px;
+    box-sizing: border-box;
+  }
+  .describeSection {
+    gap: 41px;
+    padding: 65px 59px;
+    box-sizing: border-box;
+  }
+  .featureColumn {
+    /* padding-left секції тут = 59px → 536 − 59 − 20 = 457px */
+    max-width: calc(536px - 59px - 20px);
+  }
+  .textBlockWrapper {
+    width: calc(536px - 59px - 20px);
+  }
+  .chaineSectionWrapper {
+    padding-bottom: 208px;
+    box-sizing: border-box;
+  }
+  .chaineSection {
+    gap: 314px;
+    padding: 44px var(--padding-60) 82px;
+    box-sizing: border-box;
+  }
+  .featureBlockParent {
+    flex-wrap: wrap;
+  }
+  .combinedProductsWrapper {
+    padding-bottom: 79px;
+    box-sizing: border-box;
+  }
+  .combinedProducts {
+    gap: 69px;
+  }
+}
+@media screen and (max-width: 900px) {
+  .desktop {
+    height: auto;
+  }
+  .describeSectionWrapper {
+    /* Зберігаємо первісну сумарну висоту 68px: 51 (top) + 17 (bottom) = 68 */
+    padding-top: 51px;
+    padding-bottom: 17px;
+    box-sizing: border-box;
+  }
+  .describeSection {
+    gap: var(--gap-21);
+    padding: 42px 29px;
+    box-sizing: border-box;
+  }
+  .featureColumn {
+    /* padding-left секції тут = 29px → 536 − 29 − 20 = 487px */
+    max-width: calc(536px - 29px - 20px);
+  }
+  .textBlockWrapper {
+    width: calc(536px - 29px - 20px);
+  }
+  .h1,
+  .h2 {
+    font-size: var(--fs-41);
+    line-height: var(--lh-59);
+  }
+  .textBlock {
+    gap: 69px;
+  }
+  .chaineSectionWrapper {
+    padding-bottom: 135px;
+    box-sizing: border-box;
+  }
+  .chaineSection {
+    gap: 157px;
+    padding: 29px 30px 53px;
+    box-sizing: border-box;
+  }
+  .combinedProductsWrapper {
+    padding-bottom: 51px;
+    box-sizing: border-box;
+  }
+  .combinedProducts {
+    gap: 34px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .describeSectionWrapper {
+    /* Зберігаємо первісну сумарну висоту 44px: 33 (top) + 11 (bottom) = 44 */
+    padding-top: 33px;
+    padding-bottom: 11px;
+    box-sizing: border-box;
+  }
+  /* Per user spec: 20px outer padding on mobile (узгоджено з рештою
+     сторінки товару, .productSectionWrapper). На ≤450px перевизначаємо
+     горизонтальний padding describeSection з 29px (з ≤900px) на 20px. */
+  .describeSection {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .h1,
+  .h2 {
+    font-size: var(--fs-25);
+    line-height: var(--lh-39);
+  }
+  .textBlock {
+    gap: 35px;
+  }
+  .chaineSectionWrapper {
+    padding-bottom: 88px;
+    box-sizing: border-box;
+  }
+  .combinedProducts {
+    gap: var(--gap-17);
+  }
+}
+
+/* =========================================================================
+   DOSAGE TAB — vertical timeline / step cards
+   ========================================================================= */
+.dosageTab {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 32px;
+  background:
+    radial-gradient(120% 80% at 0% 0%, #eaf2c5 0%, transparent 55%),
+    radial-gradient(120% 80% at 100% 100%, #f7fae8 0%, transparent 55%),
+    #f7fae8;
+  border-radius: 28px;
+  border: 1px solid #d9e6a3;
+  box-shadow: 0 1px 0 rgba(27,67,50,0.04), 0 24px 60px -40px rgba(27,67,50,0.18);
+}
+.dosageHead {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 6px 6px 18px;
+  border-bottom: 1px dashed #c4d585;
+}
+.dosageHeadIcon {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #b3d217 0%, #8eb212 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1b4332;
+  box-shadow: 0 8px 20px rgba(179,210,23,0.32);
+}
+.dosageHeadIcon svg { width: 30px; height: 30px; }
+.dosageHeadText { flex: 1; min-width: 0; }
+.dosageTitle {
+  font-family: var(--font-golos-text);
+  font-weight: 800;
+  font-size: 32px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1b4332;
+  margin: 0 0 6px;
+}
+.dosageIntro {
+  font-family: var(--font-golos-text);
+  font-size: 16px;
+  line-height: 1.55;
+  color: #4b5036;
+  margin: 0;
+}
+.dosageStepCount {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  padding: 10px 12px;
+  background: #1b4332;
+  color: #f0f3e2;
+  border-radius: 16px;
+  flex-shrink: 0;
+}
+.dosageStepCountNum {
+  font-family: var(--font-golos-text);
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1;
+  color: #b3d217;
+}
+.dosageStepCountLabel {
+  font-family: var(--font-golos-text);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 4px;
+  color: #f0f3e2;
+}
+.dosageTimeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 4px;
+}
+.dosageStep {
+  position: relative;
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+.dosageStepRail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dosageStepLine {
+  position: absolute;
+  top: 56px;
+  bottom: -22px;
+  width: 2px;
+  background: linear-gradient(180deg, #b3d217 0%, #d9e6a3 80%, transparent 100%);
+  border-radius: 2px;
+}
+.dosageStepNum {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #b3d217 0%, #8eb212 100%);
+  color: #1b4332;
+  font-family: var(--font-golos-text);
+  font-weight: 800;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 0 6px #f7fae8,
+    0 0 0 7px #d9e6a3,
+    0 8px 20px rgba(179,210,23,0.28);
+  position: relative;
+  z-index: 1;
+}
+.dosageStepBody {
+  background: #fff;
+  border: 1px solid #e5ead2;
+  border-radius: 18px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 0 rgba(27,67,50,0.04);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  min-width: 0;
+}
+.dosageStep:hover .dosageStepBody {
+  border-color: #b3d217;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(27,67,50,0.10);
+}
+.dosageStepPhase {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #f7fae8;
+  border: 1px solid #d9e6a3;
+  border-radius: 999px;
+  padding: 4px 12px 4px 6px;
+  margin-bottom: 12px;
+  color: #1b4332;
+}
+.dosageStepPhaseIcon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #1b4332;
+  color: #b3d217;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.dosageStepPhaseIcon svg {
+  width: 14px;
+  height: 14px;
+}
+.dosageStepPhaseLabel {
+  font-family: var(--font-golos-text);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.dosageStepTitle {
+  font-family: var(--font-golos-text);
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.3;
+  color: #1b4332;
+  letter-spacing: 0.01em;
+  margin-bottom: 6px;
+}
+.dosageStepBody p { margin: 0; }
+.dosageStepDesc {
+  font-family: var(--font-golos-text);
+  font-size: 15px;
+  line-height: 1.55;
+  color: #2c2c27;
+}
+.dosageNoteBox {
+  display: flex;
+  gap: 14px;
+  background: #fff;
+  border-radius: 16px;
+  border-left: 4px solid #b3d217;
+  padding: 18px 22px;
+  align-items: flex-start;
+  box-shadow: 0 4px 12px rgba(27,67,50,0.06);
+}
+.dosageNoteIcon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #f7fae8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1b4332;
+}
+.dosageNoteBody { flex: 1; }
+.dosageNoteLabel {
+  font-family: var(--font-golos-text);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1b4332;
+  margin: 0 0 4px;
+}
+.dosageNoteText {
+  font-family: var(--font-golos-text);
+  font-size: 15px;
+  line-height: 1.55;
+  color: #2c2c27;
+  margin: 0;
+}
+
+/* =========================================================================
+   COMPOSITION TAB — atom-card grid (3 columns) with rotating tone palette
+   ========================================================================= */
+.compoTab {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  padding: 32px;
+  background:
+    radial-gradient(80% 60% at 100% 0%, rgba(27,67,50,0.08) 0%, transparent 60%),
+    linear-gradient(180deg, #f0f3e2 0%, #f8faea 100%);
+  border-radius: 28px;
+  border: 1px solid #d4ddb0;
+  box-shadow: 0 1px 0 rgba(27,67,50,0.04), 0 24px 60px -40px rgba(27,67,50,0.20);
+}
+.compoHead {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #d4ddb0;
+}
+.compoHeadIcon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: #1b4332;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b3d217;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(27,67,50,0.22);
+}
+.compoHeadIcon svg { width: 32px; height: 32px; }
+.compoHeadText { flex: 1; min-width: 0; }
+.compoTitle {
+  font-family: var(--font-golos-text);
+  font-weight: 800;
+  font-size: 32px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #1b4332;
+  margin: 0;
+}
+.compoIntro {
+  font-family: var(--font-golos-text);
+  font-size: 15px;
+  line-height: 1.55;
+  color: #4b5036;
+  margin: 6px 0 0;
+}
+.compoCount {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 92px;
+  padding: 10px 12px;
+  background: #b3d217;
+  color: #1b4332;
+  border-radius: 16px;
+  flex-shrink: 0;
+}
+.compoCountNum {
+  font-family: var(--font-golos-text);
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1;
+}
+.compoCountLabel {
+  font-family: var(--font-golos-text);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.compoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.compoCard {
+  position: relative;
+  background: #fff;
+  border: 1px solid #e5e8d2;
+  border-radius: 20px;
+  padding: 18px 20px 20px;
+  overflow: hidden;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  min-height: 156px;
+  display: flex;
+  flex-direction: column;
+}
+.compoCard::after {
+  content: "";
+  position: absolute;
+  inset: auto -32px -40px auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--tone-glow, rgba(179,210,23,0.16));
+  filter: blur(8px);
+  pointer-events: none;
+}
+.compoCard[data-tone="lime"]   { --tone-bg: linear-gradient(135deg, #b3d217 0%, #6b8e0d 100%); --tone-fg: #1b4332; --tone-glow: rgba(179,210,23,0.18); --tone-border: #b3d217; }
+.compoCard[data-tone="forest"] { --tone-bg: linear-gradient(135deg, #1b4332 0%, #0e2a1f 100%); --tone-fg: #b3d217;  --tone-glow: rgba(27,67,50,0.18);  --tone-border: #1b4332; }
+.compoCard[data-tone="olive"]  { --tone-bg: linear-gradient(135deg, #8a9a3f 0%, #5a6a25 100%); --tone-fg: #f7fae8;  --tone-glow: rgba(138,154,63,0.18); --tone-border: #8a9a3f; }
+.compoCard[data-tone="earth"]  { --tone-bg: linear-gradient(135deg, #b48a3f 0%, #7a5e25 100%); --tone-fg: #f9f2e2;  --tone-glow: rgba(180,138,63,0.18); --tone-border: #b48a3f; }
+.compoCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+.compoCardBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 54px;
+  height: 54px;
+  padding: 6px 10px;
+  border-radius: 16px;
+  background: var(--tone-bg, linear-gradient(135deg,#b3d217,#6b8e0d));
+  color: var(--tone-fg, #1b4332);
+  font-family: var(--font-golos-text);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: 1.05;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(27,67,50,0.18);
+}
+.compoCard:hover {
+  border-color: var(--tone-border, #8eb212);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(27,67,50,0.12);
+}
+.compoCardName {
+  font-family: var(--font-golos-text);
+  font-weight: 700;
+  font-size: 15px;
+  color: #1b4332;
+  margin-bottom: 6px;
+  line-height: 1.35;
+  position: relative;
+  z-index: 1;
+}
+.compoCardPercent {
+  display: inline-flex;
+  align-items: center;
+  background: #1b4332;
+  color: #b3d217;
+  font-weight: 800;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  width: fit-content;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.compoCardDesc {
+  font-family: var(--font-golos-text);
+  font-size: 13px;
+  line-height: 1.5;
+  color: #6b6b66;
+  margin: auto 0 0;
+  position: relative;
+  z-index: 1;
+}
+.compoNoteBox {
+  background: #1b4332;
+  color: #f0f3e2;
+  border-radius: 16px;
+  padding: 18px 22px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  box-shadow: 0 12px 28px rgba(27,67,50,0.18);
+}
+.compoNoteIcon {
+  width: 32px; height: 32px; flex-shrink: 0;
+  border-radius: 50%;
+  background: #b3d217; color: #1b4332;
+  display: flex; align-items: center; justify-content: center;
+}
+.compoNoteLabel {
+  font-family: var(--font-golos-text);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b3d217;
+  margin: 0 0 4px;
+}
+.compoNoteText {
+  font-family: var(--font-golos-text);
+  font-size: 14px;
+  line-height: 1.55;
+  color: #f0f3e2;
+  margin: 0;
+}
+
+/* =========================================================================
+   COMPATIBILITY TAB — two-column split (ok / not-ok)
+   ========================================================================= */
+.compatTab {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  padding: 32px;
+  background:
+    radial-gradient(60% 50% at 0% 0%, rgba(106,168,79,0.10) 0%, transparent 60%),
+    radial-gradient(60% 50% at 100% 0%, rgba(193,74,60,0.08) 0%, transparent 60%),
+    #f5f5f0;
+  border-radius: 28px;
+  border: 1px solid #e0e0d4;
+  box-shadow: 0 1px 0 rgba(27,67,50,0.04), 0 24px 60px -40px rgba(27,67,50,0.18);
+}
+.compatHead {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #e0e0d4;
+}
+.compatHeadIcon {
+  width: 56px; height: 56px; border-radius: 16px;
+  background: #2c2c27; color: #b3d217;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 8px 20px rgba(44,44,39,0.20);
+}
+.compatHeadIcon svg { width: 30px; height: 30px; }
+.compatHeadText { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.compatTitle {
+  font-family: var(--font-golos-text);
+  font-weight: 800; font-size: 32px;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: #2c2c27; margin: 0;
+}
+.compatIntroBox {
+  background: #fff;
+  border-radius: 12px;
+  border-left: 3px solid #b48a3f;
+  padding: 12px 16px;
+  font-family: var(--font-golos-text);
+  font-size: 14px;
+  line-height: 1.55;
+  color: #4b4b46;
+  margin: 0;
+}
+.compatGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+.compatCol {
+  background: #fff;
+  border-radius: 22px;
+  padding: 24px;
+  border: 1px solid #e5e5e0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 2px 0 rgba(27,67,50,0.03);
+}
+.compatColOk {
+  background:
+    linear-gradient(180deg, rgba(106,168,79,0.06) 0%, transparent 50%),
+    #fff;
+  border-top: 4px solid #6aa84f;
+}
+.compatColNo {
+  background:
+    linear-gradient(180deg, rgba(193,74,60,0.06) 0%, transparent 50%),
+    #fff;
+  border-top: 4px solid #c14a3c;
+}
+.compatColHead {
+  display: flex; gap: 12px; align-items: center;
+  font-family: var(--font-golos-text);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 13px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed #e5e5e0;
+}
+.compatColOk .compatColHead { color: #2e6a1e; }
+.compatColNo .compatColHead { color: #8b3328; }
+.compatColTitle { flex: 1; }
+.compatColCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-family: var(--font-golos-text);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0;
+}
+.compatColOk .compatColCount { background: #6aa84f; color: #fff; }
+.compatColNo .compatColCount { background: #c14a3c; color: #fff; }
+.compatColIcon {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.compatColOk .compatColIcon { background: #e6f3dd; color: #2e6a1e; }
+.compatColNo .compatColIcon { background: #fbe7e3; color: #8b3328; }
+.compatList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.compatItem {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fbfbf8;
+  border: 1px solid transparent;
+  transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+}
+.compatItem:hover {
+  transform: translateY(-1px);
+}
+.compatItemOk {
+  border-left: 3px solid #6aa84f;
+}
+.compatItemOk:hover { background: #f0f8ea; border-color: #c8e0b8; }
+.compatItemNo {
+  border-left: 3px solid #c14a3c;
+}
+.compatItemNo:hover { background: #fdf3f1; border-color: #f0ccc6; }
+.compatItemMark {
+  width: 22px; height: 22px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  margin-top: 1px;
+}
+.compatItemMarkOk { background: #6aa84f; color: #fff; box-shadow: 0 4px 10px rgba(106,168,79,0.30); }
+.compatItemMarkNo { background: #c14a3c; color: #fff; box-shadow: 0 4px 10px rgba(193,74,60,0.30); }
+.compatItemText {
+  flex: 1;
+  font-family: var(--font-golos-text);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: #2c2c27;
+}
+.compatItemText b { color: #1b4332; }
+.compatNoteBox {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: #fff;
+  border-radius: 16px;
+  border-left: 4px solid #b48a3f;
+  padding: 18px 22px;
+  box-shadow: 0 4px 12px rgba(27,67,50,0.06);
+}
+.compatNoteIcon {
+  width: 36px; height: 36px;
+  border-radius: 50%; flex-shrink: 0;
+  background: #f3efe4; color: #b48a3f;
+  display: flex; align-items: center; justify-content: center;
+}
+.compatNoteBody { flex: 1; }
+.compatNoteLabel {
+  font-family: var(--font-golos-text);
+  font-weight: 700; font-size: 13px;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: #8b6a25; margin: 0 0 4px;
+}
+.compatNoteText {
+  font-family: var(--font-golos-text);
+  font-size: 15px; line-height: 1.55;
+  color: #2c2c27; margin: 0;
+}
+
+/* =========================================================================
+   Responsive tweaks for the three tabs (< 1024px)
+   ========================================================================= */
+@media (max-width: 1024px) {
+  .dosageTab, .compoTab, .compatTab { padding: 24px; border-radius: 22px; }
+  .dosageTitle, .compoTitle, .compatTitle { font-size: 26px; }
+  .compoGrid { grid-template-columns: repeat(2, 1fr); }
+  .compatGrid { grid-template-columns: 1fr; }
+  .dosageStep { grid-template-columns: 52px 1fr; gap: 14px; }
+  .dosageStepNum { width: 48px; height: 48px; font-size: 20px; }
+  .dosageStepLine { top: 48px; }
+  .dosageHead { flex-wrap: wrap; }
+  .compoHead { flex-wrap: wrap; }
+}
+@media (max-width: 720px) {
+  .compoGrid { grid-template-columns: 1fr; }
+}
+
+/* =========================================================================
+   COMPREHENSIVE MOBILE — ≤ 768px (full /product/:slug adaptation)
+   ========================================================================= */
+@media screen and (max-width: 768px) {
+  .desktop {
+    overflow-x: clip;
+  }
+  .describeSectionWrapper {
+    padding: 24px 16px 16px;
+  }
+  .describeSection {
+    padding: 24px 18px;
+    gap: 24px;
+    border-radius: 14px;
+  }
+  .featureColumnWrapper {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+  .featureColumn {
+    width: 100%;
+    max-width: 100%;
+  }
+  .h1, .h2 {
+    font-size: 28px;
+    line-height: 1.18;
+    letter-spacing: -0.3px;
+  }
+  .textBlockWrapper { width: 100%; padding: 0; }
+  .textBlock { gap: 24px; width: 100%; }
+  .chaineSectionWrapper {
+    padding: 0 16px 48px;
+  }
+  .chaineSection {
+    padding: 32px 18px;
+    gap: 28px;
+    border-radius: 14px;
+  }
+  .featureBlockParent {
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+  }
+  .imageParent {
+    width: 100%;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .imageIcon, .imageIcon2 {
+    width: 100% !important;
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+  .combinedProductsWrapper {
+    padding: 0 0 32px;
+  }
+  .combinedProducts {
+    gap: 20px;
+    padding: 0 16px;
+  }
+  /* Tabs section */
+  .tabContentWrapper {
+    padding: 0 16px;
+  }
+  .tabContentInner {
+    padding: 18px;
+    border-radius: 14px;
+    gap: 18px;
+  }
+  .tabContentTitle {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+  .tabList {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tabImage {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  .specsTable th,
+  .specsTable td {
+    font-size: 14px;
+    padding: 12px 0;
+  }
+  /* Rich Tab */
+  .richTabWrapper { padding: 20px 16px; gap: 16px; border-radius: 14px; }
+  .richTabHead { gap: 12px; flex-wrap: wrap; }
+  .richTabIcon { width: 44px; height: 44px; }
+  .richTabTitle { font-size: 22px; line-height: 1.18; }
+  .richTabIntro { font-size: 14px; line-height: 1.45; }
+  .richTabList { grid-template-columns: 1fr; gap: 10px; }
+  .richTabItem { gap: 10px; }
+  .richTabNoteBox { padding: 14px; gap: 10px; }
+  .richTabNoteLabel { font-size: 13px; }
+  .richTabNote { font-size: 14px; line-height: 1.45; }
+  /* Dosage tab */
+  .dosageTab, .compoTab, .compatTab {
+    padding: 18px;
+    border-radius: 14px;
+    gap: 18px;
+    /* Bulletproof: section ніколи не вийде за межі viewport. Внутрішні
+       .compoGrid/.compatGrid мають свій власний overflow-x: scroll,
+       тому ховання тут не блокує горизонтальний свайп. */
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+  .dosageHead {
+    gap: 12px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .dosageHeadIcon { width: 44px; height: 44px; }
+  .dosageHeadIcon svg { width: 24px; height: 24px; }
+  .dosageTitle, .compoTitle, .compatTitle {
+    font-size: 18px;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+    word-break: break-word;
+    white-space: normal;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+  }
+  .dosageIntro { font-size: 14px; line-height: 1.45; }
+  .dosageStepCount {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+  .dosageStepCountNum { font-size: 20px; }
+  .dosageStepCountLabel { font-size: 13px; }
+  .dosageTimeline { gap: 12px; }
+  .dosageStep {
+    grid-template-columns: 40px 1fr;
+    gap: 10px;
+  }
+  .dosageStepNum {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+  .dosageStepLine { top: 36px; }
+  .dosageStepBody { padding: 10px 14px; gap: 6px; }
+  .dosageStepPhase { gap: 8px; }
+  .dosageStepPhaseIcon { width: 20px; height: 20px; }
+  .dosageStepPhaseLabel { font-size: 11px; }
+  .dosageStepTitle { font-size: 16px; line-height: 1.25; }
+  .dosageStepDesc { font-size: 13px; line-height: 1.45; }
+  .dosageNoteBox { padding: 14px; gap: 10px; flex-direction: column; }
+  .dosageNoteIcon { width: 32px; height: 32px; flex-shrink: 0; }
+  .dosageNoteLabel { font-size: 12px; }
+  .dosageNoteText { font-size: 13px; line-height: 1.45; }
+  /* ============================================================
+     COMPO (Склад) — Mobile: horizontal scroll carousel.
+     ВАЖЛИВО: НЕ використовуємо negative margin (ламало overflow
+     detection — scroll не активувався). Скрол живе всередині
+     .compoTab з натуральним padding. Кожна картка 220px → 2
+     повних + peek 3-ї картки видно на iPhone 12 Pro (390px).
+     ============================================================ */
+  .compoGrid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    grid-template-columns: none;
+    /* min-width: 0 + width: 100% обовʼязкові для активації scroll
+       на flex-child всередині flex-column-parent. */
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: scroll;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    touch-action: pan-x;
+    gap: 12px;
+    padding: 4px 0 12px;
+    margin: 0;
+  }
+  .compoGrid::-webkit-scrollbar { display: none; }
+  .compoCard {
+    flex: 0 0 220px;
+    width: 220px;
+    min-width: 220px;
+    max-width: 220px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    box-sizing: border-box;
+  }
+  .compoCardPercent {
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.25;
+    font-size: 12px;
+  }
+  .compoCardTop {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .compoCardBadge {
+    flex-shrink: 0;
+  }
+  .compoHead {
+    gap: 12px;
+    flex-direction: column;
+    align-items: center;       /* user: title + counter ЦЕНТРУВАТИ */
+    text-align: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .compoHeadIcon {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    flex-shrink: 0;
+  }
+  .compoHeadIcon svg { width: 20px; height: 20px; }
+  .compoHeadText {
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .compoCount {
+    align-self: center;
+    padding: 6px 12px;
+  }
+  .compoIntro {
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+    word-break: break-word;
+  }
+  /* Note (ВАЖЛИВО) — стиснути padding/font, prevent overflow */
+  .compoNoteBox {
+    padding: 14px 16px;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    flex-direction: row;
+  }
+  .compoNoteIcon { width: 28px; height: 28px; }
+  .compoNoteIcon svg { width: 16px; height: 16px; }
+  .compoNoteLabel { font-size: 11px; }
+  .compoNoteText { font-size: 13px; line-height: 1.45; word-break: break-word; }
+
+  /* ============================================================
+     COMPAT (Сумісність) — те саме: real horizontal scroll, без
+     negative margin, з touch-action і min-width: 0.
+     ============================================================ */
+  .compatGrid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    grid-template-columns: none;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: scroll;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    touch-action: pan-x;
+    gap: 12px;
+    padding: 4px 0 12px;
+    margin: 0;
+  }
+  .compatGrid::-webkit-scrollbar { display: none; }
+  .compatCol {
+    flex: 0 0 260px;
+    width: 260px;
+    min-width: 260px;
+    max-width: 260px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    box-sizing: border-box;
+  }
+  .compatItem {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+  .compatItemText {
+    font-size: 13px;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+  .compatItemMark {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+  .compatList { gap: 8px; }
+
+  /* Compat head — title + counter ЦЕНТРУВАТИ, як просили */
+  .compatHead {
+    gap: 12px;
+    padding-bottom: 12px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .compatHeadIcon {
+    width: 36px;
+    height: 36px;
+    border-radius: 12px;
+    flex-shrink: 0;
+  }
+  .compatHeadIcon svg { width: 20px; height: 20px; }
+  .compatHeadText {
+    align-items: center;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    text-align: center;
+  }
+  .compatTitle {
+    font-size: 18px;
+    text-align: center;
+    word-break: break-word;
+    max-width: 100%;
+  }
+  /* Intro box — width: 100% і word-break щоб не виходив за межі */
+  .compatIntroBox {
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 1.45;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-break: break-word;
+    text-align: left;
+  }
+  /* Note "ПЕРЕД ЗАСТОСУВАННЯМ" — теж стиснути */
+  .compatNoteBox {
+    padding: 14px 16px;
+    gap: 10px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-items: flex-start;
+    word-break: break-word;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .h1, .h2 { font-size: 24px; }
+  .tabContentTitle { font-size: 20px; }
+  .richTabTitle, .dosageTitle, .compoTitle, .compatTitle { font-size: 20px; }
+}
+
+
+/* ≤768px — зображення дерева приховане (див. image2.module.css), тож текст
+   може займати всю ширину секції. */
+@media screen and (max-width: 768px) {
+  .featureColumn { max-width: 100%; }
+  .textBlockWrapper { width: 100%; }
+}

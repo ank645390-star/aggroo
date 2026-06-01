@@ -1,0 +1,11 @@
+# robots.txt — TAMIS АГРО
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api/
+Disallow: /checkout
+Disallow: /profile
+Disallow: /profile/
+
+Sitemap: https://tamis-agro.ua/sitemap.xml

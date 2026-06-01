@@ -1,0 +1,17 @@
+.root {
+  width: 1819px;
+  height: var(--height-60);
+  margin: 0 !important;
+  position: absolute;
+  top: calc(50% - 30px);
+  left: calc(50% - 910px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-20);
+  z-index: 1;
+}
+.root[data-active="Right"][data-size="Small"] {
+  margin: unset;
+  z-index: unset;
+}

@@ -1,0 +1,276 @@
+.backdrop {
+  position: fixed; inset: 0;
+  background: rgba(15, 26, 20, 0.55);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999;
+  padding: 24px;
+  overflow-y: auto;
+}
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  background: #f9f7f2;
+  border-radius: 14px;
+  padding: 32px 32px 28px;
+  box-shadow: 0 28px 60px rgba(15, 26, 20, 0.32);
+  font-family: "Golos Text", sans-serif;
+  color: #2c2c27;
+}
+.close {
+  position: absolute; top: 14px; right: 14px;
+  width: 32px; height: 32px;
+  border: 0; background: transparent; border-radius: 50%; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.close:hover { background: rgba(44,44,39,0.06); }
+
+/* ----- Stepper ----- */
+.stepper {
+  list-style: none; margin: 0 0 20px; padding: 0;
+  display: flex; align-items: center; gap: 4px;
+}
+.step { display: inline-flex; align-items: center; gap: 8px; flex: 1; position: relative; }
+.stepDot {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #e2e1d8; color: #93928c;
+  font-size: 13px; font-weight: 700;
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.stepLabel { font-size: 12px; color: #93928c; font-weight: 500; white-space: nowrap; }
+.stepLine {
+  flex: 1; height: 2px; background: #e2e1d8; margin: 0 8px;
+  border-radius: 2px;
+}
+.stepActive .stepDot { background: #1b4332; color: #fff; }
+.stepActive .stepLabel { color: #1b4332; }
+.stepActive .stepLine { background: #1b4332; }
+.stepCurrent .stepLabel { font-weight: 700; }
+
+.title {
+  margin: 0 0 6px; font-size: 22px; font-weight: 700;
+  font-family: "PT Serif", "Cormorant Garamond", serif;
+}
+.lead {
+  margin: 0 0 18px; font-size: 14px; color: #5d5d57; line-height: 1.55;
+}
+.lead em { font-style: normal; color: #1b4332; font-weight: 600; }
+
+/* ----- Requisites ----- */
+.reqList { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.reqRow {
+  display: grid;
+  grid-template-columns: 140px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #fff;
+  border: 1px solid #e2e1d8;
+  border-radius: 8px;
+}
+.reqRowHighlight {
+  background: #f0f5ee;
+  border-color: #1b4332;
+}
+.reqLabel { font-size: 12px; color: #93928c; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; }
+.reqValue { font-size: 14px; color: #2c2c27; word-break: break-all; }
+.reqValueMono { font-family: "Roboto Mono", ui-monospace, monospace; }
+.reqCopy {
+  background: transparent; border: 0; cursor: pointer; padding: 6px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 4px;
+}
+.reqCopy:hover { background: #f4f5ee; }
+
+.hint {
+  margin: 14px 0 18px;
+  padding: 10px 14px;
+  background: #e7ebe7;
+  color: #1b4332;
+  border-radius: 8px;
+  font-size: 12px;
+  display: flex; align-items: center; gap: 8px;
+  line-height: 1.4;
+}
+
+.actions {
+  display: flex; gap: 12px; justify-content: flex-end;
+  margin-top: 8px;
+}
+.btnGhost, .btnPrimary {
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px; font-weight: 600;
+  padding: 12px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color .15s ease, transform .12s ease;
+}
+.btnGhost { background: transparent; border: 1px solid #2c2c27; color: #2c2c27; }
+.btnGhost:hover { background: rgba(44,44,39,0.06); }
+.btnPrimary { background: #1b4332; border: 0; color: #fff; }
+.btnPrimary:hover { background: #003214; }
+
+/* ----- Confirm form ----- */
+.formBlock { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
+.fieldLabel { font-size: 13px; font-weight: 600; color: #2c2c27; }
+.fieldHint { margin: 0; font-size: 12px; color: #93928c; }
+.input {
+  border: 1px solid #2c2c27; border-radius: 8px;
+  padding: 11px 14px; font-family: "Golos Text", sans-serif;
+  font-size: 14px; color: #2c2c27; background: #fff; outline: 0;
+}
+.input:focus { border-color: #1b4332; }
+
+.divider {
+  display: flex; align-items: center; gap: 12px;
+  margin: 14px 0;
+  color: #93928c; font-size: 12px;
+}
+.divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: #e2e1d8; }
+
+.dropzone {
+  position: relative;
+  border: 2px dashed #b8baad;
+  border-radius: 10px;
+  background: #fcfaf6;
+  padding: 24px 16px;
+  text-align: center;
+  transition: border-color .12s ease, background-color .12s ease;
+  cursor: pointer;
+}
+.dropzone:hover { border-color: #1b4332; background: #f4f5ee; }
+.dropzoneFilled { border-style: solid; border-color: #1b4332; background: #f0f5ee; }
+.fileInput {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0; cursor: pointer;
+}
+.dropzoneText { display: flex; flex-direction: column; align-items: center; gap: 6px; pointer-events: none; }
+.dropzoneText strong { font-size: 14px; color: #2c2c27; font-weight: 600; }
+.dropzoneText span { font-size: 12px; color: #93928c; }
+.fileBadge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-weight: 500; color: #1b4332; font-size: 13px;
+}
+.fileRemove {
+  background: transparent; border: 0; color: #c14a3c;
+  font-size: 12px; cursor: pointer; padding: 4px 0;
+  pointer-events: auto; position: relative; z-index: 2;
+}
+.fileRemove:hover { text-decoration: underline; }
+
+.error {
+  background: #fdecea; color: #c14a3c;
+  padding: 10px 14px; border-radius: 8px;
+  font-size: 13px; font-weight: 500; margin: 0 0 6px;
+}
+
+/* ----- Success step ----- */
+.successIcon { display: flex; justify-content: center; margin-bottom: 8px; }
+.successBox {
+  margin: 16px 0;
+  padding: 16px 18px;
+  background: #fff;
+  border: 1px solid #e2e1d8;
+  border-radius: 10px;
+  display: flex; flex-direction: column; gap: 6px;
+  font-size: 14px;
+}
+.successBox span { color: #93928c; margin-right: 6px; }
+
+
+/* =========================================================
+   MOBILE (≤768px) — full-screen sheet with sticky bottom actions
+   ========================================================= */
+@media screen and (max-width: 768px) {
+  .backdrop {
+    padding: 0;
+    align-items: stretch;
+    justify-content: stretch;
+    overflow: hidden;
+  }
+  .modal {
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+    padding: 16px 20px 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: pcSheetIn 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .close {
+    top: 12px;
+    right: 12px;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+  .stepper {
+    margin: 0 0 12px;
+    gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+    flex-shrink: 0;
+  }
+  .stepLabel { font-size: 11px; }
+  .stepDot   { width: 28px; height: 28px; font-size: 12px; }
+  .title { font-size: 18px; padding-right: 44px; }
+  .lead  { font-size: 13px; }
+
+  /* Scrollable middle: any direct child after header/stepper/title that's not actions */
+  .reqList {
+    flex: 0 1 auto;
+    min-height: 0;
+    gap: 4px;
+    margin-bottom: 8px;
+  }
+  .reqRow {
+    grid-template-columns: 110px 1fr auto;
+    gap: 8px;
+    padding: 8px 0;
+    align-items: start;
+  }
+  .reqLabel { font-size: 11px; }
+  .reqValue { font-size: 13px; word-break: break-all; }
+  .reqCopy  { width: 36px; height: 36px; }
+
+  .hint { font-size: 11px; padding: 10px 12px; margin: 10px 0 14px; }
+
+  /* Body — make the whole modal column scrollable except sticky footer */
+  .formBlock,
+  .dropzone,
+  .successBox,
+  .divider {
+    flex-shrink: 0;
+  }
+  .input  { font-size: 16px; min-height: 44px; }
+
+  .actions {
+    position: sticky;
+    bottom: 0;
+    background: #f9f7f2;
+    margin: auto -20px 0;
+    padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
+    border-top: 1px solid rgba(44,44,39,0.10);
+    flex-direction: column-reverse;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .btnGhost, .btnPrimary {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 15px;
+  }
+}
+
+@keyframes pcSheetIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

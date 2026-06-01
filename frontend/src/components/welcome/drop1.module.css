@@ -1,0 +1,14 @@
+.iconDrop {
+  width: var(--width-16);
+  height: var(--height-16);
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.vectorIcon {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}

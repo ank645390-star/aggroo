@@ -1,0 +1,281 @@
+/* ============================================================
+   Section "НЕ ЗНАЙШЛИ ВАШ ПРЕПАРАТ?"
+   Figma spec: 1920 × 984 card, full-bleed bg image.
+   ============================================================ */
+.ctaSection {
+  position: relative;
+  align-self: stretch;
+  width: var(--width-1920);
+  height: 984px;
+  overflow: hidden;
+  flex-shrink: 0;
+  max-width: 100%;
+  font-family: var(--font-golos-text);
+  color: #f9f7f2;
+}
+
+/* Full-bleed background photo */
+.bg {
+  position: absolute;
+  top: -15px;
+  left: 0;
+  width: 1921px;
+  height: 1206px;
+  object-fit: cover;
+  z-index: 0;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Left-side darken gradient so cream-white headline reads clearly.
+   Covers ~55% of the width, fading to fully transparent on the right
+   side where the photo subject (agronomist) sits. */
+.darkOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.46) 0%,
+    rgba(0, 0, 0, 0.34) 22%,
+    rgba(0, 0, 0, 0.16) 42%,
+    rgba(0, 0, 0, 0) 58%
+  );
+  pointer-events: none;
+}
+
+/* ============ Main text column (title + subtitle + button) ============ */
+.mainColumn {
+  position: absolute;
+  top: 192px;
+  left: 149px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.title {
+  margin: 0;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-weight: 600;
+  font-size: 82px;
+  line-height: 120%; /* 98.4px */
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: #f9f7f2;
+  /* subtle text-shadow to anchor it on the photo without losing crispness */
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.28);
+}
+
+.subtitle {
+  /* 18px gap below the title */
+  margin: 18px 0 0 0;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 125%; /* 35px */
+  color: #f9f7f2;
+  max-width: none;
+  white-space: nowrap;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.32);
+}
+
+/* ============ Primary CTA button ============ */
+.cta {
+  /* 60px gap below the subtitle */
+  margin-top: 60px;
+  width: 364px;
+  padding: 18px 16px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--brand-accent-secondary-default, #1b4332);
+  color: var(--bg-cream, #f9f7f2);
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 140%; /* 25.2px */
+  text-align: center;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-sizing: border-box;
+  transition: background-color 0.18s ease, transform 0.12s ease,
+    box-shadow 0.18s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+}
+.cta:hover {
+  background: var(--brand-accent-secondary-hover, #163a2c);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+}
+.cta:active {
+  transform: translateY(1px);
+}
+.cta:focus-visible {
+  outline: 2px solid #acb14f;
+  outline-offset: 3px;
+}
+
+/* ============ Phone number — separately positioned ============ */
+.phone {
+  position: absolute;
+  top: 610px;
+  left: 241px;
+  z-index: 2;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 140%;
+  color: #f9f7f2;
+  text-decoration: none;
+  letter-spacing: 0.2px;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.4);
+  transition: color 0.18s ease;
+}
+.phone:hover {
+  color: #acb14f;
+}
+
+/* ============ Responsive ============ */
+@media screen and (max-width: 1400px) {
+  .ctaSection {
+    height: 740px;
+  }
+  .mainColumn {
+    top: 120px;
+    left: 90px;
+  }
+  .title {
+    font-size: 64px;
+  }
+  .subtitle {
+    font-size: 22px;
+  }
+  .phone {
+    top: 470px;
+    left: 170px;
+  }
+}
+@media screen and (max-width: 925px) {
+  .ctaSection {
+    height: 600px;
+  }
+  .mainColumn {
+    top: 80px;
+    left: 40px;
+  }
+  .title {
+    font-size: 41px;
+    line-height: 1.1;
+  }
+  .subtitle {
+    font-size: 18px;
+    white-space: normal;
+  }
+  .cta {
+    width: 280px;
+  }
+  .phone {
+    top: 380px;
+    left: 110px;
+  }
+}
+@media screen and (max-width: 450px) {
+  .title {
+    font-size: 28px;
+  }
+  .subtitle {
+    font-size: 16px;
+  }
+}
+
+/* ───── Mobile (≤ 768px) — centered stack, exact spacing per design ─────
+   Дизайн-специфікація (29.05.2026):
+   - Background: ціле зображення видимим, без затемнюючого темного overlay
+     (оригінал — соковите зелене листя кукурудзи). Лишаємо легкий
+     gradient для читабельності світлого тексту.
+   - Title: centered, ~32px, light text-cream
+   - Subtitle: 16px below title, centered
+   - Button: 40px below subtitle, full-width with side gutters, centered
+   - Phone: 10px below button, centered
+   - Все вирівняно по центру (alignItems: center).
+   ─────────────────────────────────────────────────────────────────── */
+@media screen and (max-width: 768px) {
+  .ctaSection {
+    height: auto;
+    min-height: 540px;
+    padding: 72px 20px 56px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .bg {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+  .darkOverlay {
+    /* Soft uniform darkening — keeps the cream text crisp but lets the
+       vibrant green leaves shine through (closer to the original photo). */
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.32) 0%,
+      rgba(0, 0, 0, 0.22) 50%,
+      rgba(0, 0, 0, 0.28) 100%
+    );
+  }
+  .mainColumn {
+    position: relative;
+    top: auto;
+    left: auto;
+    z-index: 2;
+    width: 100%;
+    align-items: center; /* center children horizontally */
+    text-align: center;
+  }
+  .title {
+    font-size: 32px;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+    text-align: center;
+    margin: 0;
+  }
+  .subtitle {
+    /* 16px below the title per design spec */
+    margin: 16px 0 0 0;
+    font-size: 15px;
+    line-height: 1.4;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    max-width: 100%;
+  }
+  .cta {
+    /* 40px below the subtitle per design spec */
+    margin-top: 40px;
+    width: 100%;
+    max-width: 360px;
+    height: 56px;
+    padding: 0 16px;
+    align-self: center;
+  }
+  .phone {
+    /* 10px below the button per design spec */
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-top: 10px;
+    display: inline-block;
+    text-align: center;
+    align-self: center;
+    font-size: 18px;
+    font-weight: 600;
+  }
+}

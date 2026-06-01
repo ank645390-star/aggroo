@@ -1,0 +1,18 @@
+.iconFire {
+  height: var(--height-16);
+  width: var(--width-16);
+  position: relative;
+  flex-shrink: 0;
+}
+.vectorIcon {
+  position: absolute;
+  height: 87.5%;
+  width: 100%;
+  top: 6.25%;
+  right: 15.63%;
+  bottom: 6.25%;
+  left: 15.63%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}

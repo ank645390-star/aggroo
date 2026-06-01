@@ -1,0 +1,101 @@
+/* ============================================================
+   Reveal Heading — shared word-level entrance animation.
+   Applies the same diagonal bottom-left → top-right reveal used
+   by the hero block to any heading on the welcome page.
+
+   Choreography per word:
+     • clip-path inset(... 100% ... 0%)  →  inset(... 0 ... 0)   (L→R wipe)
+     • translate3d(-8%, 80%, 0)          →  translate3d(0,0,0)   (BL→TR slide)
+     • opacity 0 → 1
+   over 1.0s on cubic-bezier(0.22, 0.61, 0.36, 1).
+   Stagger comes from inline `animation-delay` per word.
+   ============================================================ */
+
+.root {
+  display: inline;
+}
+
+/* A "line" is a flex row of words so that wrapping never breaks
+   stagger order on resize.
+   ⚠ NB: inter-word spacing — ВИКЛЮЧНО через `\u00A0`, що додає reveal-heading.tsx
+   після слова та між сегментами. Flex `gap` НЕ використовуємо, бо
+   при наявності nbsp він дав би подвійний відступ (особливо помітно
+   на межі сегментів, де ще додається explicit bridge-nbsp). */
+.line {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+/* `.lineBlock` — used when the parent passes `block` prop.
+   Behaves як block-level flex row, що ОБОВ'ЯЗКОВО переноситься на
+   нові рядки, коли ширина дочірніх word-spans перевищує контейнер.
+   Це гарантує, що анімований текст обмежується тими ж шириною
+   й відступами, що й статичний (наприклад, всередині .missionTextCol
+   width:644px). Без `flex-wrap: wrap` слова утворили б одну довгу
+   лінію, що виходить за правий край блоку. */
+.lineBlock {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* On mobile, ensure inline `.line` also wraps to multiple rows so it
+   never overflows narrow viewports. */
+@media screen and (max-width: 768px) {
+  .line {
+    flex-wrap: wrap;
+  }
+}
+
+.wordInner {
+  display: inline-block;
+  /* Initial state — fully clipped from the right, slid down-left,
+     transparent.  Negative top/bottom inset preserves ascenders
+     (й, ї, ґ) and descenders (д, у) outside the wipe mask. */
+  clip-path: inset(-22% 100% -14% 0%);
+  -webkit-clip-path: inset(-22% 100% -14% 0%);
+  /* translateY is intentionally moderate — keeps the reveal punchy
+     but not overly deep ("трохи зменшити, щоб не йшла сильно знизу"). */
+  transform: translate3d(-5%, 45%, 0);
+  transform-origin: 0% 100%;
+  opacity: 0;
+  will-change: clip-path, transform, opacity;
+}
+
+/* When the parent (.active) has fired, run the reveal animation. */
+.active .wordInner {
+  animation-name: revealWord;
+  animation-duration: 1.0s;
+  animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+  animation-fill-mode: both;
+}
+
+@keyframes revealWord {
+  0% {
+    clip-path: inset(-22% 100% -14% 0%);
+    -webkit-clip-path: inset(-22% 100% -14% 0%);
+    transform: translate3d(-5%, 45%, 0);
+    opacity: 0;
+  }
+  18% { opacity: 1; }
+  100% {
+    clip-path: inset(-22% 0% -14% 0%);
+    -webkit-clip-path: inset(-22% 0% -14% 0%);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+/* Reduced motion — show content immediately, no transforms. */
+@media (prefers-reduced-motion: reduce) {
+  .wordInner {
+    clip-path: none !important;
+    -webkit-clip-path: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}

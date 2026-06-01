@@ -1,0 +1,171 @@
+.background,
+.footer {
+  background-color: var(--text-black);
+  flex-shrink: 0;
+}
+.footer {
+  width: var(--width-1920);
+  height: 577px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--padding-120);
+  box-sizing: border-box;
+  position: relative;
+  isolation: isolate;
+  gap: var(--gap-60);
+  z-index: 1;
+  text-align: left;
+  font-size: var(--fs-18);
+  color: var(--text-cream);
+  font-family: var(--font-golos-text);
+}
+.background {
+  width: 100%;
+  height: calc(100% + 2px);
+  position: absolute;
+  margin: 0 !important;
+  top: 0;
+  right: 0;
+  bottom: -2px;
+  left: 0;
+  z-index: 0;
+}
+.socialLinks,
+.socialWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.socialLinks {
+  width: 251px;
+  margin: 0 !important;
+  position: absolute;
+  top: 381px;
+  left: 1518px;
+  z-index: 2;
+  flex-shrink: 0;
+}
+.socialWrapper {
+  gap: var(--gap-60);
+}
+.b,
+.socialInner,
+.socialWrapper {
+  align-self: stretch;
+}
+.socialInner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-24);
+  flex-shrink: 0;
+}
+.b {
+  position: relative;
+  line-height: 140%;
+}
+.iconsRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-16);
+}
+.groupIcon,
+.groupIcon2 {
+  height: var(--height-32);
+  width: var(--width-32);
+  position: relative;
+}
+.wwwolhalazarievacom {
+  position: relative;
+  font-size: var(--fs-14);
+  line-height: 120%;
+  flex-shrink: 0;
+}
+.wwwolhalazarievacom2 {
+  text-decoration: underline;
+}
+
+/* ---------- Credits block (Дизайн / Сайт створено) ---------- */
+.credits {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: var(--fs-14);
+  line-height: 120%;
+  color: var(--text-cream);
+}
+.creditRow {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  white-space: nowrap;
+}
+.creditLabel {
+  color: var(--text-cream);
+  opacity: 0.92;
+}
+.creditLink {
+  color: var(--text-cream);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.18s ease, opacity 0.18s ease;
+}
+.creditLink:hover {
+  color: var(--bg-green, #acb14f);
+}
+.creditLink:focus-visible {
+  outline: 2px solid var(--bg-green, #acb14f);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ───── Mobile (≤ 768px) — full-width, single column ───── */
+@media screen and (max-width: 768px) {
+  .footer {
+    width: 100%;
+    height: auto;
+    padding: 40px 24px;          /* 40px top/bottom, 24px sides per design 29.05.2026 */
+    gap: 40px;
+  }
+  .socialLinks {
+    width: 100%;
+    position: relative;
+    top: auto;
+    left: auto;
+    margin-top: 0;
+  }
+  .socialWrapper {
+    gap: 16px;
+  }
+  .socialInner {
+    gap: 16px;
+  }
+  .b {
+    /* Heading "Ми в соціальних мережах :" — 16px / 600 / 140% */
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 140%;
+  }
+  .wwwolhalazarievacom,
+  .wwwolhalazarievacom2 {
+    /* "Сайт створено - www..." — 14px / 400 / 120% */
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 120%;
+  }
+  .credits {
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 120%;
+  }
+  .creditRow {
+    white-space: normal;
+    flex-wrap: wrap;
+    font-size: 12px;
+    line-height: 120%;
+  }
+}

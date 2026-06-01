@@ -1,0 +1,66 @@
+/* === COUNTER 120 × 52 ====================================================
+   White bg, gray border. Левая кнопка —, текст-input в центре, правая +.
+   Поддерживает прямой ввод чисел.
+========================================================================== */
+.counter {
+  width: 120px;
+  height: 52px;
+  border-radius: 6px;
+  background-color: var(--bg-card);
+  border: 1px solid var(--text-grey);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8px;
+  gap: 4px;
+  font-family: var(--font-golos-text);
+  transition: border-color 0.15s ease;
+}
+.counter:focus-within {
+  border-color: var(--brand-accent-secondary-default);
+}
+
+.btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  padding: 0;
+  flex-shrink: 0;
+}
+.btn:hover:not(:disabled) {
+  background-color: var(--decorative-1);
+}
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.input {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  text-align: center;
+  font-family: var(--font-golos-text);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-black);
+  line-height: 100%;
+  width: 100%;
+  padding: 0;
+  -moz-appearance: textfield;
+}
+.input::-webkit-outer-spin-button,
+.input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

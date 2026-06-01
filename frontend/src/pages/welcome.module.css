@@ -1,0 +1,264 @@
+.desktop {
+  width: 100%;
+  position: relative;
+  background-color: var(--bg-card);
+  /* overflow:clip — клипает выход декора за бок страницы, но НЕ ломает
+     position:sticky у дочерних компонентов (например, scroll-driven
+     cards-stack в how-it-works-section). overflow:hidden создал бы
+     scroll-context и отключил sticky. */
+  /* Constrain ONLY horizontal axis — vertical must stay `visible` so that
+     descendants using `position: sticky` (scroll-driven cards-stack in
+     how-it-works-section etc.) keep working. Setting `overflow: clip`
+     (both axes) creates a paint-containment context that, on mobile
+     Safari/Chrome, silently disables sticky in descendants. */
+  overflow-x: clip;
+  overflow-y: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: normal;
+  letter-spacing: normal;
+}
+.frameGroup,
+.frameParent {
+  align-self: stretch;
+  flex-direction: column;
+}
+.frameParent {
+  display: flex;
+  align-items: flex-start;
+  gap: 37px;
+  max-width: 100%;
+}
+.frameGroup {
+  padding: var(--padding-0) var(--padding-0) 0;
+  box-sizing: border-box;
+}
+.frameGroup,
+.headline,
+.headlineWrapper {
+  display: flex;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.headlineWrapper {
+  align-self: stretch;
+  height: 238px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-bottom: 80px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  text-align: left;
+  font-size: var(--fs-120);
+  color: var(--brand-accent-secondary-default);
+  font-family: var(--font-golos-text);
+}
+.headline {
+  width: var(--width-1680);
+  max-width: 100%;
+  flex-direction: column;
+  gap: 32px;
+}
+.div {
+  align-self: stretch;
+  position: relative;
+  text-transform: uppercase;
+  line-height: 144px;
+}
+.span {
+  line-height: 120%;
+}
+.span2 {
+  letter-spacing: var(--ls--1);
+  font-weight: 600;
+}
+.span3,
+.span4 {
+  font-family: var(--font-commissioner);
+}
+.span3 {
+  font-weight: 400;
+  font-size: var(--fs-100);
+}
+.span4 {
+  color: var(--text-black);
+  font-size: var(--fs-100);
+  font-weight: 400;
+  line-height: 110%;
+}
+.span5 {
+  letter-spacing: var(--ls--1);
+  line-height: 110%;
+  font-weight: 400;
+}
+.span6 {
+  font-size: var(--fs-100);
+  line-height: 110%;
+  font-weight: 400;
+}
+.bottomRow {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--fs-52);
+  color: var(--text-black);
+  font-family: var(--font-commissioner);
+}
+.h2 {
+  margin: 0;
+  width: 1024px;
+  position: relative;
+  font-size: inherit;
+  letter-spacing: var(--ls--1);
+  line-height: 120%;
+  font-weight: 600;
+  font-family: inherit;
+  white-space: nowrap;
+  display: inline-block;
+  flex-shrink: 0;
+}
+@media screen and (max-width: 1400px) {
+  .frameGroup {
+    padding-bottom: 63px;
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 925px) {
+  .frameParent {
+    gap: var(--gap-18);
+  }
+  .frameGroup {
+    padding-bottom: 41px;
+    box-sizing: border-box;
+  }
+  .div {
+    font-size: var(--fs-48);
+  }
+  .h2 {
+    font-size: 42px;
+    line-height: 50px;
+    width: 100%;
+    white-space: normal;
+  }
+}
+@media screen and (max-width: 768px) {
+  /* The h2 ("Один ґрунт.  Два підходи.  Різний результат.") is authored
+     with width:1024px + white-space:nowrap, which forces every parent
+     (welcome_desktop, heroSection, …) wider than the viewport on mobile,
+     pushing the navbar's right-side icons off-screen. */
+  /* Subtitle per design spec: Commissioner 18px 400 black, lh 100%, ls -0.5 */
+  .h2 {
+    width: 100%;
+    white-space: normal;
+    font-size: 18px;
+    line-height: 100%;
+    letter-spacing: -0.5px;
+    font-weight: 400;
+    color: #000;
+    font-family: var(--font-commissioner);
+  }
+  /* Headline "БІОЛОГІЯ замість ХІМІЇ" — per design spec.
+     "Біологія" → Golos Text 600 black, "замість хімії" → Commissioner 400 grey.
+     Both 32px uppercase, lh 120%, ls -1px. */
+  .headlineWrapper {
+    height: auto;
+    margin-bottom: 32px;
+    padding: 40px 20px 0;
+    background-color: var(--bg-cream);
+  }
+  .headline {
+    width: 100%;
+    gap: 12px;
+  }
+  .div {
+    font-size: 32px;
+    line-height: 120%;
+    letter-spacing: -1px;
+    text-align: left;
+    text-transform: uppercase;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  .bottomRow {
+    font-size: 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    font-family: var(--font-commissioner);
+    color: #000;
+  }
+  .span,
+  .span2,
+  .span3,
+  .span4,
+  .span5,
+  .span6 {
+    font-size: 32px;
+    line-height: 120%;
+    letter-spacing: -1px;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  /* "Біологія" — Golos Text 600 black */
+  .span2 {
+    font-family: var(--font-golos-text);
+    font-weight: 600;
+    color: var(--text-black, #2C2C27);
+  }
+  /* "замість хімії" — Commissioner 400 grey */
+  .span5 {
+    font-family: var(--font-commissioner);
+    font-weight: 400;
+    color: var(--text-grey, #93928C);
+  }
+  /* Trailing spaces inherit grey from span4 wrapper */
+  .span3,
+  .span4,
+  .span6 {
+    font-family: var(--font-commissioner);
+    font-weight: 400;
+    color: var(--text-grey, #93928C);
+  }
+  .frameGroup {
+    padding: 0 0 32px;
+    background-color: var(--bg-cream);
+  }
+  .desktop {
+    width: 100%;
+    max-width: 100vw;
+    min-width: 0;
+    overflow-x: clip;
+  }
+}
+@media screen and (max-width: 450px) {
+  .div {
+    font-size: var(--fs-29);
+  }
+  .h2 {
+    font-size: 31px;
+    line-height: var(--lh-37);
+  }
+}
+
+
+/* ──────────────────────────────────────────────────────────────────
+   .howItWorksAgroCombo — wrapper тільки для зеленого блоку "Технологія
+   Врожаю". FrameComponent11 "Вибір агрономів" винесено як sibling.
+
+   На ВСІХ viewport-ах: natural auto-height. Жодних штучних 130vh/150vh.
+   На mobile картки перемикаються LOCAL SCROLL-LOCK у how-it-works
+   (touchmove preventDefault, swipe advances activeIdx 01→02→03→04;
+   після 04 lock знімається — сторінка скролиться далі до "Вибір
+   агрономів"). НЕМАЄ autoplay, НЕМАЄ scroll-progress wrap.
+   ────────────────────────────────────────────────────────────────── */
+.howItWorksAgroCombo {
+  position: relative;
+  width: 100%;
+  align-self: stretch;
+}

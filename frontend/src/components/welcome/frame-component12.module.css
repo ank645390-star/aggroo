@@ -1,0 +1,138 @@
+.categoryRowsThreeWrapper {
+  height: var(--height-674);
+  width: var(--width-549);
+  border-radius: var(--br-8);
+  background-color: var(--bg-card);
+  border: var(--border-1);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: var(--padding-32);
+  text-align: left;
+  font-size: var(--fs-48);
+  color: var(--text-black);
+  font-family: var(--font-golos-text);
+}
+.categoryRowsThree,
+.frameParent {
+  display: flex;
+  flex-direction: column;
+}
+.categoryRowsThree {
+  height: var(--height-586);
+  width: var(--width-496);
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+.frameParent {
+  align-self: stretch;
+  height: var(--height-532);
+  align-items: flex-start;
+  position: relative;
+  isolation: isolate;
+  gap: var(--gap-48);
+}
+.ellipseParent {
+  width: var(--width-131);
+  height: var(--height-131);
+  position: relative;
+  z-index: 0;
+  flex-shrink: 0;
+}
+.frameChild,
+.icon,
+.icon2 {
+  position: absolute;
+  flex-shrink: 0;
+}
+.frameChild {
+  top: -3px;
+  left: 0;
+  border-radius: var(--br-501);
+  border: var(--border-2);
+  box-sizing: border-box;
+  width: var(--width-131);
+  height: var(--height-131);
+}
+.icon,
+.icon2 {
+  object-fit: cover;
+}
+.icon {
+  top: 16px;
+  left: 12px;
+  width: var(--width-99);
+  height: var(--height-93);
+}
+.icon2 {
+  top: calc(50% - 75.5px);
+  left: calc(50% - 60.5px);
+  width: var(--width-102);
+  height: var(--height-119);
+}
+.titleParent {
+  align-self: stretch;
+  height: var(--height-319);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-75);
+  z-index: 1;
+  flex-shrink: 0;
+}
+.description,
+.title {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-family: inherit;
+}
+.title {
+  height: var(--height-84);
+  font-size: inherit;
+  letter-spacing: var(--ls--0_5);
+  line-height: 130%;
+  font-weight: 600;
+  display: inline-block;
+}
+.description {
+  font-size: var(--fs-28);
+  line-height: 120%;
+  font-weight: 400;
+}
+.icon3,
+.icon4,
+.icon5,
+.icon6 {
+  width: var(--width-138);
+  position: absolute;
+  margin: 0 !important;
+  top: -3px;
+  left: -27px;
+  max-height: 100%;
+  object-fit: cover;
+  display: none;
+  z-index: 2;
+  flex-shrink: 0;
+}
+.icon4,
+.icon5,
+.icon6 {
+  width: var(--width-125);
+  top: -13px;
+  left: -6px;
+  z-index: 3;
+}
+.icon5,
+.icon6 {
+  width: var(--width-105);
+  top: 0;
+  left: 9px;
+  z-index: 4;
+}
+.icon6 {
+  width: var(--width-112);
+  top: 16px;
+  z-index: 5;
+}

@@ -1,0 +1,334 @@
+/* =============================================================
+   Section "НЕ ЗНАЙШЛИ ВАШ ПРЕПАРАТ?" — product page (/product)
+   Card 1920 × 984, full-bleed background photo, centered copy.
+   ============================================================= */
+.ctaSection {
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  height: 984px;
+  overflow: hidden;
+  flex-shrink: 0;
+  max-width: 100%;
+  font-family: var(--font-golos-text);
+  color: #f9f7f2;
+  isolation: isolate;
+}
+
+/* Full-bleed background photo */
+.bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Soft horizontal scrim to anchor cream-white type on the photo
+   without darkening the agronomist's face on the left side. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0.32) 35%,
+    rgba(0, 0, 0, 0.22) 70%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
+}
+
+/* ----------- Main content stack — centered horizontally ----------- */
+.mainContent {
+  position: absolute;
+  top: 353px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60px;
+  padding: 0 329px;
+  box-sizing: border-box;
+}
+
+/* Title + subtitle group with 16px gap between */
+.headline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+  width: 100%;
+}
+
+/* "Не знайшли ваш препарат?" — single line per Figma */
+.title {
+  margin: 0;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-weight: 600;
+  font-size: 82px;
+  line-height: 120%; /* 98.4px */
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: #f9f7f2;
+  text-align: center;
+  white-space: nowrap;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.32);
+}
+
+/* "Ми безкоштовно підберемо схему захисту під вашу культуру." */
+.subtitle {
+  margin: 0;
+  font-family: "Commissioner", var(--font-commissioner), sans-serif;
+  font-weight: 500;
+  font-size: 44px;
+  line-height: 140%; /* 61.6px */
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  color: #f9f7f2;
+  text-align: center;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.32);
+}
+
+/* ---------- Button + phone group ---------- */
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  width: 364px;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 364px;
+  padding: 18px 16px;
+  border: 0;
+  border-radius: 6px;
+  background-color: var(--brand-accent-secondary-default, #1b4332);
+  cursor: pointer;
+  box-sizing: border-box;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  transition: background-color 0.18s ease, transform 0.12s ease,
+    box-shadow 0.18s ease, filter 0.18s ease;
+}
+.ctaButton:hover {
+  background-color: var(--brand-accent-secondary-hover, #003214);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.32);
+  filter: brightness(1.04);
+}
+.ctaButton:active {
+  transform: translateY(1px);
+}
+.ctaButton:focus-visible {
+  outline: 2px solid rgba(172, 177, 79, 0.7);
+  outline-offset: 3px;
+}
+
+.ctaLabel {
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 120%; /* 19.2px */
+  color: var(--bg-card, #ffffff);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.ctaIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+/* Phone — placed 9px below the button (per spec) */
+.phone {
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 140%; /* 25.2px */
+  color: var(--bg-cream, #f9f7f2);
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.38);
+  transition: color 0.18s ease;
+}
+.phone:hover {
+  color: #acb14f;
+}
+.phone:focus-visible {
+  outline: 2px solid rgba(172, 177, 79, 0.7);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ---------- Responsive (kept light — main design is pixel-perfect 1920) ---------- */
+@media screen and (max-width: 1400px) {
+  .ctaSection {
+    height: 780px;
+  }
+  .mainContent {
+    top: 220px;
+    gap: 44px;
+    padding: 0 160px;
+  }
+  .title {
+    font-size: 64px;
+  }
+  .subtitle {
+    font-size: 34px;
+  }
+}
+/* ===== 24-год SLA badge (bottom-left) ===========================
+   Same dark-green frosted-glass look as /contacts page.
+   Background #1B433233 (rgba(27,67,50,0.20)) + backdrop blur. */
+.badge {
+  position: absolute;
+  left: 120px;
+  bottom: 80px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 176px;
+  padding: 16px;
+  border-radius: 6px;
+  background: rgba(27, 67, 50, 0.20);
+  -webkit-backdrop-filter: blur(18px) saturate(110%);
+  backdrop-filter: blur(18px) saturate(110%);
+  color: #f9f7f2;
+  box-sizing: border-box;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.badgeIcon {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.badgeIcon svg { width: 40px; height: 40px; display: block; }
+.badgeText {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.badgeBig {
+  font-family: "Golos Text", sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #f9f7f2;
+  white-space: nowrap;
+}
+.badgeSub {
+  font-family: "Golos Text", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 130%;
+  color: #f9f7f2;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 1280px) {
+  .badge {
+    left: 60px;
+    bottom: 60px;
+    height: 140px;
+  }
+  .badgeBig { font-size: 24px; }
+  .badgeSub { font-size: 15px; }
+}
+
+@media screen and (max-width: 900px) {
+  .ctaSection {
+    height: 620px;
+  }
+  .mainContent {
+    top: 140px;
+    gap: 32px;
+    padding: 0 60px;
+  }
+  .title {
+    font-size: 44px;
+    line-height: 120%;
+  }
+  .subtitle {
+    font-size: 22px;
+    line-height: 140%;
+  }
+  .ctaButton,
+  .buttonGroup {
+    width: 300px;
+  }
+  .badge {
+    left: 32px;
+    bottom: 32px;
+    height: 120px;
+    padding: 12px 14px;
+  }
+  .badgeIcon, .badgeIcon svg { width: 32px; height: 32px; }
+  .badgeBig { font-size: 20px; }
+  .badgeSub { font-size: 14px; white-space: normal; max-width: 220px; }
+}
+@media screen and (max-width: 768px) {
+  .ctaSection {
+    height: auto;
+    min-height: 480px;
+  }
+  .mainContent {
+    position: relative;
+    top: auto;
+    padding: 80px 20px;
+    gap: 24px;
+  }
+  .title {
+    font-size: 28px;
+    line-height: 1.18;
+    letter-spacing: -0.4px;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .subtitle {
+    font-size: 15px;
+    line-height: 1.4;
+    letter-spacing: 0;
+  }
+  .ctaButton,
+  .buttonGroup {
+    width: 100%;
+    max-width: 320px;
+  }
+  .badge {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    margin: 0 20px 40px 20px;
+    height: auto;
+    min-height: 96px;
+    padding: 14px 16px;
+    white-space: normal;
+    width: calc(100% - 40px);
+  }
+  .badgeIcon, .badgeIcon svg { width: 28px; height: 28px; }
+  .badgeBig { font-size: 18px; }
+  .badgeSub { font-size: 13px; white-space: normal; }
+}

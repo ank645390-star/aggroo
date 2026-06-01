@@ -1,0 +1,124 @@
+/* =================================================================
+   Спільні стилі для автокомплітів (City / Warehouse).
+   ================================================================= */
+.wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.label {
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #2c2c27;
+}
+.required {
+  color: #c14a3c;
+  font-weight: 600;
+  margin-left: 2px;
+}
+.inputBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border: 1px solid #2c2c27;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+.wrap[data-error="true"] .inputBox {
+  border-color: #c14a3c;
+  background-color: #fdf5f4;
+}
+.inputBox[data-disabled="true"] {
+  background-color: #f4f5ee;
+  border-color: #d1d2c5;
+}
+.input {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-family: "Golos Text", sans-serif;
+  font-size: 15px;
+  color: #2c2c27;
+  min-width: 0;
+}
+.input::placeholder { color: #93928c; }
+.input:disabled { color: #93928c; cursor: not-allowed; }
+
+.spinner {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid #d1d2c5;
+  border-top-color: #1b4332;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  background: #fff;
+  border: 1px solid #d1d2c5;
+  border-radius: 8px;
+  box-shadow: 0 16px 32px rgba(15, 26, 20, 0.12);
+  max-height: 320px;
+  overflow-y: auto;
+}
+.option {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color .12s ease;
+}
+.option:hover, .optionActive {
+  background-color: #f4f5ee;
+}
+.optName {
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2c2c27;
+}
+.optMeta {
+  font-family: "Golos Text", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #93928c;
+}
+
+.empty {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: #fff;
+  border: 1px solid #d1d2c5;
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #93928c;
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  box-shadow: 0 16px 32px rgba(15, 26, 20, 0.12);
+}
+.error {
+  color: #c14a3c;
+  font-family: "Golos Text", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}

@@ -1,0 +1,258 @@
+/* =====================================================================
+   "Блог агронома" — centered section, aligned with FrameComponent11
+   ("Вибір українських агрономів"): same 1680px content width and
+   identical card row layout.  Includes a subtle scroll-driven parallax
+   on the entire section (`.parallax`) plus individual card parallax/tilt
+   contributed by the JS <TiltCard/> wrapper.
+   ===================================================================== */
+
+.blogPart {
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 140px 24px;                /* matches product-section vertical rhythm */
+  display: flex;
+  flex-direction: column;
+  align-items: center;                /* CENTER the whole block on the page */
+  justify-content: flex-start;
+  gap: 80px;
+  text-align: left;
+  font-family: var(--font-golos-text);
+  /* No overflow:hidden here — that would clip the 3D tilt of the cards.
+     The decorative parallax orbs are clipped by their own container. */
+}
+
+/* Inner content lane, locked to 1680px to mirror product carousel */
+.inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1680px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 80px;
+  /* Receives the parallax translate from useParallax hook */
+  transform: translate3d(0, var(--parallax-y, 0px), 0);
+  will-change: transform;
+}
+
+/* Decorative parallax orbs that drift behind the content (very subtle).
+   Their own container has overflow:hidden so they never bleed onto the
+   rest of the page, but the rest of .blogPart stays unclipped — so the
+   3D tilt of the cards is never cropped. */
+.parallaxBg {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.parallaxBg::before,
+.parallaxBg::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(110px);
+  opacity: 0.55;
+  transform: translate3d(0, calc(var(--parallax-y, 0px) * -1.4), 0);
+  transition: transform 0.05s linear;
+}
+.parallaxBg::before {
+  top: -120px;
+  left: -120px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(27, 67, 50, 0.10), transparent 70%);
+}
+.parallaxBg::after {
+  bottom: -160px;
+  right: -100px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(179, 210, 23, 0.12), transparent 70%);
+}
+
+/* ----- Header row — centered (title only) ----- */
+.headerRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  text-align: center;
+}
+
+/* ----- Footer row — "Всі статті" CTA centered, in the site's primary button style ----- */
+.footerRow {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+}
+
+/* Site-wide primary CTA style: filled dark-green rectangle with 6px radius,
+   matching PrimaryButton1 used across the platform. */
+.allLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 56px;
+  padding: 0 28px;
+  min-width: 240px;
+  border: 0;
+  border-radius: 6px;
+  background-color: #1b4332; /* brand-accent-secondary-default */
+  color: #f9f7f2;             /* cream text */
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 120%;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease,
+    transform 0.16s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 0 0 rgba(179, 210, 23, 0);
+}
+.allLink:hover {
+  background-color: #b3d217;  /* lime accent — matches AboutCompany CTA hover */
+  color: #1b4332;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px -8px rgba(179, 210, 23, 0.45);
+}
+.allLink:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px -6px rgba(179, 210, 23, 0.55);
+}
+
+.empty {
+  margin: 24px auto 0;
+  color: #5e5e57;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* ----- Title ----- */
+.h2 {
+  margin: 0;
+  font-size: 82px;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.spanAccent {
+  color: #1b4332;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-weight: 600;
+}
+.spanBlack {
+  color: #2c2c27;
+  font-family: Commissioner, var(--font-commissioner), sans-serif;
+  font-weight: 400;
+}
+
+/* ----- Cards row — identical to product carousel: 3 × 544 + 2 × 24 = 1680 ----- */
+.cardsGroup {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch;
+  justify-items: center;
+  /* breathing room so 3D tilt of cards never gets clipped by neighbour layout */
+  padding: 20px 0;
+}
+
+/* Each card slot — fixed width up to 544px, equal min-height for symmetry */
+.cardSlot {
+  width: 100%;
+  max-width: 544px;
+  min-height: 720px;
+  display: flex;
+}
+
+/* ----- Responsive (down-stack) ----- */
+@media (max-width: 1400px) {
+  .blogPart {
+    padding: 100px 24px;
+    gap: 56px;
+  }
+  .inner {
+    gap: 56px;
+  }
+  .h2 {
+    font-size: 64px;
+  }
+  .cardSlot {
+    min-height: 640px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .cardsGroup {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .blogPart {
+    padding: 56px 0;
+    gap: 32px;
+    overflow: hidden;
+  }
+  .inner {
+    gap: 28px;
+    padding: 0 20px;
+  }
+  .h2 {
+    font-size: 34px;
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+  }
+  .headerRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .footerRow {
+    justify-content: stretch;
+    padding: 0 20px;
+  }
+  .allLink {
+    width: 100%;
+    height: 56px;
+  }
+  /* === Horizontal scroll carousel on mobile (per design 29.05.2026) ===
+     Cards no longer stack vertically — user swipes through posts. */
+  .cardsGroup {
+    display: flex !important;
+    flex-direction: row !important;
+    grid-template-columns: none !important;
+    flex-wrap: nowrap;
+    gap: 16px;
+    padding: 8px 20px;
+    margin: 0 -20px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .cardsGroup::-webkit-scrollbar {
+    display: none;
+  }
+  .cardSlot {
+    flex: 0 0 calc(100vw - 64px);
+    width: calc(100vw - 64px);
+    min-height: auto;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+}

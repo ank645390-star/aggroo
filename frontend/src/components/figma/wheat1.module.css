@@ -1,0 +1,17 @@
+.iconWheat {
+  height: var(--height-16);
+  width: var(--width-16);
+  position: relative;
+}
+.vectorIcon {
+  position: absolute;
+  height: 90.63%;
+  width: 100%;
+  top: 3.13%;
+  right: 28.13%;
+  bottom: 6.25%;
+  left: 28.13%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}

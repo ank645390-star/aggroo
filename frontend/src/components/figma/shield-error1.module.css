@@ -1,0 +1,21 @@
+.root {
+  height: var(--height-20);
+  width: var(--width-20);
+  position: relative;
+}
+.root[data-size="60"] .vectorIcon {
+  top: 6.33%;
+  bottom: 6.17%;
+}
+.vectorIcon {
+  position: absolute;
+  height: 87.5%;
+  width: 100%;
+  top: 6.5%;
+  right: 12.5%;
+  bottom: 6%;
+  left: 12.5%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}

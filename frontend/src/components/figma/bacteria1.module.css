@@ -1,0 +1,17 @@
+.iconBacteria {
+  height: var(--height-20);
+  width: var(--width-20);
+  position: relative;
+}
+.vectorIcon {
+  position: absolute;
+  height: 83.5%;
+  width: 100%;
+  top: 10.5%;
+  right: 2%;
+  bottom: 6%;
+  left: 2%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}

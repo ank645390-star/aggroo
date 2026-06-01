@@ -1,0 +1,17 @@
+.iconClock {
+  height: var(--height-20);
+  width: var(--width-20);
+  position: relative;
+}
+.vectorIcon {
+  position: absolute;
+  height: 83.5%;
+  width: 100%;
+  top: 8.5%;
+  right: 8%;
+  bottom: 8%;
+  left: 8.5%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}

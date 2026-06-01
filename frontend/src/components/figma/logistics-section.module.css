@@ -1,0 +1,545 @@
+/* ============================================================
+ * Section: «Логістика живих рішень»
+ * Figma audited spec:
+ *   - frame:           1920 × 1372 (bg #003214 / --brand-accent-secondary-hover)
+ *   - heading frame:   1664 × 144  (centered horizontally)
+ *   - center plant:    1013 × 803
+ *   - feature blocks:  472 × 123 each, gap 8px
+ *   - tag chips:       40px height
+ * Typography uses platform tokens:
+ *   - Heading primary:  Golos Display Bold ~120 / 120%
+ *   - Heading secondary: Commissioner ~120 / 110% (text-grey)
+ *   - Feature heading:  Golos Display Bold 28 / 120%
+ *   - Feature label-top (sub): Golos Body Regular 16
+ *   - Tag body:         Golos Body 18
+ * ============================================================ */
+
+.section {
+  position: relative;
+  width: 100%;
+  min-height: 1372px;
+  background-color: var(--brand-accent-secondary-hover);
+  color: var(--bg-cream);
+  font-family: var(--font-golos-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 86px 128px 120px;
+  box-sizing: border-box;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ----- HEADING ROW ----- */
+.heading {
+  width: 1664px;
+  max-width: 100%;
+  height: 144px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: var(--ls--1);
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-size: 120px;
+  line-height: 120%;
+  font-weight: 600;
+  font-family: var(--font-golos-text);
+  flex-shrink: 0;
+  z-index: 5;
+}
+.headingPrimary {
+  color: var(--bg-cream);
+}
+.headingGap {
+  display: inline-block;
+  width: 0.5em;
+}
+.headingSecondary {
+  color: var(--text-grey);
+  font-family: var(--font-commissioner);
+  font-size: 100px;
+  font-weight: 400;
+  line-height: 110%;
+}
+
+/* ----- STAGE ----- */
+.stage {
+  position: relative;
+  width: 1664px;
+  max-width: 100%;
+  flex: 1;
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1040px;
+}
+
+/* Dashed circular orbit — 921 × 921 (perfect circle) per Figma */
+.orbit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 921px;
+  height: 921px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--bg-green);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Center plant animation video.
+ *
+ * Source MP4 has dark-green background (#001A0A) plus black pillarboxing.
+ * Section bg is #003214 (slightly brighter dark green).
+ *
+ * With `mix-blend-mode: lighten`, every pixel of the video that is DARKER
+ * than the section bg gets replaced by the section bg — so both the black
+ * pillarboxing AND the dark-green background of the video become invisible.
+ * Only the bright bubble (water reflections, plant, droplets) blends.
+ *
+ * Mask is intentionally LARGE so the bubble and the entire plant remain
+ * fully revealed; only the far corners feather softly.
+ */
+.plant {
+  position: relative;
+  width: 1013px;
+  height: 803px;
+  object-fit: contain;
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: lighten;
+  background: transparent;
+  -webkit-mask-image: radial-gradient(
+    circle at 50% 50%,
+    #000 70%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: radial-gradient(
+    circle at 50% 50%,
+    #000 70%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* ===== FEATURE BLOCKS — 472 × 123 Hug, gap 8 between icon and text ===== */
+.feature {
+  position: absolute;
+  width: 472px;
+  min-height: 123px;
+  z-index: 3;
+}
+.feature.topLeft {
+  top: 110px;
+  left: 0;
+}
+.feature.topRight {
+  top: 110px;
+  right: 0;
+}
+.feature.bottomLeft {
+  bottom: 110px;
+  left: 0;
+}
+.feature.bottomRight {
+  bottom: 110px;
+  right: 0;
+}
+
+.featureRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+.featureText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+.featureText.alignEnd {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.featureLabelTop {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-cream);
+  opacity: 0.85;
+  line-height: 120%;
+  font-family: var(--font-golos-text);
+}
+.featureLabelBottom {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--bg-cream);
+  line-height: 140%;
+  letter-spacing: var(--ls--0_5);
+  font-family: var(--font-golos-text);
+}
+
+.featureIcon,
+.featureIconImg {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.featureIconImg {
+  display: block;
+  object-fit: contain;
+}
+
+/* ===== FLOATING TAG CHIPS — sit on the 921×921 orbit (radius 460.5) ===== */
+.tag {
+  position: absolute;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 4px 16px;
+  background-color: var(--bg-card);
+  color: var(--brand-accent-secondary-default);
+  border-radius: 4px;
+  font-family: var(--font-golos-text);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 140%;
+  white-space: nowrap;
+  box-sizing: border-box;
+  z-index: 4;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+}
+
+.tagActive {
+  top: calc(50% - 460.5px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tagTemp {
+  top: 50%;
+  left: calc(50% - 460.5px);
+  transform: translate(-50%, -50%);
+}
+
+.tagBio {
+  top: calc(50% + 417px);
+  left: calc(50% + 195px);
+  transform: translate(-50%, -50%);
+}
+
+/* ===== Responsive ===== */
+@media screen and (max-width: 1700px) {
+  .heading {
+    font-size: 90px;
+  }
+  .headingSecondary {
+    font-size: 75px;
+  }
+}
+
+@media screen and (max-width: 1275px) {
+  .section {
+    padding: 60px 48px 80px;
+    min-height: auto;
+  }
+  .heading {
+    font-size: 70px;
+    height: auto;
+  }
+  .headingSecondary {
+    font-size: 58px;
+  }
+  .stage {
+    min-height: 800px;
+  }
+  .orbit {
+    width: 760px;
+    height: 760px;
+  }
+  .plant {
+    width: 760px;
+    height: 602px;
+  }
+  .feature {
+    width: 360px;
+  }
+  .featureLabelBottom {
+    font-size: 22px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .section {
+    padding: 48px 24px 64px;
+  }
+  .heading {
+    font-size: 44px;
+    white-space: normal;
+  }
+  .headingSecondary {
+    font-size: 37px;
+  }
+  .stage {
+    min-height: 600px;
+  }
+  .orbit {
+    width: 540px;
+    height: 540px;
+  }
+  .plant {
+    width: 540px;
+    height: 428px;
+  }
+  .feature {
+    width: 260px;
+  }
+  .feature.topLeft {
+    top: 30px;
+    left: -10px;
+  }
+  .feature.topRight {
+    top: 30px;
+    right: -10px;
+  }
+  .feature.bottomLeft {
+    bottom: 30px;
+    left: -10px;
+  }
+  .feature.bottomRight {
+    bottom: 30px;
+    right: -10px;
+  }
+  .featureLabelBottom {
+    font-size: 18px;
+  }
+}
+
+/* =========================================================
+   MOBILE (≤ 768px) — Logistics section
+   Concept per Figma:
+     • Title: "ЛОГІСТИКА ЖИВИХ РІШЕНЬ" — inline wrap, Commissioner.
+     • Layout: 2 cards top-LEFT (icon LEFT, text-align LEFT),
+       large plant animation centered (420×333),
+       2 cards bottom-RIGHT (icon RIGHT, text-align RIGHT).
+   ========================================================= */
+@media screen and (max-width: 768px) {
+  /* Figma frame: 375 × 928 (dark green). We center the design on
+     any phone width — content max-width pinned to 375. Side
+     padding inside the frame is ~25px (items live with a 25px
+     inset from each edge). Animation slightly overflows that
+     inset to land at exactly 332px wide on a 375 frame. */
+  .section {
+    padding: 48px 25px 56px;
+    min-height: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* ---- Heading: inline-wrap "ЛОГІСТИКА ЖИВИХ" + "РІШЕНЬ" ---- */
+  .heading {
+    display: block;
+    width: 100%;
+    max-width: 325px;
+    margin: 0 auto;
+    height: auto;
+    flex-direction: row;
+    text-align: center;
+    white-space: normal;
+    font-family: var(--font-commissioner);
+    font-size: 32px;
+    line-height: 120%;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    align-items: initial;
+    justify-content: initial;
+    gap: 0;
+  }
+  .headingPrimary {
+    display: inline;
+    font-family: var(--font-commissioner);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 120%;
+    letter-spacing: -1px;
+    color: var(--text-cream, #f9f7f2);
+  }
+  .headingGap {
+    display: inline;
+    width: auto;
+  }
+  .headingSecondary {
+    display: inline;
+    font-family: var(--font-commissioner);
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 130%;
+    letter-spacing: -1px;
+    color: var(--text-grey, #93928c);
+  }
+
+  /* ---- Stage: vertical stack with reordered children ---- */
+  .stage {
+    width: 100%;
+    max-width: 325px;
+    margin: 0 auto;
+    min-height: 0;
+    margin-top: 28px;
+    flex-direction: column;
+    gap: 22px;
+    align-items: stretch;
+  }
+  .orbit { display: none; }
+  .tag { display: none; }
+
+  /* Plant animation — viewport-driven.
+     Source MP4 has wide dark-green padding around the bright bubble
+     (visible bubble ≈ 40% of the video frame width). We size the
+     element so the visible bubble lands ~45px from each viewport
+     edge (i.e. ~285px wide on a 375 frame). Strong negative vertical
+     margins eat the empty top/bottom padding the source MP4 carries
+     above/below the bubble, so the text blocks above and below sit
+     within ~30px from the visible sphere. */
+  .plant {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc((100vw - 50px) * 2.2);
+    max-width: 820px;
+    aspect-ratio: 800 / 634;
+    height: auto;
+    margin: -110px 0;
+    object-fit: contain;
+    order: 3;
+    align-self: stretch;
+    -webkit-mask-image: radial-gradient(
+      circle at 50% 50%,
+      #000 55%,
+      rgba(0, 0, 0, 0) 92%
+    );
+    mask-image: radial-gradient(
+      circle at 50% 50%,
+      #000 55%,
+      rgba(0, 0, 0, 0) 92%
+    );
+  }
+
+  /* Feature blocks: full-width, with `order` to split top/bottom */
+  .feature {
+    position: static !important;
+    width: 100% !important;
+    min-height: 0;
+    margin: 0;
+  }
+  .feature.topLeft,
+  .feature.topRight,
+  .feature.bottomLeft,
+  .feature.bottomRight {
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+  }
+  /* Top group (left side, icon LEFT) */
+  .feature.topLeft { order: 1; }        /* Цифрові датчики (clipboard) */
+  .feature.bottomLeft { order: 2; }     /* Контрольоване транспортування (truck) */
+  /* plant order: 3 (set above) */
+  /* Bottom group (right side, icon RIGHT) */
+  .feature.bottomRight { order: 4; }    /* Паспорт зберігання (thermometer) */
+  .feature.topRight { order: 5; }       /* Холодильні камери (nodes) */
+
+  /* Slight inset from the opposite edge so the block visually
+     "looks" to its side, while remaining accessible at full row width. */
+  .feature.topLeft,
+  .feature.bottomLeft {
+    padding-right: 36px;
+  }
+  .feature.topRight,
+  .feature.bottomRight {
+    padding-left: 36px;
+  }
+
+  .featureRow {
+    align-items: center;
+    gap: 12px;
+    padding: 0;
+  }
+  .featureText {
+    gap: 4px;
+    min-width: 0;
+    flex: 1;
+  }
+  /* Restore right-alignment for right-side items on mobile */
+  .featureText.alignEnd {
+    align-items: flex-end;
+    text-align: right;
+  }
+  /* Keep the designer-forced line breaks visible on mobile too —
+     the JSX has `<br />` between, e.g. "cold-chain" and "на" without
+     a literal space, so hiding the <br> would collapse those into
+     one merged word ("cold-chainна"). */
+  .featureLabelTop br,
+  .featureLabelBottom br {
+    display: inline;
+  }
+
+  /* Typography per Figma spec */
+  .featureLabelTop {
+    font-family: "Golos Text", var(--font-golos-text);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 140%;
+    letter-spacing: 0;
+    color: var(--text-cream, #f9f7f2);
+    opacity: 1;
+  }
+  .featureLabelBottom {
+    font-family: "Golos Text", var(--font-golos-text);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: 0;
+    color: var(--text-cream, #f9f7f2);
+  }
+
+  /* Icons stay readable but compact on mobile */
+  .featureIcon,
+  .featureIconImg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Narrow phones (<= 380px) — keep the 375-frame layout consistent,
+   just slightly tighten the side padding so the 332 animation still
+   fits comfortably. */
+@media screen and (max-width: 380px) {
+  .section {
+    padding: 44px 20px 52px;
+  }
+  .heading,
+  .stage {
+    max-width: 100%;
+  }
+  .feature.topLeft,
+  .feature.bottomLeft {
+    padding-right: 28px;
+  }
+  .feature.topRight,
+  .feature.bottomRight {
+    padding-left: 28px;
+  }
+}
+

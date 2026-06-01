@@ -1,0 +1,15 @@
+.tag {
+  border-radius: var(--br-4);
+  background-color: var(--bg-card);
+  display: flex;
+  align-items: center;
+  padding: var(--padding-4) var(--padding-16);
+  gap: var(--gap-3);
+  text-align: left;
+  font-size: var(--fs-12);
+  color: var(--brand-accent-secondary-default);
+  font-family: var(--font-golos-text);
+}
+.div {
+  position: relative;
+}

@@ -1,0 +1,2233 @@
+/* =====================================================================
+   /cultures — "Культури" page.
+   Strictly matches the Figma design (desktop, 1920px width).
+   All measurements in design-px; scaled uniformly by <ScaledShell>.
+   Header (Navbar1) & Footer (Footer1) are project-wide and untouched.
+   ===================================================================== */
+
+/* Design variables — kept ONLY for this page so we don't pollute globals */
+.page {
+  --bg-card: #ffffff;
+  --bg-cream: #f9f7f2;
+  --bg-green: #acb14f;
+  --brand-primary: #b3d217;
+  --brand-secondary: #1b4332;
+  --brand-secondary-hover: #003214;
+  --decorative-1: #f7fae8;
+  --decorative-2: #e7ebe7;
+  --text-black: #2c2c27;
+  --text-cream: #f9f7f2;
+  --text-grey: #93928c;
+
+  width: 100%;
+  background-color: var(--bg-cream);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+  overflow: hidden;
+  font-family: "Golos Text", system-ui, sans-serif;
+  color: var(--text-black);
+}
+
+/* ============================================================
+   1. HERO — 1920×600, aerial farmland bg, breadcrumb + headline
+   ============================================================ */
+.hero {
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  height: 694px;
+  background-color: #f2f2f2;
+  overflow: hidden;
+  isolation: isolate;
+  box-sizing: border-box;
+}
+.heroImg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.25) 40%, rgba(0, 0, 0, 0.45) 100%);
+  z-index: 1;
+}
+.breadcrumb {
+  position: absolute;
+  top: 32px;
+  left: 120px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-cream, #F9F7F2);
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 20px;
+  line-height: 120%;
+  letter-spacing: -0.1px;
+}
+.breadcrumbLink {
+  color: var(--text-cream, #F9F7F2);
+  opacity: 0.7;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+.breadcrumbLink:hover { opacity: 1; }
+.breadcrumbCurrent { color: var(--text-cream, #F9F7F2); font-weight: 500; }
+.heroHeadline {
+  position: absolute;
+  top: 50%;              /* vertically center in hero */
+  transform: translateY(-50%);
+  left: 120px;
+  right: 883px;          /* width = 1920 - 120 - 883 = 917px */
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  color: var(--text-cream, #F9F7F2);
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  line-height: 120%;
+}
+.heroLine1 {
+  display: block;
+  width: 100%;
+  margin: 0;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 82px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 120%;       /* 98.4px */
+  letter-spacing: -1px;
+  text-align: left;
+}
+.heroLine2 {
+  display: block;
+  width: 100%;
+  margin: 0;
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 82px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 120%;       /* 98.4px */
+  letter-spacing: -1px;
+  text-align: left;
+}
+
+/* ============================================================
+   2. CHOOSE CULTURE — 1920×?, padding 160 / 120 / 168.8, bg leaf
+   ============================================================ */
+.chooseSection {
+  position: relative;
+  align-self: stretch;
+  background-color: var(--bg-cream, #F9F7F2);
+  padding: 160px var(--page-gutter) 168.8px;
+  box-sizing: border-box;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 104px;
+}
+.chooseBg {
+  position: absolute;
+  width: 1919px;
+  height: 2735px;
+  top: -728px;
+  left: 0;
+  object-fit: cover;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+  will-change: transform;
+  transition: transform 0.05s linear;
+}
+
+/* Заголовок «Знайдіть рішення для вашої культури» — двома рядками,
+   за специфікацією: рядок1 Commissioner 100/400 (grey), рядок2 Golos Text 120/600 (black) */
+.chooseHead {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+.chooseTitle {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+.chooseTitleGrey {
+  display: block;
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 100px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%;
+  letter-spacing: -1px;
+  color: var(--text-grey, #93928C);
+  text-transform: uppercase;
+}
+.chooseTitleBold {
+  display: block;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 120px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;  /* 144px */
+  letter-spacing: -1px;
+  color: var(--text-black, #2C2C27);
+  text-transform: uppercase;
+}
+
+/* hint — «Оберіть культуру - ми покажемо…» */
+.chooseHintRow {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 87px;
+}
+.chooseHint {
+  margin: 0;
+  max-width: 640px;
+  color: #000;
+  font-family: "Golos Text", system-ui, sans-serif;
+}
+.chooseHint b {
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%;  /* 44.8px */
+  color: #000;
+}
+.chooseHint span {
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 125%;
+  color: #000;
+}
+
+.cardGroup {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.cardsLoading,
+.cardsEmpty {
+  padding: 60px 40px;
+  text-align: center;
+  color: var(--text-grey, #93928C);
+  background: var(--bg-card, #FFFFFF);
+  border-radius: 6px;
+  border: 1px dashed #d6d6cb;
+  font-size: 18px;
+}
+
+/* ====== AGRO CULTURE CARD (Open) ====== */
+.cardOpen {
+  width: 1680px;
+  max-width: 100%;
+  border-radius: 6px;
+  background-color: var(--bg-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  transform: translate3d(0, 0, 0) scale(1);
+  transform-origin: center center;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+.cardOpen:hover {
+  transform: translate3d(0, 0, 0) scale(1.012);
+  box-shadow: 0 12px 36px rgba(27, 67, 50, 0.12);
+}
+.cardHead {
+  align-self: stretch;
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background-color: var(--bg-card);
+  box-sizing: border-box;
+  /* Уся «шапка» картки — клікабельна, не лише іконка-плюс. */
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 160ms ease;
+}
+.cardHead:hover .iconBtn {
+  background-color: var(--brand-secondary-hover);
+  transform: scale(1.06);
+}
+.cardHead:active .iconBtn {
+  transform: scale(0.97);
+}
+.cardHead:focus-visible {
+  outline: 2px solid var(--brand-secondary);
+  outline-offset: -4px;
+  border-radius: 8px;
+}
+.cardTitle {
+  margin: 0;
+  flex: 1;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 48px;
+  line-height: 140%;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  color: #000000;
+}
+.iconBtn {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 100px;
+  background-color: var(--brand-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* Клік перехоплюється всією .cardHead */
+  border: 0;
+  padding: 0;
+  transition: background-color 160ms ease, transform 120ms ease;
+}
+.iconBtn svg { width: 24px; height: 24px; color: var(--bg-card); }
+
+.cardDivider {
+  width: calc(100% - 80px);
+  align-self: center;
+  height: 1px;
+  border-top: 1px solid var(--text-grey);
+  opacity: 0.3;
+}
+
+.cardBody {
+  align-self: stretch;
+  display: flex;
+  align-items: stretch;
+  padding: 40px;
+  gap: 40px;
+  box-sizing: border-box;
+  background-color: var(--bg-card);
+}
+.cardLeftCol {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  align-items: flex-start;
+}
+.problemText {
+  width: 100%;
+  max-width: 780px;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 140%;
+  color: var(--text-black);
+}
+.typeRow,
+.efRow {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 780px;
+}
+.typeRow .label,
+.efRow .label {
+  font-size: 12px;
+  line-height: 100%;
+  color: var(--text-black);
+}
+.chipsRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--brand-secondary);
+}
+.chipsRow .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.chipsRow .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background-color: var(--brand-primary);
+}
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.tag {
+  padding: 8px 16px;
+  background-color: var(--decorative-1);
+  color: var(--brand-secondary);
+  font-size: 14px;
+  line-height: 100%;
+  border-radius: 4px;
+  font-weight: 500;
+}
+.cardTwoColInner {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+.viewLineBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 16px;
+  width: 340px;
+  border-radius: 6px;
+  background-color: var(--brand-secondary);
+  color: var(--bg-cream);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 120%;
+  cursor: pointer;
+  border: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+  transition: background-color 160ms ease;
+  gap: 8px;
+}
+.viewLineBtn:hover { background-color: var(--brand-secondary-hover); }
+
+.cardRightImage {
+  position: relative;
+  width: 640px;
+  height: 412px;
+  border-radius: 6px;
+  background-color: var(--decorative-1);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.cardRightImage .cardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.cardOpen:hover .cardRightImage .cardImg {
+  transform: scale(1.03);
+}
+
+/* Closed accordion */
+.cardClosed {
+  width: 1680px;
+  max-width: 100%;
+  border-radius: 6px;
+  background-color: var(--bg-card);
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  box-sizing: border-box;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.04);
+  transform: translate3d(0, 0, 0) scale(1);
+  transform-origin: center center;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+  cursor: pointer;
+}
+.cardClosed:hover {
+  transform: translate3d(0, 0, 0) scale(1.012);
+  box-shadow: 0 10px 28px rgba(27, 67, 50, 0.1);
+}
+.cardClosed .cardHead {
+  padding: 56px 40px;
+}
+
+/* ============================================================
+   3 + 4. CALC SECTION — "Порахуйте вигоду" + slider
+   1920 × 1463, bg cream #F9F7F2
+     - Top 524 px : cream area з заголовком
+     - Bottom 939 px : green field image зі слайдером
+   ============================================================ */
+.calcSection {
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  height: 1463px;
+  background-color: var(--bg-cream, #F9F7F2);
+  box-sizing: border-box;
+  overflow: hidden;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- TOP : heading (524px) ---- */
+.calcTop {
+  width: 100%;
+  height: 524px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 var(--page-gutter);
+  box-sizing: border-box;
+}
+.calcHeading {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+.calcLineBold {
+  display: block;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 120px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;         /* 144px */
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: var(--text-black, #2C2C27);
+}
+.calcLineLight {
+  display: block;
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 100px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 110%;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: var(--text-grey, #93928C);
+}
+
+/* ---- BOTTOM : slider 1920×939 ---- */
+.calcSlider {
+  position: relative;
+  width: 100%;
+  height: 939px;
+  overflow: hidden;
+  isolation: isolate;
+  box-sizing: border-box;
+}
+
+/* Each slide stacked absolutely, faded by opacity */
+.calcSlide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    visibility 0s linear 0.55s;
+  z-index: 0;
+}
+.calcSlideActive {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    visibility 0s linear 0s;
+  z-index: 1;
+}
+
+.sliderBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  user-select: none;
+  pointer-events: none;
+}
+.sliderOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.18) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Title "РІК 1: ТОЧКА ВІДЛІКУ." — Golos 82/600/120% cream */
+.slideTitle {
+  position: absolute;
+  top: 64px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  margin: 0;
+  text-align: center;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 82px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;          /* 98.4 */
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: var(--text-cream, #F9F7F2);
+}
+
+/* Cards row: 448 left + 420 + 185 + 420 + 447 right = 1920
+   bottom 165 to dots area */
+.metricCardsRow {
+  position: absolute;
+  z-index: 2;
+  top: 276px;                 /* top distance per Figma */
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: stretch;
+  gap: 185px;
+}
+
+.metricCard {
+  width: 420px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.20);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+  padding: 32px;
+  box-sizing: border-box;
+  color: var(--text-cream, #F9F7F2);
+}
+
+.metricCardLabel {
+  align-self: stretch;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--bg-cream, #F9F7F2);
+  text-align: left;
+}
+
+.metricStat {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.metricNum {
+  display: block;
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 52px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;          /* 62.4 */
+  letter-spacing: -1px;
+  color: var(--bg-cream, #F9F7F2);
+}
+.metricSub {
+  display: block;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;          /* 33.6 */
+  color: var(--bg-cream, #F9F7F2);
+}
+
+/* Dots — 165px from bottom of cards area; aligned centered horizontally */
+.sliderDots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 60px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.sliderDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid var(--bg-cream, #F9F7F2);
+  background-color: transparent;
+  padding: 0;
+  transition: background-color 0.18s ease, transform 0.18s ease, width 0.18s ease;
+}
+.sliderDot:hover {
+  background-color: rgba(255, 255, 255, 0.55);
+}
+.sliderDotActive {
+  background-color: var(--bg-cream, #F9F7F2);
+  width: 28px;
+}
+
+/* Responsive ---- keep design intact at typical desktop, scale gracefully below */
+@media (max-width: 1400px) {
+  .calcSection { height: auto; }
+  .calcTop { height: auto; padding: 80px 60px 60px; }
+  .calcLineBold { font-size: 84px; line-height: 110%; }
+  .calcLineLight { font-size: 72px; line-height: 110%; }
+  .calcSlider { height: 760px; }
+  .slideTitle { font-size: 56px; top: 48px; }
+  .metricCardsRow { top: 200px; gap: 80px; }
+  .metricCard { width: 360px; padding: 28px; gap: 24px; }
+  .metricNum { font-size: 44px; }
+  .metricCardLabel, .metricSub { font-size: 22px; }
+}
+@media (max-width: 925px) {
+  .calcTop { padding: 60px 30px 40px; }
+  .calcLineBold { font-size: 50px; }
+  .calcLineLight { font-size: 42px; }
+  .calcSlider { height: auto; padding: 60px 30px 80px; }
+  .slideTitle { position: static; padding: 0 0 32px; font-size: 36px; }
+  .metricCardsRow { position: static; transform: none; flex-direction: column; gap: 24px; align-items: center; }
+  .metricCard { width: 100%; max-width: 420px; }
+  .sliderDots { position: static; margin-top: 32px; }
+}
+
+/* ============================================================
+   5. WHY CHOOSE BIO — dark green 1920×1843, бекграунд із noise,
+      листок-вектор на фоні, заголовок зверху, 2×2 сітка
+      (текст-лід + 3 картки)
+   ============================================================ */
+.whyWrap {
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  min-height: 1843px;
+  background-color: #003214;
+  /* noise — лише точкові світлі вкраплення (~22% площі), фон не темніє */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n' x='0%25' y='0%25' width='100%25' height='100%25'><feTurbulence type='fractalNoise' baseFrequency='2.5' stitchTiles='stitch' numOctaves='3' seed='1108'/><feColorMatrix type='luminanceToAlpha'/><feComponentTransfer><feFuncA type='discrete' tableValues='0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0'/></feComponentTransfer></filter><rect width='100%25' height='100%25' filter='url(%23n)' fill='%23F9F7F2' fill-opacity='0.25'/></svg>");
+  background-size: 400px 400px;
+  background-repeat: repeat;
+  padding: 160px var(--page-gutter);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 90px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Plant vector overlaid on bg — 1932×1461, top -17, left 180, opacity 20% */
+.whyVectorBg {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  top: -17px;
+  left: 180px;
+  width: 1932px;
+  height: 1461px;
+  opacity: 0.20;
+  user-select: none;
+  object-fit: contain;
+}
+
+/* Title — two parts:
+   "Чому агрономи" — Golos Text 82 / 600 cream
+   "переходять на біопрепарати" — Commissioner 82 / 400 grey */
+.whyHeading {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  line-height: 120%;
+  max-width: 1300px;
+}
+.whyHeadCream {
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 82px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: var(--text-cream, #F9F7F2);
+}
+.whyHeadGrey {
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 82px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: var(--text-grey, #93928C);
+}
+
+/* 2×2 grid:
+   row 1: [lead text]   [card "Ефективність"]
+   row 2: [card "Ціна"]  [card "Застосування"]
+   gap 24, cards 828×636 */
+.whyGrid {
+  position: relative;
+  z-index: 1;
+  align-self: stretch;
+  display: grid;
+  grid-template-columns: 828px 828px;
+  gap: 24px;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+/* lead column (top-left) — no card background, just paragraphs */
+.whyLead {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  padding: 32px 32px 0 0;
+  box-sizing: border-box;
+  justify-content: flex-start;
+}
+.leadPara {
+  margin: 0;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 125%;
+  color: var(--text-cream, #F9F7F2);
+}
+.leadAccent {
+  color: var(--brand-accent-primary-default, #B3D217);
+}
+
+/* Card 828×636 — frosted glass.
+   Hover state: підкреслено-якісний, у нашому стилі (cream + accent lime).
+   Композиція:
+   1. Plate сама плавно піднімається + більше тінь.
+   2. ::before — м'яке lime-glow border + verticalхтопний accent-stripe зліва.
+   3. ::after — діагональний shine, що пробігає по плашці один раз.
+   4. Title міняє колір на accent lime, з anti-flicker text-shadow.
+   5. Text стає трохи яскравіший. */
+.whyCard {
+  position: relative;
+  width: 828px;
+  height: 636px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.30);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  padding: 32px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  color: var(--text-cream, #F9F7F2);
+  overflow: hidden;
+  cursor: default;
+  isolation: isolate;
+  transition: transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 0.5s ease,
+              background-color 0.35s ease,
+              border-color 0.35s ease;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Accent vertical-stripe + soft outer glow (схована в idle) */
+.whyCard::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg,
+              rgba(179, 210, 23, 0) 0%,
+              rgba(179, 210, 23, 1) 35%,
+              rgba(179, 210, 23, 1) 65%,
+              rgba(179, 210, 23, 0) 100%);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Діагональний shine — на hover проходить раз по плашці */
+.whyCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg,
+              transparent 30%,
+              rgba(255, 255, 255, 0.10) 48%,
+              rgba(255, 255, 255, 0.18) 50%,
+              rgba(255, 255, 255, 0.10) 52%,
+              transparent 70%);
+  background-size: 240% 100%;
+  background-position: -40% 0;
+  transition: background-position 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+              opacity 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: screen;
+}
+
+.whyCard > * { position: relative; z-index: 2; }
+
+.whyCard:hover {
+  transform: translateY(-6px);
+  background-color: rgba(255, 255, 255, 0.40);
+  border-color: rgba(179, 210, 23, 0.35);
+  box-shadow:
+    0 22px 50px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(179, 210, 23, 0.20),
+    0 0 32px -8px rgba(179, 210, 23, 0.30);
+}
+.whyCard:hover::before {
+  transform: scaleY(1);
+}
+.whyCard:hover::after {
+  background-position: 140% 0;
+  opacity: 1;
+}
+.whyCard:focus-within {
+  outline: 2px solid #b3d217;
+  outline-offset: 4px;
+}
+.whyCardTitle {
+  margin: 0;
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 52px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: -1px;
+  color: var(--text-cream, #F9F7F2);
+  transition: color 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+              text-shadow 0.4s ease;
+  will-change: transform, color;
+}
+.whyCard:hover .whyCardTitle {
+  color: #B3D217;
+  transform: translateX(4px);
+  text-shadow: 0 0 24px rgba(179, 210, 23, 0.35);
+}
+.whyCardText {
+  margin: 0;
+  flex: 1;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--text-cream, #F9F7F2);
+  transition: color 0.4s ease, opacity 0.4s ease;
+}
+.whyCard:hover .whyCardText {
+  color: #FFFFFF;
+  opacity: 1;
+}
+
+/* Image inside card — hidden on desktop, shown only on mobile (see @media ≤768px) */
+.whyCardImage {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .whyCard,
+  .whyCardTitle,
+  .whyCardText,
+  .whyCard::before,
+  .whyCard::after {
+    transition: none !important;
+    animation: none !important;
+  }
+  .whyCard:hover { transform: none; }
+  .whyCard:hover .whyCardTitle { transform: none; }
+}
+
+@media (max-width: 1900px) {
+  .whyWrap { padding: 120px 80px; }
+  .whyGrid { grid-template-columns: 1fr 1fr; }
+  .whyCard { width: 100%; height: auto; min-height: 460px; }
+}
+@media (max-width: 1100px) {
+  .whyWrap { padding: 80px 40px; min-height: 0; }
+  .whyHeadCream, .whyHeadGrey { font-size: 48px; }
+  .whyGrid { grid-template-columns: 1fr; }
+  .whyCard { min-height: 0; padding: 28px; }
+  .whyCardTitle { font-size: 36px; }
+  .whyCardText, .leadPara { font-size: 20px; }
+  .whyLead { gap: 32px; padding: 0; }
+  .whyVectorBg { width: 700px; opacity: 0.4; }
+}
+
+/* ============================================================
+   6. INSIDE / TABS — Bacillus etc.
+   ============================================================ */
+.insideWrap {
+  align-self: stretch;
+  padding: 160px 80px;
+  box-sizing: border-box;
+  background-color: var(--bg-cream);
+}
+.inside {
+  background-color: var(--bg-card);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  gap: 0;
+  box-sizing: border-box;
+  align-items: flex-start;
+  width: 1760px;
+  min-height: 959px;
+  margin: 0 auto;
+}
+.insideLeft {
+  width: 852px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex-shrink: 0;
+}
+.insideTitle {
+  margin: 0;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 82px;
+  line-height: 120%;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #000000;
+}
+.insideTitle .italic {
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  color: #000000;
+  white-space: normal;
+}
+.tabsGroup {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+.tab {
+  padding: 16px 20px;
+  height: 60px;
+  border-radius: 6px;
+  background-color: #1B4332;
+  color: var(--text-cream);
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 120%;
+  font-weight: 600;
+  border: 1px solid #1B4332;
+  cursor: pointer;
+  box-sizing: border-box;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  transition: background-color 0.18s ease,
+              color 0.18s ease,
+              border-color 0.18s ease,
+              transform 0.12s ease,
+              box-shadow 0.18s ease;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+}
+.tabInactive {
+  background-color: transparent;
+  border: 1px solid var(--text-grey);
+  color: var(--text-grey);
+  font-weight: 600;
+  line-height: 120%;
+  box-shadow: none;
+}
+.tab:hover:not(.tabInactive) {
+  background-color: var(--brand-secondary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(27, 67, 50, 0.22);
+}
+.tabInactive:hover {
+  color: var(--text-black);
+  border-color: var(--text-black);
+  transform: translateY(-1px);
+}
+.tab:active { transform: translateY(0); }
+.tab:focus-visible {
+  outline: 2px solid #b3d217;
+  outline-offset: 3px;
+}
+
+/* Якщо в адмінці додали більше 6 пунктів — group компактно wrap-ається
+   у 2 ряди, не ламаючи дизайн. */
+.tabsGroup[data-count="5"] .tab,
+.tabsGroup[data-count="6"] .tab { padding: 14px 18px; font-size: 17px; }
+.tabsGroup[data-count="7"] .tab,
+.tabsGroup[data-count="8"] .tab,
+.tabsGroup[data-count="9"] .tab { padding: 12px 16px; font-size: 16px; height: 54px; }
+.insideTextBlock {
+  width: 661px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 60px;
+  /* плавна fade-in при зміні активного табу (key={activeTabId} ремаунтить block) */
+  animation: insideFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes insideFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.insideH2 {
+  margin: 0;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 28px;
+  line-height: 125%;
+  font-weight: 400;
+  color: var(--text-black);
+}
+.insideDesc {
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 18px;
+  line-height: 140%;
+  font-weight: 400;
+  color: var(--text-black);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.insideDescPara { margin: 0; }
+
+.insideRight {
+  position: relative;
+  width: 828px;
+  height: 879px;
+  border-radius: 6px;
+  overflow: hidden;
+  isolation: isolate;
+  flex-shrink: 0;
+  display: block;
+  padding: 0;
+  box-sizing: border-box;
+  background: #f4f1e9; /* фон поки картинка не завантажилась */
+}
+.insideRightImg {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 6px;
+  opacity: 0;
+  transform: scale(1.035);
+  transition: opacity 0.55s ease, transform 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.insideRightImgActive {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+}
+@media (prefers-reduced-motion: reduce) {
+  .insideTextBlock { animation: none; }
+  .insideRightImg { transition: opacity 0.2s linear, transform 0.2s linear; }
+}
+
+/* ============================================================
+   7. HOW IT WORKS — olive section with steps + vertical timeline
+   ============================================================ */
+.howWrap {
+  align-self: stretch;
+  padding: 0;
+  box-sizing: border-box;
+}
+.how {
+  position: relative;
+  background-color: var(--bg-green);
+  width: 100%;
+  height: 2261px;
+  min-height: 2261px;
+  overflow: hidden;
+}
+.howTitle {
+  position: absolute;
+  top: 93px;
+  left: 120px;
+  margin: 0;
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 82px;
+  line-height: 120%;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--bg-cream);
+  z-index: 2;
+}
+.howTitle .italic {
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--bg-cream);
+}
+.timeline {
+  position: absolute;
+  top: 276px;
+  left: 952px;
+  width: 16px;
+  height: 1811px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+.timeline .tlLine {
+  width: 2px;
+  flex: 1;
+  border-radius: 1px;
+  background-color: var(--bg-cream);
+}
+.timeline .tlDot {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: -8px;
+  left: calc(50% - 8px);
+  border-radius: 50%;
+  background-color: var(--brand-primary);
+}
+.stepsList {
+  position: absolute;
+  top: 276px;
+  left: 120px;
+  width: 1680px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 120px;
+  z-index: 2;
+}
+.stepRow {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 0 0 0 4px;
+  /* Initial state — invisible, slightly pushed down. */
+  opacity: 0;
+  transform: translateY(48px);
+  will-change: transform, opacity;
+  transition: opacity 0.85s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.85s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+/* Кожен .stepRow має власний IntersectionObserver; коли крок входить
+   у viewport — додаємо .stepRowIn і він з'являється як ЦІЛИЙ блок
+   (текст і фото синхронно). Не зліва-направо — як одне ціле. */
+.stepRowIn { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .stepRow {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+.stepText {
+  width: 640px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  gap: 32px;
+  align-items: flex-start;
+}
+.stepTitle {
+  margin: 0;
+  align-self: stretch;
+  font-size: 52px;
+  line-height: 120%;
+  letter-spacing: -1px;
+  font-weight: 600;
+  font-family: "Commissioner", system-ui, sans-serif;
+  color: var(--brand-secondary-hover);
+}
+.stepDesc {
+  margin: 0;
+  align-self: stretch;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 28px;
+  line-height: 120%;
+  font-weight: 400;
+  white-space: pre-line;
+  color: var(--text-cream);
+}
+.stepImg {
+  width: 658px;
+  height: 366px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   8. ICON FEATURES — 3 centered cols on cream bg
+   ============================================================ */
+.iconsWrap {
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  background-color: var(--bg-cream);
+  padding: 160px var(--page-gutter);
+  box-sizing: border-box;
+}
+.iconsRow {
+  width: 100%;
+  max-width: 1680px;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  align-items: flex-start;
+}
+.iconCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 32px;
+  text-align: center;
+  max-width: 475px;
+  flex: 1;
+}
+.iconCircle {
+  width: 120px;
+  height: 120px;
+  border-radius: 100px;
+  background-color: var(--decorative-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.iconCircle img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+.iconCol .ftTextContent {
+  width: 100%;
+  max-width: 411px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.iconColTitle {
+  margin: 0;
+  align-self: stretch;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 32px;
+  letter-spacing: -0.5px;
+  line-height: 125%;
+  font-weight: 600;
+  color: var(--text-black);
+}
+.iconColDesc {
+  align-self: stretch;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 140%;
+  font-weight: 400;
+  color: var(--text-grey);
+}
+
+/* ============================================================
+   9. CONSULTATION — strictly per design measurements
+   Section box: width 1920, height 880 (heading top 86 +
+   image area + 24год top 614 +176 +90 bottom = 880).
+   Left padding: 120 everywhere.
+   ============================================================ */
+.consultWrap {
+  position: relative;
+  align-self: stretch;
+  background-color: var(--bg-cream);
+  height: 880px;
+  overflow: hidden;
+  isolation: isolate;
+  box-sizing: border-box;
+}
+.consultHeading {
+  position: absolute;
+  top: 86px;
+  left: 120px;
+  right: 120px;
+  margin: 0;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 82px;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: var(--text-black);
+  z-index: 3;
+}
+.consultHeading .italic {
+  color: var(--text-grey);
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-weight: 500;
+}
+
+/* Image: fills the section, behind everything */
+.consultImage {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 622px;
+  object-fit: cover;
+  z-index: 0;
+}
+/* Smooth gradient overlay per design spec: 1922x467 at top=233, left=-1
+   linear-gradient(180deg, #F9F7F2 45.83%, rgba(249, 247, 242, 0) 100%) */
+.consultGradient {
+  position: absolute;
+  top: 233px;
+  left: -1px;
+  width: 1922px;
+  height: 467px;
+  background: linear-gradient(180deg, #F9F7F2 45.83%, rgba(249, 247, 242, 0) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* "Опишіть культуру..." text positioned at top 264, left 120 */
+.consultText {
+  position: absolute;
+  top: 264px;
+  left: 120px;
+  width: 824px;
+  z-index: 2;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 125%;
+  color: var(--text-black);
+}
+.consultText b {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 140%;
+  color: var(--text-black);
+}
+
+/* Button positioned at left 963 */
+.consultBtn {
+  position: absolute;
+  top: 264px;
+  left: 963px;
+  width: 396px;
+  z-index: 2;
+  display: inline-flex;
+  padding: 18px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  border-radius: 6px;
+  background: var(--brand-secondary);
+  color: var(--bg-card);
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 120%;
+  cursor: pointer;
+  border: 0;
+  box-sizing: border-box;
+  transition: background-color 160ms ease;
+}
+.consultBtn:hover { background: var(--brand-secondary-hover); }
+
+/* Phone positioned at top 360, left 1108 (center of button column) */
+.consultPhone {
+  position: absolute;
+  top: 360px;
+  left: 1108px;
+  z-index: 2;
+  color: var(--text-black);
+  text-align: center;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 140%;
+}
+
+/* 24 год card: top 614, left 120, height 176.
+   Frosted-glass effect — same family as .metricCard / .whyCard
+   (rgba white + backdrop-filter blur) для візуальної узгодженості
+   з блоком "1 РІК / 3 РОКИ / 5+ РОКІВ". */
+.cart24 {
+  position: absolute;
+  top: 614px;
+  left: 120px;
+  width: 494px;
+  height: 176px;
+  display: inline-flex;
+  padding: 0 20px;
+  align-items: center;
+  gap: 17px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.20);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 24px rgba(15, 27, 22, 0.18);
+  z-index: 4;
+  box-sizing: border-box;
+}
+.cart24 .ico {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.cart24 .ico svg {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+.cart24 .label {
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: var(--bg-cream);
+  margin-bottom: 4px;
+}
+.cart24 .body {
+  display: block;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 130%;
+  color: var(--bg-cream);
+  margin-top: 0;
+}
+
+/* =============================================================
+   ============= MOBILE ADAPTIVE — ≤768px (1-1 from PNG) =========
+   ============================================================= */
+@media screen and (max-width: 768px) {
+  .page {
+    overflow-x: clip;
+    font-size: 16px;
+  }
+
+  /* ---------- 1) HERO ---------- */
+  .hero {
+    height: 460px;
+  }
+  .breadcrumb {
+    top: 16px;
+    left: 20px;
+    font-size: 14px;
+    gap: 8px;
+  }
+  .heroHeadline {
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);  /* vertically center on mobile */
+    left: 20px;
+    right: 20px;
+  }
+  .heroHeadline > span {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100%;
+    max-width: 100%;
+  }
+  .heroLine1, .heroLine2 {
+    font-size: 36px;
+    line-height: 1.12;
+    letter-spacing: -0.4px;
+    text-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  }
+
+  /* ---------- 2) CHOOSE CULTURE ---------- */
+  .chooseSection {
+    padding: 56px 20px 48px;
+    gap: 48px;
+  }
+  .chooseBg {
+    width: 1200px;
+    height: 1800px;
+    top: -200px;
+    left: -300px;
+    opacity: 0.45;
+  }
+  .chooseHead {
+    gap: 20px;
+  }
+  .chooseTitle > span {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100%;
+  }
+  .chooseTitleGrey {
+    font-size: 28px;
+    line-height: 1.1;
+    letter-spacing: -0.3px;
+  }
+  .chooseTitleBold {
+    font-size: 34px;
+    line-height: 1.08;
+    letter-spacing: -0.4px;
+  }
+  .chooseHintRow {
+    justify-content: flex-start;
+    padding-right: 0;
+  }
+  .chooseHint {
+    max-width: 100%;
+  }
+  .chooseHint b {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+  .chooseHint span {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .cardGroup {
+    gap: 16px;
+  }
+
+  /* Open & closed accordion cards — full width, mobile padding */
+  .cardOpen,
+  .cardClosed {
+    width: 100%;
+    border-radius: 12px;
+  }
+  .cardOpen:hover,
+  .cardClosed:hover {
+    transform: none;
+  }
+  .cardHead {
+    padding: 20px 20px;
+    gap: 12px;
+  }
+  .cardClosed .cardHead {
+    padding: 28px 20px;
+  }
+  .cardTitle {
+    font-size: 22px;
+    line-height: 1.18;
+    letter-spacing: -0.2px;
+  }
+  .iconBtn {
+    width: 40px;
+    height: 40px;
+  }
+  .iconBtn svg {
+    width: 20px;
+    height: 20px;
+  }
+  .cardDivider {
+    width: calc(100% - 40px);
+  }
+  .cardBody {
+    padding: 20px;
+    gap: 20px;
+    flex-direction: column;
+  }
+  .cardLeftCol {
+    gap: 24px;
+    width: 100%;
+  }
+  .problemText {
+    font-size: 15px;
+    line-height: 1.45;
+    max-width: 100%;
+  }
+  .typeRow,
+  .efRow {
+    max-width: 100%;
+    gap: 10px;
+  }
+  .typeRow .label,
+  .efRow .label {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--text-grey, #93928c);
+    font-weight: 500;
+  }
+  .chipsRow {
+    gap: 8px;
+    font-size: 13px;
+  }
+  .tag {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  .cardTwoColInner {
+    gap: 18px;
+  }
+  .viewLineBtn {
+    width: 100%;
+    padding: 16px 18px;
+    font-size: 15px;
+  }
+  .cardRightImage {
+    width: 100%;
+    height: 200px;
+    order: -1;
+    border-radius: 8px;
+  }
+
+  /* ---------- 3+4) CALC SECTION ---------- */
+  .calcSection {
+    height: auto;
+  }
+  .calcTop {
+    height: auto;
+    padding: 48px 20px 28px;
+  }
+  .calcHeading > span {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100%;
+  }
+  .calcLineBold {
+    font-size: 30px;
+    line-height: 1.08;
+    letter-spacing: -0.3px;
+  }
+  .calcLineLight {
+    font-size: 26px;
+    line-height: 1.1;
+    letter-spacing: -0.3px;
+  }
+  .calcSlider {
+    height: 700px;
+    min-height: 0;
+    padding: 0 0 60px;
+    overflow: hidden;
+  }
+  /* Slides stay absolute (overlap each other), active shown via opacity.
+     Page height = slider height (no vertical stacking on mobile). */
+  .calcSlide {
+    /* inherit base: position: absolute; inset: 0; */
+    height: auto;
+  }
+  .slideTitle {
+    position: absolute;
+    top: 34px;
+    left: 24px;
+    right: 24px;
+    /* per design spec — Golos Text 28/600/120% / -1px */
+    font-family: "Golos Text", system-ui, sans-serif;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;         /* 33.6px */
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--text-cream, #F9F7F2);
+  }
+  /* Container becomes a full-slide canvas — cards inside are positioned absolutely
+     in a diagonal stagger (Bio top-left, Chem bottom-right) per design.
+     IMPORTANT: pointer-events: none so the cards-row doesn't block clicks on
+     the slider dots below (cards themselves restore pointer-events). */
+  .metricCardsRow {
+    position: absolute;
+    inset: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    display: block;
+    gap: 0;
+    pointer-events: none;
+  }
+  /* Card spec (per user):
+        width:180; padding:12; gap:16; radius:6;
+        background: rgba(255,255,255,0.20);
+        height ≈ 242px */
+  .metricCard {
+    position: absolute;
+    pointer-events: auto;
+    display: flex;
+    width: 180px;
+    height: 242px;
+    padding: 12px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 16px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.20);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    box-sizing: border-box;
+  }
+  /* DOM order: chem first, bio second.
+     Visual order per design: Bio top-left, Chem bottom-right.
+     Cards must NOT visually overlap — vertical gap between them. */
+  .metricCard:nth-of-type(1) {              /* chem  — bottom-right */
+    top: 392px;
+    right: 24px;
+    left: auto;
+  }
+  .metricCard:nth-of-type(2) {              /* bio   — top-left */
+    top: 120px;
+    left: 24px;
+    right: auto;
+  }
+  .metricCardLabel {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 120%;
+  }
+  .metricStat {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 2px;
+  }
+  .metricNum {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 120%;
+    letter-spacing: -0.5px;
+  }
+  .metricSub {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 120%;
+    text-align: left;
+    flex-shrink: 0;
+  }
+  .sliderDots {
+    bottom: 24px;
+  }
+
+  /* ---------- 5) WHY BIO ---------- */
+  .whyWrap {
+    padding: 56px 20px 56px;
+    gap: 32px;
+    min-height: 0;
+  }
+  .whyVectorBg {
+    width: 600px;
+    height: auto;
+    top: 200px;
+    left: -100px;
+    opacity: 0.18;
+  }
+  .whyHeading {
+    max-width: 100%;
+  }
+  .whyHeading > span {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100%;
+  }
+  .whyHeadCream,
+  .whyHeadGrey {
+    font-size: 28px;
+    line-height: 1.12;
+    letter-spacing: -0.3px;
+  }
+  /* Cards container: 1-column grid with 16px vertical gap. The card
+     itself is 335px wide and is centered inside the grid track. We use
+     0 horizontal padding here (card defines its own width) so the card
+     is symmetric on the screen — `place-items: center` ensures perfect
+     horizontal centering. */
+  .whyGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding-left: 0;
+    padding-right: 0;
+    box-sizing: border-box;
+    justify-items: center;
+    place-items: center;
+  }
+  .whyLead {
+    gap: 20px;
+    padding: 0 27px;
+  }
+  .leadPara {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  /* Card per Figma spec:
+        width: 335px;  height: 378px;
+        padding: 24px;   (symmetric)
+        Title + body grouped tightly at TOP (8px between title and body).
+        Image anchored to the BOTTOM, filling the remaining vertical space
+        (~170-200px tall) to match Figma where the photo is prominent
+        and the copy block sits compactly above it.
+        background: rgba(255,255,255,0.30). */
+  .whyCard {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 335px;
+    max-width: 100%;
+    height: 378px;
+    min-height: 0;
+    padding: 24px 16px;
+    gap: 0;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.30);
+    align-self: center;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+  /* Title + body grouped together (tight) so they read as a single block. */
+  .whyCardCopy {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;                       /* tight title→body gap per Figma */
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  /* Decorative gradient layers from desktop ::before / ::after are visually
+     too heavy for the small mobile card — disable them so the flat
+     translucent fill from background: rgba(...0.30) matches the design. */
+  .whyCard::before,
+  .whyCard::after {
+    display: none;
+  }
+  .whyCard:hover {
+    transform: none;
+  }
+  /* Title: Commissioner 20/600/120%/-1px / cream */
+  .whyCardTitle {
+    margin: 0;
+    font-family: "Commissioner", system-ui, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 120%;             /* 24px */
+    letter-spacing: -1px;
+    color: var(--text-cream, #F9F7F2);
+    flex-shrink: 0;
+  }
+  /* Body: Golos Text 14/400/120% / cream */
+  .whyCardText {
+    margin: 0;
+    flex: 0 0 auto;
+    font-family: "Golos Text", system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 120%;             /* 16.8px */
+    letter-spacing: 0;
+    color: var(--text-cream, #F9F7F2);
+  }
+  /* Image anchored to the bottom of the card. Uses `margin-top: auto` so it
+     occupies all remaining vertical space, regardless of how many lines the
+     body text wraps to. Fixed min-height keeps the photo visually prominent
+     (matches Figma where the image is ~½ of the card height). */
+  .whyCardImage {
+    display: block;
+    width: 100%;
+    margin-top: auto;
+    flex: 1 1 auto;
+    min-height: 160px;
+    max-height: 200px;
+    border-radius: 4px;
+    object-fit: cover;
+    object-position: center;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  /* ---------- 6) INSIDE TABS ---------- */
+  .insideWrap {
+    padding: 56px 20px;
+  }
+  .inside {
+    width: 100%;
+    min-height: 0;
+    padding: 24px 20px;
+    flex-direction: column;
+    gap: 24px;
+    border-radius: 12px;
+  }
+  .insideLeft {
+    width: 100%;
+  }
+  .insideTitle {
+    font-size: 32px;
+    line-height: 1.1;
+    letter-spacing: -0.3px;
+  }
+  .tabsGroup {
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .tab {
+    height: 44px;
+    padding: 10px 14px;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+  .tabsGroup[data-count="5"] .tab,
+  .tabsGroup[data-count="6"] .tab,
+  .tabsGroup[data-count="7"] .tab,
+  .tabsGroup[data-count="8"] .tab,
+  .tabsGroup[data-count="9"] .tab {
+    height: 44px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  .insideTextBlock {
+    width: 100%;
+    margin-top: 24px;
+    gap: 16px;
+  }
+  .insideH2 {
+    font-size: 20px;
+    line-height: 1.25;
+    font-weight: 600;
+  }
+  .insideDesc {
+    font-size: 15px;
+    line-height: 1.5;
+    gap: 10px;
+  }
+  .insideRight {
+    width: 100%;
+    height: 280px;
+    border-radius: 12px;
+  }
+
+  /* ---------- 7) HOW IT WORKS ---------- */
+  .howWrap {
+    padding: 0;
+  }
+  .how {
+    height: auto;
+    min-height: 0;
+    padding: 56px 20px 56px;
+  }
+  .howTitle {
+    position: relative;
+    top: auto;
+    left: auto;
+    font-size: 30px;
+    line-height: 1.12;
+    letter-spacing: -0.3px;
+    margin-bottom: 32px;
+  }
+  .howTitle > span {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100%;
+  }
+  .timeline {
+    display: none;
+  }
+  .stepsList {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    gap: 36px;
+  }
+  .stepRow {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+    padding: 0;
+  }
+  .stepText {
+    width: 100%;
+    padding: 0;
+    gap: 12px;
+  }
+  .stepTitle {
+    font-size: 24px;
+    line-height: 1.18;
+    letter-spacing: -0.2px;
+  }
+  .stepDesc {
+    font-size: 15px;
+    line-height: 1.5;
+    white-space: normal;
+  }
+  .stepImg {
+    width: 100%;
+    height: 220px;
+    border-radius: 12px;
+  }
+
+  /* ---------- 8) ICON FEATURES ---------- */
+  .iconsWrap {
+    padding: 48px 20px;
+  }
+  .iconsRow {
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+  }
+  .iconCol {
+    max-width: 100%;
+    width: 100%;
+    gap: 16px;
+  }
+  .iconCircle,
+  .iconCircle img {
+    width: 80px;
+    height: 80px;
+  }
+  .iconColTitle {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+  .iconColDesc {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  /* ---------- 9) CONSULTATION ---------- */
+  .consultWrap {
+    height: auto;
+    min-height: 0;
+    padding: 48px 20px 0;
+  }
+  .consultHeading {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    font-size: 30px;
+    line-height: 1.12;
+    letter-spacing: -0.3px;
+    margin-bottom: 16px;
+  }
+  .consultText {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  .consultText b {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .consultBtn {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    padding: 16px 18px;
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+  .consultPhone {
+    position: relative;
+    top: auto;
+    left: auto;
+    text-align: center;
+    margin-bottom: 28px;
+    font-size: 17px;
+  }
+  .consultImage {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    width: calc(100% + 40px);
+    height: 280px;
+    margin: 0 -20px;
+  }
+  .consultGradient {
+    display: none;
+  }
+  .cart24 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: calc(100% + 40px);
+    height: auto;
+    min-height: 120px;
+    padding: 20px;
+    gap: 14px;
+    border-radius: 0;
+    background: rgba(20, 50, 30, 0.65);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    margin: -120px -20px 0;
+  }
+  .cart24 .ico,
+  .cart24 .ico svg {
+    width: 32px;
+    height: 32px;
+  }
+  .cart24 .label {
+    font-size: 18px;
+    margin-bottom: 2px;
+  }
+  .cart24 .body {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+}
+
+/* Tighter on very small phones */
+@media screen and (max-width: 380px) {
+  .heroLine1, .heroLine2 { font-size: 30px; }
+  .chooseTitleGrey { font-size: 24px; }
+  .chooseTitleBold { font-size: 28px; }
+  .calcLineBold { font-size: 26px; }
+  .calcLineLight { font-size: 22px; }
+  .whyHeadCream, .whyHeadGrey { font-size: 24px; }
+  .insideTitle { font-size: 28px; }
+  .howTitle { font-size: 26px; }
+  .consultHeading { font-size: 26px; }
+  .cardTitle { font-size: 19px; }
+  .stepTitle { font-size: 22px; }
+  .whyCardTitle { font-size: 22px; }
+}

@@ -1,0 +1,800 @@
+/* ============================================================
+   Contacts page — TAMIS АГРО.
+   Pixel-perfect implementation following the design (PNG).
+   Canvas: 1920px. ScaledShell handles responsive scaling.
+   Side padding: 120px throughout.
+   ============================================================ */
+
+.page {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  position: relative;
+  background-color: var(--bg-cream, #f9f7f2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: "Golos Text", sans-serif;
+  color: var(--text-black, #2c2c27);
+  line-height: normal;
+}
+
+/* ===== HERO ===== */
+.navbarParent {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+.contactSectionWrapper {
+  align-self: stretch;
+  display: flex;
+  justify-content: flex-start;
+  padding: 162px var(--page-gutter) 160px;
+  box-sizing: border-box;
+}
+
+.contactSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 80px;
+}
+
+.contactHeader {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 80px;
+  text-align: left;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #93928c;
+  line-height: 120%;
+  letter-spacing: -0.1px;
+}
+.breadcrumb a { color: #93928c; text-decoration: none; transition: color 0.15s ease; }
+.breadcrumb a:hover { color: #1b4332; }
+.breadcrumb .breadcrumbSep { color: #c9c7c0; user-select: none; font-weight: 300; }
+.breadcrumb .current { color: #2c2c27; font-weight: 500; }
+
+.parent {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.title {
+  margin: 0;
+  width: 828px;
+  font-family: "Commissioner", sans-serif;
+  font-size: 82px;
+  font-weight: 400;
+  letter-spacing: -1px;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #2c2c27;
+  flex-shrink: 0;
+}
+.titleStrong {
+  font-family: "Golos Text", sans-serif;
+  font-weight: 600;
+  color: #2c2c27;
+}
+.titleMuted {
+  font-family: "Commissioner", sans-serif;
+  font-weight: 400;
+  color: #93928c;
+}
+
+.heroDescription {
+  width: 657px;
+  margin-top: 94px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%;
+  color: #2c2c27;
+  flex-shrink: 0;
+}
+
+.contactInformation {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.heroImage {
+  width: 828px;
+  height: 554px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+}
+
+.contactData {
+  width: 828px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+  text-align: left;
+  flex-shrink: 0;
+}
+
+.contactCard {
+  align-self: stretch;
+  height: 134px;
+  background-color: #ffffff;
+  border-top: 1px solid #e7ebe7;
+  border-bottom: 1px solid #e7ebe7;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding: 20px 16px;
+  gap: 20px;
+}
+.cardIcon {
+  width: 60px;
+  height: 60px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.cardIcon img {
+  width: 60px;
+  height: 60px;
+  display: block;
+  object-fit: contain;
+}
+.cardText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  min-width: 0;
+}
+.cardLabel {
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #828278;
+  line-height: 100%;
+}
+.cardValueMono {
+  font-family: "Manrope", "Golos Text", sans-serif;
+  font-size: 18px;
+  line-height: 150%;
+  font-weight: 600;
+  color: #000;
+}
+.cardValueLight {
+  font-family: "Golos Text", sans-serif;
+  font-size: 18px;
+  line-height: 140%;
+  font-weight: 400;
+  color: #2c2c27;
+}
+/* Click-to-call link */
+.phoneLink {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease, opacity 0.15s ease;
+  cursor: pointer;
+}
+.phoneLink:hover {
+  color: #1b4332;
+  text-decoration: underline;
+}
+.phoneLink:active { opacity: 0.8; }
+
+/* ===== CONSULTATION (Не знайшли своє рішення) ===== */
+/* Wheat/sunflower image is the full bg of the block;
+   cream gradient overlays top portion (per design spec). */
+.consultationSection {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  background-color: var(--bg-cream, #f9f7f2);
+}
+
+.consultationTitleWrap {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 120px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+.consultationTitle {
+  margin: 0;
+  font-family: "Commissioner", sans-serif;
+  font-size: 82px;
+  font-weight: 400;
+  letter-spacing: -1px;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #2c2c27;
+  text-align: left;
+}
+.consultTitleStrong {
+  font-family: "Golos Text", sans-serif;
+  font-weight: 600;
+  color: #2c2c27;
+}
+.consultTitleMuted {
+  font-family: "Commissioner", sans-serif;
+  font-weight: 400;
+  color: #93928c;
+}
+.consultTitleBlack { color: #2c2c27; }
+
+/* Block that holds the wheat/sunflower bg + content (24-год badge + right text) */
+.consultationBgBlock {
+  align-self: stretch;
+  margin-top: 98px;
+  position: relative;
+  width: 100%;
+  isolation: isolate;
+  /* Wheat bg image — full bleed */
+  background-image: url("/contacts-consultation-bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* Cream gradient overlay — fades from cream (top) to transparent (bottom)
+   per spec: linear-gradient(180deg, #F9F7F2 45.83%, rgba(249,247,242,0) 100%) */
+.consultationBgBlock::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #f9f7f2 45.83%, rgba(249, 247, 242, 0) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.consultationContent {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  padding: 0 var(--page-gutter) 120px;
+  box-sizing: border-box;
+  min-height: 720px;
+  gap: 24px;
+}
+
+/* 24 год badge — UNIFIED design per Figma:
+   Semi-transparent DARK green tile (#1B433233 = rgba(27,67,50,0.20))
+   WITH backdrop blur so the underlying photo is softly blurred behind. */
+.featureBlock {
+  background: rgba(27, 67, 50, 0.20);
+  -webkit-backdrop-filter: blur(18px) saturate(110%);
+  backdrop-filter: blur(18px) saturate(110%);
+  border: 0;
+  box-shadow: none;
+  border-radius: 6px;
+  width: auto;
+  max-width: 100%;
+  height: 176px;
+  padding: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #f9f7f2;
+  align-self: end;
+  justify-self: start;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+.featureIcon {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.featureIcon svg {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+.featureText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.featureBig {
+  font-family: "Golos Text", sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #f9f7f2;
+  white-space: nowrap;
+}
+.featureSub {
+  font-family: "Golos Text", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 130%;
+  color: #f9f7f2;
+  max-width: none;
+  white-space: nowrap;
+}
+
+/* Right text block "Розкажіть нам про вашу культуру" */
+.textBlock {
+  width: 706px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 32px;
+  align-self: start;
+  justify-self: end;
+  margin-top: 0;
+  margin-bottom: 240px;
+  position: relative;
+}
+.consultationText {
+  font-family: "Golos Text", sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 125%;
+  color: #2c2c27;
+}
+.consultationBold {
+  font-family: "Golos Text", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 140%;
+  color: #2c2c27;
+}
+.buttonGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.primaryBtn {
+  cursor: pointer;
+  border: 0;
+  padding: 18px 16px;
+  background-color: #1b4332;
+  align-self: stretch;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #fff;
+  font-family: "Golos Text", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 140%;
+  transition: background-color 0.18s ease, transform 0.12s ease;
+}
+.primaryBtn:hover { background-color: #133527; }
+.primaryBtn:active { transform: translateY(1px); }
+.phoneText {
+  text-align: center;
+  font-family: "Golos Text", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 140%;
+  color: #2c2c27;
+}
+
+/* ===== FAQ SECTION (green) ===== */
+.faqSection {
+  align-self: stretch;
+  width: 100%;
+  background-color: #acb14f;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 120px;
+  box-sizing: border-box;
+  gap: 24px;
+  text-align: left;
+}
+.faqColumn {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 48px;
+  max-height: 910px; /* match image height for symmetric block */
+}
+.faqTitle {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 82px;
+  line-height: 120%;
+  letter-spacing: -1px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.faqSpanCasti {
+  font-family: "Golos Text", sans-serif;
+  font-weight: 600;
+  color: #f9f7f2;
+}
+.faqSpanZap {
+  font-family: "Commissioner", sans-serif;
+  font-weight: 400;
+  color: #f9f7f2;
+}
+
+/* Scrollable list — preserves layout for any number of FAQ items */
+.faqList {
+  flex: 1;
+  min-height: 0;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(249, 247, 242, 0.6) transparent;
+  padding-right: 8px;
+}
+.faqList::-webkit-scrollbar {
+  width: 6px;
+}
+.faqList::-webkit-scrollbar-track {
+  background: transparent;
+}
+.faqList::-webkit-scrollbar-thumb {
+  background-color: rgba(249, 247, 242, 0.45);
+  border-radius: 9999px;
+}
+.faqList::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(249, 247, 242, 0.75);
+}
+.faqDivider {
+  align-self: stretch;
+  height: 1px;
+  background-color: rgba(249, 247, 242, 0.35);
+}
+.faqItem {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px 0;
+}
+.faqHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  width: 100%;
+  text-align: left;
+}
+.faqQuestion {
+  flex: 1;
+  font-family: "Golos Text", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: normal;
+  color: #f9f7f2;
+}
+.faqItemOpen .faqQuestion { color: #1b4332; }
+
+.faqToggle {
+  width: 48px;
+  height: 48px;
+  border-radius: 9999px;
+  border: 1.5px solid #f9f7f2;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #f9f7f2;
+  transition: all 0.18s ease;
+}
+.faqItemOpen .faqToggle {
+  border-color: #1b4332;
+  color: #1b4332;
+}
+
+.faqAnswer {
+  font-family: "Golos Text", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 140%;
+  color: #f9f7f2;
+  max-width: 660px;
+}
+
+.faqImage {
+  width: 828px;
+  height: 910px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+}
+
+
+/* =========================================================
+   MOBILE (≤ 768px) — /contacts page native layout
+   Side padding 20px, no transform-scale, no horizontal overflow.
+   ========================================================= */
+@media screen and (max-width: 768px) {
+  .page {
+    width: 100%;
+    overflow-x: clip;
+  }
+
+  /* Outer wrappers full-width */
+  .navbarParent,
+  .contactSectionWrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .contactSectionWrapper {
+    padding: 32px 0 48px !important;
+  }
+
+  /* Main section block */
+  .contactSection {
+    width: 100%;
+    padding: 0 20px;
+    gap: 40px;
+    box-sizing: border-box;
+  }
+
+  /* ====== HEADER (breadcrumb + title + description) ====== */
+  .contactHeader {
+    align-self: stretch;
+    gap: 24px;
+    padding-top: 24px;
+  }
+
+  .breadcrumb {
+    font-size: 14px;
+    gap: 8px;
+  }
+
+  .parent {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+
+  .title {
+    width: 100%;
+    font-size: 40px;
+    line-height: 1.1;
+    letter-spacing: -0.4px;
+  }
+
+  .heroDescription {
+    width: 100%;
+    margin-top: 0;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  /* ====== CONTACT INFO BLOCK (cards + hero image) ====== */
+  .contactInformation {
+    flex-direction: column;
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  /* Cards FIRST in DOM are next to hero image on desktop;
+     on mobile we re-order so cards appear ABOVE hero image. */
+  .contactData {
+    order: 1;
+    width: 100%;
+    gap: 0;
+  }
+  .heroImage {
+    order: 2;
+    width: 100%;
+    height: 360px;
+    border-radius: 12px;
+  }
+
+  .contactCard {
+    height: auto;
+    min-height: 92px;
+    padding: 20px 0;
+    gap: 16px;
+    background: transparent;
+    border-top: 1px solid #e7ebe7;
+    border-bottom: 0;
+  }
+  .contactCard:last-child {
+    border-bottom: 1px solid #e7ebe7;
+  }
+
+  .cardIcon {
+    width: 48px;
+    height: 48px;
+  }
+  .cardIcon img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .cardText {
+    gap: 4px;
+  }
+  .cardLabel {
+    font-size: 13px;
+    letter-spacing: 0.2px;
+  }
+  .cardValueMono,
+  .cardValueLight {
+    font-size: 15px;
+    line-height: 1.35;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  /* ====== CONSULTATION CTA (зелений+фон) ====== */
+  .consultationSection {
+    margin-top: 16px;
+    padding: 0;
+    background-color: var(--bg-cream, #f9f7f2);
+  }
+
+  .consultationTitleWrap {
+    padding: 0 20px;
+  }
+  .consultationTitle {
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.4px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .consultationBgBlock {
+    margin-top: 20px;
+    width: 100%;
+    min-height: 0;
+    background-position: center bottom;
+    /* On mobile use a softer overlay that doesn't hide the whole image */
+  }
+  .consultationBgBlock::before {
+    background: linear-gradient(180deg, #f9f7f2 0%, rgba(249,247,242,0.85) 35%, rgba(249,247,242,0) 70%);
+  }
+
+  .consultationContent {
+    grid-template-columns: 1fr;
+    padding: 24px 20px 320px;
+    min-height: 0;
+    gap: 20px;
+  }
+
+  /* "24 год" badge — mobile: text may wrap, fits to container width */
+  .featureBlock {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    padding: 16px 16px;
+    gap: 12px;
+    align-self: start;
+    justify-self: stretch;
+    white-space: normal;
+  }
+  .featureIcon { width: 36px; height: 36px; }
+  .featureIcon svg { width: 36px; height: 36px; }
+  .featureBig  { font-size: 22px; white-space: nowrap; }
+  .featureSub  { font-size: 14px; max-width: 100%; white-space: normal; }
+
+  /* Right text block on mobile = stays under badge */
+  .textBlock {
+    width: 100%;
+    margin-bottom: 0;
+    margin-top: 0;
+    gap: 20px;
+    align-self: stretch;
+    justify-self: stretch;
+  }
+  .consultationText { font-size: 16px; line-height: 1.4; }
+  .consultationBold  { font-size: 18px; line-height: 1.35; }
+  .primaryBtn {
+    padding: 16px 20px;
+    font-size: 16px;
+    line-height: 1.2;
+    border-radius: 8px;
+  }
+  .primaryBtn:focus-visible {
+    outline: 3px solid rgba(27, 67, 50, 0.35);
+    outline-offset: 2px;
+  }
+  .phoneText  { font-size: 16px; }
+
+  /* ====== FAQ ====== */
+  .faqSection {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 40px 20px 48px;
+    flex-direction: column;
+    gap: 24px;
+    align-items: stretch;
+  }
+  .faqColumn {
+    gap: 24px;
+    max-height: none;
+    width: 100%;
+  }
+  .faqTitle {
+    font-size: 36px;
+    line-height: 1.15;
+    letter-spacing: -0.4px;
+    white-space: normal;
+    width: 100%;
+  }
+
+  /* No internal scroll on mobile — let page scroll instead */
+  .faqList {
+    overflow-y: visible;
+    max-height: none;
+    padding-right: 0;
+    gap: 0;
+  }
+  .faqItem  { padding: 18px 0; gap: 10px; }
+  .faqHeader { gap: 12px; }
+  .faqQuestion { font-size: 16px; line-height: 1.3; }
+  .faqToggle {
+    width: 40px;
+    height: 40px;
+  }
+  .faqToggle svg {
+    width: 16px;
+    height: 16px;
+  }
+  .faqAnswer { font-size: 14px; line-height: 1.45; max-width: 100%; }
+
+  /* FAQ image (decorative — plant) hidden on mobile to save space */
+  .faqImage {
+    display: none;
+  }
+}
+
+/* Very small phones */
+@media screen and (max-width: 380px) {
+  .title { font-size: 36px; }
+  .consultationTitle { font-size: 26px; }
+  .faqTitle { font-size: 32px; }
+  .heroImage { height: 320px; }
+}

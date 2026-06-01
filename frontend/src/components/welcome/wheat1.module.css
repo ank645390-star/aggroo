@@ -1,0 +1,14 @@
+.iconWheat {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.img {
+  display: block;
+  width: 16px;
+  height: 16px;
+}

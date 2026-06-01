@@ -1,0 +1,54 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--br-6, 6px);
+  padding: 6px 10px;
+  gap: 6px;
+  text-align: left;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 400;
+  color: #1b4332;
+  font-family: var(--font-golos-text);
+  white-space: nowrap;
+}
+
+/* Ghost — без подложки (Хіт продажу) */
+.ghost {
+  background-color: transparent;
+  padding: 6px 0;
+}
+
+/* Filled — пилюля #F7FAE8 (Захист рослин) */
+.filled {
+  background-color: #f7fae8;
+}
+
+.div {
+  position: relative;
+  letter-spacing: 0;
+}
+
+/* ───── Mobile (≤ 768px) — per design spec ─────
+   - Both tags: padding 4px 16px, gap 3px, border-radius 4px
+   - Tag 1 (fire, "Хіт продажу"): bg #F7FAE8 (--decorative-1) — NO border
+   - Tag 2 (wheat, "Захист рослин"): bg #E7EBE7 (--decorative-2) — NO border
+   ОНОВЛЕННЯ 28.05.2026: NO borders/outlines. Тільки solid bg per design. */
+@media screen and (max-width: 768px) {
+  .root {
+    padding: 4px 16px;
+    gap: 3px;
+    border-radius: 4px;
+    border: none;
+  }
+  /* Tag 1 — fire icon → bg #F7FAE8 (--decorative-1), no border */
+  .root[data-variant="fire"] {
+    background-color: var(--decorative-1, #F7FAE8) !important;
+    border: none !important;
+  }
+  /* Tag 2 — wheat icon → bg #E7EBE7 (--decorative-2), no border */
+  .root[data-variant="wheat"] {
+    background-color: var(--decorative-2, #E7EBE7) !important;
+    border: none !important;
+  }
+}

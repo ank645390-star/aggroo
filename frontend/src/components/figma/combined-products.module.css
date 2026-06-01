@@ -1,0 +1,364 @@
+/* ===== Combined Products carousel ===== */
+.section {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  background-color: var(--bg-cream, #F9F7F2);
+  box-sizing: border-box;
+  /* Padding per spec:
+   *   • 120px left / right
+   *   • bottom 120px (від crap-точок до наступного блоку — додатково через .dots margin)
+   *   • top — узгоджено через відступ між блоком "Досвід покупців" і цією секцією (138 + 138)
+   */
+  padding: 0 120px 120px;
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  color: var(--text-black, #2C2C27);
+}
+
+/* ---------- Header (heading + arrows) ---------- */
+.headerRow {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 48px;
+  width: 100%;
+}
+
+.heading {
+  margin: 0;
+  font-size: 120px;
+  line-height: 120%;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  /* allow heading to take remaining width */
+  flex: 1;
+}
+.headingPrimary {
+  color: #000;
+}
+.headingGap {
+  display: inline-block;
+  width: 0.25em;
+}
+.headingSecondary {
+  color: var(--text-grey, #93928C);
+  font-family: var(--font-commissioner), "Commissioner", sans-serif;
+  font-size: 100px;
+  font-weight: 400;
+  line-height: 110%;
+  letter-spacing: -1px;
+}
+
+/* ---------- Nav arrows (top-right) ---------- */
+.navArrows {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+  align-self: flex-end;
+  padding-bottom: 12px; /* visual alignment with descender of heading */
+}
+.navBtn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.navBtn:hover { transform: scale(1.05); }
+.navBtn:active { transform: scale(0.97); }
+.navBtn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.navBtn:focus-visible {
+  outline: 2px solid var(--brand-accent-secondary-default, #1B4332);
+  outline-offset: 2px;
+}
+.navIcon {
+  width: 60px;
+  height: 60px;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+/* Left button: horizontally flip the right-arrow asset */
+.navBtnLeft .navIcon {
+  transform: scaleX(-1);
+}
+
+/* ---------- Scroll container ---------- */
+.scroller {
+  /* 138px gap from heading to cards */
+  margin-top: 138px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;       /* Firefox */
+  -ms-overflow-style: none;    /* IE 10+ */
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  /* on mobile/touch: gentle inertia */
+  -webkit-overflow-scrolling: touch;
+}
+.scroller::-webkit-scrollbar { display: none; }
+
+.track {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 8px;
+  display: flex;
+  gap: 24px;          /* (1680 - 3×544) / 2 = 24px між картками */
+  width: max-content;
+}
+
+/* ---------- Card ---------- */
+.card {
+  width: 544px;
+  height: 724px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  background: #fff;
+  border: 1px solid var(--bg-green, #ACB14F);
+  border-radius: 4px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Top badges row */
+.topBadges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+.badgeHit,
+.badgeCategory {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 4px;
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+.badgeHit {
+  color: var(--text-black, #2C2C27);
+  background: #fff;
+}
+.badgeCategory {
+  color: var(--brand-accent-secondary-default, #1B4332);
+  background: #EDF1D7;     /* light variant of brand green */
+}
+
+/* Photo */
+.photoWrap {
+  width: 400px;
+  height: 388px;
+  margin: 0 auto;        /* центрування зображення в карточці */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.photo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Rating */
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.stars {
+  display: inline-flex;
+  gap: 2px;
+}
+.ratingText {
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  font-size: 14px;
+  color: var(--text-grey, #93928C);
+}
+
+/* Title + body */
+.cardTitle {
+  margin: 0 0 4px 0;
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: normal;
+  color: var(--text-black, #2C2C27);
+}
+.cardBody {
+  margin: 0 0 12px 0;
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 140%;
+  color: var(--text-black, #2C2C27);
+}
+
+/* Meta list */
+.metaList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--text-black, #2C2C27);
+}
+.metaItem svg { flex-shrink: 0; }
+
+.spacer { flex: 1; }
+
+/* Footer: price + cart */
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 8px;
+}
+.price {
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 140%;
+  color: var(--text-black, #2C2C27);
+  white-space: nowrap;
+}
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 120%;
+  color: var(--brand-accent-secondary-default, #1B4332);
+}
+.addBtn:focus-visible {
+  outline: 2px solid var(--brand-accent-secondary-default, #1B4332);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+.addText { white-space: nowrap; }
+.addIcon {
+  width: 48px;
+  height: 48px;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+  transition: transform 0.2s ease;
+}
+.addBtn:hover .addIcon { transform: translateX(2px); }
+
+/* ---------- Pagination dots ---------- */
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  /* 32px from cards to dots */
+  margin-top: 32px;
+}
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  transition: background 0.15s ease, width 0.15s ease;
+}
+.dot:hover { background: rgba(0, 0, 0, 0.32); }
+.dot:focus-visible {
+  outline: 2px solid var(--brand-accent-secondary-default, #1B4332);
+  outline-offset: 2px;
+}
+.dotActive {
+  background: var(--brand-accent-secondary-default, #1B4332);
+  width: 22px;             /* longer "pill" for active page */
+  border-radius: 999px;
+}
+
+/* ===== Responsive ===== */
+@media screen and (max-width: 1700px) {
+  .heading { font-size: 96px; }
+  .headingSecondary { font-size: 80px; }
+}
+@media screen and (max-width: 1275px) {
+  .section { padding: 0 48px 80px; }
+  .heading { font-size: 72px; }
+  .headingSecondary { font-size: 60px; }
+  .scroller { margin-top: 80px; }
+  .card { width: calc((100vw - 96px - 48px) / 3); height: auto; min-height: 640px; padding: 24px; }
+  .photoWrap { width: 100%; height: 280px; }
+}
+@media screen and (max-width: 900px) {
+  .section { padding: 0 24px 64px; }
+  .heading { font-size: 44px; }
+  .headingSecondary { font-size: 36px; }
+  .navBtn, .navIcon { width: 48px; height: 48px; }
+  .scroller { margin-top: 48px; }
+  .card { width: calc((100vw - 48px - 16px) / 2); min-height: 560px; padding: 20px; }
+  .photoWrap { height: 240px; }
+}
+@media screen and (max-width: 600px) {
+  .section { padding: 0 16px 56px; }
+  .headerRow { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .heading {
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.4px;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    width: 100%;
+  }
+  .headingSecondary { font-size: 24px; }
+  .navArrows { align-self: flex-end; padding-bottom: 0; }
+  .scroller { margin-top: 24px; }
+  .card { width: calc(100vw - 48px); min-height: 520px; padding: 18px; }
+  .photoWrap { width: 100%; height: 220px; }
+  .cardTitle { font-size: 20px; }
+  .cardBody { font-size: 15px; }
+  .price { font-size: 24px; }
+  .addText { display: none; }
+  .addIcon { width: 40px; height: 40px; }
+}

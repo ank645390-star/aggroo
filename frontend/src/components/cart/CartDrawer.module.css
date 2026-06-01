@@ -1,0 +1,629 @@
+/* =================================================================
+   Cart Drawer (640 × 848)
+   Slides in from the right. Two visual states:
+     • Empty   — centered illustration + "Ваш кошик ПУСТИЙ"
+     • Full    — list of items + cross-sell + totals footer
+   ================================================================= */
+
+/* ---------- Backdrop ---------- */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 26, 20, 0);
+  z-index: 998;
+  pointer-events: none;
+  transition: background-color 0.32s ease;
+}
+.backdropOpen {
+  background-color: rgba(15, 26, 20, 0.42);
+  pointer-events: auto;
+}
+
+/* ---------- Drawer ---------- */
+.drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 560px;
+  height: 100vh;
+  max-height: 100vh;
+  background-color: var(--bg-cream, #f9f7f2);
+  z-index: 999;
+  transform: translateX(100%);
+  transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1),
+              width 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: -24px 0 48px rgba(15, 26, 20, 0.24);
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  color: var(--text-black, #2c2c27);
+}
+.drawerOpen {
+  transform: translateX(0%);
+}
+
+/* =====================================================================
+   UNIFIED-UI-CONCEPT
+   ---------------------------------------------------------------------
+   Існує єдина візуальна шкала бокових панелей:
+     • Профіль (UserDrawer)        → 380 px
+     • Порожній кошик (.drawerEmpty)→ 380 px  ← мінімум інформації
+     • Кошик з товарами (.drawer)  → 560 px  ← список + чек-аут
+   Завдяки цьому користувач не бачить три різні розміри хаотично —
+   маленький дровер = маленьке навантаження, ширший = більше даних.
+   ===================================================================== */
+.drawerEmpty {
+  width: 380px;
+}
+
+/* ---------- Header ---------- */
+.drawerHeader {
+  display: flex;
+  height: 60px;
+  padding: 24px 32px;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  align-self: stretch;
+  background-color: var(--bg-cream, #f9f7f2);
+  box-sizing: border-box;
+}
+.drawerTitle {
+  margin: 0;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: normal;
+  color: var(--text-black, #2c2c27);
+}
+.drawerCount {
+  color: var(--text-grey, #93928c);
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+}
+.closeBtn,
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+}
+.closeBtn:hover,
+.iconButton:hover {
+  background-color: rgba(15, 26, 20, 0.06);
+}
+.closeBtn:focus-visible,
+.iconButton:focus-visible {
+  outline: 2px solid var(--bg-green, #acb14f);
+  outline-offset: 2px;
+}
+
+/* =====================================================================
+   EMPTY STATE — no illustration. Text vertically centered,
+   CTA sticks to the very bottom of the drawer (full-width).
+   ===================================================================== */
+.emptyWrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 0;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+.emptyInner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 40px 0;
+  text-align: center;
+}
+.emptyHeadlineRow {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--text-black, #2c2c27);
+  line-height: 1.1;
+}
+.emptyHeadlineBold {
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 140%; /* 67.2px */
+  text-transform: uppercase;
+}
+.emptyHeadlineLight {
+  font-family: "Commissioner", var(--font-commissioner), sans-serif;
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 140%; /* 61.6px */
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+}
+.emptyCaption {
+  margin: 0;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 140%; /* 25.2px */
+  color: var(--text-grey, #93928c);
+  text-align: center;
+}
+
+/* CTA fixed to the bottom edge of the drawer, full width */
+.emptyCta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  align-self: stretch;
+  margin: 32px 32px 32px;
+  padding: 18px 16px;
+  background-color: var(--brand-accent-secondary-default, #1b4332);
+  color: var(--bg-card, #fff);
+  border-radius: 6px;
+  text-decoration: none;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 120%;
+  transition: background-color 0.18s ease, transform 0.12s ease;
+  box-shadow: 0 8px 22px rgba(27, 67, 50, 0.18);
+}
+.emptyCta:hover {
+  background-color: var(--brand-accent-secondary-hover, #003214);
+}
+.emptyCta:active {
+  transform: translateY(1px);
+}
+
+/* =====================================================================
+   EMPTY-STATE адаптація під 380 px (drawerEmpty)
+   ---------------------------------------------------------------------
+   Коли кошик порожній, drawer звужується до 380 px (єдина шкала з
+   профілем). Текст і paddings масштабуються пропорційно, щоб у вузький
+   контейнер усе поміщалось і виглядало як «компактний профільний» drawer.
+
+   Header — у тому ж стилі, що й UserDrawer: меншi розміри, без зайвого
+   повітря. Сам контент (Заголовок + caption + CTA) лишається той самий,
+   просто пропорційно зменшений.
+   ===================================================================== */
+.drawerEmpty .drawerHeader {
+  height: 60px;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(44, 44, 39, 0.08);
+}
+.drawerEmpty .drawerTitle {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+.drawerEmpty .drawerCount {
+  font-size: 14px;
+  font-weight: 500;
+}
+.drawerEmpty .emptyInner {
+  gap: 14px;
+  padding: 32px 24px 0;
+}
+.drawerEmpty .emptyHeadlineBold {
+  font-size: 30px;
+  line-height: 1.1;
+}
+.drawerEmpty .emptyHeadlineLight {
+  font-size: 28px;
+  line-height: 1.1;
+  letter-spacing: -0.4px;
+}
+.drawerEmpty .emptyCaption {
+  font-size: 14px;
+  line-height: 140%;
+}
+.drawerEmpty .emptyCta {
+  margin: 24px 24px 24px;
+  padding: 14px 16px;
+  font-size: 14px;
+  box-shadow: 0 6px 16px rgba(27, 67, 50, 0.16);
+}
+
+/* =====================================================================
+   FULL STATE — list + cross-sell + totals
+   ===================================================================== */
+.fullWrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 4px 32px 24px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* ---------- Items list ---------- */
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 8px;
+}
+.itemCard {
+  display: flex;
+  width: 576px;
+  max-width: 100%;
+  padding: 12px;
+  align-items: flex-start;
+  gap: 16px;
+  border-radius: 6px;
+  border: 1px solid var(--decorative-2, #e7ebe7);
+  background: var(--bg-card, #fff);
+  box-sizing: border-box;
+}
+.itemImage {
+  width: 134px;
+  height: 130.171px;
+  aspect-ratio: 35 / 34;
+  flex-shrink: 0;
+  border-radius: 4px;
+  background-color: #f4f5ee;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.itemImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.itemBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.itemHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.itemName {
+  margin: 0;
+  flex: 1;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 120%; /* 21.6px */
+  color: var(--text-black, #2c2c27);
+}
+.itemCategory {
+  margin: 0;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 100%;
+  color: var(--text-grey, #93928c);
+}
+.itemMeta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.itemDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px;
+  background-color: var(--brand-accent-primary-default, #b3d217);
+  flex-shrink: 0;
+}
+.itemVolume {
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--text-grey, #93928c);
+}
+.itemFooter {
+  margin-top: auto;
+  padding-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.itemPrice {
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 120%;
+  color: var(--text-black, #2c2c27);
+}
+
+/* ---------- Counter (-/qty/+) ---------- */
+.counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid var(--decorative-2, #e7ebe7);
+  border-radius: 6px;
+  padding: 2px;
+  background-color: #fff;
+}
+.counterBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+}
+.counterBtn:hover {
+  background-color: rgba(15, 26, 20, 0.06);
+}
+.counterBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.counterValue {
+  min-width: 22px;
+  text-align: center;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 100%;
+  color: var(--text-black, #2c2c27);
+}
+
+/* =====================================================================
+   Cross-sell ("Часто купують разом")
+   ===================================================================== */
+.crossSell {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 8px;
+}
+.crossSellTitle {
+  margin: 0;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 140%; /* 25.2px */
+  color: var(--text-black, #2c2c27);
+}
+.crossSellList {
+  display: flex;
+  gap: 12px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.crossCard {
+  display: flex;
+  width: 297px;
+  padding: 12px;
+  align-items: flex-start;
+  gap: 16px;
+  border-radius: 6px;
+  border: 1px solid var(--decorative-2, #e7ebe7);
+  background: var(--bg-card, #fff);
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+.crossImage {
+  width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  background-color: #f4f5ee;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.crossImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.crossBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.crossName {
+  margin: 0;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 120%;
+  color: var(--text-black, #2c2c27);
+}
+.crossCategory {
+  margin: 0;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--text-grey, #93928c);
+}
+.crossMeta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.crossFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 6px;
+}
+.crossPrice {
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 120%;
+  color: var(--text-black, #2c2c27);
+}
+.crossAddBtn {
+  display: inline-flex;
+  padding: 6px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 4px;
+  border: 1px solid var(--brand-accent-secondary-default, #1b4332);
+  background: transparent;
+  color: var(--brand-accent-secondary-default, #1b4332);
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+.crossAddBtn:hover {
+  background-color: var(--brand-accent-secondary-default, #1b4332);
+  color: var(--bg-card, #fff);
+}
+.crossAddBtn:hover svg path {
+  stroke: var(--bg-card, #fff);
+}
+
+/* =====================================================================
+   Totals + Checkout footer
+   ===================================================================== */
+.totalsRow {
+  margin-top: auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--decorative-2, #e7ebe7);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.totalsLine {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.totalsLabel {
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: normal;
+  color: var(--text-black, #2c2c27);
+}
+.totalsValue {
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 140%; /* 44.8px */
+  color: var(--text-black, #2c2c27);
+}
+.deliveryNote {
+  margin: 0;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--text-grey, #93928c);
+}
+.checkoutBtn {
+  display: flex;
+  padding: 18px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  align-self: stretch;
+  border: 0;
+  border-radius: 6px;
+  background: var(--brand-accent-secondary-default, #1b4332);
+  color: var(--bg-card, #fff);
+  text-align: center;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 120%; /* 19.2px */
+  cursor: pointer;
+  transition: background-color 0.18s ease, transform 0.12s ease;
+  box-shadow: 0 8px 22px rgba(27, 67, 50, 0.18);
+}
+.checkoutBtn:hover {
+  background-color: var(--brand-accent-secondary-hover, #003214);
+}
+.checkoutBtn:active {
+  transform: translateY(1px);
+}
+
+/* =====================================================================
+   Responsive — narrow viewports
+   ===================================================================== */
+@media (max-width: 768px) {
+  .drawer {
+    width: 100vw;
+    max-width: none;
+  }
+  .drawerHeader {
+    padding: 16px 20px;
+    min-height: 56px;
+  }
+  .closeBtn,
+  .iconButton {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+  .itemCard {
+    width: 100%;
+    padding: 14px;
+    gap: 12px;
+  }
+  .itemImage { width: 96px; height: 96px; }
+  .itemName  { font-size: 16px; }
+  .counterBtn { width: 40px; height: 40px; }
+  .crossCard { width: 260px; }
+  .emptyHeadlineBold  { font-size: 36px; }
+  .emptyHeadlineLight { font-size: 32px; }
+  .emptyInner { padding: 24px 20px 0; }
+  .emptyCta {
+    margin: 16px 20px calc(16px + env(safe-area-inset-bottom));
+    min-height: 48px;
+    border-radius: 12px;
+  }
+  .totalsRow {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+  .checkoutBtn {
+    min-height: 48px;
+    border-radius: 12px;
+  }
+}

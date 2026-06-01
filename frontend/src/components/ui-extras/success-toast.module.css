@@ -1,0 +1,56 @@
+.wrap {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  z-index: 9999;
+  pointer-events: none;
+}
+.toast {
+  pointer-events: auto;
+  min-width: 320px;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background-color: #ffffff;
+  border: 1px solid #d6dcd6;
+  border-left: 4px solid #1b4332;
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(15, 26, 20, 0.18);
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2c2c27;
+  animation: slideInRight 0.22s ease-out;
+  transform: scale(var(--app-scale, 1));
+  transform-origin: top right;
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.text {
+  flex: 1;
+  line-height: 140%;
+}
+.closeBtn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  padding: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+.closeBtn:hover {
+  background-color: #f0f2ed;
+}

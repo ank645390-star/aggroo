@@ -1,0 +1,252 @@
+/* LeaveReviewModal — кастомний дизайн у фірмовому стилі TAMIS АГРО */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(28, 36, 32, 0.55);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.18s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal {
+  background-color: #ffffff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 560px;
+  max-height: calc(100vh - 48px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(15, 26, 20, 0.28);
+  animation: slideUp 0.22s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid #ece9df;
+}
+
+.title {
+  font-family: "Golos Text", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1b4332;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.closeBtn {
+  appearance: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+.closeBtn:hover { background-color: #f4f5ee; }
+
+.content {
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* ----- Form ----- */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.targetProduct {
+  background-color: #f4f5ee;
+  border: 1px solid #ece9df;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #2c2c27;
+}
+
+.formRow { display: flex; flex-direction: column; gap: 10px; }
+
+.label {
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #5e5e57;
+}
+
+.starPicker {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.starBtn {
+  appearance: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 8px;
+  transition: transform 0.12s ease;
+}
+.starBtn:hover { transform: scale(1.08); }
+.starBtn:focus-visible {
+  outline: 2px solid #1b4332;
+  outline-offset: 2px;
+}
+
+.textarea {
+  appearance: none;
+  font: inherit;
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  color: #2c2c27;
+  background-color: #ffffff;
+  border: 1px solid #ece9df;
+  border-radius: 10px;
+  padding: 12px 14px;
+  resize: vertical;
+  min-height: 120px;
+  line-height: 1.5;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.textarea::placeholder { color: #9aa19a; }
+.textarea:focus-visible {
+  outline: none;
+  border-color: #1b4332;
+  box-shadow: 0 0 0 3px rgba(27, 67, 50, 0.08);
+}
+
+.counter {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #93928c;
+}
+.counterWarn { color: #c44a4a; }
+.counterHint { color: #93928c; }
+
+.error {
+  background-color: #fbe9e7;
+  border: 1px solid #f1bcb6;
+  color: #9c2c1a;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.btn {
+  appearance: none;
+  font: inherit;
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, opacity 0.18s ease;
+  min-width: 120px;
+  white-space: nowrap;
+}
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.btnPrimary {
+  background-color: #1b4332;
+  color: #ffffff;
+}
+.btnPrimary:hover:not(:disabled) { background-color: #2d5b46; }
+
+.btnGhost {
+  background-color: transparent;
+  color: #1b4332;
+  border-color: #ece9df;
+}
+.btnGhost:hover:not(:disabled) {
+  background-color: #f4f5ee;
+  border-color: #c8c4b5;
+}
+
+/* ----- State branches (unauth / no orders / already / success) ----- */
+.state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  padding: 12px 0 4px;
+}
+
+.stateText {
+  font-family: "Golos Text", sans-serif;
+  font-size: 15px;
+  color: #2c2c27;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.stateActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.successIcon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: #e8efe5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.successTitle {
+  font-family: "Golos Text", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1b4332;
+  margin: 0;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .modal { max-width: 100%; border-radius: 14px; }
+  .header { padding: 16px 18px; }
+  .title { font-size: 18px; }
+  .content { padding: 18px; }
+  .actions { flex-direction: column-reverse; }
+  .btn { width: 100%; }
+}

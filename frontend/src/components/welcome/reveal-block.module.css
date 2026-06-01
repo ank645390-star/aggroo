@@ -1,0 +1,36 @@
+/* ============================================================
+   Reveal Block — simple "block fade-in / drop-in" entrance.
+   Use this where you want a whole content block to appear with
+   a soft motion BUT without the per-word left-to-right reveal
+   used on big headings.
+
+   Initial: opacity 0, translateY(28px).
+   Final:   opacity 1, translateY(0).
+   Duration 800ms, cubic-bezier(0.22, 0.61, 0.36, 1).
+   ============================================================ */
+
+.block {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  will-change: opacity, transform;
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.block.active {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Optional per-instance entrance delay (applied via inline style on
+   the wrapper).  Two blocks staged 120ms apart give a nice
+   "raz, dva" cadence. */
+
+@media (prefers-reduced-motion: reduce) {
+  .block {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

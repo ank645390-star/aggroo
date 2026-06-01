@@ -1,0 +1,17 @@
+.iconCalendar {
+  height: var(--height-20);
+  width: var(--width-20);
+  position: relative;
+}
+.vectorIcon {
+  position: absolute;
+  height: 81.5%;
+  width: 100%;
+  top: 6.5%;
+  right: 12.5%;
+  bottom: 12%;
+  left: 12.5%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}

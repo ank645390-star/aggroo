@@ -1,0 +1,129 @@
+.numberCard {
+  width: 478px;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-20);
+  text-align: left;
+  font-size: var(--fs-82);
+  color: var(--brand-accent-primary-default);
+  font-family: var(--font-golos-text);
+}
+.numberCardChild {
+  align-self: stretch;
+  width: var(--width-2);
+  position: relative;
+  border-right: 2px solid var(--brand-accent-primary-default);
+  box-sizing: border-box;
+}
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--gap-8);
+}
+.h2,
+.h3 {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-family: inherit;
+}
+.h2 {
+  font-size: inherit;
+  letter-spacing: var(--ls--1);
+  line-height: 120%;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.h3 {
+  font-size: var(--fs-28);
+  line-height: 125%;
+  font-weight: 400;
+  color: var(--text-black);
+}
+
+/* ============================================================
+   Number row layout — digits + label («ТИС» / «%») + «+»
+   Усе в одну стрічку, плюс по центру по вертикалі.
+   ============================================================ */
+.statRow {
+  display: inline-flex;
+  align-items: center; /* "+" відцентрований по вертикалі з цифрами */
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* Контейнер per-digit reels (цифри в один рядок по baseline). */
+.digits {
+  display: inline-flex;
+  align-items: flex-end;
+  letter-spacing: var(--ls--1);
+  line-height: 1;
+}
+
+/* «ТИС» / «%» — статична мітка поряд із цифрами. */
+.statLabel {
+  display: inline-block;
+  font-size: 0.78em;       /* трохи менше за цифри, як у дизайні */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  line-height: 1;
+  margin-left: 0.08em;
+  align-self: center;
+}
+
+/* «+» — з'являється fade-in в кінці анімації. */
+.statPlus {
+  display: inline-block;
+  font-size: 0.78em;
+  font-weight: 600;
+  line-height: 1;
+  margin-left: 0.12em;
+  align-self: center;
+  /* Зберігаємо ширину навіть коли opacity:0 — щоб не стрибали сусідні елементи */
+  /* transition керується inline-стилями (вимикається при snap) */
+}
+
+/* =================================================================
+   Mobile (≤ 768px): each card is full-width with a left accent line.
+   Per design Mobile.png: large green/black number, italic-ish "+" /
+   "%", subdued description below.
+   ================================================================= */
+@media screen and (max-width: 768px) {
+  .numberCard {
+    width: 100% !important;     /* override the inline `cardWidth` prop */
+    max-width: 100%;
+    gap: 16px;
+    align-items: stretch;
+  }
+  .numberCardChild {
+    width: 3px;
+    border-right-width: 3px;
+    flex-shrink: 0;
+  }
+  .content {
+    gap: 8px;
+    min-width: 0;
+  }
+  .h2 {
+    font-size: 56px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+  .h3 {
+    font-size: 15px;
+    line-height: 1.35;
+    /* normal wrap on mobile so descriptions don't overflow horizontally
+       on narrow screens. */
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+  .statLabel,
+  .statPlus {
+    font-size: 0.7em;
+  }
+}

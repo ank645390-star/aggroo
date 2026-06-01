@@ -1,0 +1,463 @@
+/* ============================================================
+   MISSION SECTION — блок «+20 РОКІВ»
+   Канвас: 1920 × 1377
+   Background: #F9F7F2 + изображение поля/дерева снизу
+   Gradient overlay: linear-gradient(180deg, #F9F7F2 0% → rgba(249,247,242,0))
+
+   Текстовые элементы (абсолютные координаты от верха канваса):
+     • +20 РОКІВ:           left=120, top=111         Golos Text SemiBold 120px
+     • МИ СТВОРЮЄМО...      top=183, right=423        Commissioner Medium 44px
+     • Лев. параграф:       left=268, top=396         Golos Text Regular 28px
+     • Прав. параграф:      left=1013, top=575, r=280 Golos Text Regular 28px
+     • Tag температури:     left ≈ 660, top ≈ 1015
+   ============================================================ */
+
+.missionSection {
+  position: relative;
+  align-self: stretch;
+  width: 100%;
+  height: 1377px;
+  overflow: hidden;
+  background-color: #F9F7F2;
+  isolation: isolate;
+  text-align: left;
+  color: var(--text-black, #2C2C27);
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+}
+
+/* Фоновое изображение поля/дерева — приближено (zoom),
+   масштаб ~145% от ширины канваса. Дерево становится крупнее
+   и располагается «ближе к началу дороги», как в дизайне.
+
+   ANIMATION (wind sway):
+   - transform-origin прив'язано до низу зображення (поле = якір),
+     завдяки чому крона дерева у верхньому центрі коливається на
+     кілька пікселів, а ґрунт майже статичний.
+   - Keyframes навмисно нерівномірні — імітують пориви вітру.
+   - Композиція з translateX(-50%) збережена.
+   - Cycle ≈ 14s; reduced-motion ⇒ disabled.
+*/
+.imageIcon {
+  position: absolute;
+  width: 145%;
+  height: auto;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  /* Якір — біля основи стовбура дерева (нижній центр). */
+  transform-origin: 50% 96%;
+  will-change: transform;
+  animation: missionWindSway 14s ease-in-out infinite;
+}
+
+@keyframes missionWindSway {
+  /* Природні пориви вітру. Max rotate ~0.75°, що при якорі знизу
+     дає ~3-4px горизонтального руху крони (видно, але не різко). */
+  0%   { transform: translateX(-50%) rotate(0deg)      skewX(0deg)     scale(1); }
+  10%  { transform: translateX(-50%) rotate(0.35deg)   skewX(0.10deg)  scale(1.0020); }
+  22%  { transform: translateX(-50%) rotate(0.70deg)   skewX(0.18deg)  scale(1.0040); }
+  35%  { transform: translateX(-50%) rotate(0.45deg)   skewX(0.12deg)  scale(1.0028); }
+  48%  { transform: translateX(-50%) rotate(0.05deg)   skewX(0.02deg)  scale(1.0010); }
+  60%  { transform: translateX(-50%) rotate(-0.30deg)  skewX(-0.08deg) scale(1.0015); }
+  72%  { transform: translateX(-50%) rotate(-0.60deg)  skewX(-0.16deg) scale(1.0030); }
+  85%  { transform: translateX(-50%) rotate(-0.25deg)  skewX(-0.06deg) scale(1.0012); }
+  100% { transform: translateX(-50%) rotate(0deg)      skewX(0deg)     scale(1); }
+}
+
+/* Soft wind/light haze drifting horizontally over the SCENE only —
+   додає "живість" атмосфери лише у нижній частині секції (де власне
+   фото поля/дерева), НЕ зачіпає текстову зону зверху.
+   Дуже легкий градієнт, обережна opacity, без mix-blend-mode (щоб не
+   вицвітати кольори).  Деактивовано при prefers-reduced-motion. */
+.windHaze {
+  position: absolute;
+  /* Починаємо нижче всього основного тексту (всі параграфи
+     закінчуються ~720px, нижче — тільки зображення). */
+  top: 760px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0) 35%,
+    rgba(255, 255, 255, 0.10) 50%,
+    rgba(255, 255, 255, 0) 65%
+  );
+  background-size: 260% 100%;
+  background-repeat: no-repeat;
+  background-position: -60% 0;
+  /* fade-mask на верхньому краї, щоб не було жорсткої лінії при
+     старті haze-овалу. */
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 100%);
+          mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 100%);
+  animation: missionWindDrift 13s ease-in-out infinite;
+  opacity: 1;
+}
+
+@keyframes missionWindDrift {
+  0%   { background-position: -60% 0; opacity: 0.0; }
+  25%  { opacity: 0.55; }
+  60%  { background-position: 160% 0; opacity: 0.55; }
+  85%  { opacity: 0.0; }
+  100% { background-position: 160% 0; opacity: 0.0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .imageIcon { animation: none !important; }
+  .windHaze { animation: none !important; opacity: 0 !important; }
+}
+
+/* Градиент-оверлей: сверху сплошной cream, плавно прозрачный к низу */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    #F9F7F2 0%,
+    #F9F7F2 40%,
+    rgba(249, 247, 242, 0.5) 60%,
+    rgba(249, 247, 242, 0) 75%
+  );
+  pointer-events: none;
+}
+
+/* +20 РОКІВ */
+.years {
+  position: absolute;
+  top: 111px;
+  left: 120px;
+  margin: 0;
+  z-index: 3;
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  /* Fixed px (NOT vw-based) — ScaledShell already scales the entire
+     1920px canvas; vw-based clamp would double-scale on QHD/4K and
+     overflow absolute neighbours.
+     Value tuned so +20 РОКІВ (left:120) + headingLine1 (right:423)
+     fit side-by-side on the 1920 canvas without horizontal overlap. */
+  font-size: 124px;
+  font-weight: 600;
+  line-height: 1.0;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: #1B4332;
+  white-space: nowrap;
+}
+
+/* МИ СТВОРЮЄМО КОМПЛЕКСНІ — первая строка справа от +20 РОКІВ */
+.headingLine1 {
+  position: absolute;
+  top: 183px;
+  right: 423px;
+  margin: 0;
+  z-index: 3;
+  font-family: var(--font-commissioner), "Commissioner", sans-serif;
+  /* Fixed px — see .years comment about vw + ScaledShell interaction.
+     Sized to fit alongside +20 РОКІВ without horizontal overlap on
+     the 1920px canvas. */
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  color: var(--text-black, #2C2C27);
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* БІОЛОГІЧНІ РІШЕННЯ ДЛЯ УКРАЇНСЬКИХ ПОЛІВ — вторая строка слева */
+.headingLine2 {
+  position: absolute;
+  top: 245px;
+  left: 120px;
+  margin: 0;
+  z-index: 3;
+  font-family: var(--font-commissioner), "Commissioner", sans-serif;
+  /* Fixed px — see .years comment. Matches headingLine1 to keep
+     a coherent two-line subtitle. */
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  color: var(--text-black, #2C2C27);
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* Левый параграф «Таміс Агро»... */
+.paragraphLeft {
+  position: absolute;
+  top: 396px;
+  left: 268px;
+  width: 600px;
+  margin: 0;
+  z-index: 3;
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  /* Fixed px — see .years comment. */
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--text-black, #2C2C27);
+}
+
+/* Правый параграф «Урожай, вирощений...» */
+.paragraphRight {
+  position: absolute;
+  top: 575px;
+  left: 1013px;
+  right: 280px;
+  margin: 0;
+  z-index: 3;
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  /* Fixed px — see .years comment. */
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--text-black, #2C2C27);
+}
+
+/* Tag «Суворий температурний контроль...» — top=1047, left=486
+   Геометрия по Figma: width=406, height=138, right=1028 (от правого края секции),
+   bottom=192 (от низа секции 1920×1377). */
+.featureBlockWrapper {
+  position: absolute;
+  top: 1047px;
+  left: 486px;
+  width: 406px;
+  height: 138px;
+  z-index: 3;
+}
+
+/* ───── Адаптив ───── */
+@media screen and (max-width: 1024px) {
+  .missionSection { height: auto; padding: 64px 32px 96px; }
+  .imageIcon { position: relative; bottom: auto; transform: none; left: auto; margin-top: 32px; }
+  .overlay { display: none; }
+  .years, .heading, .paragraphLeft, .paragraphRight, .featureBlockWrapper {
+    position: relative; top: auto; left: auto; right: auto; width: auto; max-width: none; margin-bottom: 24px;
+  }
+  .featureBlockWrapper { height: auto; }
+  .years { font-size: 64px; white-space: normal; }
+  .heading { font-size: 28px; }
+  .paragraphLeft, .paragraphRight { font-size: 18px; }
+}
+
+/* ───── Mobile (≤ 767px) — Figma-faithful redesign (375px frame)
+   ─────────────────────────────────────────────────────────────────
+   КЛЮЧОВА ІДЕЯ:
+     Фото поля/дерева — ФОН УСІЄЇ СЕКЦІЇ (а НЕ окремий блок знизу).
+     Зверху накладається cream-gradient overlay (#F9F7F2 100% → 0%),
+     який поступово розчиняється до низу — туди де власне видно дерево.
+     Текст лежить на cream-зоні, бейдж — на видимій частині фото знизу.
+
+   Композиція (z-index zone):
+     z=0 :  <img.imageIcon>     — фото на всю секцію, object-fit:cover
+     z=1 :  <div.overlay>       — cream-gradient overlay
+     z=3 :  Text content (heading + subtitle + body) — flex flow
+     z=5 :  Badge (absolute, bottom-left)
+
+   Типографіка згідно Figma:
+     +20 РОКІВ      Golos Text 32/600 / -1px / UPPERCASE / #2C2C27
+     Subtitle       Commissioner 20/400 / -0.5px / UPPERCASE / #93928C
+     Body           Golos Text 16/400 / 140% / #2C2C27   (+ <strong> = 700)
+     Badge          FeatureBlock1 native green gradient (як на desktop)
+   ───────────────────────────────────────────────────────────────── */
+@media screen and (max-width: 767px) {
+  .missionSection {
+    position: relative;
+    width: 100%;
+    height: auto;
+    /* Min-height потрібен щоб під-текстова зона + фото-знизу + бейдж
+       мали достатньо простору. Не fixed (бо текст може зрости).        */
+    min-height: 760px;
+    padding: 64px 0 0 0;
+    margin: 0;
+    overflow: hidden;
+    background-color: #F9F7F2;
+    isolation: isolate;
+  }
+
+  /* ───────── ФОТО: всю секцію закриває як background ───────── */
+  .imageIcon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: cover;
+    /* По вертикалі — показуємо нижню частину (дерево+дорога), верхня
+       частина все одно під cream-overlay. По горизонталі — центр. */
+    object-position: 50% 100%;
+    z-index: 0;
+    transform: none;
+    animation: none !important;
+    pointer-events: none;
+  }
+
+  /* ───────── CREAM-FADE OVERLAY ───────── */
+  .overlay {
+    display: block !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      #F9F7F2 0%,
+      #F9F7F2 38%,
+      rgba(249, 247, 242, 0.92) 50%,
+      rgba(249, 247, 242, 0.55) 62%,
+      rgba(249, 247, 242, 0.00) 78%
+    );
+  }
+  /* Wind-haze на mobile зайвий */
+  .windHaze { display: none !important; }
+
+  /* ───────── ТЕКСТОВІ БЛОКИ — flex flow поверх фото+overlay ───────── */
+  .years,
+  .headingLine1,
+  .headingLine2,
+  .paragraphLeft,
+  .paragraphRight {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+    width: auto;
+    max-width: 100%;
+    margin: 0;
+    transform: none;
+    animation: none !important;
+    white-space: normal;
+    z-index: 3;        /* поверх image+overlay */
+  }
+  /* RevealHeading inner span wraps natively on mobile */
+  .years > span,
+  .headingLine1 > span,
+  .headingLine2 > span {
+    display: block !important;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* ───────── 1. "+20 РОКІВ" ───────── */
+  .years {
+    padding: 0 20px;
+    margin-bottom: 8px;
+    color: var(--text-black, #2C2C27);
+    font-family: var(--font-golos-text), "Golos Text", sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: 120%;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    word-break: keep-all;
+  }
+
+  /* ───────── 2. Subtitle ───────── */
+  .headingLine1,
+  .headingLine2 {
+    padding: 0 20px;
+    color: var(--text-grey, #93928C);
+    font-family: var(--font-commissioner), "Commissioner", sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 140%;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+  }
+  .headingLine1 { margin-bottom: 0; }
+  .headingLine2 { margin-bottom: 28px; }
+
+  /* ───────── 3-4. Body — з підтримкою <strong> для bold-слів ───────── */
+  .paragraphLeft,
+  .paragraphRight {
+    padding: 0 20px;
+    color: var(--text-black, #2C2C27);
+    font-family: var(--font-golos-text), "Golos Text", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 140%;
+    letter-spacing: 0;
+  }
+  .paragraphLeft  { margin-bottom: 24px; }
+  .paragraphRight { margin-bottom: 40px; }
+  .paragraphLeft strong,
+  .paragraphLeft b,
+  .paragraphRight strong,
+  .paragraphRight b {
+    font-weight: 700;
+    color: var(--text-black, #2C2C27);
+  }
+
+  /* ───────── 5. Badge — Figma mobile color/position/text ─────────
+     1) Колір: ТЕМНО-зелений (sage/olive) ≈ #4C6640 з легкою прозорістю
+        (НЕ світлий olive як на desktop FeatureBlock1).
+     2) Позиція: bottom-LEFT, ближче до лівого краю (left: 16px).
+     3) Текст: lowercase + крапка наприкінці ("суворий … препаратів.").
+     4) Іконка: 38px (вдвічі більша за попередню ітерацію).
+     5) Padding 14/16, gap 12, radius 10.                              */
+  .featureBlockWrapper {
+    position: absolute;
+    left: 16px;
+    bottom: 100px;            /* 100px відступ знизу секції (per Figma) */
+    width: 295px;
+    max-width: calc(100% - 32px);
+    height: auto;
+    z-index: 5;
+    margin: 0;
+  }
+  .featureBlockWrapper > * {
+    /* Override desktop FeatureBlock1 gradient (BCC6B0→99A574) with
+       deeper sage-green per Figma mobile spec.                       */
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 14px 16px !important;
+    border-radius: 10px !important;
+    background: rgba(76, 102, 64, 0.88) !important;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+  /* Іконка термометра — 38px */
+  .featureBlockWrapper > * > :first-child,
+  .featureBlockWrapper > * > :first-child > img {
+    width: 38px !important;
+    height: 38px !important;
+    flex-shrink: 0 !important;
+  }
+  /* Лейбл — Golos Text 15/500, білий, lowercase + крапка */
+  .featureBlockWrapper > * > :last-child {
+    font-family: var(--font-golos-text), "Golos Text", sans-serif !important;
+    font-size: 15px !important;
+    font-weight: 500 !important;
+    line-height: 130% !important;
+    letter-spacing: -0.01em !important;
+    color: #FFFFFF !important;
+    text-transform: lowercase !important;
+  }
+  .featureBlockWrapper > * > :last-child::after {
+    content: ".";
+  }
+}

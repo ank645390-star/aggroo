@@ -1,0 +1,333 @@
+/* EmailModal — стиль узгоджений з CallbackModal, але ширший (max-width 640px)
+   та з row2 двоколонковим варіантом для пар полів. */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 26, 20, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 24px;
+  animation: fadeIn 0.18s ease-out;
+}
+.modal {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  background: #f9f7f2;
+  border-radius: 14px;
+  padding: 32px 32px 28px;
+  box-shadow: 0 28px 60px rgba(15, 26, 20, 0.32);
+  font-family: "Golos Text", sans-serif;
+  color: #2c2c27;
+  animation: pop 0.22s cubic-bezier(0.2, 0.85, 0.4, 1);
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+.close:hover {
+  background: rgba(44, 44, 39, 0.08);
+}
+
+.header {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+.iconWrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #b3d217, #8fb31a);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.title {
+  margin: 0;
+  font-family: "Commissioner", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #1b4332;
+}
+.subtitle {
+  margin: 4px 0 0;
+  font-size: 13.5px;
+  color: #5e5e57;
+  line-height: 1.45;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 540px) {
+  .row2 { grid-template-columns: 1fr; }
+  .modal { padding: 24px 20px; }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.fieldLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: #2c2c27;
+}
+.req {
+  color: #c14a3c;
+  font-weight: 600;
+}
+.input,
+.textarea {
+  border: 1px solid #2c2c27;
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 15px;
+  color: #2c2c27;
+  background: #fff;
+  outline: 0;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+.textarea {
+  resize: vertical;
+  min-height: 110px;
+  max-height: 260px;
+  line-height: 1.5;
+}
+.input:focus,
+.textarea:focus {
+  border-color: #1b4332;
+  box-shadow: 0 0 0 3px rgba(27, 67, 50, 0.12);
+}
+
+.consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 12.5px;
+  color: #5e5e57;
+  line-height: 1.5;
+  user-select: none;
+  cursor: pointer;
+  margin-top: 4px;
+}
+.consent input[type="checkbox"] {
+  margin-top: 2px;
+  width: 18px;
+  height: 18px;
+  accent-color: #1b4332;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.error {
+  background: #fdecea;
+  color: #c14a3c;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.submit {
+  margin-top: 6px;
+  background: #1b4332;
+  color: #f9f7f2;
+  border: 0;
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, transform 0.12s ease;
+}
+.submit:hover {
+  background: #003214;
+}
+.submit:active {
+  transform: translateY(1px);
+}
+.submit:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.successWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8px 0;
+  gap: 12px;
+}
+.successIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #e7f4ea;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.successTitle {
+  margin: 0;
+  font-family: "Commissioner", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1b4332;
+}
+.successText {
+  margin: 0;
+  font-size: 14px;
+  color: #5e5e57;
+  line-height: 1.5;
+  max-width: 420px;
+}
+.closeBtn {
+  margin-top: 6px;
+  background: transparent;
+  border: 1px solid #1b4332;
+  color: #1b4332;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.closeBtn:hover {
+  background: rgba(27, 67, 50, 0.06);
+}
+
+.consentLink {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #1b4332;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+}
+.consentLink:hover { color: #b3d217; }
+.consentLink:focus-visible { outline: 2px solid #b3d217; outline-offset: 2px; border-radius: 2px; }
+
+
+/* =========================================================
+   MOBILE (≤768px) — full-screen sheet
+   ========================================================= */
+@media screen and (max-width: 768px) {
+  .backdrop {
+    padding: 0;
+    align-items: stretch;
+    justify-content: stretch;
+  }
+  .modal {
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    max-height: none;
+    border-radius: 0;
+    padding: 16px 20px 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    animation: emailSheetIn 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .close {
+    top: 12px;
+    right: 12px;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+  }
+  .header {
+    margin-bottom: 14px;
+    padding-right: 44px;
+    gap: 12px;
+  }
+  .iconWrap { width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0; }
+  .title    { font-size: 20px; line-height: 1.2; }
+  .subtitle { font-size: 13px; line-height: 1.4; }
+  .form {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+    min-height: 0;
+  }
+  .row2 { grid-template-columns: 1fr; gap: 12px; }
+  .input, .textarea { font-size: 16px; }
+  .input { min-height: 44px; }
+  .submit {
+    width: 100%;
+    min-height: 48px;
+    border-radius: 12px;
+    margin-top: 8px;
+    margin-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+  .submit:focus-visible {
+    outline: 3px solid rgba(174, 187, 80, 0.45);
+    outline-offset: 2px;
+  }
+  .closeBtn {
+    min-height: 44px;
+  }
+}
+
+@keyframes emailSheetIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

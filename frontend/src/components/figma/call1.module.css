@@ -1,0 +1,15 @@
+/* Phone icon: 24 × 24 — used inside primary CTA button */
+.iconCall {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.vectorIcon {
+  width: 19px;
+  height: 19px;
+  display: block;
+  object-fit: contain;
+}

@@ -1,0 +1,329 @@
+/* Section: "Фермери обирають нас" */
+.reviewArea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 112px 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
+  font-family: var(--font-golos-text);
+  color: var(--brand-accent-secondary-default);
+  overflow: hidden;
+}
+
+.reviewSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 120px; /* title → cards group */
+}
+
+/* Title row */
+.headlineButton {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.div {
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  line-height: 1;
+  font-size: var(--fs-120);
+  font-weight: 600;
+  color: var(--brand-accent-secondary-default);
+}
+.span {
+  line-height: 1;
+}
+.span2 {
+  letter-spacing: -1px;
+  font-weight: 600;
+}
+.span3 {
+  font-family: var(--font-commissioner);
+  font-weight: 400;
+}
+.span4 {
+  font-family: var(--font-commissioner);
+  font-size: var(--fs-100);
+  letter-spacing: -1px;
+  line-height: 1;
+  font-weight: 400;
+  color: var(--text-black);
+}
+
+/* Cards group */
+.reviewGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 79px; /* cards row → dots/arrows */
+}
+
+/* Row: image (fixed left) + coverflow stage on the right */
+.imageRow {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 24px;
+}
+.imageIcon {
+  height: var(--height-404);
+  width: var(--width-504);
+  border-radius: var(--br-6);
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* Coverflow stage: a positioning lane where every review is absolutely
+   placed.  The "active" card is centred at the left edge of the lane;
+   "prev"/"next" sit slightly behind, scaled down, blurred & desaturated
+   so they read like cards under frosted glass — subtle, never noisy. */
+.stage {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 404px;
+  perspective: 1400px;
+  isolation: isolate;
+  overflow: visible;
+}
+
+.slot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 541px;
+  max-width: 100%;
+  display: flex;
+  transform-style: preserve-3d;
+  transition:
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 360ms ease,
+    filter 360ms ease;
+  will-change: transform, opacity, filter;
+}
+
+/* ACTIVE — centred at the left edge of the stage, full focus */
+.active {
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+  filter: none;
+  z-index: 3;
+  pointer-events: auto;
+}
+
+/* PREV — fully slides off to the LEFT and fades out (no overlap with active).
+   Hidden visually because the wheat image lives in the same row to the left;
+   we only keep the transform so the slide-out animation reads natural. */
+.prev {
+  transform: translate3d(calc(-100% - 32px), 0, 0) scale(0.92);
+  opacity: 0;
+  filter: blur(2px) saturate(0.8);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* NEXT — peeks ENTIRELY to the right of the active card with a clean
+   32px gap. No overlap, never bleeds into the active text. */
+.next {
+  transform: translate3d(calc(100% + 32px), 0, 0) scale(0.92);
+  opacity: 0.55;
+  filter: saturate(0.92);
+  z-index: 1;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* HIDDEN — fully invisible, no interaction */
+.hidden {
+  transform: translate3d(0, 0, 0) scale(0.88);
+  opacity: 0;
+  filter: blur(4px) saturate(0.6);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Hover on the next card — slightly brighten as a click affordance */
+.next:hover {
+  opacity: 0.78;
+  filter: saturate(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slot { transition: none !important; }
+  .prev, .next { filter: saturate(0.85); }
+}
+
+/* Controls row: dots centered, arrows right */
+.controlsRow {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+.dotsCell {
+  grid-column: 2;
+  display: flex;
+  justify-content: center;
+}
+.arrowsCell {
+  grid-column: 3;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.arrowsBar {
+  width: 96px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.arrowBtn {
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  line-height: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+}
+.arrowBtn:disabled {
+  cursor: not-allowed;
+}
+.arrowImg {
+  width: 36px;
+  height: 36px;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.arrowImgFlip {
+  transform: scaleX(-1);
+}
+
+/* ───── Mobile (≤ 768px) — stacked, image on top, 1 card at a time ───── */
+@media screen and (max-width: 768px) {
+  .reviewArea {
+    padding: 56px 20px;
+    overflow: hidden;
+  }
+  .reviewSection {
+    gap: 32px;
+  }
+  .headlineButton {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  /* === Title typography (mobile, per design 29.05.2026 spec) ===
+     ФЕРМЕРИ — light grey 400 weight, letter-spacing -1px
+     ОБИРАЮТЬ НАС — bold dark 600 weight, letter-spacing -2px
+     Both Commissioner, 42px, uppercase, line-height 120%. */
+  .div {
+    font-family: "Commissioner", var(--font-commissioner), sans-serif;
+    font-size: 42px;
+    line-height: 120%;
+    text-transform: uppercase;
+    color: #93928c;
+    font-weight: 400;
+    letter-spacing: -1px;
+  }
+  .span2 {
+    color: #93928c;
+    font-weight: 400;
+    letter-spacing: -1px;
+    font-family: "Commissioner", var(--font-commissioner), sans-serif;
+  }
+  .span3 {
+    font-family: "Commissioner", var(--font-commissioner), sans-serif;
+  }
+  .span4 {
+    color: #2c2c27;
+    font-family: "Commissioner", var(--font-commissioner), sans-serif;
+    font-weight: 600;
+    font-size: 42px;
+    letter-spacing: -2px;
+    line-height: 120%;
+  }
+  .reviewGroup {
+    gap: 28px;
+  }
+  /* Hide the decorative wheat image on mobile (per design 29.05.2026 —
+     only the review cards remain on small screens). */
+  .imageRow {
+    flex-direction: column;
+    gap: 0;
+  }
+  .imageIcon {
+    display: none !important;
+  }
+  /* Stage becomes a native horizontal scroller — user swipes through
+     all reviews. Active/prev/next CSS is overridden so every card is
+     fully visible and gets equal width. */
+  .stage {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    perspective: none;
+    overflow-x: auto;
+    overflow-y: visible;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Edge gutters so first/last cards align with content */
+    padding: 4px 20px;
+    margin: 0 -20px;
+    touch-action: pan-y pan-x;
+  }
+  .stage::-webkit-scrollbar { display: none; }
+  .slot {
+    position: relative;
+    flex: 0 0 calc(100vw - 64px);
+    width: calc(100vw - 64px) !important;
+    max-width: calc(100vw - 64px);
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    pointer-events: auto;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+  /* On mobile every review is visible via native scroll — DO NOT hide
+     prev/next/hidden slots anymore. */
+  .prev,
+  .next,
+  .hidden {
+    display: flex;
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+  /* Hide the legacy arrow controls; dots remain centered for indication. */
+  .controlsRow {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .arrowsCell {
+    display: none;
+  }
+  .dotsCell {
+    grid-column: 1;
+    justify-content: center;
+  }
+}

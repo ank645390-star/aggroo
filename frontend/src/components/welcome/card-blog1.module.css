@@ -1,0 +1,183 @@
+/* Card — full height, max-width 544.
+   All visual chrome (border, background, shadow, radius) lives on
+   `.cardBlog` itself so that when the TiltCard wrapper rotates the
+   layer in 3D, every visual layer rotates with it as one solid block.
+   No child elements have their own `transform` on :hover. */
+.cardLink {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-width: 544px;
+  flex: 1 0 0;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.cardBlog {
+  width: 100%;
+  height: 100%;
+  min-height: 720px;
+  flex: 1 0 0;
+  max-width: 544px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  background: #f9f7f2;
+  border: 1px solid #d9dfd6;
+  border-radius: 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+  isolation: isolate;
+  text-align: left;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  color: #2c2c27;
+  /* Permanent soft shadow + transitions on shadow / border only.
+     We never animate `transform` on the card itself — that is owned by
+     the parent TiltCard wrapper so everything moves in sync. */
+  box-shadow: 0 8px 24px -16px rgba(20, 40, 22, 0.18),
+              0 2px 6px -3px rgba(20, 40, 22, 0.08);
+  transition: border-color 0.25s ease, box-shadow 0.3s ease;
+}
+
+.cardLink:hover .cardBlog {
+  border-color: #b3d217;
+  box-shadow: 0 28px 60px -24px rgba(20, 40, 22, 0.32),
+              0 12px 24px -16px rgba(20, 40, 22, 0.22);
+}
+
+@media (max-width: 1400px) {
+  .cardBlog {
+    min-height: 640px;
+  }
+}
+@media (max-width: 760px) {
+  .cardBlog {
+    min-height: 0;
+  }
+}
+
+/* Image — fluid 16:9-ish ratio. No hover transforms here. */
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 544 / 360;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.imageContainer {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+}
+.categoryBadge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  padding: 6px 14px;
+  background: rgba(247, 250, 232, 0.96);
+  color: #1b4332;
+  border-radius: 4px;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1;
+}
+
+/* Content area */
+.content {
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 0 24px 24px 24px;
+  box-sizing: border-box;
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+.metaRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #5e5e57;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+}
+.date { color: #2c2c27; font-weight: 500; }
+.metaDot { color: #c4c4be; }
+.readingTime {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #5e5e57;
+  font-weight: 500;
+}
+.readingTime svg { color: #1b4332; }
+
+.title {
+  margin: 0;
+  align-self: stretch;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 140%;
+  color: #2c2c27;
+}
+
+.description {
+  margin: 0;
+  display: -webkit-box;
+  max-width: 680px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  align-self: stretch;
+  overflow: hidden;
+  color: #2c2c27;
+  text-overflow: ellipsis;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+/* "Читати більше" button — no hover transform either */
+.readMore {
+  align-self: stretch;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: #2c2c27;
+}
+.readMoreLabel {
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 120%;
+  color: #2c2c27;
+}
+.iconArrow {
+  width: 48px;
+  height: 48px;
+  display: block;
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-user-drag: none;
+}

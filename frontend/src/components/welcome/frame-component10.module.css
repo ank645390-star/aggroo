@@ -1,0 +1,291 @@
+/* ============================================================
+   Section "Нам довіряють"
+   Figma spec:
+     block       : 1920 × 1176 px, bg #F9F7F2, margin-left -2px
+     title       : Golos Text 600 SemiBold, 82px / 120%, -1px tracking,
+                   uppercase, color #2C2C27, top 152px from card,
+                   left/right 609px (centered)
+     logos       : transparent PNGs, єдиний формат боксу для всіх
+   ============================================================ */
+.section {
+  position: relative;
+  width: var(--width-1920);
+  min-height: 1176px;
+  margin-left: -2px;
+  background-color: #f9f7f2;
+  box-sizing: border-box;
+  padding: 152px 0 80px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  align-self: stretch;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.title {
+  margin: 0;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-weight: 600;
+  font-size: 82px;
+  line-height: 120%;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: #2c2c27;
+  text-align: left;
+  white-space: nowrap;
+  /* Shift the title 120px to the left of the centered layout so it
+   * sits flush with the page's 120px content gutter (matches sibling
+   * sections like "+20 років"). */
+  align-self: stretch;
+  padding-left: 120px;
+  box-sizing: border-box;
+}
+
+/* Centered variant — used on /welcome (home page), matches original Figma
+ * layout that had title flush-centered above the logo grid. */
+.titleCenter {
+  text-align: center;
+  padding-left: 0;
+  padding-right: 0;
+  align-self: center;
+}
+
+/* ---- N-column grid of logos (3 cols at design width) ---- */
+.grid {
+  margin-top: 168px;
+  width: 1620px;
+  max-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: stretch;
+  justify-items: stretch;
+  gap: 56px 80px;
+  padding-bottom: 60px;
+  box-sizing: border-box;
+}
+
+/* —— єдиний формат для кожної комірки —— */
+.cell {
+  width: 100%;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+
+  /* Scroll-in animation initial state */
+  opacity: 0;
+  transform: translate3d(0, 32px, 0);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: opacity, transform;
+}
+.cellVisible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.cellLink {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  outline: none;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+.cellLink:hover {
+  transform: scale(1.05);
+  opacity: 0.92;
+}
+
+/* Лого розміщується в єдиному боксі фіксованої висоти з contain-fit —
+   будь-який PNG/SVG з будь-якими пропорціями вписується без ламання адаптиву. */
+.logoBox {
+  width: 100%;
+  max-width: 420px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  box-sizing: border-box;
+}
+.logoImg {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  filter: grayscale(0);
+  transition: filter 0.3s ease;
+}
+
+.fallback {
+  font-family: "Golos Text", sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: #93928c;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.emptyState {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #93928c;
+  padding: 60px 20px;
+  font-size: 20px;
+}
+
+/* ---- Responsive ---- */
+@media screen and (max-width: 1400px) {
+  .section {
+    min-height: 900px;
+    padding: 99px var(--padding-60) 126px;
+  }
+  .grid {
+    margin-top: 80px;
+    width: 100%;
+    gap: 40px 50px;
+  }
+  .logoBox {
+    max-width: 360px;
+    height: 160px;
+  }
+}
+
+@media screen and (max-width: 925px) {
+  .section {
+    padding: var(--padding-64) var(--padding-30) 82px;
+    min-height: 0;
+  }
+  .title {
+    font-size: var(--fs-41);
+    line-height: var(--lh-59);
+    white-space: normal;
+    padding-left: 0;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 30px;
+    margin-top: 40px;
+  }
+  .logoBox {
+    max-width: 280px;
+    height: 120px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .title {
+    font-size: var(--fs-25);
+    line-height: var(--lh-39);
+  }
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+  .logoBox {
+    height: 100px;
+  }
+}
+
+/* ───── Mobile (≤ 768px) — left-aligned title, 8px compact grid + bg ─────
+   Дизайн-специфікація (29.05.2026):
+   - Title aligned LEFT, flush with the 20px page gutter (NOT centered,
+     навіть якщо align="center" prop, бо це /welcome variant).
+   - Логотипи 2 колонки, gap 8px по обох осях (за дизайном).
+   - Висота логотипу зменшена (~70px), щоб блок був компактним.
+   - Поверх фону — декоративна сітка (gridBg) лише на мобільному.
+   ─────────────────────────────────────────────────────────────────── */
+@media screen and (max-width: 768px) {
+  .section {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 32px 20px 28px;
+    min-height: 0;
+    align-items: stretch;
+    overflow: hidden;
+    position: relative;
+  }
+  .title,
+  .titleCenter {
+    font-size: 32px;
+    line-height: 1.12;
+    letter-spacing: -0.5px;
+    white-space: normal;
+    padding-left: 0;
+    text-align: left;
+    align-self: stretch;
+    position: relative;
+    z-index: 2;
+  }
+  .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px 16px !important;
+    margin-top: 16px;
+    width: 100%;
+    padding-bottom: 0;
+    position: relative;
+    z-index: 2;
+  }
+  .cell {
+    min-height: 64px;
+  }
+  .logoBox {
+    max-width: 100%;
+    height: 56px;
+    padding: 4px;
+  }
+  .fallback {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c2c27;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.2;
+  }
+
+  /* Decorative perspective grid (mobile only) — exact original from Figma.
+     SVG (375×364) has:
+       • Built-in radial gradient (cx=195, cy=232.5, rx≈240, ry≈168) that
+         FADES from dark green (#1B4332) in the centre to TRANSPARENT at
+         edges → produces the depth/darkening effect (центр темний,
+         краї блякнуть, як у дизайні).
+       • path opacity=0.2 inside the SVG already.
+     We render the SVG at its natural aspect (375:364) covering the whole
+     trust section width (375 design width). NO CSS rotation, NO extra
+     gradient overlay — the SVG is the single source of truth. */
+  .gridBg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .gridBg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    background-image: url("/trust-grid-pattern.svg?v=7");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: 100% auto;
+  }
+}
+
+/* Hide decorative grid pattern on tablet/desktop (mobile-only effect). */
+.gridBg { display: none; }
+@media screen and (max-width: 768px) {
+  .gridBg { display: block; }
+}

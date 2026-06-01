@@ -1,0 +1,226 @@
+/* RichEditor styles — базовий шрифт Golos Text, під дизайн сайту. */
+.shell {
+  background: #fff;
+  border: 1px solid #e7ebe7;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: "Golos Text", system-ui, sans-serif;
+  color: #2c2c27;
+}
+.shellLoading {
+  padding: 24px;
+  text-align: center;
+  color: #5e5e57;
+  border: 1px solid #e7ebe7;
+  border-radius: 8px;
+  background: #fafaf6;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  background: #fafaf6;
+  border-bottom: 1px solid #e7ebe7;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.tbBtn {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #2c2c27;
+  line-height: 1;
+  min-width: 32px;
+  height: 30px;
+  transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+}
+.tbBtn:hover {
+  background: #eef2e9;
+  border-color: #d8dccd;
+}
+.tbBtnActive {
+  background: #1b4332;
+  color: #fff;
+  border-color: #1b4332;
+}
+.tbBtnActive:hover {
+  background: #003214;
+  color: #fff;
+}
+.tbSep {
+  display: inline-block;
+  width: 1px;
+  height: 22px;
+  background: #d8dccd;
+  margin: 0 4px;
+}
+.tbColor {
+  width: 32px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid #d8dccd;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+.hiddenInput { display: none; }
+
+/* === Editor content area === */
+.editorContent {
+  padding: 20px 24px;
+  outline: none;
+  font-size: 17px;
+  line-height: 1.65;
+  color: #2c2c27;
+  font-family: "Golos Text", system-ui, sans-serif;
+}
+.editorContent p { margin: 0 0 1em; }
+.editorContent p:last-child { margin-bottom: 0; }
+.editorContent h1,
+.editorContent h2,
+.editorContent h3 {
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #1b4332;
+  margin: 1.4em 0 0.5em;
+  line-height: 1.25;
+}
+.editorContent h1 { font-size: 30px; }
+.editorContent h2 { font-size: 24px; }
+.editorContent h3 { font-size: 20px; }
+.editorContent ul,
+.editorContent ol {
+  padding-left: 1.6em;
+  margin: 0 0 1em;
+}
+.editorContent ul li::marker { color: #1b4332; }
+.editorContent ol li::marker { color: #1b4332; font-weight: 600; }
+.editorContent li { margin: 0.25em 0; }
+.editorContent blockquote {
+  border-left: 4px solid #b3d217;
+  background: #f7fae8;
+  padding: 12px 16px;
+  margin: 1.2em 0;
+  color: #2c2c27;
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
+}
+.editorContent blockquote p { margin: 0; }
+.editorContent code {
+  background: #f0f3ee;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.9em;
+}
+.codeBlock,
+.editorContent pre {
+  background: #2c2c27;
+  color: #f0f3ee;
+  padding: 14px 16px;
+  border-radius: 8px;
+  overflow-x: auto;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 14px;
+  line-height: 1.55;
+  margin: 1.2em 0;
+}
+.editorContent pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+.editorContent a {
+  color: #1b4332;
+  text-decoration: underline;
+  text-decoration-color: #b3d217;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+.editorContent a:hover { background: #f7fae8; }
+.embeddedImage {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.2em auto;
+  border-radius: 8px;
+  border: 1px solid #e7ebe7;
+}
+.embeddedYoutube,
+.editorContent iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: 0;
+  margin: 1.2em 0;
+  border-radius: 8px;
+  overflow: hidden;
+  display: block;
+}
+
+/* Table inside the editor (and matches public article style) */
+.embeddedTable,
+.editorContent table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2em 0;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid #e7ebe7;
+  background: #fff;
+  table-layout: fixed;
+}
+.editorContent table td,
+.editorContent table th {
+  border: 1px solid #e7ebe7;
+  padding: 10px 12px;
+  vertical-align: top;
+  text-align: left;
+  position: relative;
+}
+.editorContent table th {
+  background: #f0f3ee;
+  font-weight: 600;
+  color: #1b4332;
+}
+.editorContent table tr:nth-child(even) td { background: #fafaf6; }
+.editorContent table .selectedCell:after {
+  background: #b3d21733;
+  content: "";
+  inset: 0;
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+}
+.editorContent table p { margin: 0; }
+.editorContent hr {
+  border: 0;
+  border-top: 2px solid #e7ebe7;
+  margin: 2em 0;
+}
+.editorContent .is-editor-empty:first-child::before {
+  color: #93928c;
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.statusBar {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: #fafaf6;
+  border-top: 1px solid #e7ebe7;
+  font-size: 12px;
+  color: #5e5e57;
+}

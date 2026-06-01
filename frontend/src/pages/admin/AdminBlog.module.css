@@ -1,0 +1,209 @@
+.shell {
+  padding: 4px 0 40px;
+}
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.title {
+  margin: 0;
+  font-size: 16px;
+  color: #2c2c27;
+}
+.muted { color: #93928c; font-weight: 400; }
+.addBtn {
+  appearance: none;
+  border: 0;
+  background: #1b4332;
+  color: #f9f7f2;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.addBtn:hover { background: #003214; }
+.error {
+  background: #fdecea;
+  color: #c14a3c;
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+.filtersRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.tabRow {
+  display: inline-flex;
+  background: #fff;
+  border: 1px solid #e7ebe7;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.tab {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 8px 16px;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #5e5e57;
+  cursor: pointer;
+  border-right: 1px solid #e7ebe7;
+}
+.tab:last-child { border-right: 0; }
+.tabActive { background: #f7fae8; color: #1b4332; }
+.searchInput {
+  flex: 1;
+  min-width: 240px;
+  padding: 9px 14px;
+  border: 1px solid #e7ebe7;
+  border-radius: 8px;
+  background: #fff;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 14px;
+  outline: 0;
+}
+.searchInput:focus { border-color: #1b4332; }
+.empty {
+  padding: 60px 24px;
+  text-align: center;
+  color: #93928c;
+  font-size: 14px;
+  background: #fff;
+  border: 1px solid #e7ebe7;
+  border-radius: 8px;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid #e7ebe7;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 13px;
+}
+.table thead th {
+  background: #fafaf6;
+  padding: 11px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #5e5e57;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid #e7ebe7;
+}
+.table tbody td {
+  padding: 12px;
+  vertical-align: middle;
+  border-bottom: 1px solid #f0f3ee;
+  color: #2c2c27;
+}
+.table tbody tr:last-child td { border-bottom: 0; }
+.table tbody tr:hover { background: #fdfcf7; }
+.titleCell { display: flex; gap: 12px; align-items: center; }
+.thumb {
+  width: 56px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #e7ebe7;
+}
+.cellTitle {
+  font-weight: 500;
+  color: #2c2c27;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cellSlug {
+  font-size: 12px;
+  color: #93928c;
+  margin-top: 2px;
+  font-family: ui-monospace, monospace;
+}
+.hotBadge {
+  background: #c14a3c;
+  color: #fff;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+.catTag {
+  display: inline-block;
+  background: #f7fae8;
+  color: #1b4332;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.statusBadge {
+  appearance: none;
+  border: 0;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Golos Text", system-ui, sans-serif;
+}
+.statusPublished { background: #e7f4ea; color: #1b4332; }
+.statusDraft { background: #f0f3ee; color: #5e5e57; }
+.statusBadge:hover { opacity: 0.85; }
+.actions { display: flex; gap: 6px; align-items: center; justify-content: flex-end; }
+.actBtn {
+  appearance: none;
+  border: 1px solid #e7ebe7;
+  background: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #2c2c27;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+}
+.actBtn:hover { background: #f7fae8; border-color: #b3d217; color: #1b4332; }
+.actBtnPrimary {
+  appearance: none;
+  border: 0;
+  background: #1b4332;
+  color: #f9f7f2;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.actBtnPrimary:hover { background: #003214; }
+.actBtnDanger {
+  color: #c14a3c;
+  border-color: #f3d3cf;
+}
+.actBtnDanger:hover {
+  background: #fdecea;
+  border-color: #c14a3c;
+  color: #c14a3c;
+}

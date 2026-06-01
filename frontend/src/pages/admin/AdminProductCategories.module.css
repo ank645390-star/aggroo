@@ -1,0 +1,61 @@
+.shell { padding: 4px 0 40px; }
+.createCard {
+  background: #fff; border: 1px solid #e7ebe7; border-radius: 12px;
+  padding: 20px; margin-bottom: 20px;
+}
+.cardTitle { margin: 0 0 16px; font-size: 14px; font-weight: 600; color: #2c2c27; }
+.row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; align-items: end; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.fieldLabel { font-size: 12px; color: #6b6b66; font-weight: 500; }
+.input {
+  appearance: none; padding: 10px 12px; border: 1px solid #d9dad3; border-radius: 8px;
+  font-size: 14px; font-family: inherit; color: #2c2c27; background: #fff;
+  width: 100%; box-sizing: border-box;
+}
+.input:focus { outline: none; border-color: #1b4332; }
+.slugInput { font-family: monospace; max-width: 200px; }
+.addBtn {
+  appearance: none; border: 0; background: #1b4332; color: #fff;
+  padding: 10px 18px; border-radius: 8px; font-weight: 600; font-size: 13px;
+  cursor: pointer; font-family: inherit; height: 42px;
+}
+.addBtn:hover:not(:disabled) { background: #003214; }
+.addBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+.error {
+  background: #fdecea; color: #c14a3c; padding: 12px 14px; border-radius: 8px;
+  margin-bottom: 16px; font-size: 14px;
+}
+.loading, .empty {
+  padding: 60px 20px; text-align: center; color: #6b6b66; background: #fff;
+  border-radius: 12px; border: 1px solid #e7ebe7; font-size: 14px;
+}
+.list { display: flex; flex-direction: column; gap: 8px; }
+.itemRow {
+  display: grid; grid-template-columns: auto 1fr 200px 80px 110px 100px;
+  gap: 12px; align-items: center; background: #fff;
+  border: 1px solid #e7ebe7; border-radius: 10px; padding: 12px 16px;
+}
+.itemOrder { display: flex; align-items: center; gap: 4px; }
+.orderNum { font-size: 13px; color: #6b6b66; font-weight: 500; min-width: 18px; text-align: center; }
+.miniBtn {
+  appearance: none; border: 1px solid #e7ebe7; background: #fff;
+  width: 24px; height: 24px; border-radius: 4px; cursor: pointer; font-size: 12px;
+}
+.miniBtn:hover:not(:disabled) { background: #f5f5f0; }
+.miniBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+.count { color: #6b6b66; font-size: 13px; }
+.activeToggle {
+  display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 13px; color: #2c2c27;
+}
+.activeToggle input { width: 16px; height: 16px; cursor: pointer; }
+.deleteBtn {
+  appearance: none; border: 1px solid #f4c5be; background: #fdecea; color: #c14a3c;
+  padding: 8px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer;
+  font-family: inherit;
+}
+.deleteBtn:hover:not(:disabled) { background: #facfc7; }
+.deleteBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+@media (max-width: 900px) {
+  .row { grid-template-columns: 1fr; }
+  .itemRow { grid-template-columns: 1fr; gap: 8px; }
+}

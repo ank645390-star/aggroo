@@ -1,0 +1,14 @@
+.iconFire {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}

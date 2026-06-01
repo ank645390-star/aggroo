@@ -1,0 +1,213 @@
+/* =====================================================================
+   BlogCard styles — pixel-perfect Figma:
+     - regular: 544×720px
+     - wide:    828×720px
+   Image: 100% width × 456px (aspect handled by object-fit: cover)
+   Content: 32px gap, ends with «Chat більше» CTA button.
+   ===================================================================== */
+.card {
+  width: 544px;
+  height: 780px;
+  border-radius: 6px;
+  background-color: #fff;
+  border: 1px solid #e7ebe7;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  isolation: isolate;
+  gap: 28px;
+  text-align: left;
+  font-family: "Golos Text", system-ui, sans-serif;
+  color: #2c2c27;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #d8dccd;
+  box-shadow: 0 18px 40px -22px rgba(20, 30, 12, 0.18),
+    0 6px 14px -8px rgba(20, 30, 12, 0.08);
+}
+.cardWide {
+  width: 828px;
+}
+
+/* === Image (top) === */
+.imageLink {
+  align-self: stretch;
+  height: 456px;
+  display: block;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 0;
+  cursor: pointer;
+}
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card:hover .image {
+  transform: scale(1.04);
+}
+
+/* === Tag (top-left, floating) === */
+.tag {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 4px;
+  background-color: #f7fae8;
+  padding: 4px 14px;
+  height: 32px;
+  box-sizing: border-box;
+}
+.tagLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: #1b4332;
+  line-height: 1;
+  white-space: nowrap;
+}
+.fireIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+/* === Content area (below image) === */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  align-self: stretch;
+  padding: 0 24px 28px;
+  gap: 24px;
+  z-index: 2;
+}
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  gap: 12px;
+}
+.date {
+  font-size: 14px;
+  font-weight: 400;
+  color: #2c2c27;
+  line-height: 100%;
+}
+.metaRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #5e5e57;
+  font-size: 14px;
+  font-weight: 400;
+}
+.metaDot { color: #c4c4be; }
+.readingTime {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #5e5e57;
+  font-weight: 500;
+}
+.readingTime svg { color: #1b4332; }
+.title {
+  margin: 0;
+  align-self: stretch;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: normal;
+  color: #2c2c27;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  font-family: inherit;
+}
+.excerpt {
+  margin: 0;
+  width: 100%;
+  max-width: 680px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 140%;
+  color: #2c2c27;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* === CTA «Читати більше» (label + circular arrow button) === */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  margin-left: auto;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+.ctaLabel {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 120%;
+  color: #1b4332;
+  font-family: inherit;
+}
+.ctaIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #b3d217;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.25s ease;
+}
+.cta:hover .ctaIcon {
+  transform: translateX(4px);
+  background-color: #c4e02a;
+}
+.cta:focus-visible {
+  outline: 2px solid #1b4332;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* === Responsive: stack and shrink for narrower viewports === */
+@media (max-width: 1700px) {
+  .card { width: 100%; max-width: 544px; }
+  .cardWide { max-width: 100%; width: 100%; }
+}
+@media (max-width: 900px) {
+  .card,
+  .cardWide {
+    height: auto;
+    min-height: 480px;
+  }
+  .imageLink { height: 280px; }
+  .title { font-size: 22px; }
+  .excerpt { font-size: 16px; }
+}

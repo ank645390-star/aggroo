@@ -1,0 +1,12 @@
+.root {
+  height: var(--height-60);
+  width: var(--width-60);
+  border-radius: var(--br-50);
+  background-color: var(--decorative-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.root[data-state="Disabled"][data-size="Small"] {
+  opacity: 0.3;
+}

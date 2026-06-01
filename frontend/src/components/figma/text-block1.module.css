@@ -1,0 +1,67 @@
+.textBlock {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-24);
+  text-align: left;
+  font-size: var(--fs-12);
+  color: var(--text-black);
+  font-family: var(--font-golos-text);
+}
+.line {
+  height: 270px;
+  width: var(--width-2);
+  position: relative;
+  border-right: 2px solid var(--text-grey);
+  box-sizing: border-box;
+}
+.detailContents,
+.textContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.textContent {
+  width: 622px;
+  gap: var(--gap-32);
+}
+.detailContents {
+  align-self: stretch;
+  gap: var(--gap-12);
+}
+.headings {
+  border-radius: var(--br-4);
+  background-color: var(--decorative-2);
+  display: flex;
+  align-items: center;
+  padding: var(--padding-4) var(--padding-16);
+}
+.div,
+.div2,
+.h3 {
+  position: relative;
+}
+.div2,
+.h3 {
+  align-self: stretch;
+  font-size: var(--fs-18);
+  line-height: 140%;
+}
+.h3 {
+  margin: 0;
+  font-size: var(--fs-28);
+  line-height: 120%;
+  font-weight: 400;
+  font-family: inherit;
+}
+@media screen and (max-width: 900px) {
+  .textContent {
+    gap: var(--gap-16);
+  }
+}
+@media screen and (max-width: 450px) {
+  .h3 {
+    font-size: var(--fs-22);
+    line-height: 27px;
+  }
+}

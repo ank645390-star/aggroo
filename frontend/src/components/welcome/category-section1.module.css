@@ -1,0 +1,276 @@
+/* =========================================================================
+   Category Section — «Біотехнології захисту та живлення»
+   ------------------------------------------------------------------------
+   ТОЧНАЯ ГЕОМЕТРИЯ (Figma, viewport 1920):
+     • Section padding:  top 147 / right 135 / left 125 / bottom 120
+     • Title block:      ширина 850, 2 строки  → 120px SemiBold
+        - «Біотехнології»          → #1B4332
+        - «захисту / та живлення»  → #2C2C27
+     • Description box:  width 560, right-aligned (margin-right 155 from edge)
+        - margin-top от title = 75px  → description TOP @ 486 from section top
+        - Golos Text Regular 28px / 135% / #2C2C27
+     • Description → Cards grid:    156px
+     • Cards grid:                  3 × 2,  col-gap 27,  row-gap 16
+     • Cards → Button:              105px
+     • Button «Переглянути каталог»: 540 × 60, центр (695/699 по бокам)
+   ========================================================================= */
+
+.categorySection {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 147px 135px 120px 125px;
+  box-sizing: border-box;
+  position: relative;
+  gap: 156px; /* distance from description bottom to cards top */
+  max-width: 100%;
+  text-align: left;
+  background-color: var(--bg-card);
+  font-family: var(--font-golos-text);
+  color: var(--text-black);
+}
+
+/* Title + description блок */
+.parent {
+  align-self: stretch;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 75px; /* title bottom → description top, чтобы description top был на 486 от section top */
+  max-width: 100%;
+}
+
+/* Сам тайтл — 2 строки, 120px SemiBold */
+.div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  text-transform: uppercase;
+  width: 850px;
+  flex-shrink: 0;
+  line-height: 1;
+  position: relative;
+}
+.titleLine {
+  white-space: nowrap;
+  font-family: var(--font-golos-text);
+  /* Fixed px (NOT vw-based) — ScaledShell already scales the entire
+     1920px canvas; vw-clamp would double-scale on QHD/4K. */
+  font-size: 138px;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: -1px;
+}
+.span {
+  color: var(--brand-accent-secondary-default); /* #1B4332 */
+  font-family: var(--font-golos-text);
+  font-weight: 600;
+}
+.span2 {
+  font-family: var(--font-golos-text);
+  font-weight: 600;
+  color: var(--text-black);
+}
+.span3 {
+  color: var(--text-black); /* #2C2C27 */
+  font-family: var(--font-golos-text);
+  font-weight: 600;
+}
+
+/* Описание: выровнено к правому краю секции, c отступом 155 справа */
+.wrapper {
+  align-self: flex-end;
+  width: 560px;
+  margin-right: 155px;
+  display: flex;
+  align-items: flex-start;
+}
+.h3 {
+  margin: 0;
+  font-family: var(--font-golos-text);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--text-black);
+  letter-spacing: 0;
+}
+
+/* Блок с карточками + кнопкой */
+.frameParent {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 105px; /* cards bottom → button top */
+}
+
+.categoryColumnOneParent {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 27px;
+  row-gap: 16px;
+}
+
+.categoryAction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}
+
+/* «Переглянути каталог» — Primary Button.
+   Figma spec:
+     W 540px / H 60px (hug), padding 18 (top/bottom) · 16 (left/right),
+     bg #1B4332, radius 6, text + arrow центрируются как группа. */
+.catalogButton {
+  width: 540px;
+  height: 60px;
+  padding: 18px 16px;
+  border: 0;
+  border-radius: 6px;
+  background-color: var(--brand-accent-secondary-default); /* #1B4332 */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #FFFFFF;
+  font-family: var(--font-golos-text);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 100%;
+  letter-spacing: 0;
+  box-sizing: border-box;
+  transition: background-color 0.18s ease, transform 0.12s ease;
+}
+.catalogButton:hover {
+  background-color: var(--brand-accent-secondary-hover); /* #003214 */
+}
+.catalogButton:active {
+  transform: translateY(1px);
+}
+.catalogButtonLabel {
+  font-family: var(--font-golos-text);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 100%;
+  color: #FFFFFF;
+  white-space: nowrap;
+}
+.catalogButtonArrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* =========================================================================
+   Адаптив (плавная деградация — дизайн заточен под 1920px)
+   ========================================================================= */
+@media screen and (max-width: 1400px) {
+  .categorySection {
+    padding: 90px 60px 80px;
+    gap: 100px;
+  }
+  .div { width: auto; }
+  .titleLine { font-size: 84px; }
+  .wrapper { margin-right: 0; align-self: stretch; width: 100%; }
+  .parent { gap: 48px; }
+  .frameParent { gap: 60px; }
+}
+@media screen and (max-width: 925px) {
+  .categorySection {
+    padding: 40px 24px 40px;
+    gap: 48px;
+  }
+  .titleLine { font-size: 48px; white-space: normal; }
+  .h3 { font-size: 18px; }
+  .parent { gap: 24px; }
+  .categoryColumnOneParent {
+    grid-template-columns: 1fr;
+    column-gap: 16px;
+    row-gap: 16px;
+  }
+  .frameParent { gap: 32px; }
+  .catalogButton {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .categorySection {
+    padding: 56px 20px 56px;
+    gap: 36px;
+  }
+  .div { width: 100%; flex-wrap: wrap; }
+  .titleLine {
+    font-size: 28px;
+    line-height: 1.15;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    letter-spacing: -0.3px;
+  }
+  .wrapper {
+    width: 100%;
+    margin-right: 0;
+  }
+  .h3 { font-size: 16px; line-height: 1.4; }
+  .parent { gap: 20px; }
+  .frameParent { gap: 28px; }
+
+  /* ============================================================
+     Картки категорій → ГОРИЗОНТАЛЬНИЙ СЛАЙДЕР на mobile.
+     - Edge-to-edge (bleed за межі section padding 20px) для нативного
+       мобільного відчуття.
+     - Кожна картка фіксованої ширини 280px з flex-shrink:0.
+     - Scroll-snap для приємного "магнітного" скролу.
+     - Прихований scrollbar (cross-browser).
+     ============================================================ */
+  .categoryColumnOneParent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    grid-template-columns: none;          /* killing the desktop grid */
+    overflow-x: auto;
+    overflow-y: visible;
+    column-gap: 14px;
+    row-gap: 0;
+    gap: 14px;
+    /* Edge-to-edge bleed: вийти з 20px padding'а секції в обидва боки */
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 4px 20px 8px 20px;
+    /* iOS momentum + scroll-snap */
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 20px;
+    /* Сховати scrollbar (Chrome/Safari/Firefox) */
+    scrollbar-width: none;
+  }
+  .categoryColumnOneParent::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+  .categoryColumnOneParent > * {
+    flex: 0 0 auto;
+    width: 280px;
+    min-width: 280px;
+    max-width: 280px;
+    scroll-snap-align: start;
+    /* На випадок, якщо CategoryCard має margin auto / inline alignments */
+    margin: 0;
+  }
+
+  .catalogButton {
+    width: 100%;
+    height: 56px;
+  }
+}

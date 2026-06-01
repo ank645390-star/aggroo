@@ -1,0 +1,195 @@
+/* Shared profile-layout styles
+   ================================================================= */
+.page {
+  width: 100%;
+  background-color: #f9f7f2;
+  font-family: "Golos Text", sans-serif;
+  color: #2c2c27;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* ===== Top-row ===== */
+.topRow {
+  width: 100%;
+  padding: 36px var(--page-gutter) 0;
+  box-sizing: border-box;
+  background-color: #f9f7f2;
+}
+.topRowInner {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 16px;
+  min-height: 90px;
+}
+.exitLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #2c2c27;
+  font-family: "Golos Text", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 100%;
+  width: max-content;
+  cursor: pointer;
+  transition: color .15s ease;
+}
+.exitLink svg {
+  width: 12px;
+  height: 18px;
+  flex-shrink: 0;
+}
+.exitLink:hover { color: #1b4332; }
+.exitLink:hover svg path { stroke: #1b4332; }
+.logoWrap {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+.logoWrap img {
+  display: block;
+  width: 128px;
+  height: 90px;
+  object-fit: contain;
+}
+.rightSlot {
+  justify-self: end;
+}
+
+/* ===== User trigger (opens UserDrawer) =====
+   Уніфіковано з .iconButtons2 у navbar1: круглий 40×40 з декоративним
+   фоном, без chevron. Старий UserDropdown (popover з ↓) залишається
+   у коді як резерв і тут більше не використовується. */
+.userTrigger {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--decorative-2, #e7ebe7);
+  border: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  transition: background-color 0.18s ease;
+}
+.userTrigger:hover {
+  background-color: #d8dccd;
+}
+.userTrigger:focus-visible {
+  outline: 2px solid var(--brand-accent-secondary-default, #1b4332);
+  outline-offset: 2px;
+}
+.divider {
+  margin-top: 24px;
+  width: 100%;
+  height: 1px;
+  background-color: #e7ebe7;
+}
+
+/* ===== Main ===== */
+.main {
+  width: 100%;
+  padding: 56px var(--page-gutter) 80px;
+  box-sizing: border-box;
+}
+.container {
+  width: 1680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 100%;
+  color: #93928c;
+}
+.breadcrumbLink {
+  color: #93928c;
+  text-decoration: none;
+  transition: color .15s ease;
+}
+.breadcrumbLink:hover { color: #1b4332; }
+.breadcrumbSep     { color: #c9c7c0; font-weight: 300; }
+.breadcrumbCurrent { color: #2c2c27; font-weight: 500; }
+
+.h1 {
+  margin: 0;
+  font-family: "Golos Text", sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 120%;
+  letter-spacing: -1px;
+  color: #2c2c27;
+}
+
+@media (max-width: 900px) {
+  .topRow      { padding: 16px 24px 0; }
+  .main        { padding: 40px 24px 60px; }
+  .container   { width: 100%; gap: 24px; }
+  .h1          { font-size: 36px; }
+}
+
+/* =====================================================================
+   COMPREHENSIVE MOBILE — ≤ 768px (profile layout — top-row + container)
+   ===================================================================== */
+@media screen and (max-width: 768px) {
+  .topRow {
+    padding: 12px 16px 0;
+  }
+  .topRowInner {
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    min-height: 56px;
+  }
+  .exitLink {
+    font-size: 16px;
+    gap: 8px;
+  }
+  .exitLink svg { width: 10px; height: 16px; }
+  /* Hide centered logo on mobile to save space */
+  .logoWrap { display: none; }
+
+  .userTrigger {
+    width: 36px;
+    height: 36px;
+  }
+
+  .divider { margin-top: 10px; }
+
+  .main {
+    padding: 24px 16px 60px;
+  }
+  .container {
+    width: 100%;
+    gap: 18px;
+  }
+  .breadcrumb {
+    font-size: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .h1 {
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.3px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .h1 { font-size: 24px; }
+}
+

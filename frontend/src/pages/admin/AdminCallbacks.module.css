@@ -1,0 +1,121 @@
+.toolbar {
+  display: flex; gap: 10px; align-items: center; flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.filter {
+  padding: 8px 14px;
+  border: 1px solid #e2e1d8;
+  border-radius: 8px;
+  background: #fff;
+  font-family: "Golos Text", sans-serif;
+  font-size: 13.5px; font-weight: 500;
+  color: #2c2c27;
+  cursor: pointer;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+.filter:hover { border-color: #1b4332; }
+.filterActive { background: #1b4332; color: #fff; border-color: #1b4332; }
+.refresh {
+  margin-left: auto;
+  padding: 8px 14px;
+  border: 1px solid #e2e1d8;
+  border-radius: 8px;
+  background: #fff;
+  font-family: "Golos Text", sans-serif;
+  font-size: 13.5px; font-weight: 500;
+  color: #1b4332; cursor: pointer;
+  display: inline-flex; gap: 6px; align-items: center;
+  transition: background-color .15s ease;
+}
+.refresh:hover { background: #f3f5f1; }
+.refresh:disabled { opacity: .6; cursor: wait; }
+
+.table {
+  width: 100%;
+  background: #fff;
+  border-radius: 12px;
+  border: 1px solid #e2e1d8;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+.table th {
+  text-align: left;
+  font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.08em;
+  color: #93928c; font-weight: 600;
+  padding: 14px 16px;
+  background: #f9f7f2;
+  border-bottom: 1px solid #e2e1d8;
+}
+.table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  color: #2c2c27;
+  border-bottom: 1px solid #ededec;
+  vertical-align: middle;
+}
+.table tbody tr:last-child td { border-bottom: 0; }
+.table tbody tr:hover { background: #f9f7f2; }
+
+.name { font-weight: 600; color: #1b4332; }
+.phone {
+  font-family: "Inter", monospace;
+  font-size: 13.5px; color: #2c2c27;
+  background: rgba(27,67,50,0.06);
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  text-decoration: none;
+}
+.phone:hover { background: rgba(27,67,50,0.12); }
+.comment { color: #5e5e57; font-size: 13px; max-width: 280px; }
+.date { color: #93928c; font-size: 12.5px; white-space: nowrap; }
+
+.statusBadge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px; font-weight: 600;
+  display: inline-block;
+}
+.statusNew { background: rgba(179,210,23,0.2); color: #1b4332; }
+.statusInProgress { background: rgba(217,119,6,0.15); color: #b45309; }
+.statusDone { background: rgba(27,67,50,0.1); color: #1b4332; }
+.statusArchived { background: rgba(44,44,39,0.08); color: #5e5e57; }
+
+.notifyDots { display: inline-flex; gap: 4px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; }
+.dotOk { background: #b3d217; }
+.dotFail { background: #d0d0c5; }
+
+.actions { display: inline-flex; gap: 6px; }
+.actionBtn {
+  background: transparent; border: 1px solid #e2e1d8;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 12.5px; font-weight: 500;
+  color: #2c2c27; cursor: pointer;
+  transition: border-color .15s ease, background-color .15s ease;
+  white-space: nowrap;
+}
+.actionBtn:hover { border-color: #1b4332; background: #f3f5f1; }
+.actionDanger { color: #c14a3c; }
+.actionDanger:hover { border-color: #c14a3c; background: rgba(193,74,60,0.06); }
+
+.empty {
+  padding: 60px 20px;
+  text-align: center;
+  color: #93928c;
+  font-size: 14px;
+}
+.emptyIcon { font-size: 42px; margin-bottom: 10px; }
+
+.select {
+  padding: 6px 10px;
+  border: 1px solid #e2e1d8;
+  border-radius: 6px;
+  background: #fff;
+  font-family: "Golos Text", sans-serif;
+  font-size: 12.5px;
+  cursor: pointer;
+}

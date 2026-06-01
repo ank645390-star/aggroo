@@ -1,0 +1,39 @@
+.featureBlock {
+  width: var(--width-382);
+  border-radius: var(--br-6);
+  background-color: var(--color-gray-100);
+  display: flex;
+  align-items: flex-start;
+  padding: var(--padding-16);
+  box-sizing: border-box;
+  gap: var(--gap-4);
+  flex-shrink: 0;
+  text-align: left;
+  font-size: var(--fs-14);
+  color: var(--text-black);
+  font-family: var(--font-golos-text);
+}
+.leftIcon {
+  height: var(--height-36);
+  width: var(--width-36);
+  position: relative;
+}
+.textStack {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-8);
+}
+.labelBottom,
+.labelTop {
+  align-self: stretch;
+  position: relative;
+  line-height: 100%;
+}
+.labelBottom {
+  font-size: var(--fs-18);
+  line-height: 120%;
+  font-weight: 600;
+}

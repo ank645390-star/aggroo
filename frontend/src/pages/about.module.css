@@ -1,0 +1,1530 @@
+/* =====================================================================
+   /about — TAMIS АГРО "Про нас" page.
+   Design width: 1920. Use existing ScaledShell scaling (App.tsx).
+   Tokens come from figma-global.css / welcome-global.css.
+   ===================================================================== */
+
+.page {
+  width: 100%;
+  background-color: #f9f7f2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  box-sizing: border-box;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: #2c2c27;
+  font-family: "Golos Text", system-ui, -apple-system, sans-serif;
+  font-size: 24px;
+}
+
+/* ============ 1. HERO ============ */
+.heroWrap {
+  align-self: stretch;
+  padding: 0 0 120px 0;
+  display: flex;
+  flex-shrink: 0;
+}
+.hero {
+  flex: 1;
+  background-color: #f2f2f2;
+  overflow: hidden;
+  position: relative;
+  padding: 447px 208px 227px;
+  display: flex;
+  align-items: flex-start;
+  isolation: isolate;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.heroBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.heroBg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0) 60%);
+}
+.heroInner {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 62px;
+  z-index: 1;
+  max-width: 100%;
+}
+.heroTitle {
+  margin: 0;
+  font-size: 82px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #1b4332;
+  text-align: center;
+  text-shadow: 0 2px 18px rgba(249, 247, 242, 0.45);
+}
+.heroSubtitle {
+  margin: 0;
+  font-size: 44px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  line-height: 140%;
+  text-transform: uppercase;
+  color: #1b4332;
+  font-family: "Commissioner", system-ui, -apple-system, sans-serif;
+  text-align: center;
+  align-self: stretch;
+  text-shadow: 0 2px 18px rgba(249, 247, 242, 0.45);
+}
+
+/* ============ 2. NUMBERS ============ */
+.numbersWrap {
+  align-self: stretch;
+  padding: 0 var(--page-gutter) 160px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.numbersInner {
+  width: 100%;
+  max-width: 1680px;
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+.numbersRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.numbersHr {
+  align-self: stretch;
+  width: 1680px;
+  max-width: 100%;
+  height: 1px;
+  background-color: #93928c;
+}
+.numbersHrLegacy {
+  align-self: stretch;
+  height: 1px;
+  border-top: 1px solid #93928c;
+  box-sizing: border-box;
+}
+.numberCard {
+  width: 478px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+.numberCardLine {
+  width: 2px;
+  height: 176px;
+  background-color: #93928c;
+  flex-shrink: 0;
+}
+.numberCardLineAccent {
+  background-color: #b3d217;
+}
+.numberCardContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.numberCardTitle {
+  margin: 0;
+  font-size: 82px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #2c2c27;
+}
+.numberCardTitleAccent {
+  color: #b3d217;
+}
+.numberCardDesc {
+  margin: 0;
+  font-size: 22px;
+  line-height: 125%;
+  font-weight: 400;
+  color: #2c2c27;
+}
+.numbersHr {
+  align-self: stretch;
+  height: 1px;
+  border-top: 1px solid #93928c;
+  box-sizing: border-box;
+}
+
+/* ============ 3. MISSION (green wide block) ============ */
+.missionWrap {
+  align-self: stretch;
+  padding: 0 0 160px 0;
+  flex-shrink: 0;
+}
+.mission {
+  background-color: #acb14f;
+  width: 100%;
+  position: relative;
+  padding: 97px 122px 118px;
+  box-sizing: border-box;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 105px;
+  overflow: hidden;
+  min-height: 1633px;
+}
+/* Decorative rotated leaf — second background per Figma spec
+   844.464 × 1121.098, rotate 49.611deg, opacity 0.1.
+   Positioned in the right-of-center area of the green block,
+   visible behind both title and right text column. */
+.missionLeafBg {
+  position: absolute;
+  width: 844.464px;
+  height: 1121.098px;
+  transform: rotate(49.611deg);
+  transform-origin: center;
+  top: 80px;
+  right: 200px;
+  opacity: 0.1;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+  user-select: none;
+}
+.missionTitle {
+  margin: 0;
+  width: 1116px;
+  max-width: 100%;
+  font-size: 82px;
+  letter-spacing: -1px;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #f9f7f2;
+  font-weight: 600;
+  font-family: "Golos Text", system-ui, sans-serif;
+  position: relative;
+  z-index: 1;
+}
+.missionTitleAccent {
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-weight: 400;
+  color: #f9f7f2;
+}
+.missionRow {
+  display: flex;
+  gap: 106px;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
+}
+.missionLeafImg {
+  width: 732px;
+  height: 915px;
+  flex-shrink: 0;
+  object-fit: cover;
+  aspect-ratio: 4 / 5;
+  border-radius: 0;
+}
+.missionTextCol {
+  width: 644px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  height: 915px;
+  /* Was: justify-content: space-between. We instead let the top content take
+     its natural height and push the author block to the very bottom of the
+     column via margin-top:auto. This guarantees Михайло Севастьянов sits
+     exactly at the bottom edge of the photo on the left, matching the Figma. */
+  justify-content: flex-start;
+  min-width: 0;
+  position: relative;
+}
+.missionTextTop {
+  display: flex;
+  flex-direction: column;
+  gap: 96px;
+}
+.missionLead {
+  margin: 0;
+  font-size: 48px;
+  line-height: 140%;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #f9f7f2;
+  font-family: "Golos Text", system-ui, sans-serif;
+}
+.missionStatement {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.missionStatementTitle {
+  margin: 0;
+  font-size: 48px;
+  letter-spacing: -0.5px;
+  line-height: 130%;
+  font-weight: 600;
+  color: #1b4332;
+  font-family: "Golos Text", system-ui, sans-serif;
+}
+.missionStatementBody {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.missionStatementText {
+  margin: 0;
+  font-size: 28px;
+  line-height: 125%;
+  font-weight: 400;
+  color: #f9f7f2;
+  font-family: "Golos Text", system-ui, sans-serif;
+}
+.missionAuthor {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  /* Pinned to the very bottom of the column so the name/role line up
+     with the bottom edge of the photo on the left side. */
+  margin-top: auto;
+}
+.missionAuthorName {
+  margin: 0;
+  font-size: 52px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  line-height: 120%;
+  color: #1b4332;
+  font-family: "Commissioner", system-ui, sans-serif;
+}
+.missionAuthorRole {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%;
+  color: #1b4332;
+  font-family: "Golos Text", system-ui, sans-serif;
+}
+
+/* ============ 4. LAB → FIELD (4 cards 01-04) ============
+   Snap-lock карусель — як на welcome / «Технологія Врожаю».
+   Секція має одну висоту viewport (~100vh), не tall scroll-track.
+   JS у about.tsx перехоплює scroll коли центр секції біля центру
+   viewport — wheel/touch переключає активну картку. Картки stack-аються
+   в одному deck, JS пише transform translateY: 0 (active) / +760px
+   (next) / -760px (prev). Smooth slide-transition робить CSS.
+   ============================================================ */
+.labWrap {
+  align-self: stretch;
+  padding: 80px var(--page-gutter) 80px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 1080px;
+}
+.labInner {
+  width: 100%;
+  max-width: 1680px;
+  display: flex;
+  flex-direction: column;
+}
+.labTitle {
+  margin: 0 0 60px 0;
+  width: 828px;
+  max-width: 100%;
+  font-size: 82px;
+  letter-spacing: -1px;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #2c2c27;
+  font-weight: 600;
+}
+.labTitleAccent {
+  font-family: "Commissioner", system-ui, sans-serif;
+  color: #93928c;
+  font-weight: 500;
+}
+.labCardTrack {
+  position: relative;
+  width: 100%;
+}
+.labCardStage {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.labCardDeck {
+  position: relative;
+  width: 100%;
+  height: 580px;
+  overflow: hidden;
+}
+.labCard {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  background-color: #fff;
+  border: 1px solid #f7fae8;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 38px 60px;
+  gap: 20px;
+  box-shadow: 0 24px 60px -28px rgba(27, 67, 50, 0.18);
+  transform: translate3d(0, 760px, 0);
+  opacity: 0;
+  will-change: transform, opacity;
+  transition:
+    transform 600ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    opacity 380ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.labCard:nth-child(1) {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+  z-index: 50;
+}
+.labCard:nth-child(2) { z-index: 2; }
+.labCard:nth-child(3) { z-index: 3; }
+.labCard:nth-child(4) { z-index: 4; }
+.labCardLeft {
+  width: 460px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+.labCardNumber {
+  margin: 0;
+  font-size: 220px;
+  line-height: 120%;
+  font-weight: 500;
+  font-family: "Commissioner", system-ui, sans-serif;
+  color: #f7fae8;
+  user-select: none;
+}
+.labCardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: -100px;
+  position: relative;
+}
+.labCardSubtitle {
+  margin: 0;
+  font-size: 52px;
+  letter-spacing: -1px;
+  line-height: 120%;
+  font-weight: 600;
+  color: #2c2c27;
+}
+.labCardDesc {
+  margin: 0;
+  font-size: 18px;
+  line-height: 140%;
+  color: #2c2c27;
+  font-family: "Golos Text", system-ui, sans-serif;
+  white-space: pre-line;
+}
+.labCardImg {
+  width: 768px;
+  height: 452px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+/* Dot indicator (clickable). */
+.labDots {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+.labDot {
+  width: 36px;
+  height: 6px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(44, 44, 39, 0.18);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s ease, width 0.25s ease;
+}
+.labDot:hover { background: rgba(44, 44, 39, 0.4); }
+.labDotActive {
+  background: #1b4332;
+  width: 64px;
+}
+
+/* ============ 5. LOGISTICS (dark teal section) ============ */
+.logisticsWrap {
+  align-self: stretch;
+  padding: 0 0 160px 0;
+  flex-shrink: 0;
+}
+.logistics {
+  background-color: #003214;
+  position: relative;
+  padding: 68px 120px 126px;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+.logisticsHeader {
+  width: 100%;
+  max-width: 1664px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 24px;
+  text-align: center;
+  color: #f9f7f2;
+  margin: 0 auto;
+}
+.logisticsTitle {
+  align-self: stretch;
+  font-size: 120px;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  line-height: 120%;
+  font-weight: 600;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.logisticsTitleAccent {
+  font-size: 100px;
+  font-family: "Commissioner", system-ui, sans-serif;
+  color: #93928c;
+  font-weight: 500;
+}
+.logisticsTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 16px;
+  background-color: #fff;
+  height: 40px;
+  border-radius: 4px;
+  color: #1b4332;
+  font-size: 18px;
+  line-height: 140%;
+  border: 0;
+  cursor: default;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+.logisticsBody {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.logisticsPlantImage {
+  width: 1013px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  z-index: 1;
+}
+.logisticsTagFloat {
+  position: absolute;
+  z-index: 3;
+}
+.logisticsTagFloatTopLeft {
+  top: -20px;
+  left: 22%;
+}
+.logisticsTagFloatBottomRight {
+  bottom: 120px;
+  right: 24%;
+}
+.logisticsFeatures {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  color: #f9f7f2;
+}
+.featureBlock {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  width: 472px;
+  max-width: 100%;
+}
+.featureBlockRight {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.featureBlockIcon {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b3d217;
+}
+.featureBlockText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+.featureBlockLabel {
+  font-size: 18px;
+  line-height: 140%;
+  color: #f9f7f2;
+}
+.featureBlockTitle {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 140%;
+  color: #f9f7f2;
+}
+
+/* ============ 6. HISTORY / TIMELINE ============ */
+.historyWrap {
+  align-self: stretch;
+  padding: 100px 120px 160px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+.historyInner {
+  width: 100%;
+  max-width: 1680px;
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+}
+.historyHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.historyTitle {
+  margin: 0;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 120px;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: #2c2c27;
+  white-space: nowrap;
+}
+.historySubtitle {
+  margin: 0;
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  color: #93928c;
+  white-space: nowrap;
+}
+
+/* Big content card showing the currently selected period */
+.historyCard {
+  align-self: stretch;
+  border-radius: 12px;
+  background-color: #fff;
+  border: 1px solid #f0efe9;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 32px 40px;
+  gap: 32px;
+  box-shadow: 0 4px 32px rgba(44, 44, 39, 0.04);
+}
+.historyCardImage {
+  align-self: stretch;
+  width: 100%;
+  height: 520px;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+  /* Subtle fade-in when the active period changes (key prop force-remounts). */
+  animation: historyCardFade 420ms ease-out both;
+}
+@keyframes historyCardFade {
+  from {
+    opacity: 0;
+    transform: scale(1.015);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.historyCardText {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 1064px;
+  padding: 0 16px;
+}
+.historyCardTitle {
+  margin: 0;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 130%;
+  letter-spacing: -0.5px;
+  color: #000;
+}
+.historyCardDesc {
+  margin: 0;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%;
+  color: #000;
+}
+
+/* === Sunflower timeline === */
+.timelineWrap {
+  align-self: stretch;
+  position: relative;
+  padding-top: 20px;
+}
+
+/* Vertical connector line — 1px wide vertical line that links the BOTTOM
+ * edge of the white history card (its visible border) straight down to the
+ * TOP of the active sunflower icon below.
+ *
+ * Geometry:
+ *   .historyInner has gap: 120px between the white card and .timelineWrap
+ *   .timelineWrap has padding-top: 20px, after which the icons start
+ *   .timelineIcon is 140px tall, so the horizontal .timelineLine sits at
+ *     timelineWrap top + 20 + 70 = 90px (its vertical center)
+ *
+ *   Therefore, to start the connector AT the card's bottom edge and run it
+ *   down to the TOP of the icon (where the horizontal line crosses the
+ *   icon's upper edge), we use:
+ *     top:    -120px   (== minus the historyInner gap, i.e. card bottom)
+ *     height:  140px   (120 down to timelineWrap top + 20 padding-top
+ *                       = arrives exactly at icon top, where the
+ *                       horizontal line meets the icon edge)
+ *
+ * Previous values (top:-88, height:108) intentionally left a 32px gap
+ * which the design lead asked to remove — the line must touch the white
+ * contour of the card. */
+.timelineConnector {
+  position: absolute;
+  top: -120px;
+  width: 1px;
+  height: 140px;
+  background-color: #93928c;
+  z-index: 2;
+  transform: translateX(-0.5px);
+  transition: left 320ms cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+/* Solid line connecting the sunflower icons — sits behind them at vertical
+ * center of the 140px circle. Uses the same color/style as the vertical
+ * connector above for visual consistency. */
+.timelineLine {
+  position: absolute;
+  left: 100px;
+  right: 100px;
+  top: 90px;
+  height: 1px;
+  background-color: #93928c;
+  border: 0;
+  z-index: 0;
+}
+.timelineRow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+.timelineItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Icon = round button. Each holds the sunflower image. Inactive items
+ * receive a grayscale CSS filter so the user-provided colored icon doubles
+ * as the active state — no need for two separate assets. */
+.timelineIcon {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  padding: 0;
+  border: none;
+  background: #efeee8;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition:
+    transform 240ms ease,
+    box-shadow 240ms ease,
+    background-color 240ms ease;
+  outline: none;
+}
+.timelineIcon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(1) brightness(1.05) contrast(0.9);
+  opacity: 0.55;
+  transition:
+    filter 280ms ease,
+    opacity 280ms ease,
+    transform 280ms ease;
+  user-select: none;
+  pointer-events: none;
+}
+.timelineIcon:hover img {
+  filter: grayscale(0.4);
+  opacity: 0.85;
+  transform: scale(1.04);
+}
+.timelineIcon:focus-visible {
+  box-shadow: 0 0 0 4px rgba(179, 210, 23, 0.45);
+}
+
+.timelineIconActive {
+  background: transparent;
+  transform: scale(1.05);
+  box-shadow: 0 8px 28px rgba(27, 67, 50, 0.18);
+}
+.timelineIconActive img {
+  filter: none;
+  opacity: 1;
+}
+
+.timelineYearLabel {
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 24px;
+  line-height: 125%;
+  font-weight: 400;
+  color: #93928c;
+  text-align: center;
+  transition: color 240ms ease, font-weight 240ms ease;
+}
+.timelineYearLabelActive {
+  color: #2c2c27;
+  font-weight: 600;
+}
+
+@media (max-width: 1400px) {
+  .historyCardImage {
+    height: 420px;
+  }
+  .timelineIcon {
+    width: 110px;
+    height: 110px;
+  }
+  .timelineLine {
+    top: 75px;
+    left: 80px;
+    right: 80px;
+  }
+}
+@media (max-width: 900px) {
+  .historyWrap {
+    padding: 0 24px 80px;
+  }
+  .historyInner {
+    gap: 48px;
+  }
+  .historyTitle {
+    font-size: 64px;
+  }
+  .historySubtitle {
+    font-size: 22px;
+  }
+  .historyCard {
+    padding: 16px 16px 24px;
+    gap: 20px;
+  }
+  .historyCardImage {
+    height: 240px;
+  }
+  .historyCardTitle {
+    font-size: 30px;
+  }
+  .historyCardDesc {
+    font-size: 18px;
+  }
+  .timelineRow {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+  }
+  .timelineLine {
+    display: none;
+  }
+  .timelineConnector {
+    display: none;
+  }
+  .timelineIcon {
+    width: 84px;
+    height: 84px;
+  }
+  .timelineYearLabel {
+    font-size: 16px;
+  }
+}
+
+/* ============ 7. TRUST (logos) ============ */
+.trustWrap {
+  align-self: stretch;
+  padding: 0 var(--page-gutter) 160px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+}
+.trustInner {
+  width: 100%;
+  max-width: 1680px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  position: relative;
+}
+.trustPattern {
+  position: absolute;
+  right: -200px;
+  bottom: -150px;
+  width: 1100px;
+  height: auto;
+  z-index: 0;
+  opacity: 0.4;
+  pointer-events: none;
+}
+.trustTitle {
+  margin: 0;
+  font-size: 82px;
+  letter-spacing: -1px;
+  line-height: 120%;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #2c2c27;
+  position: relative;
+  z-index: 1;
+}
+.trustLogos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+.trustLogo {
+  background-color: #fff;
+  border: 1px solid #e7ebe7;
+  border-radius: 6px;
+  width: 100%;
+  height: 187px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.trustLogo img {
+  width: auto;
+  height: 80%;
+  max-width: 80%;
+  object-fit: contain;
+}
+.trustLogo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+
+/* ============ MOBILE-ONLY: history carousel arrows (under card) ============ */
+.historyArrows {
+  display: none;
+}
+.historyArrowBtn {
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  border: 1px solid #e7ebe7;
+  background: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color .18s ease, border-color .18s ease;
+}
+.historyArrowBtn:hover  { background: #f4f5ee; border-color: #1b4332; }
+.historyArrowBtn:active { transform: translateY(1px); }
+.historyArrowBtn:focus-visible {
+  outline: 3px solid rgba(27, 67, 50, 0.25);
+  outline-offset: 2px;
+}
+.historyArrowsCenter {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+.historyArrowsIcon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+.historyArrowsYear {
+  font-family: "Golos Text", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c2c27;
+}
+
+/* =========================================================
+   MOBILE (≤ 768px) — /about page native layout
+   Side padding 20px, no transform-scale, no horizontal overflow.
+   ========================================================= */
+@media screen and (max-width: 768px) {
+  .page {
+    font-size: 16px;
+    overflow-x: clip;
+  }
+
+  /* 1) HERO — full-bleed video background, centered headline */
+  .heroWrap {
+    padding: 0 0 40px 0;
+    overflow: hidden;
+  }
+  .hero {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    min-height: 0;
+    height: 560px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .heroBg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .heroBg::after {
+    background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.0) 40%, rgba(0,0,0,0.25) 100%);
+  }
+  .heroInner {
+    width: 100%;
+    padding: 0 20px;
+    gap: 14px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    align-items: center;
+  }
+  /* RevealHeading "block" mode renders inner <span class="lineBlock">
+     with display:flex but no wrap. On mobile force wrap so headlines
+     fit within the 20px-padded viewport. Higher specificity overrides
+     the reveal-heading.module.css `.lineBlock { display:flex }` rule. */
+  .heroTitle > span,
+  .heroSubtitle > span,
+  .missionTitle > span,
+  .labTitle > span,
+  .historyTitle > span,
+  .historySubtitle > span {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    width: 100%;
+    max-width: 100%;
+    justify-content: inherit;
+  }
+  .heroTitle > span,
+  .heroSubtitle > span {
+    justify-content: center;
+  }
+  .heroTitle {
+    font-size: 30px;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    color: #ffffff;
+  }
+  .heroSubtitle {
+    font-size: 22px;
+    line-height: 1.25;
+    letter-spacing: -0.3px;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  /* 2) NUMBERS — vertical stack, divider between cards */
+  .numbersWrap {
+    padding: 0 20px 48px;
+  }
+  .numbersInner {
+    max-width: 100%;
+    gap: 0;
+  }
+  .numbersRow {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+  }
+  .numberCard {
+    width: 100%;
+    padding: 24px 0;
+    gap: 16px;
+    border-bottom: 1px solid #e7ebe7;
+  }
+  .numberCard:last-child { border-bottom: 0; }
+  .numberCardLine {
+    height: auto;
+    min-height: 92px;
+  }
+  .numberCardTitle {
+    font-size: 56px;
+    line-height: 1.05;
+    letter-spacing: -0.8px;
+  }
+  .numberCardDesc {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  .numbersHr {
+    display: none;
+  }
+
+  /* 3) MISSION (olive bg) */
+  .missionWrap {
+    padding: 0 0 48px 0;
+  }
+  .mission {
+    padding: 48px 20px 56px;
+    gap: 24px;
+    min-height: 0;
+  }
+  .missionLeafBg {
+    width: 460px;
+    height: auto;
+    top: 24px;
+    right: -200px;
+    opacity: 0.12;
+  }
+  .missionTitle {
+    font-size: 24px;
+    line-height: 1.22;
+    letter-spacing: -0.3px;
+    width: 100%;
+  }
+  .missionRow {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .missionLeafImg {
+    width: 100%;
+    height: 220px;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+  .missionTextCol {
+    width: 100%;
+    height: auto;
+  }
+  .missionTextTop {
+    gap: 16px;
+  }
+  .missionLead {
+    font-size: 16px;
+    line-height: 1.35;
+    text-transform: none;
+  }
+  .missionStatement {
+    gap: 12px;
+  }
+  .missionStatementTitle {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+  .missionStatementBody {
+    gap: 12px;
+  }
+  .missionStatementText {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .missionAuthor {
+    margin-top: 16px;
+    gap: 4px;
+  }
+  .missionAuthorName {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+  .missionAuthorRole {
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  /* 4) LAB → FIELD — mobile: cards stack on top of each other and swap
+        with the SAME animation as welcome HowItWorksSection1 (lock +
+        slide-up replace). The deck becomes a fixed-height stage, each
+        card is absolutely positioned, JS toggles transform/opacity. */
+  .labWrap {
+    padding: 0 20px 48px;
+    min-height: 0;
+  }
+  .labInner { max-width: 100%; }
+  .labTitle {
+    font-size: 32px;
+    line-height: 1.15;
+    letter-spacing: -0.4px;
+    margin-bottom: 24px;
+    white-space: normal;
+  }
+  /* Track stays auto-height; stage is normal flow (header + deck + dots). */
+  .labCardTrack {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+  .labCardStage {
+    position: static !important;
+    inset: auto !important;
+    height: auto !important;
+    gap: 0 !important;
+    transform: none !important;
+    will-change: auto;
+    contain: none;
+    display: flex;
+    flex-direction: column;
+  }
+  /* Deck = the stage area where cards overlap. Mobile: height is driven
+     by JS to match the active card's natural height (eliminates the
+     dead-space gap shown to the user). min-height kicks in before JS
+     first runs so the section doesn't collapse on initial paint. */
+  .labCardDeck {
+    position: relative;
+    min-height: 380px;
+    overflow: hidden;
+    display: block;
+    transition: height 500ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .labCard {
+    /* IMPORTANT: NOT `inset: 0` — that forces height = parent (and re-
+       introduces the empty-space bug). We pin top/left/right only and
+       let height shrink to the natural content. */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    flex-direction: column;
+    align-items: stretch;
+    /* Per design: image touches the top corners of the card, text block
+       lives in its own padded box (12 / 20 / 20 / 60). So the OUTER
+       card has zero padding/gap. */
+    padding: 0;
+    gap: 0;
+    border-radius: 12px;
+    overflow: hidden;             /* clip image radius corners cleanly */
+    /* IMPORTANT: do NOT force transform/opacity/transition with !important
+       here — JS sets them dynamically (same effect as welcome cards). */
+    will-change: transform, opacity;
+    box-shadow: 0 4px 24px rgba(27, 67, 50, 0.06);
+  }
+  /* Dots indicator — show on mobile so the user has a visual progress
+     hint (and can tap to jump to a step). */
+  .labDots {
+    display: flex !important;
+    margin-top: 20px;
+    justify-content: center;
+  }
+  .labDot {
+    width: 28px;
+    height: 5px;
+  }
+  .labDotActive {
+    width: 48px;
+  }
+  .labCardLeft {
+    width: 100%;
+    flex-shrink: 1;
+    order: 2;
+    position: relative;           /* anchor for the .labCardNumber watermark */
+    /* Per design spec — text block W=314 / H=206 with explicit per-side
+       paddings (avoid shorthand to ensure CSS-Modules / preprocess can't
+       drop any side):
+         60px top  (gap from image to "Розробка")
+         20px right
+         20px bottom
+         12px left */
+    padding-top: 60px !important;
+    padding-right: 20px !important;
+    padding-bottom: 20px !important;
+    padding-left: 12px !important;
+    box-sizing: border-box;
+    /* Belt-and-braces: prevent any flex child from forcing this box
+       wider than its parent (the absolute .labCard). */
+    min-width: 0;
+    max-width: 100%;
+  }
+  /* Decorative big numeral (01 / 02 / 03 / 04) shown as a watermark on
+     mobile per design. Anchored to .labCardLeft (the padded text box).
+     Sits inside the 60px top-gap of that box, partially overlapping the
+     "Розробка" title. NEVER spills over the image above NOR off the
+     left edge of the card — per user request the watermark must respect
+     the same left gutter as the title text. */
+  .labCardNumber {
+    display: block;
+    position: absolute;
+    /* Inside the 60px top padding of .labCardLeft — top edge ~ 4px below
+       the image bottom, so the numeral is fully within the text block. */
+    top: 4px;
+    /* Same 12px left gutter as the title — watermark no longer bleeds
+       off the card. (Previously left: -4px caused the '01' to clip on
+       the very left edge.) */
+    left: 12px;
+    margin: 0;
+    font-family: "Commissioner", system-ui, sans-serif;
+    font-size: 110px;
+    font-weight: 500;
+    line-height: 120%;
+    color: #F7FAE8;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+    white-space: nowrap;
+  }
+  .labCardContent {
+    margin-top: 0;
+    /* Per design — 12px between "Розробка" and "Кожен препарат" body. */
+    gap: 12px;
+    position: relative;            /* sit above the watermark */
+    z-index: 1;
+  }
+  .labCardSubtitle {
+    font-size: 22px;
+    line-height: 1.2;
+    letter-spacing: -0.2px;
+  }
+  .labCardDesc {
+    /* Per design spec — 14px / 400 / 140% Golos Text. */
+    font-size: 14px;
+    line-height: 140%;
+    color: var(--text-black, #2C2C27);
+    font-family: "Golos Text", system-ui, sans-serif;
+  }
+  .labCardImg {
+    width: 100%;
+    /* Per design — image height 205px on mobile (was 200). */
+    height: 205px;
+    /* Image now flush with the card top — corners are clipped by parent's
+       overflow:hidden + 12px radius. */
+    border-radius: 0;
+    order: 1;
+    object-fit: cover;
+  }
+
+  /* 6) HISTORY — keep header + card, hide timeline row, show arrows */
+  .historyWrap {
+    padding: 48px 20px 48px;
+  }
+  .historyInner {
+    gap: 0;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .historyHeader {
+    gap: 4px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 40px;
+  }
+  .historyTitle {
+    font-family: "Commissioner", system-ui, sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 120%;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    color: #2c2c27;
+    white-space: normal;
+    width: 100%;
+  }
+  .historySubtitle {
+    font-family: "Commissioner", system-ui, sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 120%;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    color: #93928c;
+    white-space: normal;
+    width: 100%;
+    padding-right: 0;
+  }
+  /* Standardised card geometry — fixed image height (221) + clamped
+     description (3 lines × 14px) keeps every period card at exactly
+     the same outer size, so navigating periods doesn't "jump". */
+  .historyCard {
+    align-self: stretch;
+    padding: 16px 16px 16px 16px;
+    gap: 20px;
+    border-radius: 12px;
+    background-color: #fff;
+    border: 1px solid #f0efe9;
+    box-shadow: 0 4px 24px rgba(44, 44, 39, 0.04);
+    box-sizing: border-box;
+    margin-bottom: 20px;
+  }
+  .historyCardImage {
+    width: 100%;
+    height: 221px;
+    border-radius: 8px;
+    object-fit: cover;
+    display: block;
+    flex-shrink: 0;
+  }
+  .historyCardText {
+    padding: 0;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+  }
+  .historyCardTitle {
+    margin: 0;
+    font-family: "Golos Text", system-ui, sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 120%;
+    letter-spacing: -0.2px;
+    color: #2c2c27;
+  }
+  .historyCardDesc {
+    margin: 0;
+    font-family: "Golos Text", system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 140%;
+    color: #2c2c27;
+    /* Clamp to 3 lines so every period card has identical height */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  /* Hide horizontal timeline row on mobile */
+  .timelineWrap { display: none; }
+
+  /* Show carousel arrows */
+  .historyArrows {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0;
+  }
+  /* Round, uniform 112×112 icon container for the active-period
+     thumbnail at the centre of the carousel arrows row. Each
+     year-icon webp gets cropped via object-fit: cover so all
+     six periods render at exactly the same circular size. */
+  .historyArrowsCenter {
+    gap: 8px;
+  }
+  .historyArrowsIcon {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    background-color: #efeee8;
+    object-fit: cover;
+    display: block;
+  }
+  .historyArrowsYear {
+    font-family: "Golos Text", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 120%;
+    color: #2c2c27;
+  }
+
+  /* 7) TRUST */
+  .trustWrap {
+    padding: 0 20px 48px;
+  }
+  .trustInner {
+    gap: 28px;
+    max-width: 100%;
+  }
+  .trustPattern { display: none; }
+  .trustTitle {
+    font-size: 32px;
+    line-height: 1.15;
+    letter-spacing: -0.4px;
+    text-align: center;
+  }
+  .trustLogos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 16px;
+  }
+  .trustLogo {
+    height: 100px;
+  }
+}
+
+/* Tighter on very small phones */
+@media screen and (max-width: 380px) {
+  .heroTitle    { font-size: 26px; }
+  .heroSubtitle { font-size: 20px; }
+  .missionTitle { font-size: 22px; }
+  .labTitle     { font-size: 28px; }
+  .numberCardTitle { font-size: 48px; }
+  /* Keep history title/subtitle ratio per Figma even on tiny phones,
+     just nudge font-size slightly down so the 24px subtitle still
+     fits on a 320px screen without forced wrap. */
+  .historyTitle    { font-size: 28px; }
+  .historySubtitle { font-size: 20px; }
+}

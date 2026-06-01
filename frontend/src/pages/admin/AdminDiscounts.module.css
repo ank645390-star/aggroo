@@ -1,0 +1,171 @@
+/* ============================================================================
+   AdminDiscounts page — стилі.
+   ============================================================================ */
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  max-width: 1280px;
+  box-sizing: border-box;
+}
+
+.header { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.h1 { margin: 0 0 4px; font-family: "Golos Text", sans-serif; font-size: 28px; font-weight: 700; color: #1b1b1b; }
+.sub { margin: 0; font-family: "Golos Text", sans-serif; font-size: 14px; color: #6b6b6b; max-width: 720px; }
+.h2 { margin: 0 0 16px; font-family: "Golos Text", sans-serif; font-size: 18px; font-weight: 600; color: #1b1b1b; }
+
+.error {
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: #fee;
+  color: #b00;
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+}
+
+/* ============ FORM ============ */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 6px 18px rgba(0,0,0,0.04);
+}
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; align-items: end; }
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field > span {
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+}
+.field input,
+.field select,
+.field textarea {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d6d6d2;
+  background: #fff;
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  color: #1b1b1b;
+  resize: vertical;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: 2px solid rgba(27,67,50,0.35);
+  outline-offset: 1px;
+  border-color: #1b4332;
+}
+
+.checkboxField {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  color: #1b1b1b;
+  cursor: pointer;
+  user-select: none;
+}
+.checkboxField input { width: 18px; height: 18px; cursor: pointer; }
+
+.actions { display: flex; justify-content: flex-end; gap: 10px; }
+.btnPrimary,
+.btnSecondary {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 0;
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+.btnPrimary { background: #1b4332; color: #fff; }
+.btnPrimary:hover { background: #133527; }
+.btnPrimary:disabled { opacity: 0.6; cursor: not-allowed; }
+.btnSecondary { background: #f3f3f0; color: #1b1b1b; }
+.btnSecondary:hover { background: #e8e8e3; }
+
+/* ============ LIST / TABLE ============ */
+.listSection {
+  padding: 24px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 6px 18px rgba(0,0,0,0.04);
+}
+.muted { color: #6b6b6b; font-family: "Golos Text", sans-serif; font-size: 14px; }
+.cellMuted { color: #6b6b6b; font-size: 12px; }
+
+.tableWrap { overflow-x: auto; }
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  color: #1b1b1b;
+}
+.table th {
+  text-align: left;
+  padding: 12px 12px;
+  background: #f9f9f6;
+  border-bottom: 1px solid #e7e7e2;
+  font-weight: 600;
+  color: #444;
+  white-space: nowrap;
+}
+.table td {
+  padding: 12px 12px;
+  border-bottom: 1px solid #f0f0eb;
+  vertical-align: top;
+}
+.rowDisabled { opacity: 0.55; }
+.nameCell { display: flex; flex-direction: column; gap: 2px; max-width: 260px; }
+.rowActions { display: inline-flex; gap: 10px; white-space: nowrap; }
+
+.btnLink,
+.btnLinkDanger {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+.btnLink { color: #1b4332; }
+.btnLink:hover { text-decoration: underline; }
+.btnLinkDanger { color: #b00020; }
+.btnLinkDanger:hover { text-decoration: underline; }
+
+.statusOn,
+.statusOff {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 0;
+  font-family: "Golos Text", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+}
+.statusOn  { background: #d3ecdb; color: #1b4332; }
+.statusOff { background: #efefea; color: #6b6b6b; }
+
+/* ============ Responsive ============ */
+@media screen and (max-width: 900px) {
+  .grid2, .grid3 { grid-template-columns: 1fr; }
+  .actions { justify-content: stretch; }
+  .actions button { flex: 1; }
+}

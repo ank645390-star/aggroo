@@ -1,0 +1,30 @@
+.carouselBlock {
+  align-self: stretch;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--gap-32);
+  z-index: 1;
+}
+.cardsGroup,
+.cardsWrapper,
+.carouselBlock {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.cardsWrapper {
+  height: 724px;
+  flex-shrink: 0;
+  flex-direction: column;
+  justify-content: center;
+}
+.cardsGroup {
+  width: var(--width-1680);
+  flex: 1;
+  gap: var(--gap-24);
+}
+@media screen and (max-width: 900px) {
+  .carouselBlock {
+    gap: var(--gap-16);
+  }
+}

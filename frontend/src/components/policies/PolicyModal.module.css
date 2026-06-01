@@ -1,0 +1,186 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 22, 18, 0.55);
+  z-index: 10010;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.18s ease-out;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal {
+  background: #ffffff;
+  border-radius: 16px;
+  width: min(820px, 100%);
+  max-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  font-family: var(--font-golos-text, "Golos Text", system-ui, sans-serif);
+  color: #2c2c27;
+  animation: slideUp 0.22s ease-out;
+}
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px;
+  border-bottom: 1px solid #ede9df;
+  background: #faf8f2;
+  gap: 16px;
+}
+.title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #1b4332;
+  letter-spacing: -0.01em;
+}
+.close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+.close:hover { background: #ede9df; }
+.close:focus-visible { outline: 2px solid #b3d217; outline-offset: 2px; }
+
+.content {
+  padding: 24px 28px;
+  overflow-y: auto;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #2c2c27;
+  flex: 1;
+}
+.content h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1b4332;
+  margin: 22px 0 10px;
+  letter-spacing: -0.01em;
+}
+.content h2:first-child { margin-top: 0; }
+.content h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c2c27;
+  margin: 18px 0 8px;
+}
+.content p { margin: 0 0 12px; }
+.content ul, .content ol { margin: 0 0 14px; padding-left: 22px; }
+.content li { margin-bottom: 6px; }
+.content a {
+  color: #1b4332;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.content a:hover { color: #b3d217; }
+.content strong { color: #1a1a16; }
+.content img { max-width: 100%; height: auto; border-radius: 8px; margin: 12px 0; }
+.content table { width: 100%; border-collapse: collapse; margin: 12px 0; }
+.content th, .content td { padding: 8px 12px; border: 1px solid #ede9df; text-align: left; }
+
+.footer {
+  padding: 16px 28px;
+  border-top: 1px solid #ede9df;
+  background: #faf8f2;
+  display: flex;
+  justify-content: flex-end;
+}
+.acceptBtn {
+  background: #1b4332;
+  color: #f9f7f2;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+  font-family: inherit;
+}
+.acceptBtn:hover { background: #245041; }
+.acceptBtn:active { transform: scale(0.98); }
+.acceptBtn:focus-visible { outline: 2px solid #b3d217; outline-offset: 2px; }
+
+@media (max-width: 640px) {
+  .header, .content, .footer { padding-left: 18px; padding-right: 18px; }
+  .title { font-size: 19px; }
+  .modal { max-height: 92vh; }
+}
+
+/* =========================================================
+   MOBILE (≤ 768px) — full-screen with sticky header + footer
+   ========================================================= */
+@media screen and (max-width: 768px) {
+  .backdrop {
+    padding: 0;
+    align-items: stretch;
+    justify-content: stretch;
+  }
+  .modal {
+    width: 100vw;
+    height: 100vh;
+    max-width: none;
+    max-height: 100vh;
+    border-radius: 0;
+    animation: policySheetIn 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .header {
+    padding: 14px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: #faf8f2;
+  }
+  .title { font-size: 17px; }
+  .close {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 12px;
+  }
+  .content {
+    padding: 16px 20px 24px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .content h2 { font-size: 18px; }
+  .content h3 { font-size: 16px; }
+  .footer {
+    position: sticky;
+    bottom: 0;
+    padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
+    z-index: 2;
+  }
+  .acceptBtn {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 24px;
+    border-radius: 12px;
+  }
+}
+
+@keyframes policySheetIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

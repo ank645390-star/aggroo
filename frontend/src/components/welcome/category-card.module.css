@@ -1,0 +1,316 @@
+/* =========================================================================
+   CategoryCard — карточка категорії біопрепаратів
+   ------------------------------------------------------------------------
+   Типографіка (за дизайном):
+     • Заголовок «Біоінсектициди»:  Golos Text  SemiBold  48px  #2C2C27
+     • Опис:                         Golos Text  Regular   28px  #2C2C27
+     • CTA «Детальніше»:             Golos Text  Medium    16px  #1B4332
+   ------------------------------------------------------------------------
+   Інтерактивність:
+   Уся картка — це <Link>. Hover-стан:
+     • lift + м'яке масштабування + сяюча тінь
+     • заливка кола брендовим лаймом + pulse-кільце
+     • іконка трохи зростає та підіймається
+     • стрічка-акцент зверху картки розгортається
+     • заголовок переходить у форест-зелений
+     • CTA-стрілка скочується праворуч + меняє фон на брендовий
+   ========================================================================= */
+
+.card {
+  background: var(--bg-card);
+  border: var(--border-3); /* 1px solid var(--bg-green) */
+  border-radius: var(--br-6);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  min-height: 580px;
+  box-sizing: border-box;
+  position: relative;
+  font-family: var(--font-golos-text);
+  color: var(--text-black);
+  text-decoration: none;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.4s ease;
+  will-change: transform, box-shadow;
+}
+
+/* Decorative top ribbon — slides in on hover */
+.hoverRibbon {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--brand-accent-primary-default, #b3d217) 20%,
+    var(--brand-accent-secondary-default, #1b4332) 80%,
+    transparent 100%
+  );
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Decorative bottom-right glow blob (z-index < content) */
+.card::after {
+  content: "";
+  position: absolute;
+  right: -80px;
+  bottom: -80px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(179, 210, 23, 0.28) 0%,
+    rgba(179, 210, 23, 0.10) 35%,
+    transparent 70%
+  );
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* All real content sits above the decorative layer */
+.card > *:not(.hoverRibbon) {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover ============================================================ */
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow:
+    0 24px 48px -16px rgba(27, 67, 50, 0.22),
+    0 8px 16px -4px rgba(179, 210, 23, 0.15);
+  border-color: var(--brand-accent-primary-default, #b3d217);
+  background: linear-gradient(180deg, #fbfdf2 0%, var(--bg-card) 55%);
+}
+.card:hover .hoverRibbon { transform: scaleX(1); }
+.card:hover::after { opacity: 1; transform: scale(1); }
+
+/* Active (press) state — subtle dip */
+.card:active {
+  transform: translateY(-4px) scale(0.995);
+}
+
+/* Focus visible — accessibility */
+.card:focus-visible {
+  outline: 3px solid var(--brand-accent-primary-default, #b3d217);
+  outline-offset: 3px;
+}
+
+/* Icon circle ====================================================== */
+
+.iconCircle {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 1.5px solid var(--bg-green);
+  background: var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  flex-shrink: 0;
+  position: relative;
+  transition:
+    background-color 0.45s ease,
+    border-color 0.45s ease,
+    box-shadow 0.45s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Pulse ring behind the icon — animates on hover */
+.iconPulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid var(--brand-accent-primary-default, #b3d217);
+  opacity: 0;
+  transform: scale(0.85);
+  pointer-events: none;
+}
+
+.card:hover .iconCircle {
+  border-color: var(--brand-accent-primary-default, #b3d217);
+  background: radial-gradient(
+    circle at 30% 30%,
+    #f4faca 0%,
+    #eaf2ad 60%,
+    #dfe98a 100%
+  );
+  box-shadow: 0 12px 28px -10px rgba(179, 210, 23, 0.5);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.card:hover .iconPulse {
+  animation: cc-pulse 1.4s ease-out infinite;
+}
+
+@keyframes cc-pulse {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.85);
+  }
+  70% {
+    opacity: 0;
+    transform: scale(1.15);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+.iconImg {
+  display: block;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.45s ease;
+  position: relative;
+  z-index: 1;
+}
+.card:hover .iconImg {
+  transform: scale(1.08) rotate(-2deg);
+  filter: drop-shadow(0 8px 14px rgba(27, 67, 50, 0.2));
+}
+
+/* Title ============================================================ */
+
+.title {
+  margin: 0;
+  font-family: var(--font-golos-text);
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: -1px;
+  color: var(--text-black);
+  max-width: 100%;
+  transition: color 0.35s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card:hover .title {
+  color: var(--brand-accent-secondary-default, #1b4332);
+  transform: translateX(2px);
+}
+
+/* Description ===================================================== */
+
+.description {
+  margin: 0;
+  font-family: var(--font-golos-text);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 135%;
+  color: var(--text-black);
+  max-width: 100%;
+  flex: 1;
+  transition: color 0.35s ease;
+}
+.card:hover .description {
+  color: #3c3c34;
+}
+
+/* CTA ============================================================= */
+
+.cta {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--brand-accent-secondary-default, #1b4332);
+  font-family: var(--font-golos-text);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 100%;
+  transition: gap 0.35s ease, color 0.35s ease;
+}
+.card:hover .cta {
+  gap: 18px;
+  color: var(--brand-accent-secondary-default, #1b4332);
+}
+.ctaText { font-family: var(--font-golos-text); position: relative; }
+.ctaText::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1.5px;
+  background: var(--brand-accent-secondary-default, #1b4332);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card:hover .ctaText::after { transform: scaleX(1); }
+
+.ctaArrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--brand-accent-primary-default, #b3d217);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--brand-accent-secondary-default, #1b4332);
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+.card:hover .ctaArrow {
+  transform: translateX(4px) rotate(-12deg) scale(1.08);
+  background: var(--brand-accent-secondary-default, #1b4332);
+  color: #fff;
+  box-shadow: 0 10px 20px -6px rgba(27, 67, 50, 0.35);
+}
+.card:hover .ctaArrow svg path { stroke: #b3d217; }
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card:hover,
+  .card *,
+  .card:hover *,
+  .iconCircle,
+  .iconImg,
+  .ctaArrow,
+  .title,
+  .description {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* Responsive ====================================================== */
+
+@media screen and (max-width: 1400px) {
+  .card { min-height: 480px; padding: 32px; gap: 24px; }
+  .title { font-size: 36px; }
+  .description { font-size: 20px; }
+  .iconCircle { width: 140px; height: 140px; }
+}
+@media screen and (max-width: 925px) {
+  .card { min-height: auto; padding: 24px; gap: 18px; }
+  .title { font-size: 24px; }
+  .description { font-size: 16px; }
+  .iconCircle { width: 120px; height: 120px; }
+}

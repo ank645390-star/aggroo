@@ -1,0 +1,349 @@
+.cardItem,
+.imageContainer {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.cardLink {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+.cardItem {
+  flex: 1;
+  width: 100%;
+  border-radius: 8px;
+  background-color: var(--bg-card);
+  border: 1px solid #d9dfd6;
+  align-items: center;
+  text-align: left;
+  font-size: var(--fs-12);
+  color: var(--brand-accent-secondary-default);
+  font-family: var(--font-golos-text);
+  /* Permanent shadow + transitions only on border/shadow. The 3D tilt
+     is owned by the parent TiltCard wrapper, so the whole card —
+     border, background, shadow, image, content — rotates as one. */
+  box-shadow: 0 8px 24px -16px rgba(20, 40, 22, 0.18),
+              0 2px 6px -3px rgba(20, 40, 22, 0.08);
+  transition: border-color 0.25s ease, box-shadow 0.3s ease;
+}
+.cardLink:hover .cardItem {
+  border-color: #b3d217;
+  box-shadow: 0 28px 60px -24px rgba(20, 40, 22, 0.32),
+              0 12px 24px -16px rgba(20, 40, 22, 0.22);
+}
+.imageContainer {
+  align-self: stretch;
+  height: var(--height-420);
+  flex-shrink: 0;
+  align-items: flex-start;
+  position: relative;
+  isolation: isolate;
+}
+.imageContainerChild {
+  width: var(--width-363);
+  height: var(--height-360);
+  top: calc(50% - 166px);
+  left: calc(50% - 185px);
+  filter: blur(174.3px);
+  border-radius: var(--br-501);
+  background-color: var(--bg-card);
+  z-index: 0;
+}
+.imageContainerChild,
+.photoContainer,
+.tags {
+  position: absolute;
+  margin: 0 !important;
+}
+.tags {
+  top: 24px;
+  left: 24px;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-12);
+  z-index: 1;
+}
+.photoContainer {
+  width: var(--width-400);
+  height: var(--height-388);
+  bottom: 0;
+  left: calc(50% - 200px);
+  overflow: hidden;
+  flex-shrink: 0;
+  z-index: 2;
+}
+.photoIcon {
+  position: absolute;
+  top: calc(50% - 153px);
+  left: calc(50% - 158px);
+  width: 100%;
+  height: var(--height-307);
+  object-fit: cover;
+}
+.content,
+.infoBlock,
+.titleBlock {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.content {
+  flex: 1;
+  justify-content: space-between;
+  padding: var(--padding-0) var(--padding-32) var(--padding-40);
+  gap: var(--gap-20);
+  font-size: var(--fs-14);
+  color: var(--text-black);
+}
+.infoBlock,
+.titleBlock {
+  gap: var(--gap-16);
+}
+.titleBlock {
+  gap: var(--gap-12);
+}
+.rating,
+.star {
+  display: flex;
+  align-items: center;
+}
+.rating {
+  align-self: stretch;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: var(--gap-8) var(--gap-12);
+}
+.star {
+  gap: var(--gap-8);
+}
+.ratingCount {
+  position: relative;
+  line-height: 100%;
+}
+.titleGroup {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: var(--fs-24);
+}
+.div,
+.h3 {
+  align-self: stretch;
+  position: relative;
+}
+.h3 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: 600;
+  font-family: inherit;
+}
+.div {
+  font-size: var(--fs-18);
+  line-height: 140%;
+}
+.specRow,
+.specs {
+  align-self: stretch;
+  display: flex;
+  gap: var(--gap-4);
+}
+.specs {
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: var(--fs-12);
+  gap: var(--gap-8);
+}
+.specRow {
+  align-items: center;
+  gap: var(--gap-12);
+}
+.div2 {
+  position: relative;
+}
+.specRow2 {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  gap: var(--gap-12);
+}
+.div3 {
+  width: var(--width-128);
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.priceRow {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-20);
+  font-size: var(--fs-32);
+}
+.h2 {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  line-height: 140%;
+  font-weight: 700;
+  font-family: inherit;
+}
+
+/* ───── Mobile (≤ 768px) — compact card layout per design ─────
+   Spec (per Figma annotation 28.05.2026 — пиксель-перфектні відступи):
+     Card: width auto × auto height, border-radius 6px, border 1px #E7EBE7, bg #FFF
+     Padding від низу price/cart row → нижній край картки: 24px
+     Padding зліва: 14px, справа: 14px
+     Padding від низу зображення → верх контенту (.content padding-top): 16px
+     Image area: bg #F9F7F2 (--bg-cream) — РІЗНИЙ від тегу "Хіт продажу"
+                 (#F7FAE8) щоб тег НЕ зливався з фоном картинки.
+     Gap від кінця опису товару (subtitle) до Тара: 16px (.infoBlock gap)
+     Gap від кінця Норма до price-row: 42px (.priceRow { margin-top: 42px })
+     Без обводки на тегах. */
+@media screen and (max-width: 768px) {
+  /* ---- Outer card: 6px radius, 1px border #E7EBE7, bg white ---- */
+  .cardItem {
+    /* Card height auto — росте під контент. Дозволяє ТОЧНІ 42px між
+       Норма і ціною, без вимушеного space-between розтягування. */
+    height: auto !important;
+    min-height: 480px;
+    border-radius: 6px;
+    border: 1px solid var(--decorative-2, #E7EBE7);
+    background: var(--bg-card, #fff);
+    box-shadow: none;
+    gap: 0;
+    overflow: hidden;
+  }
+  /* ---- Image area: bg #F9F7F2 (РІЗНИЙ від pill bg #F7FAE8!) ---- */
+  .imageContainer {
+    height: 260px;
+    flex-direction: column;
+    align-items: stretch;
+    flex-shrink: 0;
+    align-self: stretch;
+    /* CRITICAL: background was #F7FAE8 — same as "Хіт продажу" pill.
+       Тепер #F9F7F2 (--bg-cream) — pill стане видимим (не зливається). */
+    background: var(--bg-cream, #F9F7F2);
+    overflow: hidden;
+    position: relative;
+  }
+  .imageContainerChild {
+    display: none;
+  }
+  /* Tags row at top with 14px padding L/R, 14px from top */
+  .tags {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    padding: 14px 14px 0 14px;
+    gap: 8px;
+    z-index: 3;
+    flex: 0 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  /* Image fills remaining space below tags, centered */
+  .photoContainer {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    right: auto !important;
+    width: 100%;
+    flex: 1 1 auto;
+    min-height: 0;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 16px 16px;
+    box-sizing: border-box;
+    z-index: 2;
+  }
+  .photoIcon {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+  /* ---- Content block: top-aligned (NOT space-between), explicit 42px
+          gap before price row, 24px padding bottom ---- */
+  .content {
+    padding: 16px 14px 24px 14px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex: 1 1 auto;
+    align-self: stretch;
+    gap: 0;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+  }
+  /* infoBlock keeps its default 16px gap between titleBlock and specs
+     (so 16px between subtitle/description and Тара row) */
+  .infoBlock {
+    gap: 16px;
+  }
+  /* Title block — gap between elements */
+  .titleGroup {
+    gap: 4px;
+  }
+  /* Product name: Golos Text 20px 600 */
+  .h3 {
+    font-size: 20px;
+    line-height: normal;
+    font-weight: 600;
+    font-family: var(--font-golos-text);
+    color: var(--text-black, #2C2C27);
+  }
+  /* Description: Golos Text 16px 400, lh 140% */
+  .div {
+    font-size: 16px;
+    line-height: 140%;
+    font-weight: 400;
+    font-family: var(--font-golos-text);
+    color: var(--text-black, #2C2C27);
+  }
+  /* Spec rows: keep compact, 6px between Тара і Норма */
+  .specs {
+    gap: 6px;
+  }
+  /* Price row — EXACT 42px above (margin-top), 24px below (.content padding-bottom).
+     Price left, cart icon right, contained within 14px side padding. */
+  .priceRow {
+    align-self: stretch;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 24px;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    flex-wrap: nowrap;
+    overflow: visible;
+    margin-top: 42px;
+  }
+  /* Price: Golos 24px 700, lh 140% */
+  .h2 {
+    font-size: 24px;
+    line-height: 140%;
+    font-weight: 700;
+    font-family: var(--font-golos-text);
+    color: var(--text-black, #2C2C27);
+    white-space: nowrap;
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+}

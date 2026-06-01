@@ -1,0 +1,162 @@
+/* Image2 — Tree + 3 glass-chip overlays, EXACT pixel positions from Figma SVG
+ *
+ *   ╔══════════════════════════ describeSection 1920 × 1395 ═══════════════════════════╗
+ *   ║  (0,0)                                                                            ║
+ *   ║                                                                                   ║
+ *   ║                                                  ┌─────────────────────────────── ║
+ *   ║                                                  │ Tree image                     ║
+ *   ║                                     y=424 ──────►│ x=536 .. 2138 (overflows right)║
+ *   ║                                                  │ y=424 .. 1252  (1602 × 828)    ║
+ *   ║   ─── chips ────────────────────                 │                                ║
+ *   ║   chip1  "Швидке"  : x=1417, y= 576, 382×120     │                                ║
+ *   ║   chip2  "pH"       : x= 790, y= 812, 382×120    │                                ║
+ *   ║   chip3  "Поглинання": x=1417, y=1064, 382×120   │                                ║
+ *   ║                                                  └─────────────────────────────── ║
+ *   ╚═══════════════════════════════════════════════════════════════════════════════════╝
+ *
+ *   White fade-out gradient: x=97, y=597, w=1920, h=684  (transparent→white at bottom)
+ *   All chips: rgba(255,255,255,0.2) + backdrop-filter blur — glass-morphism
+ *   chip1+chip2 text/icon color: #F9F7F2 (cream)
+ *   chip3       text/icon color: #2C2C27 (black)
+ */
+
+.image {
+  position: absolute;
+  /* Strictly bound to describeSection — clip any child that tries to escape */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+  margin: 0 !important;
+  flex-shrink: 0;
+  font-family: var(--font-golos-text);
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;   /* ← key: clip tree image + overlay that overflow right by 218px */
+}
+
+.imageParent {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.imageIcon {
+  position: absolute;
+  left: 536px;
+  top: 424px;
+  width: 1602px;
+  height: 828px;
+  object-fit: contain;
+  object-position: left center;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Vertical white fade — transparent at top → white at bottom (per SVG paint0_linear_624_4065) */
+.overlay {
+  position: absolute;
+  left: 97px;
+  top: 597px;
+  width: 1920px;
+  height: 684px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 67.5%, #ffffff 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ===== Base chip — exact Figma: 382 × 120, padding 16, radius 6, glass bg ===== */
+.chip {
+  position: absolute;
+  width: 382px;
+  height: 120px;
+  padding: 16px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.20);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  z-index: 5;
+  pointer-events: auto;
+  font-family: var(--font-golos-text);
+}
+
+.chipIcon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.chipText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+}
+
+/* Caption — 14 / 400 / 100% line-height */
+.chipTitle {
+  font-size: 14px;
+  line-height: 100%;
+  font-weight: 400;
+  letter-spacing: 0;
+  font-family: var(--font-golos-text);
+}
+
+/* Body / Label — 18 / 600 / 120% line-height */
+.chipBody {
+  font-size: 18px;
+  line-height: 120%;
+  font-weight: 600;
+  font-family: var(--font-golos-text);
+}
+
+/* ===== Chip 1 — «Швидке відновлення»  ─── x=1417, y=576 ===== */
+.chip1 {
+  top: 576px;
+  left: 1417px;
+}
+.chip1 .chipTitle,
+.chip1 .chipBody { color: #f9f7f2; }
+.chip1 .chipIcon img { filter: brightness(0) invert(1); }
+
+/* ===== Chip 2 — «Ідеальний pH-баланс води» ─── x=790, y=812 ===== */
+.chip2 {
+  top: 812px;
+  left: 790px;
+}
+.chip2 .chipTitle,
+.chip2 .chipBody { color: #f9f7f2; }
+.chip2 .chipIcon img { filter: brightness(0) invert(1); }
+
+/* ===== Chip 3 — «Покращення поглинання» ─── x=1417, y=1064 ===== */
+.chip3 {
+  top: 1064px;
+  left: 1417px;
+}
+.chip3 .chipTitle,
+.chip3 .chipBody { color: #2c2c27; }
+.chip3 .chipIcon img { filter: brightness(0); }
+
+/* =====================================================================
+   MOBILE — ≤ 768px : keep tree image visible, hide chips (too cramped)
+   ===================================================================== */
+@media screen and (max-width: 768px) {
+  .image,
+  .imageParent {
+    display: none;
+  }
+}
+

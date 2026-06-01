@@ -1,0 +1,26 @@
+[
+  {
+    "content": "Clone repo and merge into /app preserving .env",
+    "status": "completed"
+  },
+  {
+    "content": "Install backend dependencies (pip)",
+    "status": "completed"
+  },
+  {
+    "content": "Install frontend dependencies (yarn)",
+    "status": "completed"
+  },
+  {
+    "content": "Restart services and verify backend running",
+    "status": "completed"
+  },
+  {
+    "content": "Test backend API root endpoint",
+    "status": "completed"
+  },
+  {
+    "content": "Verify frontend renders site",
+    "status": "completed"
+  }
+]

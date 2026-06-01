@@ -1,0 +1,117 @@
+.navbarcardStep {
+  height: var(--height-399);
+  width: var(--width-753);
+  border-radius: var(--br-6);
+  background-color: var(--color-darkkhaki-100);
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: var(--padding-16);
+  box-sizing: border-box;
+  position: relative;
+  isolation: isolate;
+  gap: var(--gap-4);
+  text-align: left;
+  font-size: var(--fs-120);
+  color: var(--brand-accent-secondary-default);
+  font-family: var(--font-commissioner);
+}
+.stepNumber,
+.textContent {
+  margin: 0 !important;
+  position: absolute;
+}
+.stepNumber {
+  height: var(--height-172);
+  width: var(--width-158);
+  top: 15px;
+  left: 244px;
+  font-size: inherit;
+  line-height: 120%;
+  font-weight: 500;
+  font-family: inherit;
+  display: inline-block;
+  z-index: 0;
+}
+.textContent {
+  width: var(--width-467);
+  top: 98px;
+  left: 250px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-24);
+  z-index: 1;
+  font-size: var(--fs-52);
+  color: var(--bg-card);
+}
+.title {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: inherit;
+  letter-spacing: var(--ls--1);
+  line-height: 120%;
+  font-weight: 600;
+  font-family: inherit;
+}
+.description {
+  width: 100%;
+  position: relative;
+  font-size: var(--fs-18);
+  line-height: 140%;
+  font-family: var(--font-golos-text);
+  display: inline-block;
+  max-width: var(--max-w-700);
+}
+/* ВАЖНО: НЕ добавлять media-queries с `flex: 1` или `min-width: 100%`.
+   CardStep1 живёт внутри <App> с pixel-perfect transform: scale(),
+   реальный viewport браузера НЕ должен влиять на размер карточки.
+   (Оригинальный экспорт имел эти queries — мы их удалили намеренно,
+   т.к. они ломали высоту карточки в нашей flex-column колонке.) */
+
+
+/* ───── Mobile (≤ 768px): natural flow inside a vertical stack ───── */
+@media screen and (max-width: 768px) {
+  .navbarcardStep {
+    width: 100%;
+    height: auto;
+    min-height: 240px;
+    padding: 22px 18px;
+    align-items: flex-start;
+  }
+  .stepNumber {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    height: auto;
+    font-size: 52px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .textContent {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: calc(100% - 60px);
+    margin-top: 8px;
+    gap: 10px;
+    font-size: 22px;
+  }
+  .title {
+    font-size: 22px;
+    line-height: 1.15;
+  }
+  .description {
+    width: 100%;
+    max-width: 100%;
+    font-size: 13px;
+    line-height: 1.4;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+}

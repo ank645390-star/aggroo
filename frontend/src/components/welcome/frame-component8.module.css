@@ -1,0 +1,71 @@
+/* ============================================================
+   INFO / STATS BLOCK — второй блок Welcome
+   Спецификация:
+     - Высота карточки: 520px
+     - Padding: 200px сверху, 200px снизу, 120px слева, 120px справа
+     - 3 колонки, выровнены по space-between (gap 160px ×2)
+     - Колонки слева 120 от края, справа 120 от края
+     - Средняя колонка (100%) — 758 слева / 727 справа от фрейма 1920
+     - Фон: cream
+   ============================================================ */
+
+.numberSectionWrapper {
+  align-self: stretch;
+  width: 100%;
+  min-height: 520px;
+  height: 520px;
+  padding: 200px 120px;          /* 200 top/bottom, 120 left/right */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFFFFF;
+  text-align: left;
+  font-size: var(--fs-82);
+  color: var(--brand-accent-primary-default);
+  font-family: var(--font-golos-text);
+}
+
+.numberSection {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.numberCards {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  flex-wrap: nowrap;
+}
+
+/* На мобильных карточки в столбик */
+@media screen and (max-width: 1024px) {
+  .numberSectionWrapper {
+    height: auto;
+    min-height: 0;
+    padding: 80px 32px;
+  }
+  .numberCards {
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .numberSectionWrapper {
+    padding: 56px 20px;
+  }
+  .numberCards {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 36px;
+    width: 100%;
+  }
+}

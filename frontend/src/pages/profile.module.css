@@ -1,0 +1,1182 @@
+/* /profile, /profile/addresses, /profile/orders shared styles */
+
+/* ===== Card ===== */
+.card {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #e7ebe7;
+  border-radius: 12px;
+  padding: 32px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.cardTitle {
+  margin: 0;
+  font-family: "Golos Text", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 120%;
+  color: #2c2c27;
+}
+.editLink {
+  background: transparent;
+  border: 0;
+  font-family: "Golos Text", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #acb14f;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: color .15s ease, background-color .15s ease;
+}
+.editLink:hover {
+  color: #1b4332;
+  background-color: #f4f5ee;
+}
+
+/* ===== Field ===== */
+.fieldGrid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+}
+.fieldWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.fieldLabel {
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #2c2c27;
+}
+/* Маркер обов'язкового поля (червона зірочка біля label) */
+.fieldRequired {
+  color: #c14a3c;
+  font-weight: 600;
+  margin-left: 2px;
+}
+.fieldBox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border: 1px solid #2c2c27;
+  border-radius: 8px;
+  background-color: #ffffff;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.fieldBox:focus-within { border-color: #1b4332; box-shadow: 0 0 0 3px rgba(27,67,50,.08); }
+.fieldBox[data-disabled="true"] {
+  border-color: #2c2c27;
+  background-color: #ffffff;
+}
+.fieldBox[data-disabled="true"] .fieldInput {
+  color: #2c2c27;
+  -webkit-text-fill-color: #2c2c27;
+  opacity: 1;
+}
+.fieldInput {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-family: "Golos Text", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  color: #2c2c27;
+  min-width: 0;
+  padding: 0;
+}
+.fieldInput::placeholder { color: #93928c; }
+.eyeBtn {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+.eyeBtn:hover svg path,
+.eyeBtn:hover svg circle,
+.eyeBtn:hover svg line {
+  stroke: #1b4332;
+}
+
+/* hide native browser password-reveal buttons (Safari/Edge/Chrome) */
+.fieldInput::-ms-reveal,
+.fieldInput::-ms-clear {
+  display: none !important;
+}
+.fieldInput::-webkit-credentials-auto-fill-button,
+.fieldInput::-webkit-strong-password-auto-fill-button,
+.fieldInput::-webkit-contacts-auto-fill-button {
+  visibility: hidden !important;
+  display: none !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
+  position: absolute !important;
+  right: 0;
+}
+
+/* ===== Security row ===== */
+.passwordRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: end;
+  gap: 16px 24px;
+}
+.submitBtn {
+  height: 48px;
+  padding: 0 20px;
+  border: 0;
+  border-radius: 8px;
+  background-color: #1b4332;
+  color: #ffffff;
+  font-family: "Golos Text", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background-color .15s ease;
+  white-space: nowrap;
+}
+.submitBtn:hover { background-color: #003214; }
+
+.successMsg {
+  margin-top: 4px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background-color: #f4f5ee;
+  color: #1b4332;
+  font-size: 14px;
+  font-weight: 500;
+}
+.errorMsg {
+  margin-top: 4px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background-color: #fdebe8;
+  color: #c14a3c;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ===== Addresses ===== */
+.addressesPageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.addressesTopRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: -8px 0 8px;
+}
+.addBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background-color: transparent;
+  border: 1.5px solid #1b4332;
+  border-radius: 6px;
+  color: #1b4332;
+  font-family: "Golos Text", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
+  white-space: nowrap;
+}
+.addBtn:hover { background-color: #1b4332; color: #ffffff; }
+.addBtn:hover svg path { stroke: #ffffff; }
+
+/* List is now single-column, full-width per design */
+.addressList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.addressCard {
+  padding: 24px 28px;
+  border: 1px solid #e7ebe7;
+  border-radius: 12px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.addressTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.addressLeft {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.addressTitle {
+  margin: 0;
+  font-family: "Golos Text", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c2c27;
+}
+.addressTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  background-color: #eef0d4;
+  color: #5a6a1f;
+  border-radius: 100px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+.addressActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+}
+.actionLink {
+  background: transparent;
+  border: 0;
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  transition: color .15s ease;
+}
+.actionLink:hover { color: #1b4332; }
+.actionEdit   { color: #acb14f; }
+.actionEdit:hover { color: #1b4332; }
+.actionDelete { color: #c14a3c; }
+.actionDelete:hover { color: #a13a2e; }
+.addressBody {
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #2c2c27;
+  line-height: 140%;
+}
+
+/* ===== Address modal ===== */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15,26,20,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 32px 24px;
+  box-sizing: border-box;
+  animation: fadeIn .15s ease-out;
+}
+.modal {
+  width: 520px;
+  max-width: 92vw;
+  max-height: calc((100vh - 64px) / var(--app-scale, 1));
+  overflow-y: auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 28px 28px 24px;
+  box-shadow: 0 22px 50px rgba(15,26,20,.2);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: slideIn .18s ease-out;
+  /* Match the on-screen scale of the rest of the page so font sizes /
+     spacing line up with the personal-cabinet design hierarchy. */
+  transform: scale(var(--app-scale, 1));
+  transform-origin: center center;
+}
+.modalTitle {
+  margin: 0;
+  font-family: "Golos Text", sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #2c2c27;
+}
+.modalActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 4px;
+}
+.modalBtn {
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  border: 0;
+  cursor: pointer;
+  transition: background-color .15s ease;
+}
+.modalBtnCancel {
+  background-color: #f0f2ed;
+  color: #2c2c27;
+}
+.modalBtnCancel:hover { background-color: #d6dcd6; }
+.modalBtnSave {
+  background-color: #1b4332;
+  color: #ffffff;
+}
+.modalBtnSave:hover { background-color: #003214; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ===== Orders ===== */
+.ordersCard { padding: 0; overflow: hidden; }
+.ordersHeader {
+  display: grid;
+  grid-template-columns: 140px 1fr 200px 200px 200px;
+  gap: 16px;
+  padding: 20px 32px;
+  border-bottom: 1px solid #e7ebe7;
+  background-color: transparent;
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #93928c;
+}
+.orderRow {
+  display: grid;
+  grid-template-columns: 140px 1fr 200px 200px 200px;
+  gap: 16px;
+  padding: 28px 32px;
+  align-items: center;
+  border-bottom: 1px solid #f0f2ed;
+  font-family: "Golos Text", sans-serif;
+  font-size: 15px;
+  color: #2c2c27;
+  transition: background-color .12s ease;
+}
+.orderRow:hover { background-color: #f9f7f2; }
+.orderRow:last-child { border-bottom: 0; }
+.orderNumber {
+  font-weight: 600;
+  color: #2c2c27;
+}
+.orderItems {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #2c2c27;
+}
+.orderItemName {
+  font-family: "Golos Text", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #2c2c27;
+}
+.orderItemMeta {
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #93928c;
+}
+.orderDate  { color: #93928c; }
+.orderTotal { font-weight: 700; color: #2c2c27; }
+
+/* ===== Order statuses (matching design) ===== */
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.statusDelivered {
+  background-color: #dde8d8;
+  color: #2f6b3f;
+}
+.statusInProgress {
+  background-color: #fff3d1;
+  color: #c14a3c;
+}
+.statusCancelled {
+  background-color: #fde0db;
+  color: #c14a3c;
+}
+
+.ordersEmpty {
+  padding: 80px 32px;
+  text-align: center;
+  color: #93928c;
+  font-family: "Golos Text", sans-serif;
+  font-size: 16px;
+}
+
+/* ===== Edit actions (Зберегти / Скасувати) ===== */
+.editActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.editLinkCancel,
+.editLinkSave {
+  background: transparent;
+  border: 0;
+  font-family: "Golos Text", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: background-color .15s ease, color .15s ease;
+}
+.editLinkCancel {
+  color: #93928c;
+}
+.editLinkCancel:hover {
+  color: #2c2c27;
+  background-color: #f0f2ed;
+}
+.editLinkSave {
+  color: #ffffff;
+  background-color: #1b4332;
+}
+.editLinkSave:hover { background-color: #003214; }
+
+/* ===== Field error helpers ===== */
+.fieldWrap[data-error="true"] .fieldBox {
+  border-color: #c14a3c;
+  box-shadow: 0 0 0 3px rgba(193,74,60,.10);
+}
+.fieldError {
+  margin-top: 2px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #c14a3c;
+}
+.helperHint {
+  margin: 0;
+  font-family: "Golos Text", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #93928c;
+}
+.helperHint code {
+  background-color: #f4f5ee;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: "Source Code Pro", monospace;
+  font-size: 12px;
+  color: #1b4332;
+}
+
+/* ===== Modal — wide variant for addresses ===== */
+.modalWide {
+  width: 540px;
+}
+.checkRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  color: #2c2c27;
+  user-select: none;
+}
+.checkRow input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #1b4332;
+  cursor: pointer;
+}
+
+/* ===== ORDERS — Filter chips ===== */
+.orderFilters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+/* Mobile (≤768px): single-row horizontal scroll, hidden scrollbar, no wrap.
+   Chips overflow the viewport and remain swipable side-to-side. */
+@media screen and (max-width: 768px) {
+  .orderFilters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    /* Pull-out to viewport edges so first chip sits flush with the
+       page's 20px gutter while still allowing a visual scroll-affordance. */
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 4px 20px 8px;
+    scrollbar-width: none;
+  }
+  .orderFilters::-webkit-scrollbar { display: none; }
+  .orderFilterChip {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+}
+.orderFilterChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 100px;
+  border: 1px solid #d6dcd6;
+  background-color: #ffffff;
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #2c2c27;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, color .15s ease;
+}
+.orderFilterChip:hover { border-color: #1b4332; color: #1b4332; }
+.orderFilterChipActive {
+  background-color: #1b4332;
+  border-color: #1b4332;
+  color: #ffffff;
+}
+.orderFilterChipActive:hover { color: #ffffff; }
+.orderFilterCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 100px;
+  background-color: rgba(15,26,20,.08);
+  font-size: 11px;
+  font-weight: 600;
+  color: inherit;
+}
+.orderFilterChipActive .orderFilterCount {
+  background-color: rgba(255,255,255,.18);
+}
+
+/* ===== ORDERS — Card grid ===== */
+.orderCards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.orderCard {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border: 1px solid #e7ebe7;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 0 rgba(15,26,20,.02);
+  transition: box-shadow .18s ease, border-color .18s ease;
+}
+.orderCard:hover {
+  border-color: #d0d8d0;
+  box-shadow: 0 6px 18px rgba(15,26,20,.06);
+}
+
+/* HEADER */
+.orderCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 20px;
+  border-bottom: 1px solid #f0f2ed;
+}
+.orderCardHeaderMain {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.orderCardNumber {
+  margin: 0;
+  font-family: "Golos Text", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c2c27;
+  letter-spacing: -0.01em;
+}
+.orderCardDate {
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #93928c;
+}
+
+/* STATUS BADGE */
+.orderStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .2px;
+  white-space: nowrap;
+}
+.orderStatusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+  flex-shrink: 0;
+}
+/* Delivered — neutral subdued #E7EBE7 (per user) */
+.orderStatusDelivered {
+  background-color: #e7ebe7;
+  color: #2c2c27;
+}
+/* In progress — warm amber */
+.orderStatusInProgress {
+  background-color: #fff3d1;
+  color: #8a6a17;
+}
+/* Cancelled — light red */
+.orderStatusCancelled {
+  background-color: #fde0db;
+  color: #c14a3c;
+}
+
+/* SHIPPING ROW */
+.orderShippingRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 20px;
+  background-color: #fafbf7;
+  border-bottom: 1px solid #f0f2ed;
+}
+.ttnPill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background-color: #ffffff;
+  border: 1px solid #d6dcd6;
+  border-radius: 100px;
+  font-family: "Source Code Pro", monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1b4332;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.ttnPill:hover { background-color: #f4f5ee; border-color: #1b4332; }
+.ttnLabel {
+  font-family: "Golos Text", sans-serif;
+  font-weight: 500;
+  color: #93928c;
+  letter-spacing: .2px;
+}
+.ttnValue { letter-spacing: .4px; }
+.ttnPillEmpty {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 100px;
+  border: 1px dashed #d6dcd6;
+  background-color: transparent;
+  font-family: "Golos Text", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #93928c;
+}
+.ttnCopied {
+  position: absolute;
+  top: -28px;
+  right: 0;
+  padding: 4px 10px;
+  background-color: #1b4332;
+  color: #ffffff;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  animation: fadeIn .15s ease-out;
+  font-family: "Golos Text", sans-serif;
+  white-space: nowrap;
+}
+.orderItemsCount {
+  margin-left: auto;
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #5e5d57;
+}
+
+/* ITEMS LIST */
+.orderItemsList {
+  list-style: none;
+  padding: 4px 20px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.orderItem {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px dashed #f0f2ed;
+}
+.orderItem:last-child { border-bottom: 0; }
+.orderItemPhoto {
+  width: 72px;
+  height: 72px;
+  border-radius: 10px;
+  background-color: #f4f5ee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.orderItemPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.orderItemPhotoPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.orderItemMain {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.orderItemTopRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.orderItemName {
+  margin: 0;
+  font-family: "Golos Text", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2c2c27;
+}
+.orderItemUnitPrice {
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #93928c;
+}
+.orderItemDesc {
+  margin: 0;
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #5e5d57;
+  line-height: 140%;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.orderItemMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #5e5d57;
+}
+.orderItemMetaDot { color: #c9d1ca; }
+.orderItemMetaVolume {
+  padding: 2px 8px;
+  background-color: #f0f2ed;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1b4332;
+}
+.orderItemMetaQty { font-weight: 500; }
+.orderItemMetaSpacer { flex: 1; }
+.orderItemMetaTotal {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2c2c27;
+  letter-spacing: -0.01em;
+}
+
+/* FOOTER */
+.orderCardFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 20px 16px;
+  background-color: #fbfdf7;
+  border-top: 1px solid #f0f2ed;
+}
+.orderDelivery,
+.orderRecipient {
+  display: flex;
+  gap: 8px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+.orderDeliveryLabel { color: #93928c; min-width: 80px; }
+.orderDeliveryValue { color: #2c2c27; font-weight: 500; }
+.orderTotalsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 6px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f2ed;
+}
+.orderTotalsLeft {
+  font-family: "Golos Text", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #93928c;
+}
+.orderDeliveryCost { color: #5e5d57; }
+.orderTotalsRight {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.orderTotalLabel {
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #5e5d57;
+}
+.orderTotalValue {
+  font-family: "Golos Text", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1b4332;
+  letter-spacing: -0.01em;
+}
+.orderActions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: flex-end;
+}
+.orderActionPrimary,
+.orderActionSecondary {
+  padding: 9px 18px;
+  border-radius: 6px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.orderActionPrimary {
+  background-color: #1b4332;
+  border: 1px solid #1b4332;
+  color: #ffffff;
+}
+.orderActionPrimary:hover { background-color: #003214; border-color: #003214; }
+.orderActionSecondary {
+  background-color: transparent;
+  border: 1px solid #d6dcd6;
+  color: #2c2c27;
+}
+.orderActionSecondary:hover { border-color: #1b4332; color: #1b4332; }
+
+@media (max-width: 720px) {
+  .orderCardHeader { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .orderShippingRow { gap: 8px; }
+  .orderItem { grid-template-columns: 56px 1fr; gap: 12px; }
+  .orderItemPhoto { width: 56px; height: 56px; }
+  .orderItemTopRow { flex-direction: column; gap: 2px; }
+  .orderActions { flex-direction: column-reverse; }
+  .orderActionPrimary, .orderActionSecondary { width: 100%; justify-content: center; }
+}
+
+/* ===== Step blocks inside the address modal ===== */
+.stepBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid #e7ebe7;
+  border-radius: 10px;
+  background-color: #fafbf7;
+  transition: opacity .15s ease, background-color .15s ease;
+}
+.stepLabel {
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1b4332;
+  letter-spacing: .2px;
+  text-transform: uppercase;
+}
+.stepHint {
+  font-size: 12px;
+  font-weight: 400;
+  color: #93928c;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.stepLocked {
+  opacity: .55;
+  pointer-events: none;
+  background-color: #f4f5ee;
+}
+.stepLocked .fieldInput {
+  cursor: not-allowed;
+}
+
+/* ===== Carrier tabs (in modal) ===== */
+.carrierTabs {
+  display: inline-flex;
+  padding: 4px;
+  background-color: #f4f5ee;
+  border-radius: 10px;
+  gap: 4px;
+  width: fit-content;
+}
+.carrierTab {
+  padding: 10px 22px;
+  border: 0;
+  background: transparent;
+  border-radius: 8px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #5e5d57;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease, box-shadow .15s ease;
+}
+.carrierTab:hover {
+  color: #1b4332;
+}
+.carrierTabActive {
+  background-color: #ffffff;
+  color: #1b4332;
+  box-shadow: 0 2px 8px rgba(15,26,20,.08);
+}
+
+/* ===== Carrier badge (in address card) ===== */
+.carrierBadgeNP,
+.carrierBadgeUP {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+.carrierBadgeNP {
+  background-color: #ffe5dc;
+  color: #c14a3c;
+}
+.carrierBadgeUP {
+  background-color: #e2eaff;
+  color: #2848a3;
+}
+
+/* ===== Address info grid ===== */
+.addressInfoRow {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 8px 12px;
+  align-items: baseline;
+}
+.addressInfoLabel {
+  color: #93928c;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .2px;
+}
+
+@media (max-width: 1200px) {
+  .addressList    { grid-template-columns: 1fr; }
+  .passwordRow    { grid-template-columns: 1fr 1fr; }
+  .submitBtn      { grid-column: 1 / -1; justify-self: start; }
+  .ordersHeader, .orderRow { grid-template-columns: 120px 1fr 140px 160px 140px; padding: 16px 20px; }
+}
+@media (max-width: 900px) {
+  .fieldGrid2     { grid-template-columns: 1fr; }
+  .passwordRow    { grid-template-columns: 1fr; }
+  .ordersHeader   { display: none; }
+  .orderRow       { grid-template-columns: 1fr 1fr; gap: 8px 16px; padding: 14px 16px; }
+  .card           { padding: 20px; }
+  .addressActions { gap: 12px; }
+  .modalWide      { width: 92vw; }
+  .addressInfoRow { grid-template-columns: 1fr; gap: 2px; }
+}
+
+/* =====================================================================
+   COMPREHENSIVE MOBILE — ≤ 768px (profile / addresses / orders)
+   ===================================================================== */
+@media screen and (max-width: 768px) {
+  .card {
+    padding: 16px;
+    border-radius: 12px;
+    gap: 16px;
+  }
+  .cardHeader {
+    align-items: flex-start;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .cardTitle {
+    font-size: 18px;
+    line-height: 1.2;
+  }
+  .editLink {
+    font-size: 13px;
+  }
+
+  .fieldLabel { font-size: 13px; }
+  .fieldBox {
+    padding: 0 12px;
+    height: 46px;
+  }
+  .fieldInput {
+    font-size: 15px;
+  }
+  .submitBtn {
+    width: 100%;
+    margin-top: 8px;
+    padding: 14px 18px;
+    font-size: 14px;
+    min-height: 46px;
+    border-radius: 10px;
+  }
+
+  /* Addresses */
+  .addressesTopRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .addBtn {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 14px;
+    justify-content: center;
+  }
+  .addressCard {
+    padding: 14px;
+    gap: 10px;
+    border-radius: 10px;
+  }
+  .addressTop {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .addressTitle { font-size: 15px; }
+  .addressActions {
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .actionLink { font-size: 13px; }
+  .addressBody { font-size: 13px; line-height: 1.45; }
+
+  /* Orders */
+  .ordersCard { padding: 0; }
+  .orderRow {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+
+  /* Modal */
+  .modal {
+    width: 94vw;
+    max-width: 420px;
+    padding: 20px;
+    border-radius: 14px;
+  }
+  .modalWide { width: 94vw; }
+  .modalTitle { font-size: 18px; }
+  .modalActions {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+  .modalBtn {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+
+  /* Carrier badges */
+  .carrierBadgeNP, .carrierBadgeUP {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+  .addressInfoRow {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .cardTitle { font-size: 16px; }
+  .modal { padding: 16px; }
+}
+

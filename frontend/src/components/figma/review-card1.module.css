@@ -1,0 +1,55 @@
+.reviewCard,
+.textContent {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.reviewCard {
+  border-radius: var(--br-6);
+  background-color: var(--bg-card);
+  padding: var(--padding-32);
+  gap: var(--gap-24);
+  text-align: left;
+  font-size: var(--fs-18);
+  color: var(--text-black);
+  font-family: var(--font-golos-text);
+}
+.textContent {
+  gap: var(--gap-12);
+}
+.star,
+.text {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+}
+.text {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.b,
+.container,
+.text {
+  align-self: stretch;
+}
+.b {
+  position: relative;
+  line-height: 140%;
+}
+.container {
+  height: var(--height-20);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-20);
+  font-size: var(--fs-14);
+}
+.div,
+.div2 {
+  position: relative;
+  line-height: 100%;
+}
+.div2 {
+  color: var(--text-grey);
+}

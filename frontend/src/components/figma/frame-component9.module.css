@@ -1,0 +1,414 @@
+.customersContent,
+.customersContentWrapper {
+  display: flex;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.customersContentWrapper {
+  align-self: stretch;
+  justify-content: center;
+  /* Padding:
+   *   • 200px зверху (320 − 120, компенсація збільшення FC8 на 120)
+   *   • 120px зліва/справа
+   *   • 138px знизу — точна відстань від останньої картки відгуку
+   *     до заголовка "Товари, які купують разом" (за специфікацією).
+   */
+  padding: 200px 120px 138px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  text-align: center;
+  font-size: var(--fs-82);
+  color: var(--text-black);
+  font-family: var(--font-golos-text);
+}
+.customersContent {
+  width: var(--width-1680);
+  flex-direction: column;
+  /* Figma: 72px между заголовком "Досвід покупців" и блоком отзывов */
+  gap: 72px;
+}
+.h2 {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  letter-spacing: var(--ls--1);
+  line-height: 120%;
+  text-transform: uppercase;
+  display: inline-block;
+  max-width: 100%;
+  font-family: inherit;
+}
+.span {
+  font-weight: 600;
+}
+.span2 {
+  font-family: var(--font-commissioner);
+  color: var(--text-grey);
+}
+.rateContent,
+.rateContentParent {
+  display: flex;
+  align-items: flex-start;
+  max-width: 100%;
+}
+.rateContentParent {
+  align-self: stretch;
+  justify-content: center;
+  gap: var(--gap-24);
+}
+.rateContent {
+  flex: 0.9517;
+  border-radius: var(--br-6);
+  background-color: var(--bg-card);
+  border: 1px solid var(--decorative-2);
+  box-sizing: border-box;
+  flex-direction: column;
+  /* Figma: внутренний padding 32px со всех сторон */
+  padding: var(--padding-32);
+  /* Figma: 32px между блоком оценки и кнопкой "Залишити відгук" */
+  gap: var(--gap-32);
+  min-width: 538px;
+  text-align: center;
+  font-size: var(--fs-48);
+  color: var(--text-black);
+  font-family: var(--font-golos-text);
+}
+.mainContent,
+.topRow {
+  width: var(--width-788);
+  display: flex;
+  flex-direction: column;
+}
+.mainContent {
+  align-items: flex-start;
+  gap: var(--gap-24);
+  max-width: 100%;
+}
+.topRow {
+  height: 133px;
+  /* Per spec: 1px solid #93928C (text-grey). Не використовуємо --border-1,
+   * бо welcome-global.css перевизначає його на 1.5px green. */
+  border-bottom: 1px solid var(--text-grey, #93928C);
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding-0) var(--padding-0) var(--padding-1);
+  gap: var(--gap-12);
+}
+.averageValue {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  line-height: var(--lh-48);
+  font-weight: 600;
+  font-family: inherit;
+}
+.star {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-8);
+}
+.div,
+.rateGroup {
+  font-size: var(--fs-14);
+}
+.div {
+  position: relative;
+  line-height: 100%;
+  color: var(--text-grey);
+}
+.rateGroup {
+  width: var(--width-788);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-12);
+  max-width: 100%;
+  text-align: left;
+}
+.container,
+.container2 {
+  display: flex;
+  align-items: center;
+}
+.container {
+  align-self: stretch;
+  height: var(--height-20);
+  gap: var(--gap-12);
+}
+.container2 {
+  width: var(--width-48);
+  gap: var(--gap-4);
+}
+.rateValue {
+  position: relative;
+  line-height: 100%;
+}
+.totalRatesIcon {
+  height: var(--height-14);
+  width: var(--width-14);
+  position: relative;
+}
+.container3,
+.container4 {
+  height: var(--height-8);
+  border-radius: var(--br-50);
+}
+.container3 {
+  flex: 1;
+  background-color: var(--decorative-2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--padding-0) 136px var(--padding-0) var(--padding-0);
+  box-sizing: border-box;
+  min-width: var(--min-w-445);
+}
+.container4 {
+  width: 220px;
+  position: relative;
+  background-color: var(--bg-green);
+}
+.container5 {
+  height: var(--height-20);
+  width: var(--width-32);
+  display: flex;
+  align-items: flex-start;
+  padding: var(--padding-0_5) var(--padding-0) var(--padding-5_5)
+    var(--padding-14);
+  box-sizing: border-box;
+  text-align: right;
+}
+.div2 {
+  height: var(--height-14);
+  width: var(--width-18);
+  position: relative;
+  line-height: 100%;
+  display: inline-block;
+}
+.container9 {
+  width: 184px;
+  height: var(--height-8);
+  position: relative;
+  border-radius: var(--br-50);
+  background-color: var(--bg-green);
+}
+.container10 {
+  height: var(--height-20);
+  width: var(--width-32);
+  display: flex;
+  align-items: flex-start;
+  padding: var(--padding-0_5) var(--padding-0) var(--padding-5_5)
+    var(--padding-15);
+  box-sizing: border-box;
+  text-align: right;
+}
+.div4 {
+  height: var(--height-14);
+  width: 17px;
+  position: relative;
+  line-height: 100%;
+  display: inline-block;
+}
+.container13,
+.container14 {
+  height: var(--height-8);
+  border-radius: var(--br-50);
+}
+.container13 {
+  flex: 1;
+  background-color: var(--decorative-2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: var(--min-w-445);
+}
+.container14 {
+  width: 547px;
+  position: relative;
+  background-color: var(--bg-green);
+}
+.container15 {
+  height: var(--height-20);
+  width: var(--width-32);
+  display: flex;
+  align-items: flex-start;
+  padding: var(--padding-0_5) var(--padding-0) var(--padding-5_5)
+    var(--padding-24);
+  box-sizing: border-box;
+  text-align: right;
+}
+.div6 {
+  height: var(--height-14);
+  width: var(--width-8);
+  position: relative;
+  line-height: 100%;
+  display: inline-block;
+}
+.container19 {
+  height: var(--height-20);
+  width: var(--width-32);
+  display: flex;
+  align-items: flex-start;
+  padding: var(--padding-0_5) var(--padding-0) var(--padding-5_5)
+    var(--padding-23);
+  box-sizing: border-box;
+  text-align: right;
+}
+.div8 {
+  height: var(--height-14);
+  width: 9px;
+  position: relative;
+  line-height: 100%;
+  display: inline-block;
+}
+.reviewGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-24);
+  min-width: 538px;
+  max-width: 100%;
+}
+@media screen and (max-width: 1625px) {
+  .rateContentParent {
+    flex-wrap: wrap;
+  }
+  .rateContent,
+  .reviewGroup {
+    flex: 1;
+  }
+}
+@media screen and (max-width: 1275px) {
+  .customersContentWrapper {
+    padding-bottom: 97px;
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 900px) {
+  .customersContentWrapper {
+    padding-bottom: 63px;
+    box-sizing: border-box;
+  }
+  .customersContent {
+    gap: 34px;
+  }
+  .h2 {
+    font-size: var(--fs-41);
+    line-height: var(--lh-59);
+  }
+  .rateContent {
+    min-width: 100%;
+  }
+  .mainContent {
+    height: auto;
+  }
+  .averageValue {
+    font-size: var(--fs-38);
+    line-height: 38px;
+  }
+  .container {
+    height: auto;
+    flex-wrap: wrap;
+  }
+  .container13,
+  .container3,
+  .reviewGroup {
+    min-width: 100%;
+  }
+}
+@media screen and (max-width: 450px) {
+  .customersContent {
+    gap: var(--gap-17);
+  }
+  .h2 {
+    font-size: var(--fs-25);
+    line-height: var(--lh-39);
+  }
+  .rateContent {
+    gap: var(--gap-16);
+  }
+  .averageValue {
+    font-size: var(--fs-29);
+    line-height: 29px;
+  }
+  .container3 {
+    padding-right: var(--padding-20);
+    box-sizing: border-box;
+  }
+}
+
+/* ===== Native mobile layout (≤ 768px) =====
+   На вузьких екранах desktop padding 120px з боків занадто широкий —
+   це обрізає блок рейтингу і відгуків. Зменшуємо padding, нормалізуємо
+   гістограму та робимо контейнер відгуків responsive. */
+@media screen and (max-width: 768px) {
+  .customersContentWrapper {
+    padding: 64px 16px 48px;
+    box-sizing: border-box;
+  }
+  .customersContent {
+    width: 100%;
+    gap: 28px;
+  }
+  .rateContentParent {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .rateContent {
+    width: 100%;
+    min-width: 0;
+    padding: 20px;
+    gap: 20px;
+  }
+  .mainContent,
+  .topRow,
+  .rateGroup,
+  .reviewGroup {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .topRow {
+    height: auto;
+    padding-bottom: 16px;
+  }
+  .container {
+    height: auto;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+  .container3,
+  .container13 {
+    flex: 1;
+    min-width: 0;
+    padding-right: 0;
+  }
+  .container2 {
+    width: auto;
+    min-width: 40px;
+    flex-shrink: 0;
+  }
+  .container5,
+  .container10,
+  .container15,
+  .container19 {
+    width: 32px;
+    flex-shrink: 0;
+    padding: 0;
+    justify-content: flex-end;
+  }
+  .h2 {
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.4px;
+  }
+  .averageValue {
+    font-size: 32px;
+    line-height: 1;
+  }
+}

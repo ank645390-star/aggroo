@@ -1,0 +1,344 @@
+/* Section "Ціна помилки в агро" — block 1920 × 1282, two columns */
+.aboutCompany {
+  width: 100%;
+  height: 1282px;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  background-color: #1b4332; /* brand-accent-secondary-default */
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  color: var(--brand-accent-primary-default);
+  font-family: var(--font-commissioner);
+  text-align: left;
+}
+
+/* LEFT — green panel (1920 − 855 = 1065px wide) */
+.leftPanel {
+  width: 1065px;
+  height: 1282px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  position: relative;
+  /* Top padding 163px — quote starts here */
+  padding-top: 163px;
+}
+
+/* Quote heading — fixed box W:902, padding-left 100 from panel edge */
+.quote {
+  margin: 0 0 0 100px;
+  width: 902px;
+  font-family: Commissioner, var(--font-commissioner), sans-serif;
+  font-size: 44px;
+  font-weight: 500;
+  line-height: 140%; /* 61.6px */
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+}
+.quoteAccent {
+  color: #b3d217; /* brand-accent-primary-default */
+}
+.quoteWhite {
+  color: #ffffff; /* bg-card */
+}
+
+/* BODY — below the quote, left:323 from panel edge */
+.body {
+  margin-top: 90px; /* gap from bottom of quote to "Наша місія" */
+  margin-left: 323px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* "Наша місія - шлях без компромісів" — Subtitle Small 24px / Golos / 600 */
+.missionLine {
+  margin: 0;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: normal;
+  color: var(--text-cream);
+}
+.missionLine .accentGreen {
+  color: #b3d217;
+}
+
+/* Mission paragraph — Body Large 28px / Golos / 400 / 120% */
+.missionDetail {
+  margin: 16px 0 0 0; /* small inner gap between mission title and detail */
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%; /* 33.6px */
+  color: var(--text-cream);
+  max-width: 642px;
+}
+.missionDetail .accentGreen {
+  color: #b3d217;
+}
+
+/* "Біопрепарати сьогодні…" — 60px from previous mission paragraph */
+.bioInvestment {
+  margin: 60px 0 0 0;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--text-cream);
+  max-width: 642px;
+}
+.bioInvestment .accentGreen {
+  color: #b3d217;
+}
+
+/* Founder — pulled up so the CTA sits comfortably above the bottom of
+   the panel.  Reduced from 156px → 60px per design feedback. */
+.founder {
+  margin: 60px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.founderName {
+  margin: 0;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 125%; /* 35px */
+  color: var(--text-cream);
+}
+.founderRole {
+  margin: 0;
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%;
+  color: #acb14f; /* bg-green muted */
+  font-style: italic;
+}
+
+/* CTA button — 37px from founder role */
+.ctaButton {
+  margin: 37px 0 0 0;
+  cursor: pointer;
+  border: 0;
+  background-color: #25593f; /* lighter green – contrast vs panel */
+  width: 380px;
+  padding: 18px 16px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-sizing: border-box;
+  color: var(--text-cream);
+  text-decoration: none;
+  transition: background-color 0.22s ease, color 0.22s ease,
+    transform 0.16s ease, box-shadow 0.22s ease;
+  box-shadow: 0 0 0 0 rgba(179, 210, 23, 0);
+}
+.ctaButton:hover {
+  background-color: #b3d217; /* lime accent on hover */
+  color: #1b4332; /* dark green text for contrast on lime */
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px -8px rgba(179, 210, 23, 0.45);
+}
+.ctaButton:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px -6px rgba(179, 210, 23, 0.55);
+}
+.ctaLabel {
+  font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 120%;
+  color: inherit; /* follows button color (cream → dark on hover) */
+  white-space: nowrap;
+  transition: color 0.22s ease;
+}
+
+/* Helpers reused inside any line */
+.accentGreen {
+  color: #b3d217;
+}
+.cream {
+  color: var(--text-cream);
+}
+
+/* RIGHT — leaf image fixed 855 × 1282 */
+.leafImage {
+  width: 855px;
+  height: 1282px;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   Mobile (≤ 768px) — Figma-faithful redesign (375 × 1183)
+
+   КОМПОЗИЦІЯ (зверху ↓ донизу, ВСЕ В ОДНІЙ КОЛОНЦІ):
+     1. Dark-green panel (#003214) на ВСЮ висоту секції.
+     2. Текстовий контент (quote → mission → bio → founder → CTA)
+        лежить ПОВЕРХ цього фону.
+     3. ЗНИЗУ секції — листок як декоративний фон-блок:
+        375 × 418, opacity 0.3, aspect-ratio 61/68, перекриває
+        founder/CTA зону, але напівпрозоро (текст лишається читабельним).
+
+   ТИПОГРАФІКА (per Figma):
+     • Quote ........... Commissioner 24/600/120% / cream / -1px
+     • Mission ......... Golos Text 16/400/140% / cream
+       • accent      .. #B3D217 (brand-accent-primary)
+     • Bio investment .. Golos Text 28/400/125% / cream
+       • accent      .. #B3D217
+     • Founder name ... Golos Text 18/400/140% / cream
+     • Founder role ... Golos Text 18/400/140% / #ACB14F
+   ────────────────────────────────────────────────────────────────── */
+@media screen and (max-width: 768px) {
+  /* ───────── SECTION container ───────── */
+  .aboutCompany {
+    flex-direction: column;
+    height: auto;
+    min-height: 0;
+    /* Solid dark-green canvas — переписує дефолтний brand-secondary */
+    background-color: var(--brand-accent-secondary-hover, #003214);
+    position: relative;
+    isolation: isolate;            /* щоб .leafImage не лізла за межі секції */
+    overflow: hidden;
+  }
+
+  /* ───────── LEFT panel — тепер одна вертикальна колонка ───────── */
+  .leftPanel {
+    width: 100%;
+    height: auto;
+    padding: 64px 20px 64px;       /* зверху простір під шапкою + комфортний знизу */
+    position: relative;
+    z-index: 2;                    /* поверх листка */
+  }
+
+  /* ───────── 1. QUOTE — Commissioner 24/600/120% / cream / -1px ───────── */
+  .quote {
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    font-family: Commissioner, var(--font-commissioner), sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: 120%;             /* 28.8px */
+    letter-spacing: -1px;
+    text-transform: none;          /* desktop робив UPPERCASE — на mobile нативний регістр */
+    color: var(--text-cream, #F9F7F2);
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+  .quoteAccent,
+  .quoteWhite {
+    color: var(--text-cream, #F9F7F2);
+  }
+
+  /* ───────── BODY block — наступний за цитатою ───────── */
+  .body {
+    margin: 40px 0 0 0;
+    width: 100%;
+  }
+
+  /* ───────── 2. "Наша місія..." — Golos Text 16/400/140% ───────── */
+  .missionLine,
+  .missionDetail {
+    font-family: "Golos Text", var(--font-golos-text), sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 140%;             /* 22.4px */
+    letter-spacing: 0;
+    color: var(--text-cream, #F9F7F2);
+    max-width: 100%;
+  }
+  .missionLine .accentGreen,
+  .missionDetail .accentGreen {
+    color: var(--brand-accent-primary-default, #B3D217);
+  }
+  .missionDetail {
+    margin-top: 8px;
+  }
+
+  /* ───────── 3. "Біопрепарати сьогодні..." — Golos Text 28/400/125% ───────── */
+  .bioInvestment {
+    margin: 32px 0 0 0;
+    font-family: "Golos Text", var(--font-golos-text), sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 125%;             /* 35px */
+    letter-spacing: 0;
+    color: var(--text-cream, #F9F7F2);
+    max-width: 100%;
+  }
+  .bioInvestment .accentGreen {
+    color: var(--brand-accent-primary-default, #B3D217);
+  }
+
+  /* ───────── 4. Founder block — Golos Text 18/400/140% ───────── */
+  .founder {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .founderName {
+    margin: 0;
+    font-family: "Golos Text", var(--font-golos-text), sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 140%;             /* 25.2px */
+    color: var(--text-cream, #F9F7F2);
+  }
+  .founderRole {
+    margin: 0;
+    font-family: "Golos Text", var(--font-golos-text), sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 140%;
+    color: var(--bg-green, #ACB14F);
+    font-style: normal;            /* override desktop italic */
+  }
+
+  /* ───────── 5. CTA button — full width ───────── */
+  .ctaButton {
+    margin-top: 32px;
+    width: 100%;
+    max-width: 100%;
+    height: 56px;
+    padding: 16px;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+
+  /* ───────── 6. LEAF — декоративний напівпрозорий фон ВНИЗУ секції ─────────
+     Figma spec:
+       width: 375px;  height: 418px;  aspect-ratio: 61/68;
+       opacity: 0.3;  positioned bottom of section.
+     Текст з .leftPanel — z-index:2, лишається поверх листка.            */
+  .leafImage {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 418px;
+    object-fit: cover;
+    object-position: -14.153px 0;  /* per Figma background-position */
+    opacity: 0.3;
+    pointer-events: none;
+    order: 0;
+    z-index: 1;                    /* під текстом, над фоном секції */
+    flex-shrink: 0;
+    display: block;
+  }
+}

@@ -1,0 +1,278 @@
+/* AdminReviews — стилі узгоджено з AdminFaq / AdminBlog */
+
+.shell { display: flex; flex-direction: column; gap: 20px; }
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.title { font-size: 14px; color: #5e5e57; margin: 0; }
+
+.addBtn {
+  cursor: pointer;
+  border: 0;
+  background-color: #1b4332;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.15s ease, transform 0.12s ease;
+}
+.addBtn:hover { background-color: #133527; }
+.addBtn:active { transform: translateY(1px); }
+.addBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.filterInput,
+.filterSelect {
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  padding: 8px 12px;
+  border: 1px solid #d8d8cd;
+  border-radius: 6px;
+  background: #fff;
+  min-width: 220px;
+}
+.filterInput:focus,
+.filterSelect:focus { outline: 2px solid #b3d217; outline-offset: -1px; }
+
+.alertErr {
+  background: #fbeae8;
+  border: 1px solid #f1c5c0;
+  color: #b32218;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.alertOk {
+  background: #ecf5e3;
+  border: 1px solid #c4dc8b;
+  color: #355d18;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.empty {
+  background: #fff;
+  border: 1px dashed #d8d8cd;
+  border-radius: 10px;
+  padding: 40px;
+  text-align: center;
+  color: #93928c;
+  font-size: 14px;
+}
+
+.list { display: flex; flex-direction: column; gap: 12px; }
+
+.item {
+  background: #fff;
+  border: 1px solid #e7e7df;
+  border-radius: 10px;
+  padding: 16px 18px;
+  box-shadow: 0 1px 2px rgba(20, 30, 12, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.itemHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.itemMeta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.itemOrder {
+  font-size: 12px; color: #93928c; font-weight: 600;
+  background: #f5f3ec; border-radius: 6px; padding: 4px 10px;
+}
+.badgeDraft {
+  font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px;
+  background: #fff1d6; color: #8a5b00; border: 1px solid #f0d27c;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.badgeHighlight {
+  font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px;
+  background: #ecf5e3; color: #355d18; border: 1px solid #c4dc8b;
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.badgeProduct {
+  font-size: 12px; padding: 4px 10px; border-radius: 6px;
+  background: #f0f6ff; color: #1a3a64; border: 1px solid #cce0f5;
+}
+
+.itemActions { display: flex; gap: 6px; flex-shrink: 0; flex-wrap: wrap; }
+.actBtn {
+  cursor: pointer; border: 1px solid #d8d8cd; background: #fff; color: #2c2c27;
+  padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 500;
+  transition: background-color 0.15s ease;
+}
+.actBtn:hover { background: #f5f3ec; }
+.actBtn:disabled { opacity: 0.4; cursor: not-allowed; }
+.actBtnPrimary { background: #1b4332; color: #fff; border-color: #1b4332; }
+.actBtnPrimary:hover { background: #133527; }
+.actBtnDanger { color: #b32218; border-color: #f1c5c0; }
+.actBtnDanger:hover { background: #fbeae8; }
+
+.itemBody { display: flex; gap: 16px; align-items: flex-start; }
+.avatar {
+  width: 64px; height: 64px; border-radius: 50%;
+  object-fit: cover; flex-shrink: 0;
+  border: 1px solid #e7e7df;
+}
+.avatarPlaceholder {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: linear-gradient(135deg, #b3d217 0%, #6b8e0d 100%);
+  color: #1b4332; font-weight: 800; font-size: 22px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.itemContent { flex: 1; min-width: 0; }
+.itemAuthorRow { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.itemAuthorName { color: #2c2c27; font-size: 15px; }
+.itemAuthorRole { color: #6b6b66; font-size: 13px; }
+.itemMetaRow {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin: 8px 0;
+}
+.tag {
+  display: inline-block; padding: 3px 10px; border-radius: 999px;
+  background: #f7fae8; color: #1b4332; font-size: 12px; font-weight: 600;
+  border: 1px solid #d9e6a3;
+}
+.rating { display: inline-flex; gap: 2px; }
+.starBtn {
+  background: transparent; border: 0; padding: 0; line-height: 0;
+  cursor: pointer;
+}
+.starBtn[tabindex="-1"] { cursor: default; }
+.starsRow { display: inline-flex; gap: 4px; padding: 6px 0; }
+.date { font-size: 12px; color: #93928c; }
+.itemText {
+  margin: 0; font-size: 14px; line-height: 1.55; color: #2c2c27;
+  white-space: pre-wrap;
+}
+
+/* ---------- Modal ---------- */
+.modalBackdrop {
+  position: fixed; inset: 0;
+  background: rgba(20, 30, 12, 0.45);
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: 40px 16px; z-index: 1000;
+  overflow-y: auto;
+}
+.modal {
+  background: #fff; border-radius: 12px;
+  width: 100%; max-width: 800px;
+  box-shadow: 0 24px 48px rgba(20, 30, 12, 0.25);
+  display: flex; flex-direction: column;
+}
+.modalHead {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 22px; border-bottom: 1px solid #e7e7df;
+}
+.modalTitle { margin: 0; font-size: 18px; color: #2c2c27; font-weight: 700; }
+.closeBtn {
+  background: transparent; border: 0; font-size: 28px; line-height: 1;
+  color: #93928c; cursor: pointer; padding: 0 6px;
+}
+.closeBtn:hover { color: #2c2c27; }
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 22px;
+}
+.field { display: flex; flex-direction: column; gap: 6px; }
+.fieldWide { grid-column: span 2; }
+.fieldLabel {
+  font-size: 12px; font-weight: 600; color: #5e5e57;
+  letter-spacing: 0.04em; text-transform: uppercase;
+}
+.input,
+.textarea {
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  padding: 10px 14px;
+  border: 1px solid #d8d8cd;
+  border-radius: 6px;
+  background: #fff;
+  color: #2c2c27;
+  width: 100%;
+}
+.textarea { resize: vertical; min-height: 120px; }
+.input:focus, .textarea:focus { outline: 2px solid #b3d217; outline-offset: -1px; }
+
+.photoRow { display: flex; gap: 14px; align-items: flex-start; }
+.photoPreview {
+  width: 88px; height: 88px; border-radius: 50%;
+  object-fit: cover; border: 1px solid #e7e7df;
+  flex-shrink: 0;
+}
+.photoEmpty {
+  width: 88px; height: 88px; border-radius: 50%;
+  border: 1px dashed #d8d8cd; background: #f5f3ec;
+  display: flex; align-items: center; justify-content: center;
+  color: #93928c; font-size: 12px;
+  flex-shrink: 0;
+}
+.photoControls { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.uploadBtn, .clearBtn {
+  font-size: 13px; padding: 8px 14px; border-radius: 6px;
+  cursor: pointer; font-family: "Golos Text", sans-serif;
+  align-self: flex-start;
+}
+.uploadBtn {
+  background: #1b4332; color: #fff; border: 1px solid #1b4332;
+}
+.uploadBtn:hover { background: #133527; }
+.uploadBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+.clearBtn {
+  background: transparent; color: #b32218; border: 1px solid #f1c5c0;
+}
+.clearBtn:hover { background: #fbeae8; }
+
+.toggles { display: flex; flex-direction: column; gap: 10px; padding-top: 4px; }
+.toggleLabel {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13.5px; color: #2c2c27; cursor: pointer;
+}
+.toggleLabel input { width: 16px; height: 16px; cursor: pointer; }
+
+.modalFooter {
+  display: flex; justify-content: flex-end; gap: 10px;
+  padding: 16px 22px; border-top: 1px solid #e7e7df;
+}
+.cancelBtn {
+  background: transparent; border: 1px solid #d8d8cd; color: #2c2c27;
+  padding: 9px 18px; border-radius: 6px;
+  font-family: "Golos Text", sans-serif; font-size: 14px; font-weight: 600;
+  cursor: pointer;
+}
+.cancelBtn:hover { background: #f5f3ec; }
+.saveBtn {
+  background: #1b4332; color: #fff; border: 1px solid #1b4332;
+  padding: 9px 22px; border-radius: 6px;
+  font-family: "Golos Text", sans-serif; font-size: 14px; font-weight: 600;
+  cursor: pointer;
+}
+.saveBtn:hover { background: #133527; }
+.saveBtn:disabled { opacity: 0.7; cursor: not-allowed; }
+
+@media (max-width: 720px) {
+  .formGrid { grid-template-columns: 1fr; }
+  .fieldWide { grid-column: span 1; }
+  .itemActions { width: 100%; }
+}

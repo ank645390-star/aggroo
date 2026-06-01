@@ -1,0 +1,677 @@
+/* /blog/:slug page styles — article reading experience. */
+.page {
+  width: 100%;
+  background-color: #f9f7f2;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  color: #2c2c27;
+  font-family: "Golos Text", system-ui, sans-serif;
+}
+.main {
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  padding: 180px var(--page-gutter) 120px var(--page-gutter);
+  box-sizing: border-box;
+}
+.inner {
+  width: 100%;
+  max-width: 1680px;
+  display: block;
+  box-sizing: border-box;
+}
+.loading {
+  text-align: center;
+  color: #5e5e57;
+  padding: 80px 0;
+  font-size: 18px;
+}
+
+/* ============================================================
+   Breadcrumb — окремий рядок зверху, до 2-колонкового контенту
+   (як на /catalog: "Головна / Блог / [заголовок]")
+   ============================================================ */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 120%;
+  color: #93928c;
+  flex-wrap: wrap;
+  letter-spacing: -0.1px;
+}
+.bcLink {
+  color: #93928c;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.bcLink:hover { color: #1b4332; }
+.bcSep { color: #c9c7c0; font-weight: 300; }
+.bcCurrent {
+  color: #2c2c27;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 50ch;
+}
+
+.hero { display: flex; flex-direction: column; gap: 24px; }
+.metaRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 14px;
+  color: #5e5e57;
+}
+.metaCategory {
+  appearance: none;
+  border: 0;
+  background: #f7fae8;
+  color: #1b4332;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  position: relative;
+  z-index: 1;
+}
+.metaCategory:hover { background: #e6f0c5; }
+.metaDot { color: #c4c4be; }
+.metaItem { display: inline-flex; align-items: center; gap: 6px; }
+
+.title {
+  margin: 0;
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 56px;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -1px;
+  color: #2c2c27;
+}
+.excerpt {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.45;
+  color: #5e5e57;
+  font-weight: 400;
+  max-width: 920px;
+}
+
+.coverWrap {
+  margin: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e7ebe7;
+  background: #fff;
+}
+.cover {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 560px;
+  object-fit: cover;
+}
+
+/* === Article content (rendered from rich editor) === */
+.content {
+  align-self: center;
+  width: 100%;
+  max-width: 820px;
+  font-size: 19px;
+  line-height: 1.7;
+  color: #2c2c27;
+  font-family: "Golos Text", system-ui, sans-serif;
+}
+.content p { margin: 0 0 1.2em; }
+.content p:last-child { margin-bottom: 0; }
+.content h1,
+.content h2,
+.content h3 {
+  font-family: "Commissioner", system-ui, sans-serif;
+  color: #1b4332;
+  margin: 1.8em 0 0.6em;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.content h1 { font-size: 34px; }
+.content h2 { font-size: 28px; }
+.content h3 { font-size: 22px; }
+.content ul,
+.content ol {
+  padding-left: 1.6em;
+  margin: 0 0 1.4em;
+}
+.content li { margin: 0.4em 0; }
+.content li::marker { color: #1b4332; }
+.content ol li::marker { font-weight: 600; }
+.content blockquote {
+  border-left: 4px solid #b3d217;
+  background: #f7fae8;
+  padding: 18px 22px;
+  margin: 1.6em 0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: #2c2c27;
+}
+.content blockquote p { margin: 0; }
+.content code {
+  background: #f0f3ee;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.9em;
+}
+.content pre {
+  background: #2c2c27;
+  color: #f0f3ee;
+  padding: 16px 18px;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.4em 0;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.content pre code { background: transparent; padding: 0; color: inherit; }
+.content a {
+  color: #1b4332;
+  text-decoration: underline;
+  text-decoration-color: #b3d217;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: background 0.12s ease;
+}
+.content a:hover { background: #f7fae8; }
+.content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.6em auto;
+  border-radius: 10px;
+  border: 1px solid #e7ebe7;
+}
+.content iframe,
+.content [data-youtube-video] {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  margin: 1.6em 0;
+  border-radius: 10px;
+  overflow: hidden;
+  display: block;
+}
+.content [data-youtube-video] iframe {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+.content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.6em 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e7ebe7;
+  background: #fff;
+  font-size: 16px;
+}
+.content table th,
+.content table td {
+  border: 1px solid #e7ebe7;
+  padding: 12px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+.content table th {
+  background: #f0f3ee;
+  color: #1b4332;
+  font-weight: 600;
+}
+.content table tr:nth-child(even) td { background: #fafaf6; }
+.content hr {
+  border: 0;
+  border-top: 2px solid #e7ebe7;
+  margin: 2.4em 0;
+}
+
+/* === Tags === */
+.tagsRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 20px;
+  border-top: 1px solid #e7ebe7;
+  max-width: 820px;
+  align-self: center;
+  width: 100%;
+}
+.tagsLabel {
+  font-size: 14px;
+  font-weight: 600;
+  color: #5e5e57;
+  margin-right: 8px;
+}
+.tagChip {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid #e7ebe7;
+  color: #2c2c27;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+.tagChip:hover {
+  background: #f7fae8;
+  border-color: #b3d217;
+  color: #1b4332;
+}
+
+/* === CTA contact block === */
+.ctaBlock {
+  background: linear-gradient(135deg, #1b4332 0%, #245138 60%, #2f6043 100%);
+  color: #f9f7f2;
+  padding: 36px 40px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+}
+.ctaBlock::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle at center, #b3d21733, transparent 70%);
+  pointer-events: none;
+}
+.ctaLeft { max-width: 580px; }
+.ctaTitle {
+  margin: 0 0 8px;
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  color: #f9f7f2;
+}
+.ctaText {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #d8dccd;
+}
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.ctaPrimary,
+.ctaSecondary {
+  appearance: none;
+  border: 0;
+  padding: 14px 22px;
+  border-radius: 8px;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.12s ease, color 0.15s ease;
+}
+.ctaPrimary {
+  background: #b3d217;
+  color: #1b4332;
+}
+.ctaPrimary:hover { background: #c4e02a; transform: translateY(-1px); }
+.ctaSecondary {
+  background: transparent;
+  border: 1px solid #d8dccd66;
+  color: #f9f7f2;
+}
+.ctaSecondary:hover { background: #ffffff14; }
+
+/* === Related (uses welcome-style CardBlog1) === */
+.related {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  /* Allow the cards row to extend beyond the article's max-width=760 */
+  width: 100%;
+  align-items: flex-start;
+}
+.relatedTitle {
+  margin: 0;
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: #1b4332;
+}
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
+}
+/* On narrow viewport — wrap into auto-fit columns */
+@media (max-width: 1100px) {
+  .relatedGrid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+}
+
+/* === Error state === */
+.errorBox {
+  text-align: center;
+  padding: 80px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.errorTitle {
+  margin: 0;
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 36px;
+  color: #1b4332;
+  font-weight: 600;
+}
+.errorText {
+  margin: 0;
+  font-size: 18px;
+  color: #5e5e57;
+}
+.errorBtn {
+  margin-top: 16px;
+  padding: 12px 24px;
+  background: #1b4332;
+  color: #f9f7f2;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+}
+.errorBtn:hover { background: #003214; }
+
+@media (max-width: 1100px) {
+  .main { padding: 24px 32px 80px; }
+  .title { font-size: 44px; }
+  .excerpt { font-size: 20px; }
+  .content { font-size: 18px; max-width: 100%; }
+  .relatedGrid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+}
+@media (max-width: 700px) {
+  /* Per user request: breadcrumb sits 20px below the sticky navbar on
+     mobile — no more 130px legacy compensation for fixed navbar. */
+  .main { padding: 20px 16px 56px; }
+  .title { font-size: 30px; line-height: 1.2; }
+  .excerpt { font-size: 16px; }
+  .ctaBlock { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 20px; }
+  .ctaTitle { font-size: 22px; }
+  .ctaActions { width: 100%; }
+  .ctaPrimary, .ctaSecondary { flex: 1 1 auto; text-align: center; }
+  .breadcrumb { font-size: 15px; gap: 8px; }
+  .bcCurrent { max-width: 22ch; }
+  .content { font-size: 16px; line-height: 1.65; }
+  .content h1 { font-size: 26px; }
+  .content h2 { font-size: 22px; }
+  .content h3 { font-size: 19px; }
+  .relatedTitle { font-size: 24px; }
+  .sideCard { flex: 0 0 220px; }
+  .tagsRow { padding-top: 16px; }
+}
+@media (max-width: 480px) {
+  .main { padding: 20px 12px 48px; }
+  .title { font-size: 26px; }
+  .metaRow { font-size: 13px; gap: 8px; }
+  .ctaBlock { padding: 20px 16px; }
+  .coverWrap { border-radius: 8px; }
+  .cover { max-height: 320px; }
+}
+
+
+/* ============================================================
+   2-column reading layout: article LEFT (~2/3) + sidebar RIGHT (~1/3),
+   gap=30px. Обидві колонки СТАТИЧНІ — скролять разом зі сторінкою.
+   Margin-top — відстань від breadcrumb до 2-колонкового контенту.
+   ============================================================ */
+.contentWrap {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  align-items: start;
+  gap: 30px;
+  width: 100%;
+  margin-top: 60px;
+}
+.articleCol {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.sideCol {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+/* === Legacy classes (більше не використовуються — sidebar тепер чистий static) === */
+
+.sideBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 26px 26px 22px;
+  background: #ffffff;
+  border: 1px solid #eceee5;
+  border-radius: 18px;
+  box-shadow: 0 1px 2px rgba(20, 30, 10, 0.03);
+}
+.sideTitle {
+  margin: 0;
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1b4332;
+  letter-spacing: -0.01em;
+}
+
+.sideList {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.sideCard {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 14px;
+  align-items: stretch;
+  text-decoration: none;
+  color: inherit;
+  padding: 0;
+  border-radius: 12px;
+  transition: background 0.15s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  background: #fafaf6;
+  overflow: hidden;
+  border: 1px solid #f1efe7;
+}
+.sideCard + .sideCard {
+  border-top: 1px solid #f1efe7;
+  padding-top: 0;
+}
+.sideCard:hover {
+  background: #f7fae8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(27, 67, 50, 0.08);
+  border-color: #d4dfa1;
+}
+.sideCardImg {
+  width: 140px;
+  height: 100%;
+  min-height: 100px;
+  border-radius: 0;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #f0eee6;
+}
+.sideCardMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  padding: 14px 16px 14px 0;
+  justify-content: center;
+}
+.sideCardCat {
+  font-size: 11px;
+  font-weight: 700;
+  color: #1b4332;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.sideCardTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2a18;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.sideCardMeta {
+  font-size: 12px;
+  color: #7d8062;
+  margin-top: 2px;
+}
+
+/* Sidebar mini-CTA card */
+.sideCta {
+  background: linear-gradient(180deg, #1b4332 0%, #244e3e 100%);
+  border-radius: 18px;
+  padding: 26px 26px 28px;
+  color: #f9f5e9;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 6px 24px rgba(27, 67, 50, 0.18);
+}
+.sideCtaIcon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(249, 245, 233, 0.14);
+  color: #f9f5e9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sideCtaTitle {
+  margin: 6px 0 0;
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #f9f5e9;
+}
+.sideCtaText {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #d9dac6;
+}
+.sideCtaBtn {
+  margin-top: 6px;
+  background: #f9f5e9;
+  color: #1b4332;
+  border: 0;
+  border-radius: 10px;
+  padding: 13px 18px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s ease, transform 0.12s ease;
+}
+.sideCtaBtn:hover { background: #ffffff; }
+.sideCtaBtn:active { transform: translateY(1px); }
+
+/* Collapse to single column on narrower screens */
+@media (max-width: 1440px) {
+  .main { padding: 160px 80px 100px 80px; }
+}
+@media (max-width: 1280px) {
+  .main { padding: 150px 48px 80px 48px; }
+  .contentWrap { gap: 24px; grid-template-columns: 1.8fr 1fr; margin-top: 40px; }
+}
+@media (max-width: 1100px) {
+  .main { padding: 140px 32px 80px 32px; }
+  .contentWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 32px;
+  }
+  .articleCol { width: 100%; flex: 1 1 auto; }
+  .sideCol { width: 100%; }
+  .sideBlock, .sideCta { padding: 18px; }
+  /* On mobile sidebar — show related as horizontal scroll cards */
+  .sideList {
+    flex-direction: row;
+    overflow-x: auto;
+    gap: 14px;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 4px;
+    margin: 0 -2px;
+  }
+  .sideCard {
+    flex: 0 0 260px;
+    scroll-snap-align: start;
+    grid-template-columns: 1fr;
+    grid-template-rows: 150px auto;
+    background: #fafaf6;
+  }
+  .sideCard + .sideCard { border-top: 0; padding-top: 0; }
+  .sideCard:hover { transform: none; }
+  .sideCardImg { width: 100%; height: 150px; min-height: 0; }
+  .sideCardMain { padding: 12px 14px 14px; }
+}
+
+
+/* =====================================================================
+   MOBILE OVERRIDES — must come AFTER the max-width: 1100/1280/1440px
+   blocks above so the cascade picks them last on phone viewports.
+   Per user request: breadcrumb sits 20px below the sticky navbar
+   and matches /catalog font size + gap (14px / gap 8px).
+   ===================================================================== */
+@media (max-width: 700px) {
+  .main { padding: 20px 16px 56px !important; }
+  .breadcrumb {
+    font-size: 14px;
+    gap: 8px;
+  }
+  .bcCurrent { max-width: 22ch; }
+}
+@media (max-width: 480px) {
+  .main { padding: 20px 12px 48px !important; }
+  .breadcrumb {
+    font-size: 14px;
+    gap: 8px;
+  }
+}

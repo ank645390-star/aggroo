@@ -1,0 +1,17 @@
+.iconArrowRight {
+  height: var(--height-24);
+  width: var(--width-24);
+  position: relative;
+}
+.vectorIcon {
+  position: absolute;
+  height: 45.83%;
+  width: 100%;
+  top: 27.08%;
+  right: 22.5%;
+  bottom: 27.08%;
+  left: 17.92%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}

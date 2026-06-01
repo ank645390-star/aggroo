@@ -1,0 +1,8 @@
+.document {
+  display: flex;
+  align-items: flex-start;
+  padding: var(--padding-0) var(--padding-0) var(--padding-60);
+  box-sizing: border-box;
+  max-width: 100%;
+  flex-shrink: 0;
+}

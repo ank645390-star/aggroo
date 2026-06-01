@@ -1,0 +1,324 @@
+/* =================================================================
+   MobileMenu — full-screen drawer rendered via portal to <body>.
+
+   Visibility is controlled by [data-open="true|false"] on .drawer
+   so that:
+     • on desktop (≥ 769px) it never renders visually,
+     • on mobile (≤ 768px) the navbar's burger toggles it.
+
+   Per design (Меню.png screenshot 1):
+     • Top header strip INSIDE drawer:
+         width:375px; height:56px; padding:10px 24px;
+         justify-content:space-between; align-items:center;
+       → Logo + (User · Cart · Burger/Close)
+     • Search: 8px radius
+     • Nav: Golos Text 18px / 600 / 120% / #2C2C27
+   ================================================================= */
+
+.drawer {
+  /* Always hidden on desktop — only the mobile media query exposes it. */
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .drawer {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100dvh;                    /* full viewport height */
+    z-index: 150;                      /* ABOVE navbar (z:50) — drawer fully covers */
+    background-color: #f9f7f2;        /* cream — matches design */
+    overflow-y: auto;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-12px);
+    transition:
+      opacity 0.32s cubic-bezier(0.22, 0.61, 0.36, 1),
+      transform 0.32s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .drawer[data-open="true"] {
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Sticky drawer header (mirrors mobile navbar1 EXACTLY) ───────
+     Per user feedback (3 скриншоти Меню.png): when menu opens,
+     the logo previously got squashed/pushed up because:
+       • drawerHeader had height: 56px AND padding: 10px 24px,
+       • while logo natively is 90×64 → max-height: 56px clipped it.
+     Fix: replicate navbar1 @media≤768 geometry 1:1 —
+       padding: 14px 20px (NOT 10px 24px),
+       NO fixed height (auto-sized by logo),
+       logo retains its native 90×64 px, no max-height clamp.
+     This makes the drawer-open header visually identical to the
+     closed-menu navbar header on the welcome / blog / catalog pages. */
+  .drawerHeader {
+    display: flex;
+    width: 100%;
+    /* height removed — let logo + padding define the row height
+       (same as navbar1 mobile, which has no explicit height). */
+    padding: 14px 20px;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    background-color: #f9f7f2;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    /* Same subtle separator as navbar1 mobile so the header reads
+       as the same component, not a duplicate. */
+    box-shadow: 0 1px 0 rgba(20, 30, 12, 0.06);
+  }
+  .logoLink {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .logoImg {
+    /* Match navbar1 mobile exactly: 90×64. NO max-height clamp —
+       that was clipping the "ТОРГОВИЙ ДІМ" badge and dragging the
+       composed logo upward. */
+    width: 90px;
+    height: 64px;
+    object-fit: contain;
+    display: block;
+  }
+  .headerActions {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+  .iconBtn {
+    position: relative;
+    /* Match navbar1 mobile icon size (40×40) so opening the menu
+       doesn't visually "shrink" the action buttons. */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background-color: var(--decorative-2, #E7EBE7);
+    color: var(--brand-accent-secondary-default, #1b4332);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.18s ease;
+    flex-shrink: 0;
+  }
+  .iconBtn:hover {
+    background-color: #d8dccd;
+  }
+  .iconBtn:focus-visible {
+    outline: 2px solid var(--brand-accent-secondary-default, #1b4332);
+    outline-offset: 2px;
+  }
+  .iconBtnAuthed {
+    background-color: var(--brand-accent-secondary-default, #1b4332);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(27, 67, 50, 0.28);
+  }
+  .iconBtnAuthed:hover {
+    background-color: #163a2a;
+  }
+  .userInitial {
+    color: #fff;
+    font-family: var(--font-golos-text), "Golos Text", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.2px;
+    user-select: none;
+  }
+  .cartBadge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 9px;
+    background-color: var(--brand-accent-secondary-default, #1b4332);
+    color: #fff;
+    font-family: var(--font-golos-text), "Golos Text", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 18px;
+    text-align: center;
+    box-sizing: border-box;
+    box-shadow: 0 2px 6px rgba(27, 67, 50, 0.32);
+    pointer-events: none;
+  }
+  .closeBtn {
+    /* Match navbar1 mobile burger size (40×40). */
+    width: 40px;
+    height: 40px;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.18s ease;
+    flex-shrink: 0;
+  }
+  .closeBtn:hover {
+    background-color: rgba(27, 67, 50, 0.08);
+  }
+  .closeBtn:focus-visible {
+    outline: 2px solid var(--brand-accent-secondary-default, #1b4332);
+    outline-offset: 2px;
+  }
+
+  /* ── Body content ─────────────────────────────────────────── */
+  .inner {
+    padding: 16px 20px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    flex: 1 1 auto;
+    box-sizing: border-box;
+  }
+
+  /* ── Search ───────────────────────────────────────────────── */
+  .searchWrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+    border: 1.5px solid #d8dccd;
+    border-radius: 8px;                /* per design: 8px (was 999px) */
+    background: #ffffff;
+    padding: 0 20px 0 56px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .searchWrap:focus-within {
+    border-color: #1b4332;
+    box-shadow: 0 0 0 3px rgba(27, 67, 50, 0.12);
+  }
+  .searchIcon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #1b4332;
+    pointer-events: none;
+  }
+  .searchInput {
+    flex: 1;
+    height: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-family: var(--font-golos-text), "Golos Text", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #2c2c27;
+  }
+  .searchInput::placeholder {
+    color: #9a9a93;
+  }
+
+  /* ── Vertical nav ─────────────────────────────────────────── */
+  .nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 8px;
+  }
+  .navItem {
+    display: block;
+    padding: 18px 0;
+    border-bottom: 1px solid #e6e2d6;
+    /* Per spec — Golos Text Label */
+    font-family: "Golos Text", var(--font-golos-text), sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%;                 /* 21.6px */
+    color: var(--text-black, #2C2C27);
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: 0;
+    transition: color 0.18s ease, transform 0.18s ease;
+  }
+  .navItem:active {
+    color: #1b4332;
+    transform: translateX(2px);
+  }
+
+  /* ── Contacts block ───────────────────────────────────────── */
+  .contacts {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-top: 24px;
+  }
+  .contactLine {
+    font-family: var(--font-golos-text), "Golos Text", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #2c2c27;
+    text-decoration: none;
+    line-height: 1.6;
+  }
+
+  /* ── CTA ──────────────────────────────────────────────────── */
+  .cta {
+    margin-top: 16px;
+    width: 100%;
+    height: 64px;
+    border: 0;
+    border-radius: 8px;
+    background: #1b4332;
+    color: #ffffff;
+    font-family: var(--font-golos-text), "Golos Text", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    box-sizing: border-box;
+    transition: background-color 0.18s ease, transform 0.12s ease;
+    box-shadow: 0 8px 20px rgba(27, 67, 50, 0.18);
+  }
+  .cta:hover { background: #143729; }
+  .cta:active { transform: translateY(1px); }
+}
+
+/* Very small phones (≤ 380px) — match navbar1 @media≤380 exactly */
+@media screen and (max-width: 380px) {
+  .drawerHeader {
+    padding: 12px 16px;
+  }
+  .logoImg {
+    width: 78px;
+    height: 56px;
+  }
+  .iconBtn,
+  .closeBtn {
+    width: 36px;
+    height: 36px;
+  }
+}

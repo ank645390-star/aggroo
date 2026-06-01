@@ -1,0 +1,13 @@
+.iconPlus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #1b4332;
+  height: 20px;
+  width: 20px;
+}
+.vectorIcon {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}

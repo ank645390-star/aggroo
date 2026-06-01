@@ -1,0 +1,111 @@
+/* AdminContactInfo — стиль в стилі інших адмін-сторінок */
+
+.shell {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 760px;
+}
+
+.sub {
+  color: #5e5e57;
+  font-size: 14px;
+  margin: 0;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e7e7df;
+  border-radius: 10px;
+  padding: 22px 24px;
+  box-shadow: 0 1px 2px rgba(20, 30, 12, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c2c27;
+}
+
+.input {
+  width: 100%;
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #2c2c27;
+  padding: 10px 12px;
+  border: 1px solid #d8d8cd;
+  border-radius: 8px;
+  background: #fff;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+.input:focus { border-color: #1b4332; }
+
+.hint {
+  font-size: 12px;
+  color: #93928c;
+  font-weight: 400;
+  margin-top: -4px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.btn {
+  cursor: pointer;
+  border: 0;
+  background-color: #1b4332;
+  color: #fff;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.15s ease, transform 0.12s ease;
+}
+.btn:hover { background-color: #133527; }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btnGhost {
+  background: #fff;
+  color: #2c2c27;
+  border: 1px solid #d8d8cd;
+}
+.btnGhost:hover { background: #f5f3ec; }
+
+.error {
+  background: #fbeae8;
+  color: #b32218;
+  border: 1px solid #f1c5c0;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.success {
+  background: #e8f3eb;
+  color: #1b4332;
+  border: 1px solid #b9d8c2;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.loading {
+  text-align: center;
+  padding: 24px;
+  color: #5e5e57;
+}

@@ -1,0 +1,24 @@
+.sliderIndicator {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-12);
+}
+.sliderDot,
+.sliderDot2,
+.sliderDot3 {
+  height: var(--height-12);
+  border-radius: var(--br-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sliderDot {
+  width: var(--width-24);
+  background-color: var(--brand-accent-secondary-default);
+}
+.sliderDot2,
+.sliderDot3 {
+  width: var(--width-12);
+  border: var(--border-4);
+  box-sizing: border-box;
+}

@@ -1,0 +1,1024 @@
+/* =========================================================================
+   PRODUCT CARD SECTION
+   Figma exact spec:
+     Outer wrapper:    1680 × 1170  (centered inside 1920)
+     Image area:        828 × 720
+     Text block:        828 × 1136  (padding: 40)
+       └ content area:  748 × ~1056
+       └ params card:   748 × 449
+       └ purchase blk:  748 × 288
+   ========================================================================= */
+
+.productSectionWrapper {
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  padding: 100px 120px 0;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  text-align: left;
+  font-family: var(--font-golos-text);
+  color: var(--text-grey);
+  font-size: var(--fs-14);
+}
+
+.productSection {
+  width: 1680px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 100%;
+}
+
+/* === BREADCRUMBS (unified style — matches /catalog & /contacts pages) === */
+.productHeader {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 120%;
+  color: #93928c;
+  letter-spacing: -0.1px;
+}
+.breadcrumbLink {
+  color: #93928c;
+  text-decoration: none;
+  transition: color .15s ease;
+}
+.breadcrumbLink:hover { color: #1b4332; }
+.breadcrumbSep     { color: #c9c7c0; font-weight: 300; }
+.breadcrumbCurrent { color: #2c2c27; font-weight: 500; }
+
+/* Legacy aliases — kept so any stale class references don't break the layout */
+.breadcrumb {
+  color: #93928c;
+  cursor: pointer;
+  text-decoration: none;
+}
+.breadcrumb:hover { color: #1b4332; }
+.flores {
+  color: #2c2c27;
+  font-weight: 500;
+}
+
+/* === MAIN CONTENT ROW (image | text) ===================================== */
+.mainContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+/* === IMAGE GALLERY ======================================================= */
+.image {
+  width: 828px;
+  height: 720px;
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: var(--color-whitesmoke-100);
+  flex-shrink: 0;
+}
+
+/* Swiper track — wraps all slides.
+   Both DESKTOP and MOBILE behave as horizontal scroll-snap carousel — user
+   can swipe / drag / use ‹ › arrows to switch between photos. */
+.swiperTrack {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE/Edge legacy */
+  -webkit-overflow-scrolling: touch;
+}
+.swiperTrack::-webkit-scrollbar { display: none; }
+
+.swiperSlide {
+  position: relative;
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: block;
+}
+/* Active slide visual emphasis — we keep all slides in the flow so the
+   carousel can scroll natively; `swiperSlideActive` just adds a subtle
+   fade-in for the currently centered slide. */
+.swiperSlideActive {
+  animation: imgFade 0.35s ease;
+}
+.mainPhoto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;            /* arrows + thumbs should not be blocked */
+  user-select: none;
+}
+@keyframes imgFade {
+  from { opacity: 0.6; }
+  to   { opacity: 1;   }
+}
+
+/* Prev/next arrow buttons — visible on BOTH desktop and mobile now.
+   Styled exactly per Figma export "Button Arrow Left" (36×36 circle,
+   --decorative-2 bg, dark-green chevron, soft drop-shadow for contrast
+   over the photo). */
+.galleryArrow {
+  display: flex;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--decorative-2, #E7EBE7);
+  color: var(--brand-accent-secondary-default, #1B4332);
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  cursor: pointer;
+  padding: 0;
+  box-shadow: 0 4px 12px rgba(15, 38, 30, 0.18);
+  transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+.galleryArrow:hover {
+  background: #DDE2DD;
+  box-shadow: 0 6px 18px rgba(15, 38, 30, 0.24);
+}
+.galleryArrow:active { transform: translateY(-50%) scale(0.94); }
+.galleryArrow svg { width: 22px; height: 22px; display: block; }
+.galleryArrowPrev { left: 20px; }
+.galleryArrowNext { right: 20px; }
+
+/* DESKTOP thumbnail strip — moved INSIDE the photo card as a bottom overlay
+   (per Figma design + user spec). Horizontal row, centered. Thumbs самі
+   мають білий фон + soft shadow — стрічка БЕЗ фону. */
+.thumbStrip {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  z-index: 3;
+  max-width: calc(100% - 120px); /* leave space around arrows */
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.thumbStrip::-webkit-scrollbar { display: none; }
+
+.thumb {
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(15, 38, 30, 0.14);
+  transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  display: block;
+  flex-shrink: 0;
+}
+.thumb:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+}
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.thumbActive {
+  border-color: var(--brand-accent-secondary-default, #1B4332);
+  box-shadow: 0 4px 14px rgba(27, 67, 50, 0.30);
+}
+
+/* MOBILE-only thumbnail row — OVERLAY positioned at the bottom INSIDE
+   the photo card (per Figma spec). Hidden on desktop via this base rule
+   (only enabled on ≤768px). Keeps mobile sizing/spacing from Phase 3.12. */
+.thumbRowMobile {
+  display: none;
+}
+.thumbMobile {
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+  box-shadow: 0 2px 6px rgba(15, 38, 30, 0.10);
+}
+.thumbMobile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.thumbMobileActive {
+  border-color: var(--brand-accent-secondary-default, #1B4332);
+  box-shadow: 0 4px 14px rgba(27, 67, 50, 0.30);
+}
+
+/* === TEXT BLOCK 828 × 1136 =============================================== */
+.textBlock {
+  width: 828px;
+  min-height: 1136px;
+  border-radius: 6px;
+  background-color: var(--bg-card);
+  padding: 40px;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+.textBlockInner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* === TOP ROW: tag+rating, title, description ============================= */
+.topRow {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.headlineGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.tagParent {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.star {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.ratingNumber {
+  font-size: 14px;
+  line-height: 100%;
+  color: var(--text-grey);
+}
+.title {
+  margin: 0;
+  font-size: 48px;
+  letter-spacing: -0.5px;
+  line-height: 130%;
+  font-weight: 600;
+  font-family: var(--font-golos-text);
+  color: var(--text-black);
+}
+.titleAccent { color: var(--text-grey); }
+.description {
+  /* Опис у блоці-картці зі специфікації Figma:
+     - max-width 620px, padding 16px, gap 10px
+     - border-radius 6px, border 1px solid --decorative-2 (#E7EBE7)
+     - background --decorative-1 (#F7FAE8)
+     - текст: Golos Text, 14px, 400, line-height 140% (≈ 19.6px), --text-black */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  gap: 10px;
+  padding: 16px;
+  max-width: 620px;
+  border-radius: 6px;
+  border: 1px solid var(--decorative-2, #E7EBE7);
+  background: var(--decorative-1, #F7FAE8);
+  font-family: var(--font-golos-text);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 140%;
+  color: var(--text-black, #2C2C27);
+}
+
+/* === PARAMETERS CARD 748 × 449 (auto height — content driven) =========== */
+.featureGroup {
+  align-self: stretch;
+  border-radius: 6px;
+  background-color: var(--decorative-1);
+  border: 1px solid var(--decorative-2);
+  padding: 24px 32px;
+  box-sizing: border-box;
+  color: var(--text-grey);
+}
+.featureRowParent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.featureRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+  align-items: flex-start;
+}
+.featureCell {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-height: 44px;
+}
+/* Уніфікований стиль для іконок фіч (lucide-react): однакові
+   на web/mobile, 20×20, dark color, без stretch/squeeze. */
+.featureIcon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  min-height: 20px;
+  color: var(--text-black, #2C2C27);
+  stroke-width: 1.6;
+}
+.featureText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.featureLabel {
+  font-size: 14px;
+  line-height: 100%;
+  color: var(--text-grey);
+}
+.featureValue {
+  font-size: 18px;
+  line-height: 120%;
+  font-weight: 600;
+  color: var(--text-black);
+  white-space: nowrap;
+}
+
+/* === PURCHASE BLOCK 748 × 288 ========================================== */
+.purchaseBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.optionsRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.optionsGroup,
+.counterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.counterGroup {
+  width: 120px;
+}
+.optionsLabel {
+  font-size: 12px;
+  line-height: 100%;
+  color: var(--text-grey);
+}
+.volumeChipGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.priceRow {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.availabilityStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 10px;
+  border-radius: 999px;
+  background: #f3f7e4;
+  border: 1px solid #d9e6a3;
+  font-family: var(--font-golos-text);
+  width: fit-content;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.availabilityStatus[data-instock="false"] {
+  background: #fbeaea;
+  border-color: #f1cfcc;
+}
+.availabilityDot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #6aa84f;
+  box-shadow: 0 0 0 2px rgba(106,168,79,0.18);
+  flex-shrink: 0;
+}
+.availabilityDot::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background-color: rgba(106,168,79,0.55);
+  animation: dotPulse 1.8s ease-out infinite;
+  pointer-events: none;
+}
+.availabilityStatus[data-instock="false"] .availabilityDot {
+  background-color: #c14a3c;
+  box-shadow: 0 0 0 2px rgba(193,74,60,0.16);
+}
+.availabilityStatus[data-instock="false"] .availabilityDot::before {
+  background-color: rgba(193,74,60,0.55);
+  animation-duration: 2.6s;
+}
+@keyframes dotPulse {
+  0%   { transform: scale(0.9); opacity: 0.55; }
+  60%  { transform: scale(2.2); opacity: 0; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+.availabilityText {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 100%;
+  color: #1b4332;
+}
+.availabilityStatus[data-instock="false"] .availabilityText {
+  color: #8b3328;
+}
+.priceParent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.price {
+  margin: 0;
+  font-size: 48px;
+  letter-spacing: -0.5px;
+  line-height: 130%;
+  font-weight: 600;
+  font-family: var(--font-golos-text);
+  color: var(--text-black);
+}
+.priceUnit {
+  font-size: 12px;
+  color: var(--text-grey);
+}
+
+.buttonsRow {
+  display: flex;
+  align-items: stretch;
+  gap: 12px;
+}
+
+/* === DELIVERY ROW ======================================================= */
+.deliveryRow {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--text-black);
+}
+.deliveryHeading {
+  font-weight: 500;
+  line-height: 100%;
+}
+.deliveryLogos {
+  display: flex;
+  align-items: center;
+  gap: 21px;
+  font-family: var(--font-inter);
+  font-size: 18px;
+}
+.deliveryPartner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.deliveryIcon {
+  width: 50px;
+  height: 50px;
+  display: block;
+  object-fit: contain;
+}
+.deliveryName {
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+}
+.deliveryLink {
+  align-self: flex-start;
+}
+.deliveryToggle {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 4px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-family: var(--font-golos-text);
+  font-size: 12px;
+  color: var(--text-grey);
+  border-bottom: 1px dashed var(--text-black);
+  line-height: 1;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.deliveryToggle:hover {
+  color: var(--brand-accent-secondary-default);
+  border-bottom-color: var(--brand-accent-secondary-default);
+}
+.deliveryToggle:focus-visible {
+  outline: 2px solid var(--brand-accent-primary-default);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+.deliveryChevron {
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.deliveryChevronOpen {
+  transform: rotate(180deg);
+}
+
+/* === Раскрывающаяся панель доставки ====================================== */
+.deliveryDetails {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease, margin-top 0.3s ease;
+  margin-top: 0;
+}
+.deliveryDetailsOpen {
+  grid-template-rows: 1fr;
+  margin-top: 4px;
+}
+.deliveryDetailsInner {
+  overflow: hidden;
+  background-color: var(--decorative-1);
+  border: 1px solid var(--decorative-2);
+  border-radius: 6px;
+  padding: 0 20px;
+  max-height: 0;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  font-size: 14px;
+  line-height: 150%;
+  color: var(--text-black);
+}
+.deliveryDetailsOpen .deliveryDetailsInner {
+  max-height: 1000px;
+  padding: 18px 20px;
+}
+.deliveryList {
+  margin: 0;
+  padding-left: 18px;
+  list-style: disc;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.deliveryList strong {
+  color: var(--brand-accent-secondary-default);
+  font-weight: 600;
+}
+
+/* === STORAGE INFO ROWS =================================================== */
+.storageInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 18px;
+  color: var(--text-black);
+}
+.storageRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.storageText {
+  line-height: 140%;
+}
+
+/* =====================================================================
+   COMPREHENSIVE MOBILE — ≤ 768px (product hero card)
+   ---------------------------------------------------------------------
+   Per Figma spec (375 viewport):
+   • Outer container padding 20 20 0 20, gap 20 between blocks
+   • Photo card: full-width 1:1, image fills (no gray bg), border-radius 16
+   • Swipe carousel + 36×36 circular arrows (--decorative-2 bg)
+   • Thumbnails row BELOW photo (not absolute overlay)
+   • Text block: NO card wrapper on mobile — flows directly on cream bg
+   • Tag + reviews row: full width, tag left, stars+count right
+   • Title: TWO-COLOR (descriptive part grey, product name black),
+     28px 600 130% -0.5px
+   • Description: 14px 400 140% black
+   • Feature card: padding 16, gap 28 row / 16 col, 2-col grid,
+     border-radius 6, decorative-1 bg, decorative-2 border
+   • Volume chips: row of 3, equal-width, 52px high, 1Л/5Л/10Л
+   • Active chip: bg decorative-2, normal 1px grey border (lighter style
+     than desktop)
+   • Counter: full-width row 52px high, padding 16/20, justify-between
+   • Stock indicator + price block: vertical stack, 32px price
+   • Buttons stack vertically full-width: Замовити primary 60px,
+     Зателефонуйте outline 52px
+   ===================================================================== */
+@media screen and (max-width: 768px) {
+  .productSectionWrapper {
+    /* Навбар тепер `position: sticky` (Phase 3.14.1) — займає своє
+       місце в потоці і прилипає при скролі. Тому компенсаційний
+       padding-top більше НЕ потрібен. Залишаємо лише статичний 20px
+       зазор від нижнього краю навбара до breadcrumb. */
+    padding: 20px 20px 0 20px;
+  }
+  .productSection {
+    width: 100%;
+    gap: 20px;
+  }
+  /* Breadcrumb на мобільному — точно за специфікацією Figma:
+     color #93928C, Golos Text, 10px, 400, line-height 100%.
+     Всі сегменти (включно з активним "Флорес") — одного сірого кольору. */
+  .productHeader {
+    font-family: var(--font-golos-text);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 100%;
+    gap: 4px;
+    flex-wrap: wrap;
+    color: var(--text-grey, #93928C);
+  }
+  .breadcrumb,
+  .breadcrumbLink,
+  .breadcrumbSep,
+  .breadcrumbCurrent,
+  .flores {
+    color: var(--text-grey, #93928C);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 100%;
+  }
+  .mainContent {
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  /* === GALLERY ============================================ */
+  .image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    background: var(--bg-cream, #f9f7f2);
+    overflow: hidden;
+    position: relative;
+  }
+  .swiperTrack {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .swiperTrack::-webkit-scrollbar { display: none; }
+  .swiperSlide {
+    position: relative;
+    inset: auto;
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100%;
+    display: block;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    animation: none;
+  }
+  .swiperSlideActive { animation: none; }
+  .mainPhoto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .galleryArrow { display: flex; }
+  /* Per user spec: arrows must be at 20px from the SCREEN edge, NOT from the
+     photo card. Photo card itself sits at 20px from screen edge (outer
+     padding), so arrows pinned to its left:0/right:0 land exactly 20px from
+     the viewport edge. Кнопки виходять до самого краю фото-картки, не
+     наїжджаючи на пляшки в центрі. */
+  .galleryArrowPrev { left: 0; }
+  .galleryArrowNext { right: 0; }
+  .galleryArrow {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+  }
+  .galleryArrow svg { width: 18px; height: 18px; }
+
+  .thumbStrip { display: none; }
+
+  /* MOBILE thumb strip — overlay INSIDE the photo card at the bottom.
+     Positioned absolutely so the photo fills the entire card behind it.
+     Sized to fit exactly 5 thumbs (56×56) within 335-32=303px content
+     with 6px gaps: 5*56 + 4*6 = 304 ≈ 303. */
+  .thumbRowMobile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 14px;
+    z-index: 4;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .thumbRowMobile::-webkit-scrollbar { display: none; }
+  .thumbMobile {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+  }
+
+  /* === TEXT BLOCK — NO card wrapper on mobile ============= */
+  .textBlock {
+    width: 100%;
+    min-height: 0;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+  .textBlockInner {
+    gap: 20px;
+  }
+
+  /* Tag + reviews row */
+  .topRow { gap: 16px; }
+  .headlineGroup { gap: 12px; }
+  .tagParent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    flex-wrap: nowrap;
+  }
+  .rating { gap: 10px; }
+  .ratingNumber { font-size: 13px; color: var(--text-grey); }
+
+  /* Title — two-color split (grey prefix + black product name) */
+  .title {
+    font-size: 28px;
+    line-height: 130%;
+    letter-spacing: -0.5px;
+    font-weight: 600;
+    color: var(--text-black);
+  }
+  .titleAccent {
+    color: var(--text-grey, #93928C);
+  }
+
+  .description {
+    /* На мобільному опис — простий текст, БЕЗ жовто-зеленої обводки/фону/
+       padding. Жовтий бекграунд #F7FAE8 залишається лише на feature-card. */
+    display: block;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    max-width: 100%;
+    font-size: 14px;
+    line-height: 140%;
+    color: var(--text-black, #2C2C27);
+    font-weight: 400;
+  }
+
+  /* Feature parameters card (yellow-green).
+     Per Figma spec for mobile feature row:
+       parent: display:flex; flex-wrap:wrap; gap: 12px 28px;
+       cell:   width: 142px; display:flex; gap:8px (icon + text);
+       label:  12px 400 100% --text-grey
+       value:  12px 600 120% --text-black (can wrap to 2 lines)
+     Both .featureRow JSX wrappers are flattened so all cells flow into
+     a single 2-col responsive grid. */
+  .featureGroup {
+    padding: 16px;
+    border-radius: 6px;
+    border: 1px solid var(--decorative-2, #E7EBE7);
+    background: var(--decorative-1, #F7FAE8);
+  }
+  .featureRowParent {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 12px 28px;
+    width: 100%;
+  }
+  .featureRow {
+    display: contents;
+  }
+  .featureCell {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    /* Exactly 2 cells per row regardless of viewport: half minus half-gap */
+    flex: 0 0 calc(50% - 14px);
+    max-width: calc(50% - 14px);
+    min-height: 0;
+  }
+  /* Hide the desktop "filler" empty placeholder cell on mobile —
+     otherwise it creates an empty slot in the wrap layout. */
+  .featureCell[aria-hidden="true"] {
+    display: none;
+  }
+  .featureCell > :first-child {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    color: var(--text-black, #2C2C27);
+  }
+  .featureIcon {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px;
+    min-height: 20px;
+    color: var(--text-black, #2C2C27);
+  }
+  .featureText {
+    display: flex;
+    flex-direction: column;
+    /* Per user spec: 8px gap between label and value (e.g. "Культури" ↔
+       "Всі культури"). Previously 4px → looked cramped. */
+    gap: 8px;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+  .featureLabel {
+    font-size: 12px;
+    line-height: 100%;
+    font-weight: 400;
+    color: var(--text-grey, #93928C);
+    font-family: var(--font-golos-text);
+  }
+  .featureValue {
+    font-size: 12px;
+    line-height: 120%;
+    font-weight: 600;
+    color: var(--text-black, #2C2C27);
+    font-family: var(--font-golos-text);
+    white-space: normal;
+    word-break: normal;
+    overflow-wrap: break-word;
+  }
+  /* Ensure all icon-images inside feature cells render in a dark color
+     even if the source SVG uses a white stroke (legacy assets). */
+  .featureCell img {
+    filter: brightness(0) saturate(100%) invert(15%) sepia(0%)
+            saturate(0%) hue-rotate(0deg) brightness(95%) contrast(80%);
+  }
+
+  /* === OPTIONS / PRICE / BUTTONS ========================== */
+  .purchaseBlock { gap: 20px; }
+  .optionsRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .optionsLabel {
+    font-size: 12px;
+    line-height: normal;
+    color: var(--text-black, #2C2C27);
+    font-weight: 400;
+    font-family: var(--font-golos-text);
+  }
+  .optionsGroup, .counterGroup {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .volumeChipGroup {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 12px;
+    width: 100%;
+  }
+  /* Override VolumeChip1 root for mobile — chips fill the row equally
+     (per design grid layout). */
+  .volumeChipGroup > button {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 52px;
+    padding: 0 12px;
+    font-size: 14px;
+  }
+  /* Active chip on mobile per Figma spec: lighter decorative-2 bg,
+     regular 1px grey border (NOT the desktop 2px dark-green style) */
+  .volumeChipGroup > button[data-state="Active"] {
+    background-color: var(--decorative-2, #E7EBE7);
+    border: 1px solid var(--text-grey, #93928C);
+    color: var(--text-black, #2C2C27);
+    font-weight: 500;
+  }
+
+  /* Counter mobile — full width, justify-between like spec card.
+     We target the direct DIV child of .counterGroup (Counter1 root).
+     Avoid matching inner .btn elements (which contain "counter" via the
+     CSS-modules `counter1_btn` hash). */
+  .counterGroup > div {
+    width: 100% !important;
+    height: 52px;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+  /* Price + availability — stack vertically */
+  .priceRow {
+    gap: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .availabilityStatus { font-size: 14px; gap: 8px; }
+  .priceParent { align-items: flex-start; gap: 4px; }
+  .price {
+    font-size: 32px;
+    line-height: 130%;
+    letter-spacing: -0.5px;
+    font-weight: 600;
+    color: var(--text-black, #2C2C27);
+    font-family: var(--font-golos-text);
+  }
+  .priceUnit { font-size: 13px; color: var(--text-grey); }
+
+  /* Buttons — stack vertically, full width.
+     Override fixed widths from PrimaryButton1/SecondaryButton1 components. */
+  .buttonsRow {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  .buttonsRow > button,
+  .buttonsRow > a {
+    width: 100% !important;
+    max-width: none !important;
+    flex: 0 0 auto !important;
+  }
+  /* Primary button (Замовити) = 60px, Secondary button (Зателефонуйте) = 52px */
+  .buttonsRow > button[data-type="Filled"] {
+    height: 60px !important;
+  }
+  .buttonsRow > button[data-type="Outline"] {
+    height: 52px !important;
+  }
+
+  /* Delivery toggle */
+  .deliveryDetailsInner {
+    font-size: 13px;
+    padding: 0 14px;
+  }
+  .deliveryDetailsOpen .deliveryDetailsInner {
+    padding: 14px;
+  }
+  .deliveryList { gap: 6px; padding-left: 16px; }
+}
+
+@media screen and (max-width: 360px) {
+  .thumbMobile { width: 56px; height: 56px; }
+  .volumeChipGroup { gap: 10px; }
+}

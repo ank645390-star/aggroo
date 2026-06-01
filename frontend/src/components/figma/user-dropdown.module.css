@@ -1,0 +1,109 @@
+/* Header user dropdown */
+.wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px 6px 6px;
+  border: 0;
+  background-color: transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color .15s ease;
+}
+.trigger:hover { background-color: #f0f2ed; }
+.wrap[data-open="true"] .trigger { background-color: #f0f2ed; }
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e7ebe7;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: 0;
+  width: 300px;
+  background-color: #ffffff;
+  border: 1px solid #e7ebe7;
+  border-radius: 12px;
+  box-shadow: 0 22px 50px rgba(15,26,20,.16);
+  z-index: 60;
+  padding: 8px;
+  animation: udFadeIn .18s ease-out;
+}
+.panel::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  right: 22px;
+  width: 14px;
+  height: 14px;
+  background: #ffffff;
+  border-left: 1px solid #e7ebe7;
+  border-top: 1px solid #e7ebe7;
+  transform: rotate(45deg);
+}
+@keyframes udFadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.panelHeader {
+  padding: 12px 12px 10px;
+  border-bottom: 1px solid #f0f2ed;
+  margin-bottom: 6px;
+}
+.title { display: flex; flex-direction: column; gap: 4px; }
+.name {
+  font-family: "Golos Text", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2c2c27;
+  line-height: 1.2;
+}
+.email {
+  font-family: "Golos Text", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #93928c;
+}
+
+.options { display: flex; flex-direction: column; gap: 2px; }
+.option {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 0;
+  background: transparent;
+  border-radius: 8px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2c2c27;
+  text-decoration: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background-color .12s ease, color .12s ease;
+}
+.option:hover { background-color: #f4f5ee; color: #1b4332; }
+.option:hover svg path,
+.option:hover svg circle { stroke: #1b4332; }
+.divider {
+  height: 1px;
+  background-color: #f0f2ed;
+  margin: 4px 8px;
+}
+.optionLogout { color: #c14a3c; }
+.optionLogout:hover { color: #a13a2e; background-color: #fdebe8; }
+.optionLogout:hover svg path { stroke: #a13a2e; }

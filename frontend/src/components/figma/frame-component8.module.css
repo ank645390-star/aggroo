@@ -1,0 +1,197 @@
+/* ============================================================
+ * Section «Ми не просто виробляємо препарати»
+ *
+ * Pixel-perfect HTML+CSS — координати взяті з Figma:
+ *
+ *   Section: 1920 × 1604
+ *   ┌────────────────────────────────────────────────────────┐
+ *   │ top:120  HEADING (left 120, right 120)                 │
+ *   │                                  ┌── DESCRIPTION ──┐   │
+ *   │                            top:470 ─ left:976 ─ r:120  │
+ *   │                                                        │
+ *   │             ┌── CANISTERS ──┐                          │
+ *   │             │  838 × 911    │  (overlay: вище зеленого)│
+ *   │             │  left: ~541   │                          │
+ *   │             │  top:  500    │                          │
+ *   │   ┌─────────┴───────────────┴────────┐                 │
+ *   │   │ FIELD 954×691 │ GREEN 954×691    │ top: 720        │
+ *   │   │ left:0        │ left:966         │ bottom: 1411    │
+ *   │   └───────────────┴──────────────────┘                 │
+ *   └────────────────────────────────────────────────────────┘
+ * ============================================================ */
+
+.parent {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
+  height: 1531px;
+  flex-shrink: 0;
+  background-color: var(--bg-cream, #F9F7F2);
+  overflow: hidden;
+  isolation: isolate;
+  text-align: left;
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  color: var(--text-black, #2C2C27);
+}
+
+/* ---------- Field card (left, поруч із зеленим блоком) ---------- */
+.fieldImage {
+  position: absolute;
+  left: 0;
+  top: 840px;
+  width: 954px;
+  height: 691px;
+  object-fit: cover;
+  object-position: center;
+  user-select: none;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ---------- Green panel (right) ---------- */
+.greenPanel {
+  position: absolute;
+  left: 966px;
+  top: 840px;
+  width: 954px;
+  height: 691px;
+  background-color: var(--bg-green, #ACB14F);
+  overflow: hidden;
+  z-index: 2;
+}
+.greenTexture {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ---------- Canisters (tight crop, ~3% більше за висоту карток 691px,
+ *            тобто ~712 visual. Aspect 504×552 → frame 650×712.
+ *            Розміщено так, що bottom каністр = bottom карток (1411),
+ *            а верх трошки виступає над top карток (720). ---------- */
+.canisters {
+  position: absolute;
+  left: 635px;
+  top: 819px;
+  width: 650px;
+  height: 712px;
+  object-fit: contain;
+  object-position: center bottom;
+  user-select: none;
+  pointer-events: none;
+  filter: drop-shadow(0 28px 48px rgba(0, 0, 0, 0.28));
+  z-index: 5;
+}
+
+/* ---------- Heading ---------- */
+.h1 {
+  position: absolute;
+  left: 120px;
+  top: 134px;
+  right: 120px;
+  margin: 0;
+  z-index: 6;
+  font-size: 82px;
+  letter-spacing: -1px;
+  line-height: 120%;
+  text-transform: uppercase;
+  font-family: inherit;
+  color: var(--text-black, #2C2C27);
+}
+.headingBlack {
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  font-weight: 600;
+  color: var(--text-black, #2C2C27);
+}
+.headingGrey {
+  font-family: var(--font-commissioner), "Commissioner", sans-serif;
+  font-weight: 400;
+  color: var(--text-grey, #93928C);
+}
+
+/* ---------- Description ---------- */
+.description {
+  position: absolute;
+  right: 120px;
+  width: 446px;
+  top: 570px;
+  margin: 0;
+  z-index: 6;
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 125%;
+  color: var(--text-black, #2C2C27);
+}
+.description b {
+  font-weight: 700;
+}
+
+/* ---------- Feature stack on green panel ----------
+ * Координати з Figma:
+ *   top:   green_top (720) + 107 = 827
+ *   right: 120 від правого краю секції
+ *   width: 446 (фікс. ширина групи з 3-х фічей)
+ */
+.featureStack {
+  position: absolute;
+  right: 120px;
+  width: 446px;
+  top: 947px;
+  z-index: 7;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  color: var(--text-cream, #F9F7F2);
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+.featureRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.featureIcon {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  display: block;
+  filter: brightness(0) invert(1);
+}
+.featureTitle {
+  margin: 0;
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 120%;
+  letter-spacing: -1px;
+  color: var(--text-cream, #F9F7F2);
+  white-space: nowrap;
+}
+.featureBody {
+  margin: 0;
+  padding-left: 72px;
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 120%;
+  color: var(--text-cream, #F9F7F2);
+}
+
+/* ---------- Responsive ---------- */
+@media screen and (max-width: 1700px) {
+  .parent {
+    width: 100%;
+  }
+}

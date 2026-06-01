@@ -1,0 +1,302 @@
+/* =============================================================================
+   CulturesNotFoundCta.module.css
+   ---------------------------------------------------------------------------
+   1-в-1 копія стилів секції "Не знайшли своє рішення?" з
+   /pages/contacts.module.css (правила .consultation*, .featureBlock,
+   .textBlock, .primaryBtn, .phoneText, .phoneLink + усі їх медіа-запити).
+   Єдина різниця між /contacts та /cultures — текст заголовка, який
+   передається в JSX. Це гарантує повну узгодженість дизайн-системи.
+   ============================================================================= */
+
+.consultationSection {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  background-color: var(--bg-cream, #f9f7f2);
+}
+
+.consultationTitleWrap {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 120px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 2;
+}
+.consultationTitle {
+  margin: 0;
+  font-family: "Commissioner", sans-serif;
+  font-size: 82px;
+  font-weight: 400;
+  letter-spacing: -1px;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #2c2c27;
+  text-align: left;
+}
+.consultTitleStrong {
+  font-family: "Golos Text", sans-serif;
+  font-weight: 600;
+  color: #2c2c27;
+}
+.consultTitleMuted {
+  font-family: "Commissioner", sans-serif;
+  font-weight: 400;
+  color: #93928c;
+}
+.consultTitleBlack { color: #2c2c27; }
+
+/* Block that holds the wheat/sunflower bg + content (24-год badge + right text) */
+.consultationBgBlock {
+  align-self: stretch;
+  margin-top: 98px;
+  position: relative;
+  width: 100%;
+  isolation: isolate;
+  /* Wheat bg image — full bleed */
+  background-image: url("/contacts-consultation-bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* Cream gradient overlay — fades from cream (top) to transparent (bottom)
+   per spec: linear-gradient(180deg, #F9F7F2 45.83%, rgba(249,247,242,0) 100%) */
+.consultationBgBlock::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, #f9f7f2 45.83%, rgba(249, 247, 242, 0) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.consultationContent {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  padding: 0 var(--page-gutter) 120px;
+  box-sizing: border-box;
+  min-height: 720px;
+  gap: 24px;
+}
+
+/* 24 год badge — UNIFIED design per Figma:
+   Semi-transparent DARK green tile (#1B433233 = rgba(27,67,50,0.20))
+   WITH backdrop blur so the underlying photo is softly blurred behind. */
+.featureBlock {
+  background: rgba(27, 67, 50, 0.20);
+  -webkit-backdrop-filter: blur(18px) saturate(110%);
+  backdrop-filter: blur(18px) saturate(110%);
+  border: 0;
+  box-shadow: none;
+  border-radius: 6px;
+  width: auto;
+  max-width: 100%;
+  height: 176px;
+  padding: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #f9f7f2;
+  align-self: end;
+  justify-self: start;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+.featureIcon {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.featureIcon svg {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+.featureText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.featureBig {
+  font-family: "Golos Text", sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 120%;
+  text-transform: uppercase;
+  color: #f9f7f2;
+  white-space: nowrap;
+}
+.featureSub {
+  font-family: "Golos Text", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 130%;
+  color: #f9f7f2;
+  max-width: none;
+  white-space: nowrap;
+}
+
+/* Right text block "Опишіть культуру та задачу..." */
+.textBlock {
+  width: 706px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 32px;
+  align-self: start;
+  justify-self: end;
+  margin-top: 0;
+  margin-bottom: 240px;
+  position: relative;
+}
+.consultationText {
+  font-family: "Golos Text", sans-serif;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 125%;
+  color: #2c2c27;
+}
+.consultationBold {
+  font-family: "Golos Text", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 140%;
+  color: #2c2c27;
+}
+.buttonGroup {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.primaryBtn {
+  cursor: pointer;
+  border: 0;
+  padding: 18px 16px;
+  background-color: #1b4332;
+  align-self: stretch;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #fff;
+  font-family: "Golos Text", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 140%;
+  transition: background-color 0.18s ease, transform 0.12s ease;
+}
+.primaryBtn:hover { background-color: #133527; }
+.primaryBtn:active { transform: translateY(1px); }
+.phoneText {
+  text-align: center;
+  font-family: "Golos Text", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 140%;
+  color: #2c2c27;
+}
+.phoneLink {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s ease, opacity 0.15s ease;
+  cursor: pointer;
+}
+.phoneLink:hover {
+  color: #1b4332;
+  text-decoration: underline;
+}
+.phoneLink:active { opacity: 0.8; }
+
+/* ============================================================================
+   Mobile / tablet adaptations — 1-в-1 з contacts.module.css (@media 768).
+   ============================================================================ */
+@media screen and (max-width: 768px) {
+  .consultationSection {
+    margin-top: 16px;
+    padding: 0;
+    background-color: var(--bg-cream, #f9f7f2);
+  }
+
+  .consultationTitleWrap {
+    padding: 0 20px;
+  }
+  .consultationTitle {
+    font-size: 28px;
+    line-height: 1.15;
+    letter-spacing: -0.4px;
+    text-align: left;
+    width: 100%;
+  }
+
+  .consultationBgBlock {
+    margin-top: 20px;
+    width: 100%;
+    min-height: 0;
+    background-position: center bottom;
+  }
+  .consultationBgBlock::before {
+    background: linear-gradient(180deg, #f9f7f2 0%, rgba(249,247,242,0.85) 35%, rgba(249,247,242,0) 70%);
+  }
+
+  .consultationContent {
+    grid-template-columns: 1fr;
+    padding: 24px 20px 320px;
+    min-height: 0;
+    gap: 20px;
+  }
+
+  .featureBlock {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    padding: 16px 16px;
+    gap: 12px;
+    align-self: start;
+    justify-self: stretch;
+    white-space: normal;
+  }
+  .featureIcon { width: 36px; height: 36px; }
+  .featureIcon svg { width: 36px; height: 36px; }
+  .featureBig  { font-size: 22px; white-space: nowrap; }
+  .featureSub  { font-size: 14px; max-width: 100%; white-space: normal; }
+
+  .textBlock {
+    width: 100%;
+    margin-bottom: 0;
+    margin-top: 0;
+    gap: 20px;
+    align-self: stretch;
+    justify-self: stretch;
+  }
+  .consultationText { font-size: 16px; line-height: 1.4; }
+  .consultationBold { font-size: 18px; line-height: 1.35; }
+  .primaryBtn {
+    padding: 16px 20px;
+    font-size: 16px;
+    line-height: 1.2;
+    border-radius: 8px;
+  }
+  .primaryBtn:focus-visible {
+    outline: 3px solid rgba(27, 67, 50, 0.35);
+    outline-offset: 2px;
+  }
+  .phoneText { font-size: 16px; }
+}
+
+@media screen and (max-width: 380px) {
+  .consultationTitle { font-size: 26px; }
+}

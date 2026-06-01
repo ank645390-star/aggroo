@@ -1,0 +1,8 @@
+.arrowSwitcher {
+  height: var(--height-60);
+  width: 155px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-20);
+}

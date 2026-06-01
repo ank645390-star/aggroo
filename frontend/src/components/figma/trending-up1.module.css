@@ -1,0 +1,17 @@
+.leftIcon {
+  height: var(--height-60);
+  width: var(--width-60);
+  position: relative;
+}
+.vectorIcon {
+  position: absolute;
+  height: 35.5%;
+  width: 100%;
+  top: 33.33%;
+  right: 16.5%;
+  bottom: 31.17%;
+  left: 14.67%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}

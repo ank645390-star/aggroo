@@ -1,0 +1,227 @@
+/* InlineContactForm — посаджується на сторінку статті. Стиль під сайт. */
+.shell {
+  background: #fff;
+  border: 1px solid #e7ebe7;
+  border-radius: 16px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.shell::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, #b3d21733 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+.title {
+  margin: 0;
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: #1b4332;
+  line-height: 1.2;
+}
+.subtitle {
+  margin: 0;
+  color: #5e5e57;
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 640px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+}
+.row2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2c2c27;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.req { color: #c14a3c; }
+
+.input,
+.textarea {
+  appearance: none;
+  border: 1px solid #d8dccd;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+  color: #2c2c27;
+  background: #fafaf6;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #1b4332;
+  background: #fff;
+  box-shadow: 0 0 0 3px #b3d21744;
+}
+.textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13px;
+  color: #5e5e57;
+  cursor: pointer;
+  line-height: 1.5;
+}
+.consent input[type="checkbox"] {
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
+  accent-color: #1b4332;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.consent a {
+  color: #1b4332;
+  text-decoration: underline;
+  text-decoration-color: #b3d217;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+.errorBox {
+  padding: 12px 16px;
+  background: #fcebe6;
+  border: 1px solid #f2c3b8;
+  border-radius: 8px;
+  color: #c14a3c;
+  font-size: 14px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 4px;
+}
+.submit {
+  appearance: none;
+  border: 0;
+  background: #1b4332;
+  color: #f9f7f2;
+  padding: 14px 28px;
+  font-family: "Golos Text", system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.12s ease, box-shadow 0.15s ease;
+  box-shadow: 0 6px 14px #1b433222;
+}
+.submit:hover:not(:disabled) {
+  background: #003214;
+  transform: translateY(-1px);
+}
+.submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.hint {
+  color: #5e5e57;
+  font-size: 14px;
+}
+.hint a {
+  color: #1b4332;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 4px;
+}
+.hint a:hover { text-decoration: underline; }
+
+/* === Success state === */
+.successShell {
+  background: linear-gradient(135deg, #f7fae8 0%, #ecf3d3 100%);
+  border-color: #b3d217;
+}
+.successInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 12px 0;
+}
+.successIcon { display: inline-flex; }
+.successTitle {
+  margin: 0;
+  font-family: "Commissioner", system-ui, sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: #1b4332;
+}
+.successText {
+  margin: 0;
+  max-width: 540px;
+  color: #5e5e57;
+  font-size: 16px;
+  line-height: 1.5;
+}
+.successBtn {
+  margin-top: 8px;
+  background: transparent;
+  border: 1px solid #1b4332;
+  color: #1b4332;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.successBtn:hover {
+  background: #1b4332;
+  color: #f9f7f2;
+}
+
+@media (max-width: 760px) {
+  .shell { padding: 28px 22px; }
+  .row2 { grid-template-columns: 1fr; }
+  .title { font-size: 24px; }
+  .actions { gap: 12px; }
+  .submit { width: 100%; }
+}

@@ -1,0 +1,70 @@
+/* =========================================================================
+   FeatureBlock1 — «Суворий температурний контроль кожної партії препаратів»
+   ------------------------------------------------------------------------
+   Figma spec (Layout panel):
+     • Width  : 406px  (fixed)
+     • Height : 138px  (fixed)
+     • Radius : 6px
+     • Padding: 16px
+     • Gap    : 4px
+     • Layout : Horizontal flow
+
+   Figma spec (Colors panel):
+     • Background: #ACB14F  (в Figma выставлено 20% — но это работает,
+       только когда canvas позади заведомо одноцветный. У нас фон —
+       фотография поля с деревом, поэтому 20% даёт «грязное» просвечивание.
+       Поэтому в рантайме используем SOLID #ACB14F: визуально совпадает
+       с тем, что показывает Figma над cream-канвасом дизайн-файла.)
+     • Text/Icon: #FFFFFF
+   ========================================================================= */
+
+.featureBlock {
+  width: 406px;
+  height: 138px;
+  box-sizing: border-box;
+  padding: 16px;
+  border-radius: 6px;
+
+  /* Дизайн-цвет — НЕ flat #ACB14F (это не оригинальный Figma color token,
+     а оливка-yellow). На Figma-рендере блок имеет вертикальный градиент
+     от светлой оливы сверху к насыщенной оливе-зелёной снизу.
+     Цвета сняты «пипеткой» с эталонного скриншота (см. палитру семплов):
+       top    rgb(188,198,176)  #BCC6B0
+       bottom rgb(153,165,116)  #99A574 */
+  background: linear-gradient(180deg, #BCC6B0 0%, #99A574 100%);
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+
+  text-align: left;
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+}
+
+.iconWrap {
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconImg {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  display: block;
+  /* Иконка уже белая на прозрачном фоне — никаких filter не нужно. */
+}
+
+.label {
+  flex: 1;
+  font-family: var(--font-golos-text), "Golos Text", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 130%;
+  letter-spacing: -0.005em;
+  color: #FFFFFF;
+}

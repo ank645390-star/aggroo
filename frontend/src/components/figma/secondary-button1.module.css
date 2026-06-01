@@ -1,0 +1,37 @@
+.secondaryButton {
+  cursor: pointer;
+  /* Figma: 1px solid #1B4332 (using explicit value to avoid welcome-global.css's
+     --border-2 = "3px solid var(--bg-green)" collision) */
+  border: 1px solid #1b4332;
+  padding: var(--padding-12) var(--padding-16);
+  background-color: transparent;
+  height: var(--height-60);
+  width: 276px;
+  border-radius: var(--br-4);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-12);
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+.secondaryButton:hover {
+  background-color: rgba(27, 67, 50, 0.04);
+}
+.div {
+  position: relative;
+  font-size: var(--fs-16);
+  font-weight: 500;
+  font-family: var(--font-golos-text);
+  color: var(--brand-accent-secondary-default);
+  text-align: left;
+}
+
+/* Arrow icon variant (used in "Залишити відгук"). 20×20, stroke = #1B4332 from SVG */
+.arrowIcon {
+  width: 20px;
+  height: 20px;
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+}

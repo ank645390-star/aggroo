@@ -1,0 +1,17 @@
+.iconJerrycan {
+  height: var(--height-16);
+  width: var(--width-16);
+  position: relative;
+}
+.vectorIcon {
+  position: absolute;
+  height: 79.38%;
+  width: 100%;
+  top: 12.5%;
+  right: 16.87%;
+  bottom: 8.13%;
+  left: 25%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}

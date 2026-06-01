@@ -1,0 +1,69 @@
+/* ============================================================
+   Odometer-style reel — number scrolls smoothly via one CSS
+   transition on translateY of .reelInner. Cells are flex column
+   inside an inline-block window with overflow:hidden.
+
+   Critical to avoid baseline-jitter:
+   - .root: inline-flex, align-items: flex-end (baseline-stable
+     bottom edge for both reel and suffix).
+   - .reel:   inline-block, line-height equals cell line-height.
+   - .reelCell: line-height EQUAL to .reel height so each cell
+     fills the window exactly once.
+   ============================================================ */
+.root {
+  display: inline-flex;
+  align-items: flex-end;
+  white-space: nowrap;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+
+.reel {
+  position: relative;
+  display: inline-block;
+  /* Висота вікна = 1em line-height поточного шрифту. Для cyrillic +
+   * descenders 1em не зачіпає glyphs, які залишаються в межах cap-line. */
+  height: 1em;
+  line-height: 1;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.reelInner {
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+}
+
+.reelCell {
+  display: block;
+  height: 1em;
+  line-height: 1;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  white-space: nowrap;
+}
+
+.suffix {
+  display: inline-block;
+  line-height: 1;
+  margin-left: 0.06em;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  vertical-align: bottom;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

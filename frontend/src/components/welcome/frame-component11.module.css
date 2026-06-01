@@ -1,0 +1,439 @@
+.topProductSectionWrapper {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 100%;
+  text-align: left;
+  font-size: var(--fs-120);
+  color: var(--brand-accent-secondary-default);
+  font-family: var(--font-golos-text);
+}
+
+/* Section "card": фиксированный размер 1920 × 1521 */
+.topProductSection {
+  align-self: stretch;
+  flex: 1;
+  width: 100%;
+  min-height: 1521px;
+  background-color: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-80);             /* 80px : заголовок -> карточки */
+  padding: 137.5px 0 136.5px;     /* 137.5 сверху до заголовка */
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* Layer container — більше НЕ parallax. Звичайний flex-stack для заголовка
+   та карусели. Залишено для збереження CSS-структури селекторів. */
+.parallaxLayer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-80);
+}
+
+/* ---------- Headline ---------- */
+.headline {
+  width: 1673px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.div {
+  align-self: stretch;
+  position: relative;
+  line-height: 144px;
+  text-transform: uppercase;
+}
+
+.span {
+  letter-spacing: var(--ls--1);
+  font-weight: 600;
+}
+
+.span2 {
+  font-family: var(--font-commissioner);
+  letter-spacing: -0.02em;
+  font-weight: 400;
+}
+
+.span3 {
+  font-family: var(--font-commissioner);
+  font-size: var(--fs-120);
+  color: var(--text-black);
+  font-weight: 400;
+  letter-spacing: var(--ls--1);
+}
+
+.div2 {
+  width: 100%;
+  position: relative;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-top: -10px;
+  font-size: var(--fs-120);
+  color: var(--text-black);
+  font-family: var(--font-commissioner);
+  font-weight: 400;
+  line-height: 144px;
+}
+
+.span4 {
+  letter-spacing: var(--ls--1);
+  line-height: 110%;
+  font-weight: 400;
+}
+
+.span5 {
+  font-size: var(--fs-120);
+  letter-spacing: -0.02em;
+  line-height: 120%;
+  color: var(--color-gray-100);
+}
+
+/* ---------- Carousel layout ---------- */
+.mainContent {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--padding-0) var(--padding-12);
+  gap: var(--gap-60);
+}
+
+.carouselBlock {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-32);
+}
+
+.cardsWrapper {
+  position: relative;
+  width: 100%;
+  height: 765px; /* card 725 + 20px breathing room top/bottom for 3D tilt */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+}
+
+.cardsViewport {
+  width: 1680px;            /* 3 * 544 + 2 * 24 — slide width unchanged */
+  max-width: 100%;
+  height: 765px;            /* matches wrapper; padding gives the tilt clearance */
+  padding: 20px 4px;        /* tiny left/right clearance so tilt corners never get clipped */
+  box-sizing: content-box;  /* padding ADDS to width — does NOT shrink the 1680 slide lane */
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+}
+
+.cardsGroup {
+  display: flex;
+  gap: 24px;                 /* between cards */
+  align-items: stretch;
+  transition: transform 0.55s cubic-bezier(0.32, 0.72, 0.32, 1);
+  will-change: transform;
+  height: 725px;             /* fixed — independent of viewport's tilt padding */
+}
+
+.cardSlot {
+  width: 544px;
+  height: 725px;
+  flex: 0 0 544px;
+  display: flex;
+}
+
+/* ---------- Arrow buttons ---------- */
+.arrowBtn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  z-index: 5;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    opacity 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.arrowBtn svg {
+  width: 20px;
+  height: 20px;
+  display: block;
+}
+
+.arrowBtnLeft {
+  left: calc(50% - 1680px / 2 - 84px); /* 12px gap + 60px button + 12px outer */
+}
+
+.arrowBtnRight {
+  right: calc(50% - 1680px / 2 - 84px);
+}
+
+.arrowActive {
+  background-color: var(--brand-accent-secondary-default);
+  color: #ffffff;
+}
+
+.arrowActive:hover {
+  box-shadow: 0 8px 24px rgba(28, 60, 39, 0.28);
+}
+
+.arrowInactive {
+  background-color: var(--decorative-2, #e9efe8);
+  color: var(--brand-accent-secondary-default);
+}
+
+.arrowBtn:disabled {
+  cursor: default;
+}
+
+.arrowBtn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(28, 60, 39, 0.35);
+}
+
+/* ---------- Pagination dots ---------- */
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-12);
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid var(--brand-accent-secondary-default);
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  transition:
+    width 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.dotActive {
+  width: 24px;
+  border-radius: 9999px;
+  background-color: var(--brand-accent-secondary-default);
+}
+
+/* ---------- Responsive (down-scale only matters below 1700px viewport) ---------- */
+@media screen and (max-width: 1760px) {
+  .arrowBtnLeft {
+    left: 16px;
+  }
+  .arrowBtnRight {
+    right: 16px;
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .topProductSection {
+    min-height: auto;
+    padding: 80px 0 80px;
+    gap: var(--gap-40);
+  }
+  .mainContent {
+    gap: var(--gap-30);
+  }
+}
+
+@media screen and (max-width: 925px) {
+  .topProductSection {
+    padding: 56px 0 56px;
+    gap: var(--gap-20);
+  }
+  .div,
+  .div2 {
+    font-size: var(--fs-50);
+    line-height: 86px;
+  }
+  .carouselBlock {
+    gap: var(--gap-16);
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .topProductSection {
+    padding: 40px 0 40px;
+  }
+  .div,
+  .div2 {
+    font-size: var(--fs-30);
+    line-height: 58px;
+  }
+}
+
+/* ───── Mobile (≤ 768px) — native horizontal scroll carousel ───── */
+@media screen and (max-width: 768px) {
+  /* Frame-component11 на mobile — простий блок-flow (БЕЗ sticky).
+     Він йде природньо ПІД зеленим блоком "Технологія Врожаю".
+     Зелений блок sticky тримається у viewport-і поки JS scroll-lock
+     перемикає картки 01→04, потім після exit-lock сторінка природньо
+     скролиться вниз і "Вибір агрономів" з'являється повністю. */
+  .topProductSectionWrapper {
+    position: relative;
+    width: 100%;
+    align-self: stretch;
+    background-color: var(--bg-cream);
+  }
+  .topProductSection {
+    padding: 60px 0 60px;       /* 60px vertical rhythm per design 29.05.2026 */
+    min-height: 0;
+    gap: 0;
+    background-color: var(--bg-cream);    /* beige, NOT white */
+  }
+  .parallaxLayer {
+    gap: 60px;                  /* 60px between title block and carousel (per design 29.05.2026) */
+    /* Disable parallax on mobile — keep the title statically anchored
+       in place (no vertical drift during scroll). RevealHeading still
+       handles the left-to-right text reveal animation. */
+    transform: none !important;
+    will-change: auto;
+  }
+  .headline {
+    width: 100%;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  .div,
+  .div2 {
+    font-size: 32px;
+    line-height: 120%;
+    letter-spacing: -1px;
+    white-space: normal;
+  }
+  .div2 {
+    margin-top: 0;
+  }
+  .span3,
+  .span5,
+  .span,
+  .span2,
+  .span4 {
+    font-size: 32px;
+    line-height: 120%;
+    letter-spacing: -1px;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  /* "ВИБІР" → Golos 600 black; "УКРАЇНСЬКИХ АГРОНОМІВ" → Commissioner 400 grey */
+  .span {
+    font-family: var(--font-golos-text);
+    font-weight: 600;
+    color: var(--text-black);
+  }
+  .span3,
+  .span4 {
+    font-family: var(--font-commissioner);
+    font-weight: 400;
+    color: var(--text-grey);
+  }
+  .mainContent {
+    gap: 24px;
+    padding: 0;
+  }
+  .carouselBlock {
+    gap: 16px;
+  }
+  /* ---- Native horizontal scroll carousel ---- */
+  .cardsWrapper {
+    height: auto;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .cardsViewport {
+    width: 100%;
+    height: auto;
+    padding: 12px 0;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    scroll-padding-left: 20px;
+    scroll-padding-right: 20px;
+    /* ── ВАЖЛИВО: на мобайлі нам потрібен ТОЧНО горизонтальний нативний
+       свайп. `pan-x` дозволяє браузеру обробляти горизонтальний gesture
+       як native scroll (без втручання useSwipeable, який заточений під
+       desktop translate-карусель). Без цього `pan-y` повністю блокує
+       горизонтальне гортання пальцем.                                  */
+    touch-action: pan-x !important;
+    -ms-touch-action: pan-x !important;
+    /* Дозволити вибір тексту під час scroll не потрібно — але
+       userSelect:none з inline style інколи блокує жести на iOS.
+       Скидаємо тут.                                                    */
+    user-select: auto;
+    -webkit-user-select: auto;
+    /* Hint для composited scroll layer на мобайлі */
+    will-change: scroll-position;
+  }
+  .cardsViewport::-webkit-scrollbar {
+    display: none;
+  }
+  .cardsGroup {
+    gap: 16px;
+    height: auto;
+    transform: none !important;     /* kill desktop translate */
+    transition: none !important;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .cardSlot {
+    width: calc(100vw - 64px);     /* peek of next card visible */
+    flex: 0 0 calc(100vw - 64px);
+    height: auto;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+  .arrowBtn {
+    display: none;
+  }
+  /* CTA "Переглянути лінійку" — design spec: 336px, padding 18px 16px */
+  .mainContent button[data-testid="primary-button"] {
+    width: 336px !important;
+    max-width: calc(100% - 40px);
+    padding: 18px 16px !important;
+    height: auto !important;
+    border-radius: 4px;
+  }
+  /* Pagination dots — solid (no border) so they match how-it-works style */
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 0;
+    background: var(--decorative-2, #e9efe8);
+  }
+  .dotActive {
+    width: 24px;
+    border-radius: 9999px;
+    background-color: var(--brand-accent-secondary-default);
+  }
+}

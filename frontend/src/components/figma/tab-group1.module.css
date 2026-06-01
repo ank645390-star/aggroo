@@ -1,0 +1,73 @@
+.container,
+.tabGroup {
+  align-self: stretch;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+}
+.tabGroup {
+  flex-direction: column;
+  padding: var(--padding-0) 73px;
+  gap: 37px;
+  z-index: 4;
+}
+.container {
+  height: 54px;
+  background-color: var(--bg-card);
+  overflow-x: auto;
+  gap: var(--gap-28);
+}
+.tabGroupChild {
+  align-self: stretch;
+  height: var(--height-1);
+  position: relative;
+  border-top: var(--border-1);
+  box-sizing: border-box;
+}
+@media screen and (max-width: 1275px) {
+  .tabGroup {
+    padding-left: var(--padding-36);
+    padding-right: var(--padding-36);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 900px) {
+  .tabGroup {
+    gap: var(--gap-18);
+  }
+}
+
+/* ============================================================
+   MOBILE (≤768px) — clean tab strip per user spec:
+   • Horizontal scroll (5 tabs > viewport width on small screens).
+   • Gap between tabs: 10px.
+   • Remove bottom underline indicator (.tabGroupChild) — не потрібен.
+   • Outer padding 20px (узгоджено з рештою сторінки товару).
+   ============================================================ */
+@media screen and (max-width: 768px) {
+  .tabGroup {
+    /* describeSection вже задає горизонтальний padding знадвору
+       (29px на ≤900px, 20px на ≤450px). Тут лишаємо tabGroup
+       без додаткових бокових padding — табы flow всередині секції. */
+    padding: 0;
+    gap: 0;
+  }
+  .container {
+    height: 44px;
+    background-color: transparent;
+    gap: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* Дозволяємо контейнеру горизонтально розкритися ширше за viewport
+       щоб scroll-snap працював плавно. */
+    scroll-snap-type: x proximity;
+  }
+  .container::-webkit-scrollbar { display: none; }
+  /* Кожен таб — стає snap-target при горизонтальному прокручуванні. */
+  .container > * { scroll-snap-align: start; }
+  /* Прибираємо нижню роздільну лінію — користувач явно попросив. */
+  .tabGroupChild { display: none; }
+}

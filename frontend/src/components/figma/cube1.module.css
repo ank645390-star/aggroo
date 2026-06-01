@@ -1,0 +1,17 @@
+.iconCube {
+  height: var(--height-20);
+  width: var(--width-20);
+  position: relative;
+}
+.vectorIcon {
+  position: absolute;
+  height: 75%;
+  width: 100%;
+  top: 12.5%;
+  right: 17%;
+  bottom: 12.5%;
+  left: 16.5%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}

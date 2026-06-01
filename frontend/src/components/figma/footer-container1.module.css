@@ -1,0 +1,455 @@
+.footerContainer,
+.mainRow {
+  align-self: stretch;
+  display: flex;
+  align-items: flex-start;
+}
+.footerContainer {
+  flex-direction: column;
+  gap: 143px;
+  z-index: 1;
+  flex-shrink: 0;
+  text-align: left;
+  font-size: var(--fs-18);
+  color: var(--text-cream);
+  font-family: var(--font-golos-text);
+}
+.mainRow {
+  overflow: hidden;
+  gap: 418px;
+}
+.logoIcon {
+  height: 261px;
+  width: 366px;
+  position: relative;
+  object-fit: cover;
+}
+.colum,
+.navColumn {
+  display: flex;
+  align-items: flex-start;
+}
+.colum {
+  flex: 1;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: var(--gap-32) 108px;
+}
+.navColumn {
+  flex-direction: column;
+  gap: var(--gap-24);
+}
+.b {
+  position: relative;
+  line-height: 140%;
+}
+.navLinks {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 29px;
+}
+.div {
+  width: var(--width-186);
+  position: relative;
+  line-height: 140%;
+  display: inline-block;
+}
+.copyrightContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--fs-12);
+  width: 100%;
+  align-self: stretch;
+  gap: var(--gap-24);
+  /* +10px зміщення вниз — внизу футера лишається багато порожнього місця,
+     тож опускаємо всі три блоки (©, policy-посилання, credits) синхронно. */
+  margin-top: 10px;
+  /* Розташовуємо в одну лінію по класиці футера:
+     © зліва — policy-посилання по центру — рік справа.
+     Блок credits із footer1.tsx позиціонується абсолютно вище
+     (top: 381px), тому конфлікту немає. */
+}
+.copyrightLeft,
+.copyrightRight {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-8);
+  flex: 1 1 0;
+  min-width: 0;
+}
+.copyrightLeft {
+  justify-content: flex-start;
+}
+.copyrightRight {
+  justify-content: flex-end;
+  text-align: right;
+}
+
+/* ---------- Credits block «Сайт створено - olhalazarieva» (RIGHT slot) ----------
+   На desktop credits-блок є 3-м flex-елементом у .copyrightContainer, тож
+   йому потрібен display:flex + flex:1 + justify-content:flex-end. Інакше він
+   виступає як block-div і ламає триколонкову розкладку (© ─ policies ─ credits).
+   На мобілці він переоверайдиться в @media (max-width:768px).             */
+.creditRowTop {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1 1 0;
+  min-width: 0;
+  justify-content: flex-end;
+  white-space: nowrap;
+  text-align: right;
+  font-size: var(--fs-12);
+  line-height: 120%;
+}
+
+/* ---------- Credits block «Дизайн створено» (right slot) ---------- */
+.creditRow {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  white-space: nowrap;
+  font-size: var(--fs-12);
+  line-height: 120%;
+}
+.creditLabel {
+  color: inherit;
+  opacity: 0.92;
+}
+.creditLink {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.18s ease, opacity 0.18s ease;
+}
+.creditLink:hover {
+  color: #b3d217;
+}
+.creditLink:focus-visible {
+  outline: 2px solid #b3d217;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.copyrightInner {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: var(--gap-8);
+}
+.copyrightLine {
+  padding-left: 26px; /* вирівнювання під текстом біля © */
+  color: inherit;
+  opacity: 0.92;
+}
+/* 3 underlined text-links (Cookie/Privacy/Terms) — centered between
+   © label (LEFT slot) and credits «Сайт створено» (RIGHT slot).         */
+.policyLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  flex-wrap: wrap;
+  /* flex:1 щоб policy-блок зайняв центральну колонку точно посередині
+     між © (зліва) і credits (справа), а не auto-width.                  */
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+}
+.policyLink {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  font-size: var(--fs-12);
+  cursor: pointer;
+  font-family: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  letter-spacing: 0.01em;
+  transition: color 0.18s ease, opacity 0.18s ease;
+  opacity: 0.92;
+}
+.policyLink:hover {
+  color: #b3d217;
+  opacity: 1;
+}
+.policyLink:focus-visible {
+  outline: 2px solid #b3d217;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.antDesigncopyrightCircleOuIcon {
+  width: var(--width-18);
+  position: relative;
+  max-height: 100%;
+}
+.div6 {
+  position: relative;
+  line-height: 120%;
+}
+
+.contactLink {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+.contactLink:hover {
+  opacity: 0.75;
+  text-decoration: underline;
+}
+
+/* Footer column nav links (Товари / Про нас / Блог / Повернення) — make them
+ * feel clickable: subtle accent color shift + underline animation on hover. */
+.navLink {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.15s ease;
+  position: relative;
+}
+.navLink:hover {
+  color: #b3d217;
+  transform: translateX(2px);
+}
+.navLink:focus-visible {
+  outline: 2px solid #b3d217;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+/* ---------- Social links block (moved here from footer1.module.css
+   so that CSS modules resolve when rendered inside FooterContainer1) ---------- */
+.socialLinks,
+.socialWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.socialLinks {
+  width: 251px;
+  margin: 0 !important;
+  position: absolute;
+  top: 381px;
+  left: 1518px;
+  z-index: 2;
+  flex-shrink: 0;
+}
+.socialWrapper {
+  gap: var(--gap-60);
+}
+.socialInner,
+.socialWrapper {
+  align-self: stretch;
+}
+.socialInner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-24);
+  flex-shrink: 0;
+}
+.iconsRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap-16);
+}
+.socialIconLink {
+  display: inline-flex;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.socialIconLink:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+.groupIcon,
+.groupIcon2 {
+  height: var(--height-32, 32px);
+  width: var(--width-32, 32px);
+  position: relative;
+  display: block;
+}
+
+/* ===== Mobile (≤768px) — per design 29.05.2026 (final compose) =====
+   Order: logo → Контакти → Нашим клієнтам → Наша адреса → Соцмережі →
+   "Сайт створено" → © Всі права захищено
+   Headings: 16 / 600 / 140%
+   Body links / phones / address: 14 / 400 / 120%
+   Small (credits / copyright / policies): 12 / 400 / 120%
+   All color #F9F7F2 (cream). */
+@media screen and (max-width: 768px) {
+  .footerContainer {
+    gap: 40px;
+    color: var(--text-cream, #f9f7f2);
+    font-family: "Golos Text", var(--font-golos-text), sans-serif;
+  }
+  .mainRow {
+    flex-direction: column;
+    gap: 40px;
+    overflow: visible;
+  }
+  .logoIcon {
+    width: 220px;
+    height: auto;
+    max-width: 100%;
+  }
+  .colum {
+    flex-direction: column;
+    gap: 40px;
+    width: 100%;
+  }
+  .navColumn {
+    width: 100%;
+    gap: 16px;
+  }
+  /* Section headings (16 / 600 / 140%). */
+  .b {
+    font-family: "Golos Text", var(--font-golos-text), sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 140%;
+    color: var(--text-cream, #f9f7f2);
+  }
+  .navLinks {
+    gap: 16px;
+  }
+  /* Body items (14 / 400 / 120%). All `.div` nav links + the .b div
+     wrappers that hold phones / address (their .b above is the heading;
+     inner divs share same class — so we override font-size on the
+     `.b div.b` nested case via the contact/address content). */
+  .div,
+  .div6,
+  .navColumn .b > a,
+  .navColumn .b > br + a {
+    font-family: "Golos Text", var(--font-golos-text), sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 120%;
+    color: var(--text-cream, #f9f7f2);
+  }
+  /* The phones / address container uses class `b` (legacy) but its
+     content is BODY text, not heading. Distinguish via :not selector
+     and ensure inner text is 14px. */
+  .navColumn > .b + .b {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 120%;
+  }
+  .contactLink {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 120%;
+    color: var(--text-cream, #f9f7f2);
+  }
+
+  /* "Сайт створено - www.olhalazarieva.com" — 12 / 400 / 120%. */
+  .creditRowTop {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 6px;
+    flex-wrap: wrap;
+    font-family: "Golos Text", var(--font-golos-text), sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 120%;
+    color: var(--text-cream, #f9f7f2);
+    margin-top: 16px;
+  }
+  .creditRowTop .creditLink {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 120%;
+    color: var(--text-cream, #f9f7f2);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .creditRowTop .creditLabel {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 120%;
+    color: var(--text-cream, #f9f7f2);
+    white-space: nowrap;
+  }
+
+  /* "© 2026. Всі права захищено." — 12 / 400 / 120%. */
+  .copyrightContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    text-align: left;
+    width: 100%;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 120%;
+    margin-top: 0;
+  }
+  .copyrightLeft {
+    flex: 0 0 auto;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    font-size: 12px;
+    line-height: 120%;
+  }
+  .copyrightLeft .div6 {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 120%;
+  }
+  .antDesigncopyrightCircleOuIcon {
+    width: 14px;
+    height: 14px;
+  }
+  .copyrightLine {
+    padding-left: 0;
+    font-size: 12px;
+  }
+  .policyLinks {
+    gap: 14px;
+    justify-content: flex-start;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .policyLink {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 120%;
+    color: var(--text-cream, #f9f7f2);
+  }
+  .navLink:hover {
+    transform: none;
+  }
+
+  /* Social links block on mobile — exit out of the desktop absolute
+     positioning and flow naturally between "Наша адреса" and credits. */
+  .socialLinks {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    margin: 0 !important;
+  }
+  .socialWrapper {
+    gap: 16px;
+  }
+  .socialInner {
+    gap: 16px;
+  }
+  .iconsRow {
+    gap: 16px;
+  }
+  .groupIcon,
+  .groupIcon2 {
+    width: 32px;
+    height: 32px;
+  }
+}

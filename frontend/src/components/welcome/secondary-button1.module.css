@@ -1,0 +1,37 @@
+.secondaryButton {
+  cursor: pointer;
+  border: 0;
+  padding: var(--padding-12) var(--padding-16);
+  background-color: var(--bg-green);
+  width: 462px;
+  height: 54px;
+  border-radius: var(--br-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  gap: var(--gap-12);
+}
+.div,
+.root {
+  position: relative;
+}
+.root {
+  height: var(--height-20);
+  width: var(--width-20);
+}
+.root[data-size="24"] .vectorIcon {
+  filter: brightness(0) saturate(100%) invert(19%) sepia(11%) saturate(2306%)
+    hue-rotate(102deg) brightness(96%) contrast(87%);
+  height: 79.17%;
+  bottom: 8.33%;
+  left: 8.33%;
+}
+.div {
+  font-size: var(--fs-16);
+  line-height: 120%;
+  font-weight: 500;
+  font-family: var(--font-golos-text);
+  color: var(--text-cream);
+  text-align: center;
+}
