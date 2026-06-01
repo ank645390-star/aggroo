@@ -292,26 +292,68 @@ async def seed_products_if_empty(db: AsyncIOMotorDatabase) -> None:
 async def backfill_product_descriptions(db: AsyncIOMotorDatabase) -> None:
     """
     One-time, idempotent migration: every existing product that is missing
-    the new `description` block (or has an empty problem.intro_html) gets
-    a sensible default populated using its own name + short_desc.
-    Safe to call on every startup — only writes documents that need it.
+    the new `description` block gets a sensible default populated using its
+    own name + short_desc.
+
+    IMPORTANT: this function NEVER overwrites an existing `problem.intro_html`
+    — that block is treated as user-authored content (and also where imported
+    real descriptions live). Only the missing sub-fields (chips, solution,
+    hero_image, title lines) are filled in.
+
+    Safe to call on every startup.
     """
     cursor = db.products.find({}, {"_id": 0})
     updated = 0
     async for doc in cursor:
         desc = doc.get("description")
-        needs = (
-            not isinstance(desc, dict)
-            or not desc.get("problem", {}).get("intro_html")
-            or not desc.get("solution", {}).get("intro_html")
-            or not desc.get("chips")
-        )
-        if not needs:
+        # If the description block is missing/invalid entirely → use full default.
+        if not isinstance(desc, dict):
+            new_desc = _build_default_description(doc.get("name", ""), doc.get("short_desc", ""))
+            await db.products.update_one(
+                {"id": doc["id"]},
+                {"$set": {"description": new_desc, "updated_at": datetime.now(timezone.utc).isoformat()}},
+            )
+            updated += 1
             continue
-        new_desc = _build_default_description(doc.get("name", ""), doc.get("short_desc", ""))
+
+        problem = desc.get("problem") or {}
+        solution = desc.get("solution") or {}
+        chips = desc.get("chips")
+        has_problem_intro = bool(problem.get("intro_html"))
+        has_solution_intro = bool(solution.get("intro_html"))
+        has_chips = bool(chips)
+
+        # Nothing to fill in?
+        if has_problem_intro and has_solution_intro and has_chips:
+            continue
+
+        # Generate a default block as the source of fallback values.
+        default = _build_default_description(doc.get("name", ""), doc.get("short_desc", ""))
+        merged = dict(desc)
+        # Preserve existing problem.intro_html if present; otherwise use default.
+        merged_problem = dict(problem)
+        if not has_problem_intro:
+            merged_problem["title"] = problem.get("title") or default["problem"]["title"]
+            merged_problem["intro_html"] = default["problem"]["intro_html"]
+            merged_problem["outro_html"] = problem.get("outro_html") or default["problem"]["outro_html"]
+        merged["problem"] = merged_problem
+        # Same for solution
+        merged_solution = dict(solution)
+        if not has_solution_intro:
+            merged_solution["title"] = solution.get("title") or default["solution"]["title"]
+            merged_solution["intro_html"] = default["solution"]["intro_html"]
+            merged_solution["outro_html"] = solution.get("outro_html") or default["solution"]["outro_html"]
+        merged["solution"] = merged_solution
+        if not has_chips:
+            merged["chips"] = default["chips"]
+        # Fill missing other fields without overwriting
+        for k in ("hero_image", "title_line1", "title_line2", "title_subline"):
+            if not merged.get(k):
+                merged[k] = default.get(k, "")
+
         await db.products.update_one(
             {"id": doc["id"]},
-            {"$set": {"description": new_desc, "updated_at": datetime.now(timezone.utc).isoformat()}},
+            {"$set": {"description": merged, "updated_at": datetime.now(timezone.utc).isoformat()}},
         )
         updated += 1
     if updated:
