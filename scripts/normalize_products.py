@@ -1,8 +1,14 @@
 """
 Уніфікує всі товари: ставить одне placeholder-фото (білі каністри) для
-всіх карток + урізає `short_desc` до 180 символів, щоб не ламав верстку.
-Залишає повний HTML-опис у `description.problem.intro_html` (показується на
-сторінці товару у вкладці «Опис»).
+всіх карток у каталозі + урізає `short_desc` до 180 символів, щоб не ламав
+верстку. Залишає повний HTML-опис у `description.problem.intro_html`
+(показується на сторінці товару у вкладці «Опис»).
+
+КРИТИЧНО: НЕ чіпає `description.hero_image`, `title_line1`, `title_line2`,
+`title_subline`, `chips` — це елементи фірмового UI секції «Опис», які
+повинні залишатися такими, як їх дав дизайнер (дерево + короткий слоган).
+Ця нормалізація лише оновлює короткі службові поля + реальний opening
+параграф проблеми.
 """
 import os
 import re
@@ -15,25 +21,45 @@ load_dotenv("/app/backend/.env")
 MONGO_URL = os.environ["MONGO_URL"]
 DB_NAME = os.environ["DB_NAME"]
 
-CANISTER = "/Photo@2x.webp"           # original placeholder (white plastic bottles)
-SHORT_LIMIT = 180                     # max chars for the catalog card description
-PHOTOS = [
-    "/Photo@2x.webp", "/Photo1@2x.webp", "/Photo2@2x.webp",
-    "/Photo3@2x.webp", "/Photo4@2x.webp", "/Photo5@2x.webp",
-    "/Photo6@2x.webp", "/Photo7@2x.webp", "/Photo8@2x.webp",
+CANISTER = "/Photo@2x.webp"     # placeholder фото каністр для каталога
+HERO_TREE = "/tree.webp"        # фірмова ілюстрація дерева для секції «Опис»
+
+# Дефолти для короткого заголовка в секції «Опис» (саме ті, які закладав дизайнер)
+DEFAULT_TITLE_LINE1 = "Відновлення"
+DEFAULT_TITLE_LINE2 = "після стресу."
+DEFAULT_TITLE_SUBLINE = "Стабільний врожай."
+
+# Дефолтні chips (як у дизайні)
+DEFAULT_CHIPS = [
+    {
+        "icon": "lightning",
+        "title": "Швидке відновлення",
+        "body": "Відновлення життєдіяльності рослин після стресу протягом короткого терміну",
+        "variant": "green",
+    },
+    {
+        "icon": "eco",
+        "title": "Ідеальний pH-баланс води",
+        "body": "Захищає дорогі пестициди від швидкого руйнування у жорсткій воді, покращуючи їх сумісність із рослиною.",
+        "variant": "dark",
+    },
+    {
+        "icon": "drop",
+        "title": "Покращення поглинання",
+        "body": "Впливає на рівномірне покриття листя та засвоєння активних речовин",
+        "variant": "cream",
+    },
 ]
+
+SHORT_LIMIT = 180
 
 
 def smart_short(text: str, limit: int) -> str:
-    """Strip HTML tags, take first sentence/paragraph, limit to `limit` chars."""
     if not text:
         return ""
     text = ihtml.unescape(text)
-    # Strip tags
     text = re.sub(r"<[^>]+>", " ", text)
-    # Collapse whitespace
     text = re.sub(r"\s+", " ", text).strip()
-    # Take first sentence if it's shorter than limit
     sent = re.split(r"(?<=[.!?])\s+", text, maxsplit=1)[0]
     out = sent if len(sent) <= limit else text[:limit].rsplit(" ", 1)[0]
     if len(out) < len(text):
@@ -50,26 +76,41 @@ async def main():
 
     updated = 0
     for p in products:
-        # New short description: prefer the first paragraph of the rich HTML
-        # description, fallback to existing short_desc.
+        # 1) Нормалізуємо short_desc — або з реального intro_html, або з існуючого
         desc_block = (p.get("description") or {}).get("problem") or {}
         raw_html = desc_block.get("intro_html") or p.get("description_html") or p.get("short_desc") or ""
         new_short = smart_short(raw_html, SHORT_LIMIT)
         if not new_short and p.get("short_desc"):
             new_short = smart_short(p["short_desc"], SHORT_LIMIT)
 
-        # Update photo: canister placeholder for ALL cards
-        update: dict = {
+        # 2) ВАЖЛИВО: НЕ переписуємо hero_image / title_line1 / title_line2 /
+        # title_subline / chips якщо вони вже є. Якщо вони відсутні або не
+        # відповідають фірмовій верстці (наприклад, hero_image == photo, що
+        # ламає секцію «Опис»), повертаємо їх до дефолтів дизайнера.
+        new_desc = dict(p.get("description") or {})
+        # Якщо hero_image — це фото товару (а не "/tree.webp"), скидаємо
+        if not new_desc.get("hero_image") or new_desc["hero_image"] != HERO_TREE:
+            new_desc["hero_image"] = HERO_TREE
+
+        # title_line1/2/subline: завжди скидаємо до дефолтів дизайнера —
+        # так секція «Опис» залишається фірмово оформленою для всіх товарів.
+        new_desc["title_line1"] = DEFAULT_TITLE_LINE1
+        new_desc["title_line2"] = DEFAULT_TITLE_LINE2
+        new_desc["title_subline"] = DEFAULT_TITLE_SUBLINE
+        # chips: якщо чіпи без body (тільки title), завжди ламають верстку —
+        # відновлюємо повний дефолтний набір.
+        existing_chips = new_desc.get("chips") or []
+        chips_have_body = any((c or {}).get("body") for c in existing_chips)
+        if not chips_have_body:
+            new_desc["chips"] = [dict(c) for c in DEFAULT_CHIPS]
+
+        update = {
             "photo": CANISTER,
             "photos": [CANISTER],
-            "description_image": CANISTER,
+            "description_image": CANISTER,  # цей field використовується тільки в адмінці
             "short_desc": new_short,
+            "description": new_desc,
         }
-        # Also overwrite hero_image inside description block (used on product page)
-        new_desc = dict(p.get("description") or {})
-        new_desc["hero_image"] = CANISTER
-        update["description"] = new_desc
-
         await db.products.update_one({"_id": p["_id"]}, {"$set": update})
         updated += 1
 
@@ -79,3 +120,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+
