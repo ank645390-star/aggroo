@@ -36,6 +36,7 @@ const IconHandshake = () => <svg width="18" height="18" viewBox="0 0 24 24" fill
 const IconLogout = () => <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M14 4V3a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 3 3v18a1.5 1.5 0 0 0 1.5 1.5h8A1.5 1.5 0 0 0 14 21v-1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/><path d="M9 12h12m0 0l-3.5-3.5M21 12l-3.5 3.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>;
 const IconExternal = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M14 4h6v6M20 4l-9 9M10 6H5.5A1.5 1.5 0 0 0 4 7.5v11A1.5 1.5 0 0 0 5.5 20h11A1.5 1.5 0 0 0 18 18.5V14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/></svg>;
 const IconChevron = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>;
+const IconArrowLeft = () => <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M15 6l-6 6 6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>;
 
 /* ---------- Page titles map ---------- */
 const pageTitles: Record<string, { title: string; sub?: string }> = {
@@ -351,7 +352,26 @@ const AdminLayout: React.FC = () => {
 
       <main className={styles.main}>
         <header className={styles.topbar}>
-          <div>
+          {location.pathname !== "/admin" && (
+            <button
+              type="button"
+              className={styles.backBtn}
+              onClick={() => {
+                // Smart back: if history is available, go back; otherwise fallback to /admin
+                if (window.history.length > 1) {
+                  navigate(-1);
+                } else {
+                  navigate("/admin");
+                }
+              }}
+              aria-label="Назад"
+              data-testid="admin-back-button"
+            >
+              <IconArrowLeft />
+              <span>Назад</span>
+            </button>
+          )}
+          <div className={styles.topbarTitleBlock}>
             <h1 className={styles.topbarTitle}>{meta.title}</h1>
             {meta.sub && <p className={styles.topbarSub}>{meta.sub}</p>}
           </div>

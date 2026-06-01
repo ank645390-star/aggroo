@@ -200,6 +200,39 @@
   padding: 16px 32px;
   display: flex; align-items: center; gap: 16px;
 }
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 1px solid #e2e1d8;
+  border-radius: 8px;
+  background: #fff;
+  font-family: "Commissioner", sans-serif;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #1b4332;
+  cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease, transform .15s ease;
+}
+.backBtn:hover {
+  background: #f3f5f1;
+  border-color: #cdd2c4;
+}
+.backBtn:active {
+  transform: translateY(1px);
+}
+.backBtn svg {
+  transition: transform .15s ease;
+}
+.backBtn:hover svg {
+  transform: translateX(-2px);
+}
+.topbarTitleBlock {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
 .topbarTitle {
   margin: 0;
   font-family: "Commissioner", sans-serif;

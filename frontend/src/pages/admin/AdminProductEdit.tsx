@@ -182,6 +182,7 @@ const AdminProductEdit: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(!isNew);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<{ name?: boolean; category?: boolean; photo?: boolean; price?: boolean }>({});
   const [savedAt, setSavedAt] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<"dosage" | "composition" | "compatibility" | "specs">("dosage");
   const photoInputRef = useRef<HTMLInputElement>(null);
@@ -250,12 +251,72 @@ const AdminProductEdit: React.FC = () => {
 
   const setField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }));
+    // Clear corresponding field error when user starts editing
+    if (key === "name" || key === "category" || key === "photo" || key === "price") {
+      setFieldErrors((prev) => ({ ...prev, [key]: false }));
+    }
+  };
+
+  // Comprehensive validation: required fields + recommended completeness for full product card.
+  const validateForm = (): { valid: boolean; errors: typeof fieldErrors; message: string | null } => {
+    const errors: typeof fieldErrors = {};
+    const missing: string[] = [];
+
+    if (!form.name.trim()) {
+      errors.name = true;
+      missing.push("Назва товару");
+    }
+    if (!form.category) {
+      errors.category = true;
+      missing.push("Категорія");
+    }
+    if (!form.photo && (!form.photos || form.photos.length === 0)) {
+      errors.photo = true;
+      missing.push("Фотографія товару");
+    }
+    // Price: either base price > 0 OR at least one priced variant
+    const hasVariantPrice = (form.variants || []).some((v) => Number(v.price) > 0);
+    if ((!form.price || form.price <= 0) && !hasVariantPrice) {
+      errors.price = true;
+      missing.push("Ціна (базова або через варіант тари)");
+    }
+
+    if (missing.length === 0) {
+      return { valid: true, errors, message: null };
+    }
+    return {
+      valid: false,
+      errors,
+      message: `Заповніть обов'язкові поля: ${missing.join(", ")}`,
+    };
   };
 
   const handleSave = async (statusOverride?: "draft" | "published") => {
     if (saving) return;
-    if (!form.name.trim()) { setError("Назва обов'язкова"); return; }
-    if (!form.category) { setError("Оберіть категорію"); return; }
+
+    // Draft can be saved without strict validation, but Published requires full data.
+    if (statusOverride === "published") {
+      const { valid, errors, message } = validateForm();
+      if (!valid) {
+        setFieldErrors(errors);
+        setError(message);
+        // Scroll to first error field
+        setTimeout(() => {
+          const firstErr = document.querySelector("[data-error='true']") as HTMLElement | null;
+          if (firstErr) firstErr.scrollIntoView({ behavior: "smooth", block: "center" });
+        }, 50);
+        return;
+      }
+    } else {
+      // Even drafts require at least a name
+      if (!form.name.trim()) {
+        setFieldErrors({ name: true });
+        setError("Назва обов'язкова навіть для чернетки");
+        return;
+      }
+    }
+
+    setFieldErrors({});
     setSaving(true);
     setError(null);
     const payload: any = { ...form };
@@ -372,9 +433,17 @@ const AdminProductEdit: React.FC = () => {
         <div className={styles.colLeft}>
           <section className={styles.card}>
             <h3 className={styles.cardTitle}>Основна інформація</h3>
-            <label className={styles.field}>
-              <span className={styles.fieldLabel}>Назва товару *</span>
-              <input className={styles.input} value={form.name} onChange={(e) => setField("name", e.target.value)} data-testid="admin-product-name" />
+            <label className={styles.field} data-error={fieldErrors.name ? "true" : undefined}>
+              <span className={styles.fieldLabel}>Назва товару <span className={styles.requiredMark}>*</span></span>
+              <input
+                className={`${styles.input} ${fieldErrors.name ? styles.inputError : ""}`}
+                value={form.name}
+                onChange={(e) => setField("name", e.target.value)}
+                data-testid="admin-product-name"
+              />
+              {fieldErrors.name && (
+                <span className={styles.fieldErrorMsg}>Введіть назву товару — обов'язкове поле.</span>
+              )}
               <span className={styles.fieldHint}>
                 Коротка назва товару — використовується у каталозі, кошику,
                 breadcrumb (наприклад: "Флорес").
@@ -747,18 +816,32 @@ const AdminProductEdit: React.FC = () => {
             </label>
           </section>
 
-          <section className={styles.card}>
-            <h3 className={styles.cardTitle}>Ціна і обсяг</h3>
+          <section
+            className={`${styles.card} ${fieldErrors.price ? styles.cardError : ""}`}
+            data-error={fieldErrors.price ? "true" : undefined}
+          >
+            <h3 className={styles.cardTitle}>Ціна і обсяг <span className={styles.requiredMark}>*</span></h3>
             <div className={styles.row2}>
               <label className={styles.field}>
                 <span className={styles.fieldLabel}>Базова ціна, ₴/л</span>
-                <input className={styles.input} type="number" step="0.01" value={form.price} onChange={(e) => setField("price", Number(e.target.value) || 0)} />
+                <input
+                  className={`${styles.input} ${fieldErrors.price ? styles.inputError : ""}`}
+                  type="number"
+                  step="0.01"
+                  value={form.price}
+                  onChange={(e) => setField("price", Number(e.target.value) || 0)}
+                />
               </label>
               <label className={styles.field}>
                 <span className={styles.fieldLabel}>Дефолтний обсяг</span>
                 <input className={styles.input} value={form.default_volume} onChange={(e) => setField("default_volume", e.target.value)} />
               </label>
             </div>
+            {fieldErrors.price && (
+              <div className={styles.fieldErrorMsg}>
+                Вкажіть базову ціну (&gt; 0) або хоча б один варіант ціни по тарі з ціною &gt; 0.
+              </div>
+            )}
             <label className={styles.field}>
               <span className={styles.fieldLabel}>Тара (наприклад: 1, 5, 10 л)</span>
               <input className={styles.input} value={form.packing} onChange={(e) => setField("packing", e.target.value)} />
@@ -848,10 +931,15 @@ const AdminProductEdit: React.FC = () => {
             </div>
           </section>
 
-          <section className={styles.card}>
-            <h3 className={styles.cardTitle}>Категорія</h3>
+          <section
+            className={`${styles.card} ${fieldErrors.category ? styles.cardError : ""}`}
+            data-error={fieldErrors.category ? "true" : undefined}
+          >
+            <h3 className={styles.cardTitle}>
+              Категорія <span className={styles.requiredMark}>*</span>
+            </h3>
             <BrandSelect
-              triggerClassName={styles.input}
+              triggerClassName={`${styles.input} ${fieldErrors.category ? styles.inputError : ""}`}
               value={form.category}
               onChange={(v) => setField("category", v)}
               options={[
@@ -860,16 +948,34 @@ const AdminProductEdit: React.FC = () => {
               ]}
               data-testid="admin-product-category"
             />
+            {fieldErrors.category && (
+              <div className={styles.fieldErrorMsg} data-testid="admin-product-category-error">
+                Оберіть категорію — це обов'язкове поле для публікації товару.
+              </div>
+            )}
             <Link to="/admin/product-categories" className={styles.linkSmall}>Налаштувати категорії →</Link>
           </section>
 
-          <section className={styles.card}>
-            <h3 className={styles.cardTitle}>Фотографії (рекомендовано 5 шт., перше = обкладинка)</h3>
+          <section
+            className={`${styles.card} ${fieldErrors.photo ? styles.cardError : ""}`}
+            data-error={fieldErrors.photo ? "true" : undefined}
+          >
+            <h3 className={styles.cardTitle}>
+              Фотографії <span className={styles.requiredMark}>*</span>{" "}
+              <span style={{ fontWeight: 400, color: "#93928c", fontSize: 12 }}>
+                (рекомендовано 5 шт., перше = обкладинка)
+              </span>
+            </h3>
             <p className={styles.descHelp}>
               Можна завантажувати кілька фото одразу. Перетягуйте стрілками для зміни порядку
               (перше фото — головне, інші відображаються як мініатюри на картці товару).
               Рекомендовано <b>5 фотографій</b> для повного огляду продукту.
             </p>
+            {fieldErrors.photo && (
+              <div className={styles.fieldErrorMsg}>
+                Додайте хоча б одне фото товару — обов'язково для публікації.
+              </div>
+            )}
             <div className={styles.gallery}>
               {form.photos.map((p, idx) => (
                 <div

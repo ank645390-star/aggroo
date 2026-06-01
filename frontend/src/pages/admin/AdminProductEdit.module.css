@@ -27,6 +27,35 @@
   background: #fdecea; color: #c14a3c; padding: 12px 14px; border-radius: 8px;
   margin-bottom: 16px; font-size: 14px;
 }
+/* Field-level validation styles */
+.cardError {
+  border-color: #d04437 !important;
+  box-shadow: 0 0 0 3px rgba(208, 68, 55, 0.12);
+}
+.inputError {
+  border-color: #d04437 !important;
+  background-color: #fff8f7 !important;
+}
+.inputError:focus {
+  border-color: #d04437 !important;
+  box-shadow: 0 0 0 3px rgba(208, 68, 55, 0.18);
+}
+.fieldErrorMsg {
+  display: block;
+  margin-top: 6px;
+  padding: 8px 10px;
+  background: #fdecea;
+  color: #c14a3c;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+.requiredMark {
+  color: #d04437;
+  font-weight: 700;
+  margin-left: 2px;
+}
 .grid {
   display: grid; grid-template-columns: 1fr 380px; gap: 20px;
 }
