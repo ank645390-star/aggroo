@@ -572,7 +572,20 @@ const Checkout: React.FC = () => {
           {/* ---- RIGHT COLUMN: order summary ---- */}
           <aside className={styles.rightColumn}>
             <div className={styles.summaryCard} data-testid="checkout-summary">
-              <h2 className={styles.summaryTitle}>Ваші товари ({items.length})</h2>
+              <div className={styles.summaryHeader}>
+                <h2 className={styles.summaryTitle}>Ваші товари ({items.length})</h2>
+                <Link
+                  to="/catalog"
+                  className={styles.continueShoppingLink}
+                  data-testid="continue-shopping-link"
+                  aria-label="Продовжити покупки"
+                >
+                  <span>Продовжити покупки</span>
+                  <svg width="15" height="12" viewBox="0 0 15 12" fill="none" aria-hidden="true">
+                    <path d="M1 6H13M13 6L8 1M13 6L8 11" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </Link>
+              </div>
               <div className={styles.summaryBody}>
                 {items.length === 0 ? (
                   <div className={styles.emptyState}>

@@ -392,6 +392,36 @@
   letter-spacing: -.5px;
   color: #2c2c27;
 }
+.summaryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.continueShoppingLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Golos Text", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2c2c27;
+  text-decoration: none;
+  padding: 8px 4px;
+  border-radius: 8px;
+  transition: color .2s ease, transform .2s ease;
+  white-space: nowrap;
+}
+.continueShoppingLink:hover {
+  color: #1b4332;
+}
+.continueShoppingLink:hover svg {
+  transform: translateX(3px);
+}
+.continueShoppingLink svg {
+  transition: transform .2s ease;
+}
 .summaryBody {
   display: flex;
   flex-direction: column;
@@ -1110,6 +1140,9 @@
   /* Summary */
   .summaryTitle { font-size: 18px; }
   .summaryBody { gap: 16px; }
+  .summaryHeader { gap: 8px; }
+  .continueShoppingLink { font-size: 13px; gap: 6px; padding: 6px 2px; }
+  .continueShoppingLink svg { width: 12px; height: 10px; }
   .itemRow {
     gap: 10px;
     padding: 10px 0;
